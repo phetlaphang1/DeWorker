@@ -18,9 +18,10 @@ import "reactflow/dist/style.css";
 
 import { FlowDefinition, NodeKind, NodeData } from "./types";
 import { TEMPLATES } from "./templates";
+import { templateManager } from "./templateManager";
 import { Button } from "@/components/ui/button";
 import { useToast } from "@/hooks/use-toast";
-import { Globe, Type, MousePointer, Save, Download, FileJson, Play, Copy, Code, Navigation, Frame, Layers, ArrowDown, List, Repeat, Database, FileText } from "lucide-react";
+import { Globe, Type, MousePointer, Save, Download, FileJson, Play, Copy, Code, Navigation, Frame, Layers, ArrowDown, List, Repeat, Database, FileText, Trash2, Plus, Upload, FolderOpen, Moon } from "lucide-react";
 
 // Palette với icons và descriptions
 const PALETTE: { 
@@ -94,6 +95,13 @@ const PALETTE: {
     defaultConfig: { waitType: "element", xpath: "", timeout: 5000 } 
   },
   { 
+    kind: "Sleep", 
+    label: "Sleep", 
+    icon: <Moon className="w-4 h-4" />,
+    description: "Pause execution for specified time",
+    defaultConfig: { timeout: 3000 } 
+  },
+  { 
     kind: "If", 
     label: "If Condition", 
     icon: <Navigation className="w-4 h-4" />,
@@ -102,10 +110,17 @@ const PALETTE: {
   },
   { 
     kind: "Loop", 
-    label: "Loop", 
+    label: "Loop Start", 
     icon: <Repeat className="w-4 h-4" />,
-    description: "Loop through items",
-    defaultConfig: { items: [], iteratorName: "item" } 
+    description: "Start loop - repeat actions N times",
+    defaultConfig: { loopCount: 5, currentIndexName: "i" } 
+  },
+  { 
+    kind: "EndLoop", 
+    label: "Loop End", 
+    icon: <Repeat className="w-4 h-4" />,
+    description: "End of loop block",
+    defaultConfig: {} 
   },
   { 
     kind: "Extract", 
@@ -159,8 +174,10 @@ const CustomNodeComponent = ({ data, selected }: { data: NodeData; selected: boo
           ${data.kind === 'SwitchTab' ? 'bg-pink-100' : ''}
           ${data.kind === 'ScrollTo' ? 'bg-teal-100' : ''}
           ${data.kind === 'Wait' ? 'bg-yellow-100' : ''}
+          ${data.kind === 'Sleep' ? 'bg-purple-100' : ''}
           ${data.kind === 'If' ? 'bg-red-100' : ''}
           ${data.kind === 'Loop' ? 'bg-cyan-100' : ''}
+          ${data.kind === 'EndLoop' ? 'bg-cyan-100' : ''}
           ${data.kind === 'Extract' ? 'bg-gray-100' : ''}
           ${data.kind === 'DataProcess' ? 'bg-lime-100' : ''}
           ${data.kind === 'Log' ? 'bg-amber-100' : ''}
@@ -174,8 +191,10 @@ const CustomNodeComponent = ({ data, selected }: { data: NodeData; selected: boo
           {data.kind === "SwitchTab" && <Layers className="w-5 h-5 text-pink-600" />}
           {data.kind === "ScrollTo" && <ArrowDown className="w-5 h-5 text-teal-600" />}
           {data.kind === "Wait" && <Navigation className="w-5 h-5 text-yellow-600" />}
+          {data.kind === "Sleep" && <Moon className="w-5 h-5 text-purple-600" />}
           {data.kind === "If" && <Navigation className="w-5 h-5 text-red-600" />}
           {data.kind === "Loop" && <Repeat className="w-5 h-5 text-cyan-600" />}
+          {data.kind === "EndLoop" && <Repeat className="w-5 h-5 text-cyan-600" />}
           {data.kind === "Extract" && <Database className="w-5 h-5 text-gray-600" />}
           {data.kind === "DataProcess" && <Database className="w-5 h-5 text-lime-600" />}
           {data.kind === "Log" && <FileText className="w-5 h-5 text-amber-600" />}
@@ -209,6 +228,9 @@ function AutomationBuilderInner() {
   const [flowName, setFlowName] = useState("Untitled Flow");
   const [nodes, setNodes, onNodesChange] = useNodesState<NodeData>([]);
   const [edges, setEdges, onEdgesChange] = useEdgesState([]);
+  const [templates, setTemplates] = useState<Record<string, FlowDefinition>>(templateManager.getAllTemplates());
+  const [showTemplateDialog, setShowTemplateDialog] = useState(false);
+  const [templateNameInput, setTemplateNameInput] = useState("");
 
   // Inspector
   const [selectedId, setSelectedId] = useState<string | null>(null);
@@ -264,7 +286,7 @@ function AutomationBuilderInner() {
   };
 
   const loadTemplate = (name: string) => {
-    const t = TEMPLATES[name];
+    const t = templates[name];
     if (!t) return;
 
     setNodes(
@@ -321,6 +343,23 @@ function AutomationBuilderInner() {
     URL.revokeObjectURL(url);
   };
 
+  const exportJS = async () => {
+    await generateCode();
+    const jsCode = preview;
+    
+    const blob = new Blob([jsCode], {
+      type: "application/javascript",
+    });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement("a");
+    a.href = url;
+    a.download = `${flowName.replace(/\s+/g, "-").toLowerCase()}.js`;
+    a.click();
+    URL.revokeObjectURL(url);
+    
+    toast({ title: "Exported", description: "JavaScript file exported successfully." });
+  };
+
   const saveLocal = () => {
     localStorage.setItem(
       "automation:current",
@@ -339,8 +378,212 @@ function AutomationBuilderInner() {
     setSelectedId(obj.nodes?.[0]?.id ?? null);
   };
 
+  const saveAsTemplate = () => {
+    if (!templateNameInput.trim()) {
+      toast({ title: "Error", description: "Please enter a template name", variant: "destructive" });
+      return;
+    }
+    
+    const templateDef: FlowDefinition = {
+      meta: { name: templateNameInput, version: "1.0" },
+      nodes: nodes.map((n) => ({
+        id: n.id,
+        type: (n.data as NodeData).kind,
+        position: n.position,
+        data: n.data as NodeData,
+      })),
+      edges: edges.map((e) => ({
+        id: e.id,
+        source: e.source,
+        target: e.target,
+        label: typeof e.label === 'string' ? e.label : undefined,
+      })),
+    };
+    
+    try {
+      templateManager.addCustomTemplate(templateNameInput, templateDef);
+      setTemplates(templateManager.getAllTemplates());
+      setShowTemplateDialog(false);
+      setTemplateNameInput("");
+      toast({ title: "Success", description: "Template saved successfully" });
+    } catch (error: any) {
+      toast({ title: "Error", description: error.message, variant: "destructive" });
+    }
+  };
+
+  const deleteTemplate = (name: string) => {
+    if (templateManager.isDefaultTemplate(name)) {
+      toast({ title: "Error", description: "Cannot delete default templates", variant: "destructive" });
+      return;
+    }
+    
+    try {
+      templateManager.deleteCustomTemplate(name);
+      setTemplates(templateManager.getAllTemplates());
+      toast({ title: "Success", description: "Template deleted successfully" });
+    } catch (error: any) {
+      toast({ title: "Error", description: error.message, variant: "destructive" });
+    }
+  };
+
+  const importTemplateFile = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const file = event.target.files?.[0];
+    if (!file) return;
+    
+    const reader = new FileReader();
+    reader.onload = (e) => {
+      try {
+        const content = e.target?.result as string;
+        
+        // Check if it's a JS file or JSON file
+        if (file.name.endsWith('.js')) {
+          // Parse JS file to create template
+          importFromJS(content, file.name);
+        } else {
+          // Parse JSON template
+          const template = JSON.parse(content) as FlowDefinition;
+          const name = template.meta?.name || `Imported_${Date.now()}`;
+          templateManager.addCustomTemplate(name, template);
+          setTemplates(templateManager.getAllTemplates());
+          toast({ title: "Success", description: `Template "${name}" imported successfully` });
+        }
+      } catch (error) {
+        toast({ title: "Error", description: "Invalid file format", variant: "destructive" });
+      }
+    };
+    reader.readAsText(file);
+  };
+
+  const importFromJS = (jsContent: string, fileName: string) => {
+    try {
+      // Basic parsing to convert JS automation back to nodes
+      const nodes: any[] = [];
+      const edges: any[] = [];
+      let nodeId = 0;
+      let yPos = 100;
+      
+      const lines = jsContent.split('\n').map(line => line.trim()).filter(line => line.length > 0);
+      
+      lines.forEach((line, index) => {
+        let nodeData: any = null;
+        const id = `imported-${nodeId++}`;
+        
+        // Parse different types of automation commands
+        if (line.includes('page.goto(')) {
+          const urlMatch = line.match(/page\.goto\(['"`]([^'"`]+)['"`]\)/);
+          nodeData = {
+            label: 'Go To URL',
+            kind: 'GoTo',
+            config: { url: urlMatch?.[1] || 'https://example.com' }
+          };
+        }
+        else if (line.includes('act.type(')) {
+          const typeMatch = line.match(/act\.type\(page,\s*['"`]([^'"`]+)['"`],\s*['"`]([^'"`]*)['"`]\)/);
+          nodeData = {
+            label: 'Type Text',
+            kind: 'Type',
+            config: { 
+              xpath: typeMatch?.[1] || '',
+              text: typeMatch?.[2] || ''
+            }
+          };
+        }
+        else if (line.includes('act.click(')) {
+          const clickMatch = line.match(/act\.click\(page,\s*['"`]([^'"`]+)['"`]/);
+          nodeData = {
+            label: 'Click Element',
+            kind: 'Click',
+            config: { xpath: clickMatch?.[1] || '' }
+          };
+        }
+        else if (line.includes('for (let') && line.includes('< ')) {
+          const loopMatch = line.match(/for \(let (\w+) = \d+; \1 < (\d+); \1\+\+\)/);
+          nodeData = {
+            label: 'Loop Start',
+            kind: 'Loop',
+            config: { 
+              loopCount: parseInt(loopMatch?.[2] || '5'),
+              currentIndexName: loopMatch?.[1] || 'i'
+            }
+          };
+        }
+        else if (line === '}' && index > 0 && lines[index-1].includes('setTimeout')) {
+          nodeData = {
+            label: 'Loop End',
+            kind: 'EndLoop',
+            config: {}
+          };
+        }
+        else if (line.includes('setTimeout')) {
+          const timeMatch = line.match(/setTimeout\(resolve, (\d+)\)/);
+          nodeData = {
+            label: 'Sleep',
+            kind: 'Sleep',
+            config: { timeout: parseInt(timeMatch?.[1] || '1000') }
+          };
+        }
+        else if (line.includes('console.log(') && !line.includes('Loop iteration')) {
+          const logMatch = line.match(/console\.log\(['"`]([^'"`]*)['"`]\)/);
+          nodeData = {
+            label: 'Log Message',
+            kind: 'Log',
+            config: { 
+              logLevel: 'info',
+              message: logMatch?.[1] || 'Log message'
+            }
+          };
+        }
+        
+        if (nodeData) {
+          nodes.push({
+            id,
+            type: nodeData.kind,
+            position: { x: 200, y: yPos },
+            data: nodeData
+          });
+          
+          // Create edge to connect to previous node
+          if (nodes.length > 1) {
+            edges.push({
+              id: `edge-${nodeId-2}-${nodeId-1}`,
+              source: nodes[nodes.length-2].id,
+              target: id,
+            });
+          }
+          
+          yPos += 80;
+        }
+      });
+      
+      if (nodes.length === 0) {
+        toast({ title: "Warning", description: "No automation commands found in JS file", variant: "destructive" });
+        return;
+      }
+      
+      // Create template from parsed nodes
+      const template: FlowDefinition = {
+        meta: { name: fileName.replace('.js', ''), version: "1.0" },
+        nodes,
+        edges
+      };
+      
+      const templateName = `JS_${fileName.replace('.js', '')}_${Date.now()}`;
+      templateManager.addCustomTemplate(templateName, template);
+      setTemplates(templateManager.getAllTemplates());
+      
+      toast({ 
+        title: "Success", 
+        description: `Imported ${nodes.length} nodes from JavaScript file` 
+      });
+      
+    } catch (error) {
+      toast({ title: "Error", description: "Failed to parse JavaScript file", variant: "destructive" });
+    }
+  };
+
   useEffect(() => {
     loadLocal();
+    setTemplates(templateManager.getAllTemplates());
   }, []);
 
   // ==== Update helpers for Inspector ====
@@ -444,6 +687,7 @@ function AutomationBuilderInner() {
   const order = topoSort();
   const nodeMap = new Map(nodes.map((n) => [n.id, n]));
   const lines: string[] = [];
+  let openLoops = 0; // Track open loops
 
   for (const id of order) {
     const n = nodeMap.get(id);
@@ -464,34 +708,29 @@ function AutomationBuilderInner() {
     }
     if (d.kind === "Type") {
       const xpath = d.config?.xpath?.trim() || "";
-      // Remove leading // from XPath if present
-      const normalizedXPath = xpath.startsWith('//') ? xpath.substring(2) : xpath;
       const text  = d.config?.text ?? "";
-      lines.push(`await act.type(page, ${JSON.stringify(normalizedXPath)}, ${JSON.stringify(text)});`);
+      lines.push(`await act.type(page, ${JSON.stringify(xpath)}, ${JSON.stringify(text)});`);
     }
     if (d.kind === "Click") {
       const xpath = d.config?.xpath?.trim() || "";
-      // Remove leading // from XPath if present
-      const normalizedXPath = xpath.startsWith('//') ? xpath.substring(2) : xpath;
       const index = d.config?.index;
       const stmt = Number.isFinite(index)
-        ? `await act.click(page, ${JSON.stringify(normalizedXPath)}, ${Number(index)});`
-        : `await act.click(page, ${JSON.stringify(normalizedXPath)});`;
+        ? `await act.click(page, ${JSON.stringify(xpath)}, ${Number(index)});`
+        : `await act.click(page, ${JSON.stringify(xpath)});`;
       lines.push(stmt);
     }
     if (d.kind === "Select") {
       const xpath = d.config?.xpath?.trim() || "";
-      const normalizedXPath = xpath.startsWith('//') ? xpath.substring(2) : xpath;
       const selectBy = d.config?.selectBy || "text";
       const selectValue = d.config?.selectValue || "";
       const selectIndex = d.config?.selectIndex ?? 0;
       
       if (selectBy === "index") {
-        lines.push(`await act.select(page, ${JSON.stringify(normalizedXPath)}, { index: ${selectIndex} });`);
+        lines.push(`await act.select(page, ${JSON.stringify(xpath)}, { index: ${selectIndex} });`);
       } else if (selectBy === "value") {
-        lines.push(`await act.select(page, ${JSON.stringify(normalizedXPath)}, { value: ${JSON.stringify(selectValue)} });`);
+        lines.push(`await act.select(page, ${JSON.stringify(xpath)}, { value: ${JSON.stringify(selectValue)} });`);
       } else {
-        lines.push(`await act.select(page, ${JSON.stringify(normalizedXPath)}, { text: ${JSON.stringify(selectValue)} });`);
+        lines.push(`await act.select(page, ${JSON.stringify(xpath)}, { text: ${JSON.stringify(selectValue)} });`);
       }
     }
     if (d.kind === "SwitchFrame") {
@@ -527,8 +766,7 @@ function AutomationBuilderInner() {
       const scrollY = d.config?.scrollY ?? 0;
       
       if (scrollType === "element") {
-        const normalizedXPath = xpath.startsWith('//') ? xpath.substring(2) : xpath;
-        lines.push(`await act.scrollToElement(page, ${JSON.stringify(normalizedXPath)});`);
+        lines.push(`await act.scrollToElement(page, ${JSON.stringify(xpath)});`);
       } else if (scrollType === "position") {
         lines.push(`await page.evaluate(() => window.scrollTo(${scrollX}, ${scrollY}));`);
       } else if (scrollType === "bottom") {
@@ -543,8 +781,7 @@ function AutomationBuilderInner() {
       const timeout = d.config?.timeout ?? 5000;
       
       if (waitType === "element") {
-        const normalizedXPath = xpath.startsWith('//') ? xpath.substring(2) : xpath;
-        lines.push(`await act.waitForElement(page, ${JSON.stringify(normalizedXPath)}, ${timeout});`);
+        lines.push(`await act.waitForElement(page, ${JSON.stringify(xpath)}, ${timeout});`);
       } else {
         lines.push(`await new Promise(resolve => setTimeout(resolve, ${timeout}));`);
       }
@@ -559,11 +796,9 @@ function AutomationBuilderInner() {
       const value = d.config?.value || "";
       
       if (condition === "element_exists") {
-        const normalizedXPath = xpath.startsWith('//') ? xpath.substring(2) : xpath;
-        lines.push(`if (await act.elementExists(page, ${JSON.stringify(normalizedXPath)})) {`);
+        lines.push(`if (await act.elementExists(page, ${JSON.stringify(xpath)})) {`);
       } else if (condition === "element_not_exists") {
-        const normalizedXPath = xpath.startsWith('//') ? xpath.substring(2) : xpath;
-        lines.push(`if (!(await act.elementExists(page, ${JSON.stringify(normalizedXPath)}))) {`);
+        lines.push(`if (!(await act.elementExists(page, ${JSON.stringify(xpath)}))) {`);
       } else if (condition === "text_contains") {
         lines.push(`if ((await page.content()).includes(${JSON.stringify(value)})) {`);
       } else if (condition === "page_title_is") {
@@ -574,9 +809,17 @@ function AutomationBuilderInner() {
       lines.push(`} else {`);
     }
     if (d.kind === "Loop") {
-      const items = d.config?.items || [];
-      const iteratorName = d.config?.iteratorName || "item";
-      lines.push(`for (const ${iteratorName} of ${JSON.stringify(items)}) {`);
+      const loopCount = d.config?.loopCount ?? 5;
+      const currentIndexName = d.config?.currentIndexName || "i";
+      lines.push(`for (let ${currentIndexName} = 0; ${currentIndexName} < ${loopCount}; ${currentIndexName}++) {`);
+      lines.push(`  console.log("Loop iteration:", ${currentIndexName} + 1);`);
+      openLoops++;
+    }
+    if (d.kind === "EndLoop") {
+      if (openLoops > 0) {
+        lines.push(`}`); // Close the loop
+        openLoops--;
+      }
     }
     if (d.kind === "For") {
       const start = d.config?.start ?? 0;
@@ -589,8 +832,7 @@ function AutomationBuilderInner() {
       const xpath = d.config?.xpath?.trim() || "";
       
       if (condition === "element_exists") {
-        const normalizedXPath = xpath.startsWith('//') ? xpath.substring(2) : xpath;
-        lines.push(`while (await act.elementExists(page, ${JSON.stringify(normalizedXPath)})) {`);
+        lines.push(`while (await act.elementExists(page, ${JSON.stringify(xpath)})) {`);
       }
     }
     if (d.kind === "Variable") {
@@ -606,15 +848,14 @@ function AutomationBuilderInner() {
     }
     if (d.kind === "Extract") {
       const xpath = d.config?.xpath?.trim() || "";
-      const normalizedXPath = xpath.startsWith('//') ? xpath.substring(2) : xpath;
       const extractType = d.config?.extractType || "text";
       const attribute = d.config?.attribute || "";
       
       if (extractType === "text") {
-        lines.push(`const extractedText = await act.getText(page, ${JSON.stringify(normalizedXPath)});`);
+        lines.push(`const extractedText = await act.getText(page, ${JSON.stringify(xpath)});`);
         lines.push(`console.log("Extracted:", extractedText);`);
       } else {
-        lines.push(`const extractedAttr = await act.getAttribute(page, ${JSON.stringify(normalizedXPath)}, ${JSON.stringify(attribute)});`);
+        lines.push(`const extractedAttr = await act.getAttribute(page, ${JSON.stringify(xpath)}, ${JSON.stringify(attribute)});`);
         lines.push(`console.log("Extracted:", extractedAttr);`);
       }
     }
@@ -624,11 +865,9 @@ function AutomationBuilderInner() {
       const targetVariable = d.config?.targetVariable || "result";
       
       if (processType === "getText") {
-        const normalizedXPath = xpath.startsWith('//') ? xpath.substring(2) : xpath;
-        lines.push(`const ${targetVariable} = await act.getText(page, ${JSON.stringify(normalizedXPath)});`);
+        lines.push(`const ${targetVariable} = await act.getText(page, ${JSON.stringify(xpath)});`);
       } else if (processType === "getValue") {
-        const normalizedXPath = xpath.startsWith('//') ? xpath.substring(2) : xpath;
-        lines.push(`const ${targetVariable} = await act.getValue(page, ${JSON.stringify(normalizedXPath)});`);
+        lines.push(`const ${targetVariable} = await act.getValue(page, ${JSON.stringify(xpath)});`);
       } else if (processType === "assignVariable") {
         const sourceVariable = d.config?.sourceVariable || "";
         lines.push(`const ${targetVariable} = ${sourceVariable};`);
@@ -648,6 +887,12 @@ function AutomationBuilderInner() {
         lines.push(`console.log(${JSON.stringify(message)});`);
       }
     }
+  }
+
+  // Auto-close any open loops
+  while (openLoops > 0) {
+    lines.push(`}`);
+    openLoops--;
   }
 
   const header =
@@ -723,21 +968,129 @@ import * as act from "#act";
         </div>
 
         <div className="mt-6 pt-4 border-t border-gray-200">
-          <h3 className="text-sm font-semibold text-gray-700 mb-3 flex items-center gap-2">
-            <FileJson className="w-4 h-4" />
-            Templates
-          </h3>
-          {Object.keys(TEMPLATES).map((t) => (
-            <Button
-              key={t}
-              className="w-full mt-2 justify-start"
-              variant="outline"
-              onClick={() => loadTemplate(t)}
-            >
-              <Play className="w-4 h-4 mr-2" />
-              {t.replace("Basic: ", "")}
-            </Button>
-          ))}
+          <div className="flex items-center justify-between mb-3">
+            <h3 className="text-sm font-semibold text-gray-700 flex items-center gap-2">
+              <FileJson className="w-4 h-4" />
+              Templates
+            </h3>
+            <div className="flex gap-1">
+              <Button
+                size="sm"
+                variant="ghost"
+                onClick={() => setShowTemplateDialog(true)}
+                className="h-7 w-7 p-0"
+                title="Save current flow as template"
+              >
+                <Plus className="w-4 h-4" />
+              </Button>
+              <label className="cursor-pointer">
+                <input
+                  type="file"
+                  accept=".json,.js"
+                  onChange={importTemplateFile}
+                  className="hidden"
+                />
+                <Button
+                  size="sm"
+                  variant="ghost"
+                  className="h-7 w-7 p-0"
+                  title="Import template"
+                  asChild
+                >
+                  <div>
+                    <Upload className="w-4 h-4" />
+                  </div>
+                </Button>
+              </label>
+            </div>
+          </div>
+          
+          {/* Template save dialog */}
+          {showTemplateDialog && (
+            <div className="mb-3 p-3 border rounded-lg bg-gray-50">
+              <input
+                className="w-full mb-2 border-2 border-gray-200 rounded px-2 py-1 text-sm"
+                placeholder="Template name..."
+                value={templateNameInput}
+                onChange={(e) => setTemplateNameInput(e.target.value)}
+                onKeyDown={(e) => e.key === 'Enter' && saveAsTemplate()}
+              />
+              <div className="flex gap-2">
+                <Button size="sm" onClick={saveAsTemplate} className="flex-1">
+                  Save
+                </Button>
+                <Button 
+                  size="sm" 
+                  variant="outline" 
+                  onClick={() => {
+                    setShowTemplateDialog(false);
+                    setTemplateNameInput("");
+                  }}
+                  className="flex-1"
+                >
+                  Cancel
+                </Button>
+              </div>
+            </div>
+          )}
+          
+          <div className="space-y-1 max-h-60 overflow-y-auto">
+            {/* Default Templates */}
+            <div className="text-xs text-gray-500 font-medium mb-1">Default Templates</div>
+            {Object.keys(templates).filter(t => templateManager.isDefaultTemplate(t)).map((t) => (
+              <div key={t} className="flex items-center gap-1">
+                <Button
+                  className="flex-1 justify-start text-xs"
+                  variant="outline"
+                  size="sm"
+                  onClick={() => loadTemplate(t)}
+                >
+                  <Play className="w-3 h-3 mr-2" />
+                  {t.replace("Basic: ", "").replace("X (Twitter) ", "")}
+                </Button>
+              </div>
+            ))}
+            
+            {/* Custom Templates */}
+            {Object.keys(templates).filter(t => !templateManager.isDefaultTemplate(t)).length > 0 && (
+              <>
+                <div className="text-xs text-gray-500 font-medium mt-2 mb-1">My Templates</div>
+                {Object.keys(templates).filter(t => !templateManager.isDefaultTemplate(t)).map((t) => (
+                  <div key={t} className="flex items-center gap-1 group hover:bg-gray-50 rounded px-1">
+                    <Button
+                      className="flex-1 justify-start text-xs"
+                      variant="outline"
+                      size="sm"
+                      onClick={() => loadTemplate(t)}
+                    >
+                      <Play className="w-3 h-3 mr-2" />
+                      <FolderOpen className="w-3 h-3 mr-1 text-blue-500" />
+                      {t}
+                    </Button>
+                    <Button
+                      size="sm"
+                      variant="destructive"
+                      onClick={() => {
+                        if (confirm(`Delete template "${t}"?`)) {
+                          deleteTemplate(t);
+                        }
+                      }}
+                      className="h-7 w-7 p-0"
+                      title="Delete template"
+                    >
+                      <Trash2 className="w-3 h-3" />
+                    </Button>
+                  </div>
+                ))}
+              </>
+            )}
+            
+            {Object.keys(templates).filter(t => !templateManager.isDefaultTemplate(t)).length === 0 && (
+              <div className="text-xs text-gray-400 italic mt-2 p-2 bg-gray-50 rounded">
+                No custom templates yet. Click + to save current flow as template.
+              </div>
+            )}
+          </div>
         </div>
 
         <div className="mt-6 pt-4 border-t border-gray-200 space-y-3">
@@ -763,9 +1116,9 @@ import * as act from "#act";
             </Button>
           </div>
           
-          <Button onClick={exportJSON} variant="secondary" className="w-full" size="sm">
-            <FileJson className="w-4 h-4 mr-2" />
-            Export JSON
+          <Button onClick={exportJS} variant="secondary" className="w-full" size="sm">
+            <Code className="w-4 h-4 mr-2" />
+            Export JS
           </Button>
 
           {/* Code Generation Section */}
@@ -889,8 +1242,10 @@ import * as act from "#act";
                     {(selectedNode.data as NodeData).kind === "SwitchTab" && <Layers className="w-4 h-4" />}
                     {(selectedNode.data as NodeData).kind === "ScrollTo" && <ArrowDown className="w-4 h-4" />}
                     {(selectedNode.data as NodeData).kind === "Wait" && <Navigation className="w-4 h-4" />}
+                    {(selectedNode.data as NodeData).kind === "Sleep" && <Moon className="w-4 h-4" />}
                     {(selectedNode.data as NodeData).kind === "If" && <Navigation className="w-4 h-4" />}
                     {(selectedNode.data as NodeData).kind === "Loop" && <Repeat className="w-4 h-4" />}
+                    {(selectedNode.data as NodeData).kind === "EndLoop" && <Repeat className="w-4 h-4" />}
                     {(selectedNode.data as NodeData).kind === "Extract" && <Database className="w-4 h-4" />}
                     {(selectedNode.data as NodeData).kind === "DataProcess" && <Database className="w-4 h-4" />}
                     {(selectedNode.data as NodeData).kind === "Log" && <FileText className="w-4 h-4" />}
@@ -1357,35 +1712,84 @@ import * as act from "#act";
                     <div className="space-y-3">
                       <div>
                         <label className="text-sm font-medium text-gray-600 mb-2 block">
-                          Iterator Name
+                          Number of Iterations
+                        </label>
+                        <input
+                          type="number"
+                          className="w-full border-2 border-gray-200 rounded-lg px-3 py-2
+                                   focus:border-blue-400 focus:outline-none transition-colors"
+                          placeholder="5"
+                          min="1"
+                          max="1000"
+                          value={(selectedNode.data as NodeData).config?.loopCount ?? 5}
+                          onChange={(e) =>
+                            patchSelectedConfig({ loopCount: Number(e.target.value) })
+                          }
+                        />
+                        <p className="text-xs text-gray-500 mt-1">
+                          The actions connected after this node will be repeated this many times
+                        </p>
+                      </div>
+                      <div>
+                        <label className="text-sm font-medium text-gray-600 mb-2 block">
+                          Index Variable Name
+                          <span className="text-xs text-gray-400 ml-2">(Optional)</span>
                         </label>
                         <input
                           className="w-full border-2 border-gray-200 rounded-lg px-3 py-2
                                    focus:border-blue-400 focus:outline-none transition-colors"
-                          placeholder="item"
-                          value={(selectedNode.data as NodeData).config?.iteratorName || "item"}
+                          placeholder="i"
+                          value={(selectedNode.data as NodeData).config?.currentIndexName || "i"}
                           onChange={(e) =>
-                            patchSelectedConfig({ iteratorName: e.target.value })
+                            patchSelectedConfig({ currentIndexName: e.target.value })
                           }
                         />
+                        <p className="text-xs text-gray-500 mt-1">
+                          Variable name to access the current iteration index (starts from 0)
+                        </p>
                       </div>
+                    </div>
+                  )}
+
+                  {/* Sleep */}
+                  {(selectedNode.data as NodeData).kind === "Sleep" && (
+                    <div className="space-y-3">
                       <div>
                         <label className="text-sm font-medium text-gray-600 mb-2 block">
-                          Items (JSON Array)
+                          Sleep Duration (ms)
                         </label>
-                        <textarea
+                        <input
+                          type="number"
                           className="w-full border-2 border-gray-200 rounded-lg px-3 py-2
-                                   focus:border-blue-400 focus:outline-none transition-colors font-mono text-sm resize-none"
-                          rows={3}
-                          placeholder='["item1", "item2", "item3"]'
-                          value={JSON.stringify((selectedNode.data as NodeData).config?.items || [])}
-                          onChange={(e) => {
-                            try {
-                              const items = JSON.parse(e.target.value);
-                              patchSelectedConfig({ items });
-                            } catch {}
-                          }}
+                                   focus:border-blue-400 focus:outline-none transition-colors"
+                          placeholder="3000"
+                          min="100"
+                          max="60000"
+                          value={(selectedNode.data as NodeData).config?.timeout ?? 3000}
+                          onChange={(e) =>
+                            patchSelectedConfig({ timeout: Number(e.target.value) })
+                          }
                         />
+                        <p className="text-xs text-gray-500 mt-1">
+                          Pause execution for this many milliseconds (1000ms = 1 second)
+                        </p>
+                      </div>
+                      <div className="bg-purple-50 p-3 rounded-lg">
+                        <p className="text-sm font-medium text-purple-800 mb-1">💡 Perfect for Testing</p>
+                        <p className="text-xs text-purple-700">
+                          Use Sleep to pause and manually inspect browser results. Great for debugging automation flows!
+                        </p>
+                      </div>
+                    </div>
+                  )}
+
+                  {/* EndLoop */}
+                  {(selectedNode.data as NodeData).kind === "EndLoop" && (
+                    <div className="space-y-3">
+                      <div className="text-sm text-gray-600 bg-blue-50 p-3 rounded-lg">
+                        <p className="font-medium mb-1">Loop End Node</p>
+                        <p className="text-xs">This node marks the end of a loop block. Connect it after all the actions you want to repeat.</p>
+                        <p className="text-xs mt-2">Usage: Loop Start → Actions → Loop End</p>
                       </div>
                     </div>
                   )}

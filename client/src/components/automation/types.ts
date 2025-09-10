@@ -1,5 +1,5 @@
 // Node types
-export type NodeKind = "GoTo" | "Type" | "Click" | "MultiType" | "If" | "Else" | "Wait" | "Sleep" | "For" | "While" | "Variable" | "Extract" | "Navigation" | "SwitchFrame" | "SwitchTab" | "ScrollTo" | "Select" | "Loop" | "DataProcess" | "Log";
+export type NodeKind = "GoTo" | "Type" | "Click" | "MultiType" | "If" | "Else" | "Wait" | "Sleep" | "For" | "While" | "Variable" | "Extract" | "Navigation" | "SwitchFrame" | "SwitchTab" | "ScrollTo" | "Select" | "Loop" | "EndLoop" | "DataProcess" | "Log";
 
 // Cấu hình của từng node
 export type NodeData = {
@@ -56,6 +56,8 @@ export type NodeData = {
     // Loop
     items?: string[];
     iteratorName?: string;
+    loopCount?: number;
+    currentIndexName?: string;
     // DataProcess
     processType?: "getText" | "getValue" | "setAttribute" | "assignVariable";
     targetVariable?: string;
