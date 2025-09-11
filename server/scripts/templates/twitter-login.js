@@ -1,0 +1,69 @@
+export const template = {
+  meta: { name: "X (Twitter) Login", version: "1.0" },
+  nodes: [
+    {
+      id: "goto1",
+      type: "GoTo",
+      position: { x: 80, y: 80 },
+      data: { label: "Go to X.com", kind: "GoTo", config: { url: "https://x.com/login" } },
+    },
+    {
+      id: "wait1",
+      type: "Wait",
+      position: { x: 280, y: 80 },
+      data: { label: "Wait for Login Form", kind: "Wait", config: { waitType: "element", xpath: "//input[@autocomplete='username']", timeout: 5000 } },
+    },
+    {
+      id: "type1",
+      type: "Type",
+      position: { x: 480, y: 80 },
+      data: { label: "Enter Username/Email", kind: "Type", config: { xpath: "//input[@autocomplete='username']", text: "your_username" } },
+    },
+    {
+      id: "click1",
+      type: "Click",
+      position: { x: 680, y: 80 },
+      data: { label: "Click Next", kind: "Click", config: { xpath: "//span[text()='Next']//ancestor::div[@role='button']" } },
+    },
+    {
+      id: "wait2",
+      type: "Wait",
+      position: { x: 880, y: 80 },
+      data: { label: "Wait for Password", kind: "Wait", config: { waitType: "element", xpath: "//input[@type='password']", timeout: 5000 } },
+    },
+    {
+      id: "type2",
+      type: "Type",
+      position: { x: 1080, y: 80 },
+      data: { label: "Enter Password", kind: "Type", config: { xpath: "//input[@type='password']", text: "your_password" } },
+    },
+    {
+      id: "click2",
+      type: "Click",
+      position: { x: 1280, y: 80 },
+      data: { label: "Click Log in", kind: "Click", config: { xpath: "//span[text()='Log in']//ancestor::div[@role='button']" } },
+    },
+    {
+      id: "wait3",
+      type: "Wait",
+      position: { x: 1480, y: 80 },
+      data: { label: "Wait for Home", kind: "Wait", config: { waitType: "element", xpath: "//a[@aria-label='X']", timeout: 10000 } },
+    },
+    {
+      id: "log1",
+      type: "Log",
+      position: { x: 1680, y: 80 },
+      data: { label: "Login Success", kind: "Log", config: { logLevel: "info", message: "Successfully logged in to X (Twitter)" } },
+    },
+  ],
+  edges: [
+    { id: "e1", source: "goto1", target: "wait1" },
+    { id: "e2", source: "wait1", target: "type1" },
+    { id: "e3", source: "type1", target: "click1" },
+    { id: "e4", source: "click1", target: "wait2" },
+    { id: "e5", source: "wait2", target: "type2" },
+    { id: "e6", source: "type2", target: "click2" },
+    { id: "e7", source: "click2", target: "wait3" },
+    { id: "e8", source: "wait3", target: "log1" },
+  ],
+};

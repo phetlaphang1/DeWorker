@@ -17,11 +17,10 @@ import { useReactFlow, ReactFlowProvider } from "reactflow";
 import "reactflow/dist/style.css";
 
 import { FlowDefinition, NodeKind, NodeData } from "./types";
-import { TEMPLATES } from "./templates";
-import { templateManager } from "./templateManager";
+import { templateManager } from "../../../../server/scripts/templates/templateManager";
 import { Button } from "@/components/ui/button";
 import { useToast } from "@/hooks/use-toast";
-import { Globe, Type, MousePointer, Save, Download, FileJson, Play, Copy, Code, Navigation, Frame, Layers, ArrowDown, List, Repeat, Database, FileText, Trash2, Plus, Upload, FolderOpen, Moon } from "lucide-react";
+import { Globe, Type, MousePointer, Save, Download, FileJson, Play, Copy, Code, Navigation, Frame, Layers, ArrowDown, List, Repeat, Database, FileText, Trash2, Plus, Moon } from "lucide-react";
 
 // Palette với icons và descriptions
 const PALETTE: { 
@@ -228,9 +227,11 @@ function AutomationBuilderInner() {
   const [flowName, setFlowName] = useState("Untitled Flow");
   const [nodes, setNodes, onNodesChange] = useNodesState<NodeData>([]);
   const [edges, setEdges, onEdgesChange] = useEdgesState([]);
-  const [templates, setTemplates] = useState<Record<string, FlowDefinition>>(templateManager.getAllTemplates());
+  const [templates, setTemplates] = useState<Record<string, FlowDefinition>>({});
   const [showTemplateDialog, setShowTemplateDialog] = useState(false);
   const [templateNameInput, setTemplateNameInput] = useState("");
+  const [currentTemplateName, setCurrentTemplateName] = useState<string | null>(null);
+  const [originalTemplateName, setOriginalTemplateName] = useState<string | null>(null);
 
   // Inspector
   const [selectedId, setSelectedId] = useState<string | null>(null);
@@ -285,6 +286,7 @@ function AutomationBuilderInner() {
     setSelectedId(id);
   };
 
+  // Load a template from the templates list and set it as current editing template
   const loadTemplate = (name: string) => {
     const t = templates[name];
     if (!t) return;
@@ -313,39 +315,213 @@ function AutomationBuilderInner() {
     );
     setFlowName(t.meta?.name ?? name);
     setSelectedId(t.nodes[0]?.id ?? null);
+    
+    // Set current template name to track which template is being edited
+    setCurrentTemplateName(name);
+    setOriginalTemplateName(name); // Store original name for rename operation
   };
 
-  const exportJSON = () => {
-    const def: FlowDefinition = {
-      meta: { name: flowName, version: "1.0" },
-      nodes: nodes.map((n) => ({
-        id: n.id,
-        type: (n.data as NodeData).kind,
-        position: n.position,
-        data: n.data as NodeData,
-      })),
-      edges: edges.map((e) => ({
-        id: e.id,
-        source: e.source,
-        target: e.target,
-        label: typeof e.label === 'string' ? e.label : undefined,
-      })),
-    };
-
-    const blob = new Blob([JSON.stringify(def, null, 2)], {
-      type: "application/json",
-    });
-    const url = URL.createObjectURL(blob);
-    const a = document.createElement("a");
-    a.href = url;
-    a.download = `${flowName.replace(/\s+/g, "-").toLowerCase()}.json`;
-    a.click();
-    URL.revokeObjectURL(url);
-  };
-
+  // Export current flow as executable JavaScript automation code
   const exportJS = async () => {
-    await generateCode();
-    const jsCode = preview;
+    // Generate code first
+    const order = topoSort();
+    const nodeMap = new Map(nodes.map((n) => [n.id, n]));
+    const lines: string[] = [];
+    let openLoops = 0;
+
+    for (const id of order) {
+      const n = nodeMap.get(id);
+      if (!n) continue;
+      const d = n.data as NodeData;
+
+      if (d.kind === "GoTo") {
+        const url = d.config?.url?.trim() || "https://example.com";
+        lines.push(`await page.goto(${JSON.stringify(url)});`);
+        lines.push(`console.log("Page title:", await page.title());`);
+      }
+      if (d.kind === "Navigation") {
+        const action = d.config?.action || "forward";
+        if (action === "forward") lines.push(`await page.goForward();`);
+        else if (action === "back") lines.push(`await page.goBack();`);
+        else if (action === "refresh") lines.push(`await page.reload();`);
+        else if (action === "newTab") lines.push(`const newPage = await browser.newPage();`);
+      }
+      if (d.kind === "Type") {
+        const xpath = d.config?.xpath?.trim() || "";
+        const text  = d.config?.text ?? "";
+        lines.push(`await act.type(page, ${JSON.stringify(xpath)}, ${JSON.stringify(text)});`);
+      }
+      if (d.kind === "Click") {
+        const xpath = d.config?.xpath?.trim() || "";
+        const index = d.config?.index;
+        const stmt = Number.isFinite(index)
+          ? `await act.click(page, ${JSON.stringify(xpath)}, ${Number(index)});`
+          : `await act.click(page, ${JSON.stringify(xpath)});`;
+        lines.push(stmt);
+      }
+      if (d.kind === "Select") {
+        const xpath = d.config?.xpath?.trim() || "";
+        const selectBy = d.config?.selectBy || "text";
+        const selectValue = d.config?.selectValue || "";
+        const selectIndex = d.config?.selectIndex ?? 0;
+        
+        if (selectBy === "index") {
+          lines.push(`await act.select(page, ${JSON.stringify(xpath)}, { index: ${selectIndex} });`);
+        } else if (selectBy === "value") {
+          lines.push(`await act.select(page, ${JSON.stringify(xpath)}, { value: ${JSON.stringify(selectValue)} });`);
+        } else {
+          lines.push(`await act.select(page, ${JSON.stringify(xpath)}, { text: ${JSON.stringify(selectValue)} });`);
+        }
+      }
+      if (d.kind === "SwitchFrame") {
+        const frameType = d.config?.frameType || "enter";
+        const frameSelector = d.config?.frameSelector || "";
+        
+        if (frameType === "enter") {
+          lines.push(`const frame = await page.waitForSelector(${JSON.stringify(frameSelector)});`);
+          lines.push(`await page.evaluate(el => el.contentDocument, frame);`);
+        } else if (frameType === "exit") {
+          lines.push(`await page.mainFrame();`);
+        } else if (frameType === "parent") {
+          lines.push(`await page.parentFrame();`);
+        }
+      }
+      if (d.kind === "SwitchTab") {
+        const tabIndex = d.config?.tabIndex ?? 0;
+        const tabUrl = d.config?.tabUrl || "";
+        
+        if (tabUrl) {
+          lines.push(`const pages = await browser.pages();`);
+          lines.push(`const targetPage = pages.find(p => p.url().includes(${JSON.stringify(tabUrl)}));`);
+          lines.push(`if (targetPage) await targetPage.bringToFront();`);
+        } else {
+          lines.push(`const pages = await browser.pages();`);
+          lines.push(`if (pages[${tabIndex}]) await pages[${tabIndex}].bringToFront();`);
+        }
+      }
+      if (d.kind === "ScrollTo") {
+        const scrollType = d.config?.scrollType || "element";
+        const xpath = d.config?.xpath?.trim() || "";
+        const scrollX = d.config?.scrollX ?? 0;
+        const scrollY = d.config?.scrollY ?? 0;
+        
+        if (scrollType === "element") {
+          lines.push(`await act.scrollToElement(page, ${JSON.stringify(xpath)});`);
+        } else if (scrollType === "position") {
+          lines.push(`await page.evaluate(() => window.scrollTo(${scrollX}, ${scrollY}));`);
+        } else if (scrollType === "bottom") {
+          lines.push(`await page.evaluate(() => window.scrollTo(0, document.body.scrollHeight));`);
+        } else if (scrollType === "top") {
+          lines.push(`await page.evaluate(() => window.scrollTo(0, 0));`);
+        }
+      }
+      if (d.kind === "Wait") {
+        const waitType = d.config?.waitType || "element";
+        const xpath = d.config?.xpath?.trim() || "";
+        const timeout = d.config?.timeout ?? 5000;
+        
+        if (waitType === "element") {
+          lines.push(`await act.waitForElement(page, ${JSON.stringify(xpath)}, ${timeout});`);
+        } else {
+          lines.push(`await new Promise(resolve => setTimeout(resolve, ${timeout}));`);
+        }
+      }
+      if (d.kind === "Sleep") {
+        const timeout = d.config?.timeout ?? 1000;
+        lines.push(`await new Promise(resolve => setTimeout(resolve, ${timeout}));`);
+      }
+      if (d.kind === "If") {
+        const condition = d.config?.condition || "element_exists";
+        const xpath = d.config?.xpath?.trim() || "";
+        const value = d.config?.value || "";
+        
+        if (condition === "element_exists") {
+          lines.push(`if (await act.elementExists(page, ${JSON.stringify(xpath)})) {`);
+        } else if (condition === "element_not_exists") {
+          lines.push(`if (!(await act.elementExists(page, ${JSON.stringify(xpath)}))) {`);
+        } else if (condition === "text_contains") {
+          lines.push(`if ((await page.content()).includes(${JSON.stringify(value)})) {`);
+        } else if (condition === "page_title_is") {
+          lines.push(`if ((await page.title()) === ${JSON.stringify(value)}) {`);
+        }
+      }
+      if (d.kind === "Loop") {
+        const loopCount = d.config?.loopCount ?? 5;
+        const currentIndexName = d.config?.currentIndexName || "i";
+        lines.push(`for (let ${currentIndexName} = 0; ${currentIndexName} < ${loopCount}; ${currentIndexName}++) {`);
+        lines.push(`  console.log("Loop iteration:", ${currentIndexName} + 1);`);
+        openLoops++;
+      }
+      if (d.kind === "EndLoop") {
+        if (openLoops > 0) {
+          lines.push(`}`); 
+          openLoops--;
+        }
+      }
+      if (d.kind === "Extract") {
+        const xpath = d.config?.xpath?.trim() || "";
+        const extractType = d.config?.extractType || "text";
+        const attribute = d.config?.attribute || "";
+        
+        if (extractType === "text") {
+          lines.push(`const extractedText = await act.getText(page, ${JSON.stringify(xpath)});`);
+          lines.push(`console.log("Extracted:", extractedText);`);
+        } else {
+          lines.push(`const extractedAttr = await act.getAttribute(page, ${JSON.stringify(xpath)}, ${JSON.stringify(attribute)});`);
+          lines.push(`console.log("Extracted:", extractedAttr);`);
+        }
+      }
+      if (d.kind === "DataProcess") {
+        const processType = d.config?.processType || "getText";
+        const xpath = d.config?.xpath?.trim() || "";
+        const targetVariable = d.config?.targetVariable || "result";
+        
+        if (processType === "getText") {
+          lines.push(`const ${targetVariable} = await act.getText(page, ${JSON.stringify(xpath)});`);
+        } else if (processType === "getValue") {
+          lines.push(`const ${targetVariable} = await act.getValue(page, ${JSON.stringify(xpath)});`);
+        } else if (processType === "assignVariable") {
+          const sourceVariable = d.config?.sourceVariable || "";
+          lines.push(`const ${targetVariable} = ${sourceVariable};`);
+        }
+      }
+      if (d.kind === "Log") {
+        const logLevel = d.config?.logLevel || "info";
+        const message = d.config?.message || "";
+        
+        if (logLevel === "error") {
+          lines.push(`console.error(${JSON.stringify(message)});`);
+        } else if (logLevel === "warn") {
+          lines.push(`console.warn(${JSON.stringify(message)});`);
+        } else if (logLevel === "debug") {
+          lines.push(`console.debug(${JSON.stringify(message)});`);
+        } else {
+          lines.push(`console.log(${JSON.stringify(message)});`);
+        }
+      }
+    }
+
+    // Auto-close any open loops
+    while (openLoops > 0) {
+      lines.push(`}`);
+      openLoops--;
+    }
+
+    const header =
+`import puppeteer from "puppeteer";
+import * as act from "#act";
+
+(async () => {
+  const browser = await puppeteer.launch({ headless: false });
+  const page = await browser.newPage();
+`;
+
+    const footer = `
+  await browser.close();
+})();
+`;
+
+    const jsCode = header + "  " + lines.join("\n  ") + footer;
     
     const blob = new Blob([jsCode], {
       type: "application/javascript",
@@ -360,12 +536,58 @@ function AutomationBuilderInner() {
     toast({ title: "Exported", description: "JavaScript file exported successfully." });
   };
 
+  // Save current flow - either update existing template or save as regular flow
   const saveLocal = () => {
-    localStorage.setItem(
-      "automation:current",
-      JSON.stringify({ flowName, nodes, edges })
-    );
-    toast({ title: "Saved", description: "Flow saved to localStorage." });
+    // If we're currently editing a template from "My Templates", update it
+    if (currentTemplateName && !currentTemplateName.startsWith("Basic:") && !currentTemplateName.startsWith("X (Twitter)")) {
+      const templateDef: FlowDefinition = {
+        meta: { name: flowName, version: "1.0" },
+        nodes: nodes.map((n) => ({
+          id: n.id,
+          type: (n.data as NodeData).kind,
+          position: n.position,
+          data: n.data as NodeData,
+        })),
+        edges: edges.map((e) => ({
+          id: e.id,
+          source: e.source,
+          target: e.target,
+          label: typeof e.label === 'string' ? e.label : undefined,
+        })),
+      };
+      
+      // If template was renamed, delete old one and save with new name
+      if (originalTemplateName && originalTemplateName !== currentTemplateName) {
+        templateManager.deleteCustomTemplate(originalTemplateName);
+        templateManager.addCustomTemplate(currentTemplateName, templateDef);
+        setOriginalTemplateName(currentTemplateName); // Update original name after successful rename
+        
+        toast({ 
+          title: "Template Renamed & Updated", 
+          description: `Template renamed from "${originalTemplateName}" to "${currentTemplateName}" with ${nodes.length} nodes.` 
+        });
+      } else {
+        // Just update the existing template
+        templateManager.addCustomTemplate(currentTemplateName, templateDef);
+        
+        toast({ 
+          title: "Template Updated", 
+          description: `Template "${currentTemplateName}" has been updated with ${nodes.length} nodes.` 
+        });
+      }
+      
+      // Refresh templates list
+      templateManager.getAllTemplates().then((allTemplates: Record<string, FlowDefinition>) => {
+        setTemplates(allTemplates);
+      });
+    } else {
+      // Save as regular flow in localStorage
+      localStorage.setItem(
+        "automation:current",
+        JSON.stringify({ flowName, nodes, edges })
+      );
+      toast({ title: "Saved", description: "Flow saved to localStorage." });
+    }
   };
 
   const loadLocal = () => {
@@ -376,9 +598,12 @@ function AutomationBuilderInner() {
     setNodes(obj.nodes);
     setEdges(obj.edges);
     setSelectedId(obj.nodes?.[0]?.id ?? null);
+    setCurrentTemplateName(null); // Reset current template since loading a regular flow
+    setOriginalTemplateName(null);
   };
 
-  const saveAsTemplate = () => {
+  // Save current flow as a new template in localStorage
+  const saveAsTemplate = async () => {
     if (!templateNameInput.trim()) {
       toast({ title: "Error", description: "Please enter a template name", variant: "destructive" });
       return;
@@ -401,8 +626,10 @@ function AutomationBuilderInner() {
     };
     
     try {
+      // Save to localStorage for persistence
       templateManager.addCustomTemplate(templateNameInput, templateDef);
-      setTemplates(templateManager.getAllTemplates());
+      const allTemplates = await templateManager.getAllTemplates();
+      setTemplates(allTemplates);
       setShowTemplateDialog(false);
       setTemplateNameInput("");
       toast({ title: "Success", description: "Template saved successfully" });
@@ -411,74 +638,108 @@ function AutomationBuilderInner() {
     }
   };
 
-  const deleteTemplate = (name: string) => {
-    if (templateManager.isDefaultTemplate(name)) {
+  const deleteTemplate = async (name: string) => {
+    const defaultTemplates = await templateManager.getDefaultTemplates();
+    if (defaultTemplates[name]) {
       toast({ title: "Error", description: "Cannot delete default templates", variant: "destructive" });
       return;
     }
     
     try {
+      // Delete from localStorage
       templateManager.deleteCustomTemplate(name);
-      setTemplates(templateManager.getAllTemplates());
+      const allTemplates = await templateManager.getAllTemplates();
+      setTemplates(allTemplates);
       toast({ title: "Success", description: "Template deleted successfully" });
     } catch (error: any) {
       toast({ title: "Error", description: error.message, variant: "destructive" });
     }
   };
 
-  const importTemplateFile = (event: React.ChangeEvent<HTMLInputElement>) => {
+  // Import template from JSON or JS file and save to localStorage
+  const importTemplateFile = async (event: React.ChangeEvent<HTMLInputElement>) => {
     const file = event.target.files?.[0];
     if (!file) return;
     
     const reader = new FileReader();
-    reader.onload = (e) => {
+    reader.onload = async (e) => {
       try {
         const content = e.target?.result as string;
         
         // Check if it's a JS file or JSON file
         if (file.name.endsWith('.js')) {
-          // Parse JS file to create template
-          importFromJS(content, file.name);
+          // Import JS file and save as template
+          await importFromJS(content, file.name);
         } else {
-          // Parse JSON template
+          // Parse JSON template and save to localStorage
           const template = JSON.parse(content) as FlowDefinition;
-          const name = template.meta?.name || `Imported_${Date.now()}`;
-          templateManager.addCustomTemplate(name, template);
-          setTemplates(templateManager.getAllTemplates());
-          toast({ title: "Success", description: `Template "${name}" imported successfully` });
+          const simpleName = file.name.replace(/\.(json)$/, '');
+          templateManager.addCustomTemplate(simpleName, template);
+          const allTemplates = await templateManager.getAllTemplates();
+          setTemplates(allTemplates);
+          
+          // Also load it to canvas
+          loadTemplate(simpleName);
+          
+          toast({ title: "Success", description: `Template "${simpleName}" saved and loaded successfully` });
         }
-      } catch (error) {
-        toast({ title: "Error", description: "Invalid file format", variant: "destructive" });
+      } catch (error: any) {
+        toast({ title: "Error", description: error.message || "Invalid file format", variant: "destructive" });
       }
     };
     reader.readAsText(file);
+    // Reset input
+    event.target.value = '';
   };
 
-  const importFromJS = (jsContent: string, fileName: string) => {
+  // Parse JS automation code and convert to template format
+  const importFromJS = async (jsContent: string, fileName: string) => {
     try {
       // Basic parsing to convert JS automation back to nodes
       const nodes: any[] = [];
       const edges: any[] = [];
       let nodeId = 0;
       let yPos = 100;
+      let openLoops: string[] = []; // Track open loops
       
       const lines = jsContent.split('\n').map(line => line.trim()).filter(line => line.length > 0);
       
-      lines.forEach((line, index) => {
+      lines.forEach((line) => {
         let nodeData: any = null;
         const id = `imported-${nodeId++}`;
         
-        // Parse different types of automation commands
-        if (line.includes('page.goto(')) {
-          const urlMatch = line.match(/page\.goto\(['"`]([^'"`]+)['"`]\)/);
+        // Parse different types of automation commands - Updated to match export format
+        if (line.includes('await page.goto(')) {
+          const urlMatch = line.match(/await\s+page\.goto\(["']([^"']+)["']\)/);
           nodeData = {
             label: 'Go To URL',
             kind: 'GoTo',
             config: { url: urlMatch?.[1] || 'https://example.com' }
           };
         }
-        else if (line.includes('act.type(')) {
-          const typeMatch = line.match(/act\.type\(page,\s*['"`]([^'"`]+)['"`],\s*['"`]([^'"`]*)['"`]\)/);
+        else if (line.includes('await page.goForward()')) {
+          nodeData = {
+            label: 'Navigation',
+            kind: 'Navigation',
+            config: { action: 'forward' }
+          };
+        }
+        else if (line.includes('await page.goBack()')) {
+          nodeData = {
+            label: 'Navigation',
+            kind: 'Navigation',
+            config: { action: 'back' }
+          };
+        }
+        else if (line.includes('await page.reload()')) {
+          nodeData = {
+            label: 'Navigation',
+            kind: 'Navigation',
+            config: { action: 'refresh' }
+          };
+        }
+        else if (line.includes('await act.type(')) {
+          const typeMatch = line.match(/await\s+act\.type\(page,\s*["']([^"']+)["'],\s*["']([^"']*)["']\)/);
           nodeData = {
             label: 'Type Text',
             kind: 'Type',
@@ -488,70 +749,148 @@ function AutomationBuilderInner() {
             }
           };
         }
-        else if (line.includes('act.click(')) {
-          const clickMatch = line.match(/act\.click\(page,\s*['"`]([^'"`]+)['"`]/);
+        else if (line.includes('await act.click(')) {
+          const clickMatch = line.match(/await\s+act\.click\(page,\s*["']([^"']+)["'](?:,\s*(\d+))?\)/);
           nodeData = {
             label: 'Click Element',
             kind: 'Click',
-            config: { xpath: clickMatch?.[1] || '' }
-          };
-        }
-        else if (line.includes('for (let') && line.includes('< ')) {
-          const loopMatch = line.match(/for \(let (\w+) = \d+; \1 < (\d+); \1\+\+\)/);
-          nodeData = {
-            label: 'Loop Start',
-            kind: 'Loop',
             config: { 
-              loopCount: parseInt(loopMatch?.[2] || '5'),
-              currentIndexName: loopMatch?.[1] || 'i'
+              xpath: clickMatch?.[1] || '',
+              index: clickMatch?.[2] ? parseInt(clickMatch[2]) : undefined
             }
           };
         }
-        else if (line === '}' && index > 0 && lines[index-1].includes('setTimeout')) {
+        else if (line.includes('await act.select(')) {
+          const selectMatch = line.match(/await\s+act\.select\(page,\s*["']([^"']+)["'],\s*\{([^}]+)\}\)/);
+          if (selectMatch) {
+            const xpath = selectMatch[1];
+            const optionsStr = selectMatch[2];
+            let config: any = { xpath };
+            
+            if (optionsStr.includes('index:')) {
+              const indexMatch = optionsStr.match(/index:\s*(\d+)/);
+              config.selectBy = 'index';
+              config.selectIndex = parseInt(indexMatch?.[1] || '0');
+            } else if (optionsStr.includes('value:')) {
+              const valueMatch = optionsStr.match(/value:\s*["']([^"']+)["']/);
+              config.selectBy = 'value';
+              config.selectValue = valueMatch?.[1] || '';
+            } else if (optionsStr.includes('text:')) {
+              const textMatch = optionsStr.match(/text:\s*["']([^"']+)["']/);
+              config.selectBy = 'text';
+              config.selectValue = textMatch?.[1] || '';
+            }
+            
+            nodeData = {
+              label: 'Select Dropdown',
+              kind: 'Select',
+              config
+            };
+          }
+        }
+        else if (line.includes('await act.scrollToElement(')) {
+          const scrollMatch = line.match(/await\s+act\.scrollToElement\(page,\s*["']([^"']+)["']\)/);
+          nodeData = {
+            label: 'Scroll To',
+            kind: 'ScrollTo',
+            config: { 
+              scrollType: 'element',
+              xpath: scrollMatch?.[1] || ''
+            }
+          };
+        }
+        else if (line.includes('await act.waitForElement(')) {
+          const waitMatch = line.match(/await\s+act\.waitForElement\(page,\s*["']([^"']+)["'],\s*(\d+)\)/);
+          nodeData = {
+            label: 'Wait',
+            kind: 'Wait',
+            config: { 
+              waitType: 'element',
+              xpath: waitMatch?.[1] || '',
+              timeout: parseInt(waitMatch?.[2] || '5000')
+            }
+          };
+        }
+        else if (line.includes('for (let') && line.includes('< ')) {
+          const loopMatch = line.match(/for\s*\(let\s+(\w+)\s*=\s*\d+;\s*\1\s*<\s*(\d+);\s*\1\+\+\)/);
+          if (loopMatch) {
+            openLoops.push(loopMatch[1]);
+            nodeData = {
+              label: 'Loop Start',
+              kind: 'Loop',
+              config: { 
+                loopCount: parseInt(loopMatch[2]),
+                currentIndexName: loopMatch[1]
+              }
+            };
+          }
+        }
+        else if (line === '}' && openLoops.length > 0) {
+          // Check if this is a loop end
+          openLoops.pop();
           nodeData = {
             label: 'Loop End',
             kind: 'EndLoop',
             config: {}
           };
         }
-        else if (line.includes('setTimeout')) {
-          const timeMatch = line.match(/setTimeout\(resolve, (\d+)\)/);
+        else if (line.includes('await new Promise(resolve => setTimeout(')) {
+          const timeMatch = line.match(/setTimeout\(resolve,\s*(\d+)\)/);
           nodeData = {
             label: 'Sleep',
             kind: 'Sleep',
             config: { timeout: parseInt(timeMatch?.[1] || '1000') }
           };
         }
-        else if (line.includes('console.log(') && !line.includes('Loop iteration')) {
-          const logMatch = line.match(/console\.log\(['"`]([^'"`]*)['"`]\)/);
+        else if (line.includes('await act.getText(')) {
+          const extractMatch = line.match(/await\s+act\.getText\(page,\s*["']([^"']+)["']\)/);
           nodeData = {
-            label: 'Log Message',
-            kind: 'Log',
-            config: { 
-              logLevel: 'info',
-              message: logMatch?.[1] || 'Log message'
+            label: 'Extract Data',
+            kind: 'Extract',
+            config: {
+              xpath: extractMatch?.[1] || '',
+              extractType: 'text'
             }
           };
+        }
+        else if (line.includes('console.log(') && !line.includes('Loop iteration') && !line.includes('Page title:') && !line.includes('Extracted:')) {
+          const logMatch = line.match(/console\.(log|warn|error|debug)\(["']([^"']+)["']\)/);
+          if (logMatch) {
+            nodeData = {
+              label: 'Log Message',
+              kind: 'Log',
+              config: { 
+                logLevel: logMatch[1] === 'log' ? 'info' : logMatch[1],
+                message: logMatch[2]
+              }
+            };
+          }
         }
         
         if (nodeData) {
           nodes.push({
             id,
-            type: nodeData.kind,
-            position: { x: 200, y: yPos },
+            type: 'custom',
+            position: { x: 250, y: yPos },
             data: nodeData
           });
           
           // Create edge to connect to previous node
           if (nodes.length > 1) {
             edges.push({
-              id: `edge-${nodeId-2}-${nodeId-1}`,
+              id: `edge-${nodes.length-2}-${nodes.length-1}`,
               source: nodes[nodes.length-2].id,
               target: id,
+              animated: true,
+              style: { stroke: '#60a5fa', strokeWidth: 2 },
+              markerEnd: {
+                type: 'arrowClosed',
+                color: '#60a5fa',
+              },
             });
           }
           
-          yPos += 80;
+          yPos += 100;
         }
       });
       
@@ -560,30 +899,49 @@ function AutomationBuilderInner() {
         return;
       }
       
-      // Create template from parsed nodes
+      // Create template and save to localStorage
       const template: FlowDefinition = {
         meta: { name: fileName.replace('.js', ''), version: "1.0" },
-        nodes,
+        nodes: nodes.map(n => ({
+          id: n.id,
+          type: n.data.kind,
+          position: n.position,
+          data: n.data
+        })),
         edges
       };
       
-      const templateName = `JS_${fileName.replace('.js', '')}_${Date.now()}`;
+      const templateName = fileName.replace('.js', '');
+      
+      // Save to localStorage
       templateManager.addCustomTemplate(templateName, template);
-      setTemplates(templateManager.getAllTemplates());
+      
+      // Update templates list
+      const allTemplates = await templateManager.getAllTemplates();
+      setTemplates(allTemplates);
+      
+      // Load the template to canvas
+      setNodes(nodes);
+      setEdges(edges);
+      setFlowName(templateName);
       
       toast({ 
         title: "Success", 
-        description: `Imported ${nodes.length} nodes from JavaScript file` 
+        description: `Imported ${nodes.length} nodes from JavaScript file and saved as template "${templateName}"` 
       });
       
-    } catch (error) {
-      toast({ title: "Error", description: "Failed to parse JavaScript file", variant: "destructive" });
+    } catch (error: any) {
+      console.error('Import error:', error);
+      toast({ title: "Error", description: error.message || "Failed to parse JavaScript file", variant: "destructive" });
     }
   };
 
   useEffect(() => {
     loadLocal();
-    setTemplates(templateManager.getAllTemplates());
+    // Load templates asynchronously
+    templateManager.getAllTemplates().then((allTemplates: Record<string, FlowDefinition>) => {
+      setTemplates(allTemplates);
+    });
   }, []);
 
   // ==== Update helpers for Inspector ====
@@ -655,13 +1013,19 @@ function AutomationBuilderInner() {
       await navigator.clipboard.writeText(text);
       toast({ title: "Copied", description: "Đã copy code vào clipboard." });
     } catch {
+      // Fallback for older browsers - using clipboard API polyfill
       const ta = document.createElement("textarea");
       ta.value = text;
       ta.style.position = "fixed";
       ta.style.left = "-9999px";
       document.body.appendChild(ta);
       ta.select();
-      document.execCommand("copy");
+      try {
+        // Using the deprecated API as fallback only
+        document.execCommand("copy");
+      } catch (e) {
+        console.error("Failed to copy:", e);
+      }
       document.body.removeChild(ta);
       toast({ title: "Copied", description: "Đã copy code vào clipboard." });
     }
@@ -983,25 +1347,6 @@ import * as act from "#act";
               >
                 <Plus className="w-4 h-4" />
               </Button>
-              <label className="cursor-pointer">
-                <input
-                  type="file"
-                  accept=".json,.js"
-                  onChange={importTemplateFile}
-                  className="hidden"
-                />
-                <Button
-                  size="sm"
-                  variant="ghost"
-                  className="h-7 w-7 p-0"
-                  title="Import template"
-                  asChild
-                >
-                  <div>
-                    <Upload className="w-4 h-4" />
-                  </div>
-                </Button>
-              </label>
             </div>
           </div>
           
@@ -1035,9 +1380,42 @@ import * as act from "#act";
           )}
           
           <div className="space-y-1 max-h-60 overflow-y-auto">
+            {/* Custom Templates (saved in localStorage) */}
+            {Object.keys(templates).filter(t => !t.startsWith("Basic:") && !t.startsWith("X (Twitter)")).length > 0 && (
+              <>
+                <div className="text-xs text-gray-500 font-medium mb-1">My Templates</div>
+                {Object.keys(templates).filter(t => !t.startsWith("Basic:") && !t.startsWith("X (Twitter)")).map((t) => (
+                  <div key={t} className="flex items-center gap-1 group hover:bg-gray-50 rounded px-1">
+                    <Button
+                      className="flex-1 justify-start text-xs"
+                      variant="outline"
+                      size="sm"
+                      onClick={() => loadTemplate(t)}
+                    >
+                      <Play className="w-3 h-3 mr-2" />
+                      {t}
+                    </Button>
+                    <Button
+                      size="sm"
+                      variant="ghost"
+                      onClick={() => {
+                        if (confirm(`Delete template "${t}"?`)) {
+                          deleteTemplate(t);
+                        }
+                      }}
+                      className="opacity-0 group-hover:opacity-100 h-6 w-6 p-0"
+                      title="Delete template"
+                    >
+                      <Trash2 className="w-3 h-3 text-red-500" />
+                    </Button>
+                  </div>
+                ))}
+              </>
+            )}
+            
             {/* Default Templates */}
-            <div className="text-xs text-gray-500 font-medium mb-1">Default Templates</div>
-            {Object.keys(templates).filter(t => templateManager.isDefaultTemplate(t)).map((t) => (
+            <div className="text-xs text-gray-500 font-medium mt-2 mb-1">Default Templates</div>
+            {Object.keys(templates).filter(t => t.startsWith("Basic:") || t.startsWith("X (Twitter)")).map((t) => (
               <div key={t} className="flex items-center gap-1">
                 <Button
                   className="flex-1 justify-start text-xs"
@@ -1051,41 +1429,7 @@ import * as act from "#act";
               </div>
             ))}
             
-            {/* Custom Templates */}
-            {Object.keys(templates).filter(t => !templateManager.isDefaultTemplate(t)).length > 0 && (
-              <>
-                <div className="text-xs text-gray-500 font-medium mt-2 mb-1">My Templates</div>
-                {Object.keys(templates).filter(t => !templateManager.isDefaultTemplate(t)).map((t) => (
-                  <div key={t} className="flex items-center gap-1 group hover:bg-gray-50 rounded px-1">
-                    <Button
-                      className="flex-1 justify-start text-xs"
-                      variant="outline"
-                      size="sm"
-                      onClick={() => loadTemplate(t)}
-                    >
-                      <Play className="w-3 h-3 mr-2" />
-                      <FolderOpen className="w-3 h-3 mr-1 text-blue-500" />
-                      {t}
-                    </Button>
-                    <Button
-                      size="sm"
-                      variant="destructive"
-                      onClick={() => {
-                        if (confirm(`Delete template "${t}"?`)) {
-                          deleteTemplate(t);
-                        }
-                      }}
-                      className="h-7 w-7 p-0"
-                      title="Delete template"
-                    >
-                      <Trash2 className="w-3 h-3" />
-                    </Button>
-                  </div>
-                ))}
-              </>
-            )}
-            
-            {Object.keys(templates).filter(t => !templateManager.isDefaultTemplate(t)).length === 0 && (
+            {Object.keys(templates).filter(t => !t.startsWith("Basic:") && !t.startsWith("X (Twitter)")).length === 0 && (
               <div className="text-xs text-gray-400 italic mt-2 p-2 bg-gray-50 rounded">
                 No custom templates yet. Click + to save current flow as template.
               </div>
@@ -1094,23 +1438,54 @@ import * as act from "#act";
         </div>
 
         <div className="mt-6 pt-4 border-t border-gray-200 space-y-3">
-          <div>
-            <label className="text-xs font-medium text-gray-600 mb-1 block">Flow Name</label>
-            <input
-              className="w-full border-2 border-gray-200 rounded-lg px-3 py-2 
-                         focus:border-blue-400 focus:outline-none transition-colors"
-              value={flowName}
-              onChange={(e) => setFlowName(e.target.value)}
-              placeholder="Enter flow name..."
-            />
-          </div>
+          {/* Template editing UI - Shows when editing a custom template */}
+          {currentTemplateName && !currentTemplateName.startsWith("Basic:") && !currentTemplateName.startsWith("X (Twitter)") && (
+            <div className="bg-blue-50 p-3 rounded-lg space-y-2">
+              <div className="text-xs text-blue-700 font-medium mb-2">Editing Template</div>
+              {/* Input for renaming template - User can change template name here */}
+              <input
+                className="w-full border-2 border-blue-200 rounded px-2 py-1 text-sm font-medium
+                         focus:border-blue-400 focus:outline-none transition-colors bg-white"
+                value={currentTemplateName}
+                onChange={(e) => setCurrentTemplateName(e.target.value)}
+                placeholder="Template name..."
+              />
+              <div className="text-xs text-blue-600">
+                Rename template by editing above, then click Save to apply changes
+              </div>
+            </div>
+          )}
+          
+          {/* REMOVED: Flow Name input and New Flow button as requested by user */}
+          {/* Users should manage flows through the template system */}
           
           <div className="grid grid-cols-2 gap-2">
             <Button onClick={saveLocal} className="w-full" size="sm">
               <Save className="w-4 h-4 mr-1" />
               Save
             </Button>
-            <Button onClick={loadLocal} variant="outline" className="w-full" size="sm">
+            <Button 
+              onClick={() => {
+                // Create file input dynamically
+                const input = document.createElement('input');
+                input.type = 'file';
+                input.accept = '.json,.js';
+                input.onchange = (e: any) => {
+                  const file = e.target.files?.[0];
+                  if (file) {
+                    const event = e as React.ChangeEvent<HTMLInputElement>;
+                    importTemplateFile(event);
+                  } else {
+                    // If no file selected, try loading from localStorage
+                    loadLocal();
+                  }
+                };
+                input.click();
+              }}
+              variant="outline" 
+              className="w-full" 
+              size="sm"
+            >
               <Download className="w-4 h-4 mr-1" />
               Load
             </Button>

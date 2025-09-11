@@ -1,0 +1,41 @@
+export const template = {
+  meta: { name: "Data Extraction with Loop", version: "1.0" },
+  nodes: [
+    {
+      id: "goto1",
+      type: "GoTo",
+      position: { x: 80, y: 80 },
+      data: { label: "Go To Page", kind: "GoTo", config: { url: "https://example.com/products" } },
+    },
+    {
+      id: "wait1",
+      type: "Wait",
+      position: { x: 280, y: 80 },
+      data: { label: "Wait for Products", kind: "Wait", config: { waitType: "element", xpath: "//div[@class='product']", timeout: 5000 } },
+    },
+    {
+      id: "loop1",
+      type: "Loop",
+      position: { x: 480, y: 80 },
+      data: { label: "Loop Products", kind: "Loop", config: { items: ["product1", "product2", "product3"], iteratorName: "product" } },
+    },
+    {
+      id: "extract1",
+      type: "Extract",
+      position: { x: 680, y: 80 },
+      data: { label: "Extract Title", kind: "Extract", config: { xpath: "//h2[@class='title']", extractType: "text" } },
+    },
+    {
+      id: "log1",
+      type: "Log",
+      position: { x: 880, y: 80 },
+      data: { label: "Log Product", kind: "Log", config: { logLevel: "info", message: "Product extracted successfully" } },
+    },
+  ],
+  edges: [
+    { id: "e1", source: "goto1", target: "wait1" },
+    { id: "e2", source: "wait1", target: "loop1" },
+    { id: "e3", source: "loop1", target: "extract1" },
+    { id: "e4", source: "extract1", target: "log1" },
+  ],
+};

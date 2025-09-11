@@ -1,0 +1,76 @@
+export const template = {
+  meta: { name: "X (Twitter) Seeding - Like & Retweet", version: "1.0" },
+  nodes: [
+    {
+      id: "goto1",
+      type: "GoTo",
+      position: { x: 80, y: 80 },
+      data: { label: "Go to X Home", kind: "GoTo", config: { url: "https://x.com/home" } },
+    },
+    {
+      id: "wait1",
+      type: "Wait",
+      position: { x: 280, y: 80 },
+      data: { label: "Wait for Feed", kind: "Wait", config: { waitType: "element", xpath: "//article[@data-testid='tweet']", timeout: 5000 } },
+    },
+    {
+      id: "scroll1",
+      type: "ScrollTo",
+      position: { x: 480, y: 80 },
+      data: { label: "Scroll Down", kind: "ScrollTo", config: { scrollType: "position", scrollX: 0, scrollY: 500 } },
+    },
+    {
+      id: "wait2",
+      type: "Wait",
+      position: { x: 680, y: 80 },
+      data: { label: "Wait 2 seconds", kind: "Wait", config: { waitType: "time", timeout: 2000 } },
+    },
+    {
+      id: "click1",
+      type: "Click",
+      position: { x: 880, y: 80 },
+      data: { label: "Like Tweet", kind: "Click", config: { xpath: "(//div[@data-testid='like'])[1]" } },
+    },
+    {
+      id: "wait3",
+      type: "Wait",
+      position: { x: 1080, y: 80 },
+      data: { label: "Wait 1 second", kind: "Wait", config: { waitType: "time", timeout: 1000 } },
+    },
+    {
+      id: "click2",
+      type: "Click",
+      position: { x: 1280, y: 80 },
+      data: { label: "Retweet", kind: "Click", config: { xpath: "(//div[@data-testid='retweet'])[1]" } },
+    },
+    {
+      id: "wait4",
+      type: "Wait",
+      position: { x: 1480, y: 80 },
+      data: { label: "Wait for Menu", kind: "Wait", config: { waitType: "element", xpath: "//span[text()='Repost']", timeout: 2000 } },
+    },
+    {
+      id: "click3",
+      type: "Click",
+      position: { x: 1680, y: 80 },
+      data: { label: "Confirm Retweet", kind: "Click", config: { xpath: "//span[text()='Repost']" } },
+    },
+    {
+      id: "log1",
+      type: "Log",
+      position: { x: 1880, y: 80 },
+      data: { label: "Action Complete", kind: "Log", config: { logLevel: "info", message: "Tweet liked and retweeted successfully" } },
+    },
+  ],
+  edges: [
+    { id: "e1", source: "goto1", target: "wait1" },
+    { id: "e2", source: "wait1", target: "scroll1" },
+    { id: "e3", source: "scroll1", target: "wait2" },
+    { id: "e4", source: "wait2", target: "click1" },
+    { id: "e5", source: "click1", target: "wait3" },
+    { id: "e6", source: "wait3", target: "click2" },
+    { id: "e7", source: "click2", target: "wait4" },
+    { id: "e8", source: "wait4", target: "click3" },
+    { id: "e9", source: "click3", target: "log1" },
+  ],
+};

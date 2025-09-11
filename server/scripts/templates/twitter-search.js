@@ -1,0 +1,70 @@
+export const template = {
+  meta: { name: "X (Twitter) Search & Interact", version: "1.0" },
+  nodes: [
+    {
+      id: "goto1",
+      type: "GoTo",
+      position: { x: 80, y: 80 },
+      data: { label: "Go to X", kind: "GoTo", config: { url: "https://x.com/explore" } },
+    },
+    {
+      id: "wait1",
+      type: "Wait",
+      position: { x: 280, y: 80 },
+      data: { label: "Wait for Search", kind: "Wait", config: { waitType: "element", xpath: "//input[@placeholder='Search']", timeout: 5000 } },
+    },
+    {
+      id: "type1",
+      type: "Type",
+      position: { x: 480, y: 80 },
+      data: { label: "Enter Search Term", kind: "Type", config: { xpath: "//input[@placeholder='Search']", text: "#AI #Technology" } },
+    },
+    {
+      id: "click1",
+      type: "Click",
+      position: { x: 680, y: 80 },
+      data: { label: "Press Enter", kind: "Click", config: { xpath: "//input[@placeholder='Search']" } },
+    },
+    {
+      id: "wait2",
+      type: "Wait",
+      position: { x: 880, y: 80 },
+      data: { label: "Wait for Results", kind: "Wait", config: { waitType: "element", xpath: "//article[@data-testid='tweet']", timeout: 5000 } },
+    },
+    {
+      id: "loop1",
+      type: "Loop",
+      position: { x: 1080, y: 80 },
+      data: { label: "Loop 5 Tweets", kind: "Loop", config: { items: ["1", "2", "3", "4", "5"], iteratorName: "index" } },
+    },
+    {
+      id: "scroll1",
+      type: "ScrollTo",
+      position: { x: 1280, y: 80 },
+      data: { label: "Scroll to Tweet", kind: "ScrollTo", config: { scrollType: "element", xpath: "(//article[@data-testid='tweet'])[${index}]" } },
+    },
+    {
+      id: "click2",
+      type: "Click",
+      position: { x: 1480, y: 80 },
+      data: { label: "Like Tweet", kind: "Click", config: { xpath: "(//div[@data-testid='like'])[${index}]" } },
+    },
+    {
+      id: "wait3",
+      type: "Wait",
+      position: { x: 1680, y: 80 },
+      data: { label: "Wait Between Likes", kind: "Wait", config: { waitType: "time", timeout: 2000 } },
+    },
+  ],
+  edges: [
+    { id: "e1", source: "goto1", target: "wait1" },
+    { id: "e2", source: "wait1", target: "type1" },
+    { id: "e3", source: "type1", target: "click1" },
+    { id: "e4", source: "click1", target: "wait2" },
+    { id: "e5", source: "wait2", target: "loop1" },
+    { id: "e6", source: "loop1", target: "scroll1" },
+    { id: "e7", source: "scroll1", target: "click2" },
+    { id: "e8", source: "click2", target: "wait3" },
+    { id: "e9", source: "wait3", target: "loop1", label: "next" },
+  ],
+};
