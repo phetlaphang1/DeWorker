@@ -155,3 +155,161 @@ export async function getText(page, xpath) {
         throw error;
     }
 }
+
+export async function demo(page, config) {
+    
+await page.goto("https://tinhte.vn/");
+  console.log("Page title:", await page.title());
+  await click(page, "//*[@id=\"__next\"]/div[1]/div[1]/div[2]/div/div/div[1]/div[1]/ol/li[1]/div[2]/article/div/h4/a", 0);
+  // Wait for 3000ms
+  await pause(3000);
+  // Extract text content from element
+  const extractedData = await getText(page, "//*[@id=\"__next\"]/div[1]/div/div[2]/div[2]/div[1]/div/div/div[1]/main/article/div/div/div/div/span[1]");
+  console.log("Extracted text into 'extractedData':", extractedData);
+  // Assign variable from extractedData to data
+  const data = extractedData;
+  console.log("Assigned 'data':", data);
+  console.log("data:", data);
+  // HTTP Request to https://llmapi.roxane.one/v1/chat/completions
+  const apiResponse = await (async () => {
+    const axios = (await import('axios')).default;
+    const requestConfig = {
+      method: "POST",
+      url: "https://llmapi.roxane.one/v1/chat/completions",
+      timeout: 30000,
+      headers: {
+        'Content-Type': 'application/json',
+        'API': 'linh-1752464641053-phonefarm',
+      },
+      data: (() => {
+        // Create template
+        let bodyTemplate = {
+  "model": "text-model",
+  "messages": [
+    {
+      "role": "system",
+      "content": "You are a helpful assistant that creates insightful comments for social media posts."
+    },
+    {
+      "role": "user",
+      "content": "Please create a thoughtful comment for this post: ${data}"
+    }
+  ]
+};
+        
+        // Recursively process the body to replace variables
+        const processValue = (obj) => {
+          if (typeof obj === 'string') {
+            // Replace ${variableName} with actual values
+            return obj.replace(/\$\{(\w+)\}/g, (match, varName) => {
+              try {
+                const value = eval(varName);
+                if (typeof value === 'string') {
+                  // Clean text: remove newlines, tabs, quotes
+                  return value
+                    .replace(/\n/g, ' ')
+                    .replace(/\r/g, '')
+                    .replace(/\t/g, ' ')
+                    .replace(/\s+/g, ' ')
+                    .trim();
+                }
+                return value;
+              } catch (e) {
+                console.warn(`Variable ${varName} not found`);
+                return '';
+              }
+            });
+          } else if (Array.isArray(obj)) {
+            return obj.map(processValue);
+          } else if (obj && typeof obj === 'object') {
+            const result = {};
+            for (const key in obj) {
+              result[key] = processValue(obj[key]);
+            }
+            return result;
+          }
+          return obj;
+        };
+        
+        return processValue(bodyTemplate);
+      })()
+    };
+    
+    try {
+      console.log('Making HTTP POST request to:', 'https://llmapi.roxane.one/v1/chat/completions');
+      
+const apiUrl="https://llmapi.roxane.one/v1/chat/completions";
+const apiKey="linh-1752464641053-phonefarm";
+const  headers = {
+        'Content-Type': 'application/json',
+        Authorization:'Bearer linh-1752464641053-phonefarm',
+      };
+const data = (() => {
+        // Create template
+        let bodyTemplate = {
+  "model": "text-model",
+  "messages": [
+    {
+      "role": "system",
+      "content": "You are a helpful assistant that creates insightful comments for social media posts."
+    },
+    {
+      "role": "user",
+      "content": "Please create a thoughtful comment for this post: ${data}"
+    }
+  ]
+};
+        
+        // Recursively process the body to replace variables
+        const processValue = (obj) => {
+          if (typeof obj === 'string') {
+            // Replace ${variableName} with actual values
+            return obj.replace(/\$\{(\w+)\}/g, (match, varName) => {
+              try {
+                const value = eval(varName);
+                if (typeof value === 'string') {
+                  // Clean text: remove newlines, tabs, quotes
+                  return value
+                    .replace(/\n/g, ' ')
+                    .replace(/\r/g, '')
+                    .replace(/\t/g, ' ')
+                    .replace(/\s+/g, ' ')
+                    .trim();
+                }
+                return value;
+              } catch (e) {
+                console.warn(`Variable ${varName} not found`);
+                return '';
+              }
+            });
+          } else if (Array.isArray(obj)) {
+            return obj.map(processValue);
+          } else if (obj && typeof obj === 'object') {
+            const result = {};
+            for (const key in obj) {
+              result[key] = processValue(obj[key]);
+            }
+            return result;
+          }
+          return obj;
+        };
+        
+        return processValue(bodyTemplate);
+      })();
+
+      const response = await axios.post(apiUrl, data , { headers, timeout: 30000 }  );
+      console.log('Response status:', response.status);
+      console.log('Response data:', JSON.stringify(response.data, null, 2));
+      return response.data;
+    } catch (error) {
+      console.error('HTTP Request failed:', error.message);
+      if (error.response) {
+        console.error('Response status:', error.response.status);
+        console.error('Response data:', error.response.data);
+      }
+      throw error;
+    }
+  })();
+  console.log('Response stored in variable: apiResponse');
+  console.log("apiResponse:", apiResponse);
+}

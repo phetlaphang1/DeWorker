@@ -1,5 +1,5 @@
 // Node types
-export type NodeKind = "GoTo" | "Type" | "Click" | "MultiType" | "If" | "Else" | "Wait" | "Sleep" | "For" | "While" | "Variable" | "Extract" | "Navigation" | "SwitchFrame" | "SwitchTab" | "ScrollTo" | "Select" | "Loop" | "EndLoop" | "DataProcess" | "Log";
+export type NodeKind = "GoTo" | "Type" | "Click" | "MultiType" | "If" | "Else" | "Wait" | "Sleep" | "For" | "While" | "Variable" | "Extract" | "Navigation" | "SwitchFrame" | "SwitchTab" | "ScrollTo" | "Select" | "Loop" | "EndLoop" | "DataProcess" | "Log" | "HttpRequest";
 
 // Cấu hình của từng node
 export type NodeData = {
@@ -31,12 +31,11 @@ export type NodeData = {
     end?: number;
     step?: number;
     // Variable
-    variableName?: string;
     variableValue?: string;
-    operation?: "set" | "get";
     // Extract
     extractType?: "text" | "attribute";
     attribute?: string;
+    variableName?: string;
     // Navigation
     action?: "forward" | "back" | "refresh" | "newTab";
     // SwitchFrame
@@ -59,12 +58,27 @@ export type NodeData = {
     loopCount?: number;
     currentIndexName?: string;
     // DataProcess
-    processType?: "getText" | "getValue" | "setAttribute" | "assignVariable";
+    processType?: "getText" | "getValue" | "setAttribute" | "assignVariable" | "processText" | "concat";
     targetVariable?: string;
     sourceVariable?: string;
+    additionalText?: string;
+    operation?: "trim" | "uppercase" | "lowercase";
     // Log
     logLevel?: "info" | "warn" | "error" | "debug";
     message?: string;
+    messageType?: "text" | "variable" | "template";
+    // HttpRequest
+    method?: "GET" | "POST" | "PUT" | "DELETE" | "PATCH";
+    endpoint?: string;
+    headers?: Record<string, string>;
+    body?: any;
+    bodyType?: "json" | "formData" | "raw";
+    responseVariable?: string;
+    authType?: "none" | "bearer" | "basic" | "apiKey";
+    authToken?: string;
+    apiKeyHeader?: string;
+    apiKeyValue?: string;
+    timeout?: number;
   };
 };
 

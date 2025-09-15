@@ -20,7 +20,7 @@ import { FlowDefinition, NodeKind, NodeData } from "./types";
 import { templateManager } from "../../../../server/scripts/templates/templateManager";
 import { Button } from "@/components/ui/button";
 import { useToast } from "@/hooks/use-toast";
-import { Globe, Type, MousePointer, Save, Download, FileJson, Play, Copy, Code, Navigation, Frame, Layers, ArrowDown, List, Repeat, Database, FileText, Trash2, Plus, Moon } from "lucide-react";
+import { Globe, Type, MousePointer, Save, Download, FileJson, Play, Copy, Code, Navigation, Frame, Layers, ArrowDown, List, Repeat, Database, FileText, Trash2, Plus, Moon, Send } from "lucide-react";
 
 // Palette với icons và descriptions
 const PALETTE: { 
@@ -121,26 +121,56 @@ const PALETTE: {
     description: "End of loop block",
     defaultConfig: {} 
   },
-  { 
-    kind: "Extract", 
-    label: "Extract Data", 
+  {
+    kind: "Extract",
+    label: "Extract Data",
     icon: <Database className="w-4 h-4" />,
-    description: "Extract text or attributes",
-    defaultConfig: { xpath: "", extractType: "text" } 
+    description: "Extract text or attributes from element",
+    defaultConfig: {
+      xpath: "",
+      extractType: "text",
+      variableName: "extractedData"
+    }
   },
-  { 
-    kind: "DataProcess", 
-    label: "Process Data", 
+  {
+    kind: "DataProcess",
+    label: "Process Data",
     icon: <Database className="w-4 h-4" />,
-    description: "Process and assign data",
-    defaultConfig: { processType: "getText", xpath: "", targetVariable: "" } 
+    description: "Process and assign data to variables",
+    defaultConfig: {
+      processType: "assignVariable",
+      sourceVariable: "extractedData",
+      targetVariable: "processedData"
+    }
   },
-  { 
-    kind: "Log", 
-    label: "Log Message", 
+  {
+    kind: "Log",
+    label: "Log Message",
     icon: <FileText className="w-4 h-4" />,
     description: "Log message to console",
-    defaultConfig: { logLevel: "info", message: "" } 
+    defaultConfig: { logLevel: "info", message: "" }
+  },
+  {
+    kind: "HttpRequest",
+    label: "HTTP Request",
+    icon: <Send className="w-4 h-4" />,
+    description: "Make HTTP API calls",
+    defaultConfig: {
+      method: "POST",
+      endpoint: "https://llmapi.roxane.one/v1/chat/completions",
+      authType: "bearer",
+      authToken: "linh-1752464641053-phonefarm",
+      bodyType: "json",
+      body: {
+        model: "text-model",
+        messages: [
+          { role: "system", content: "You are a helpful assistant that creates insightful comments for social media posts." },
+          { role: "user", content: "Please create a thoughtful comment for this post: ${data}" }
+        ]
+      },
+      responseVariable: "apiResponse",
+      timeout: 30000
+    }
   },
 ];
 
@@ -1143,11 +1173,14 @@ import * as act from "#act";
       const waitType = d.config?.waitType || "element";
       const xpath = d.config?.xpath?.trim() || "";
       const timeout = d.config?.timeout ?? 5000;
-      
-      if (waitType === "element") {
-        lines.push(`await act.waitForElement(page, ${JSON.stringify(xpath)}, ${timeout});`);
+
+      if (waitType === "element" && xpath) {
+        lines.push(`// Wait for element to appear`);
+        lines.push(`await page.waitForSelector("::-p-xpath(${JSON.stringify(xpath)})", { timeout: ${timeout} });`);
+        lines.push(`console.log("Element found: ${xpath}");`);
       } else {
-        lines.push(`await new Promise(resolve => setTimeout(resolve, ${timeout}));`);
+        lines.push(`// Wait for ${timeout}ms`);
+        lines.push(`await act.pause(${timeout});`);
       }
     }
     if (d.kind === "Sleep") {
@@ -1213,43 +1246,181 @@ import * as act from "#act";
     if (d.kind === "Extract") {
       const xpath = d.config?.xpath?.trim() || "";
       const extractType = d.config?.extractType || "text";
+      const variableName = d.config?.variableName || "extractedData";
       const attribute = d.config?.attribute || "";
-      
+
       if (extractType === "text") {
-        lines.push(`const extractedText = await act.getText(page, ${JSON.stringify(xpath)});`);
-        lines.push(`console.log("Extracted:", extractedText);`);
+        lines.push(`// Extract text content from element`);
+        lines.push(`const ${variableName} = await act.getText(page, ${JSON.stringify(xpath)});`);
+        lines.push(`console.log("Extracted text into '${variableName}':", ${variableName});`);
       } else {
-        lines.push(`const extractedAttr = await act.getAttribute(page, ${JSON.stringify(xpath)}, ${JSON.stringify(attribute)});`);
-        lines.push(`console.log("Extracted:", extractedAttr);`);
+        lines.push(`// Extract attribute '${attribute}' from element`);
+        lines.push(`const ${variableName} = await act.getAttribute(page, ${JSON.stringify(xpath)}, ${JSON.stringify(attribute)});`);
+        lines.push(`console.log("Extracted attribute into '${variableName}':", ${variableName});`);
       }
     }
     if (d.kind === "DataProcess") {
-      const processType = d.config?.processType || "getText";
-      const xpath = d.config?.xpath?.trim() || "";
-      const targetVariable = d.config?.targetVariable || "result";
-      
-      if (processType === "getText") {
-        lines.push(`const ${targetVariable} = await act.getText(page, ${JSON.stringify(xpath)});`);
-      } else if (processType === "getValue") {
-        lines.push(`const ${targetVariable} = await act.getValue(page, ${JSON.stringify(xpath)});`);
-      } else if (processType === "assignVariable") {
-        const sourceVariable = d.config?.sourceVariable || "";
+      const processType = d.config?.processType || "assignVariable";
+      const targetVariable = d.config?.targetVariable || "processedData";
+      const sourceVariable = d.config?.sourceVariable || "extractedData";
+
+      if (processType === "assignVariable") {
+        lines.push(`// Assign variable from ${sourceVariable} to ${targetVariable}`);
         lines.push(`const ${targetVariable} = ${sourceVariable};`);
+        lines.push(`console.log("Assigned '${targetVariable}':", ${targetVariable});`);
+      } else if (processType === "processText") {
+        const operation = d.config?.operation || "trim";
+        lines.push(`// Process text with ${operation}`);
+        if (operation === "trim") {
+          lines.push(`const ${targetVariable} = ${sourceVariable}.trim();`);
+        } else if (operation === "uppercase") {
+          lines.push(`const ${targetVariable} = ${sourceVariable}.toUpperCase();`);
+        } else if (operation === "lowercase") {
+          lines.push(`const ${targetVariable} = ${sourceVariable}.toLowerCase();`);
+        }
+        lines.push(`console.log("Processed '${targetVariable}':", ${targetVariable});`);
+      } else if (processType === "concat") {
+        const additionalText = d.config?.additionalText || "";
+        lines.push(`// Concatenate variables/text`);
+        lines.push(`const ${targetVariable} = ${sourceVariable} + " ${additionalText}";`);
+        lines.push(`console.log("Concatenated '${targetVariable}':", ${targetVariable});`);
       }
     }
     if (d.kind === "Log") {
       const logLevel = d.config?.logLevel || "info";
+      const messageType = d.config?.messageType || "text";
       const message = d.config?.message || "";
-      
-      if (logLevel === "error") {
-        lines.push(`console.error(${JSON.stringify(message)});`);
-      } else if (logLevel === "warn") {
-        lines.push(`console.warn(${JSON.stringify(message)});`);
-      } else if (logLevel === "debug") {
-        lines.push(`console.debug(${JSON.stringify(message)});`);
+      const variableName = d.config?.variableName || "";
+
+      let logContent;
+      if (messageType === "variable") {
+        // Log a variable directly
+        logContent = variableName;
+      } else if (messageType === "template") {
+        // Template with variable interpolation
+        logContent = `\`${message.replace(/\${/g, '${')}\``;
       } else {
-        lines.push(`console.log(${JSON.stringify(message)});`);
+        // Static text
+        logContent = JSON.stringify(message);
       }
+
+      if (logLevel === "error") {
+        lines.push(`console.error(${messageType === "variable" ? `"${variableName}:", ${logContent}` : logContent});`);
+      } else if (logLevel === "warn") {
+        lines.push(`console.warn(${messageType === "variable" ? `"${variableName}:", ${logContent}` : logContent});`);
+      } else if (logLevel === "debug") {
+        lines.push(`console.debug(${messageType === "variable" ? `"${variableName}:", ${logContent}` : logContent});`);
+      } else {
+        lines.push(`console.log(${messageType === "variable" ? `"${variableName}:", ${logContent}` : logContent});`);
+      }
+    }
+    if (d.kind === "HttpRequest") {
+      const method = d.config?.method || "POST";
+      const endpoint = d.config?.endpoint || "";
+      const headers = d.config?.headers || {};
+      const body = d.config?.body || {};
+      const authType = d.config?.authType || "none";
+      const authToken = d.config?.authToken || "";
+      const apiKeyHeader = d.config?.apiKeyHeader || "";
+      const apiKeyValue = d.config?.apiKeyValue || "";
+      const responseVariable = d.config?.responseVariable || "httpResponse";
+      const timeout = d.config?.timeout || 30000;
+
+      lines.push(`// HTTP Request to ${endpoint}`);
+      lines.push(`const ${responseVariable} = await (async () => {`);
+      lines.push(`  const axios = (await import('axios')).default;`);
+      lines.push(`  const requestConfig = {`);
+      lines.push(`    method: ${JSON.stringify(method)},`);
+      lines.push(`    url: ${JSON.stringify(endpoint)},`);
+      lines.push(`    timeout: ${timeout},`);
+      lines.push(`    headers: {`);
+      lines.push(`      'Content-Type': 'application/json',`);
+
+      // Add authentication headers
+      if (authType === "bearer" && authToken) {
+        // Check if authToken already includes "Bearer" prefix
+        const bearerToken = authToken.startsWith('Bearer ') ? authToken : `Bearer ${authToken}`;
+        lines.push(`      'Authorization': '${bearerToken}',`);
+      } else if (authType === "apiKey" && apiKeyHeader && apiKeyValue) {
+        lines.push(`      '${apiKeyHeader}': '${apiKeyValue}',`);
+      }
+
+      // Add custom headers
+      Object.entries(headers).forEach(([key, value]) => {
+        lines.push(`      '${key}': '${value}',`);
+      });
+
+      lines.push(`    },`);
+
+      // Add body for POST, PUT, PATCH requests
+      if (["POST", "PUT", "PATCH"].includes(method)) {
+        // Check if body contains variable references like ${variableName}
+        const bodyStr = JSON.stringify(body, null, 2);
+        if (bodyStr.includes('${')) {
+          // Parse body to inject variables - safer approach
+          lines.push(`    data: (() => {`);
+          lines.push(`      // Create template`);
+          lines.push(`      let bodyTemplate = ${bodyStr};`);
+          lines.push(`      `);
+          lines.push(`      // Recursively process the body to replace variables`);
+          lines.push(`      const processValue = (obj) => {`);
+          lines.push(`        if (typeof obj === 'string') {`);
+          lines.push(`          // Replace \${variableName} with actual values`);
+          lines.push(`          return obj.replace(/\\$\\{(\\w+)\\}/g, (match, varName) => {`);
+          lines.push(`            try {`);
+          lines.push(`              const value = eval(varName);`);
+          lines.push(`              if (typeof value === 'string') {`);
+          lines.push(`                // Clean text: remove newlines, tabs, quotes`);
+          lines.push(`                return value`);
+          lines.push(`                  .replace(/\\n/g, ' ')`);
+          lines.push(`                  .replace(/\\r/g, '')`);
+          lines.push(`                  .replace(/\\t/g, ' ')`);
+          lines.push(`                  .replace(/\\s+/g, ' ')`);
+          lines.push(`                  .trim();`);
+          lines.push(`              }`);
+          lines.push(`              return value;`);
+          lines.push(`            } catch (e) {`);
+          lines.push(`              console.warn(\`Variable \${varName} not found\`);`);
+          lines.push(`              return '';`);
+          lines.push(`            }`);
+          lines.push(`          });`);
+          lines.push(`        } else if (Array.isArray(obj)) {`);
+          lines.push(`          return obj.map(processValue);`);
+          lines.push(`        } else if (obj && typeof obj === 'object') {`);
+          lines.push(`          const result = {};`);
+          lines.push(`          for (const key in obj) {`);
+          lines.push(`            result[key] = processValue(obj[key]);`);
+          lines.push(`          }`);
+          lines.push(`          return result;`);
+          lines.push(`        }`);
+          lines.push(`        return obj;`);
+          lines.push(`      };`);
+          lines.push(`      `);
+          lines.push(`      return processValue(bodyTemplate);`);
+          lines.push(`    })()`);
+        } else {
+          lines.push(`    data: ${bodyStr}`);
+        }
+      }
+
+      lines.push(`  };`);
+      lines.push(`  `);
+      lines.push(`  try {`);
+      lines.push(`    console.log('Making HTTP ${method} request to:', '${endpoint}');`);
+      lines.push(`    const response = await axios(requestConfig);`);
+      lines.push(`    console.log('Response status:', response.status);`);
+      lines.push(`    console.log('Response data:', JSON.stringify(response.data, null, 2));`);
+      lines.push(`    return response.data;`);
+      lines.push(`  } catch (error) {`);
+      lines.push(`    console.error('HTTP Request failed:', error.message);`);
+      lines.push(`    if (error.response) {`);
+      lines.push(`      console.error('Response status:', error.response.status);`);
+      lines.push(`      console.error('Response data:', error.response.data);`);
+      lines.push(`    }`);
+      lines.push(`    throw error;`);
+      lines.push(`  }`);
+      lines.push(`})();`);
+      lines.push(`console.log('Response stored in variable: ${responseVariable}');`);
     }
   }
 
@@ -1624,6 +1795,7 @@ import * as act from "#act";
                     {(selectedNode.data as NodeData).kind === "Extract" && <Database className="w-4 h-4" />}
                     {(selectedNode.data as NodeData).kind === "DataProcess" && <Database className="w-4 h-4" />}
                     {(selectedNode.data as NodeData).kind === "Log" && <FileText className="w-4 h-4" />}
+                    {(selectedNode.data as NodeData).kind === "HttpRequest" && <Send className="w-4 h-4" />}
                     {(selectedNode.data as NodeData).kind} Configuration
                   </h3>
 
@@ -2185,6 +2357,9 @@ import * as act from "#act";
                             patchSelectedConfig({ xpath: e.target.value })
                           }
                         />
+                        <p className="text-xs text-gray-500 mt-1">
+                          XPath to extract data from
+                        </p>
                       </div>
                       <div>
                         <label className="text-sm font-medium text-gray-600 mb-2 block">
@@ -2218,6 +2393,23 @@ import * as act from "#act";
                           />
                         </div>
                       )}
+                      <div>
+                        <label className="text-sm font-medium text-gray-600 mb-2 block">
+                          Variable Name
+                        </label>
+                        <input
+                          className="w-full border-2 border-gray-200 rounded-lg px-3 py-2
+                                   focus:border-blue-400 focus:outline-none transition-colors"
+                          placeholder="extractedData"
+                          value={(selectedNode.data as NodeData).config?.variableName || "extractedData"}
+                          onChange={(e) =>
+                            patchSelectedConfig({ variableName: e.target.value })
+                          }
+                        />
+                        <p className="text-xs text-gray-500 mt-1">
+                          Store extracted value in this variable
+                        </p>
+                      </div>
                     </div>
                   )}
 
@@ -2231,34 +2423,75 @@ import * as act from "#act";
                         <select
                           className="w-full border-2 border-gray-200 rounded-lg px-3 py-2
                                    focus:border-blue-400 focus:outline-none transition-colors"
-                          value={(selectedNode.data as NodeData).config?.processType || "getText"}
+                          value={(selectedNode.data as NodeData).config?.processType || "assignVariable"}
                           onChange={(e) =>
                             patchSelectedConfig({ processType: e.target.value })
                           }
                         >
-                          <option value="getText">Get Text</option>
-                          <option value="getValue">Get Value</option>
-                          <option value="setAttribute">Set Attribute</option>
                           <option value="assignVariable">Assign Variable</option>
+                          <option value="processText">Process Text</option>
+                          <option value="concat">Concatenate</option>
                         </select>
                       </div>
-                      {((selectedNode.data as NodeData).config?.processType === "getText" || 
-                        (selectedNode.data as NodeData).config?.processType === "getValue") && (
+
+                      <div>
+                        <label className="text-sm font-medium text-gray-600 mb-2 block">
+                          Source Variable
+                        </label>
+                        <input
+                          className="w-full border-2 border-gray-200 rounded-lg px-3 py-2
+                                   focus:border-blue-400 focus:outline-none transition-colors"
+                          placeholder="extractedData"
+                          value={(selectedNode.data as NodeData).config?.sourceVariable || "extractedData"}
+                          onChange={(e) =>
+                            patchSelectedConfig({ sourceVariable: e.target.value })
+                          }
+                        />
+                        <p className="text-xs text-gray-500 mt-1">
+                          Variable to process (from Extract or other nodes)
+                        </p>
+                      </div>
+
+                      {(selectedNode.data as NodeData).config?.processType === "processText" && (
                         <div>
                           <label className="text-sm font-medium text-gray-600 mb-2 block">
-                            Element XPath
+                            Text Operation
+                          </label>
+                          <select
+                            className="w-full border-2 border-gray-200 rounded-lg px-3 py-2
+                                     focus:border-blue-400 focus:outline-none transition-colors"
+                            value={(selectedNode.data as NodeData).config?.operation || "trim"}
+                            onChange={(e) =>
+                              patchSelectedConfig({ operation: e.target.value })
+                            }
+                          >
+                            <option value="trim">Trim Whitespace</option>
+                            <option value="uppercase">To Uppercase</option>
+                            <option value="lowercase">To Lowercase</option>
+                          </select>
+                        </div>
+                      )}
+
+                      {(selectedNode.data as NodeData).config?.processType === "concat" && (
+                        <div>
+                          <label className="text-sm font-medium text-gray-600 mb-2 block">
+                            Additional Text
                           </label>
                           <input
                             className="w-full border-2 border-gray-200 rounded-lg px-3 py-2
-                                     focus:border-blue-400 focus:outline-none transition-colors font-mono text-sm"
-                            placeholder="//input[@id='result']"
-                            value={(selectedNode.data as NodeData).config?.xpath || ""}
+                                     focus:border-blue-400 focus:outline-none transition-colors"
+                            placeholder="Text to append"
+                            value={(selectedNode.data as NodeData).config?.additionalText || ""}
                             onChange={(e) =>
-                              patchSelectedConfig({ xpath: e.target.value })
+                              patchSelectedConfig({ additionalText: e.target.value })
                             }
                           />
+                          <p className="text-xs text-gray-500 mt-1">
+                            Text to concatenate with source variable
+                          </p>
                         </div>
                       )}
+
                       <div>
                         <label className="text-sm font-medium text-gray-600 mb-2 block">
                           Target Variable Name
@@ -2299,18 +2532,255 @@ import * as act from "#act";
                       </div>
                       <div>
                         <label className="text-sm font-medium text-gray-600 mb-2 block">
-                          Message
+                          Message Type
+                        </label>
+                        <select
+                          className="w-full border-2 border-gray-200 rounded-lg px-3 py-2
+                                   focus:border-blue-400 focus:outline-none transition-colors"
+                          value={(selectedNode.data as NodeData).config?.messageType || "text"}
+                          onChange={(e) =>
+                            patchSelectedConfig({ messageType: e.target.value })
+                          }
+                        >
+                          <option value="text">Static Text</option>
+                          <option value="variable">Variable</option>
+                          <option value="template">Template</option>
+                        </select>
+                      </div>
+
+                      {(selectedNode.data as NodeData).config?.messageType === "variable" ? (
+                        <div>
+                          <label className="text-sm font-medium text-gray-600 mb-2 block">
+                            Variable Name
+                          </label>
+                          <input
+                            className="w-full border-2 border-gray-200 rounded-lg px-3 py-2
+                                     focus:border-blue-400 focus:outline-none transition-colors"
+                            placeholder="extractedData, processedData, or httpResponse"
+                            value={(selectedNode.data as NodeData).config?.variableName || ""}
+                            onChange={(e) =>
+                              patchSelectedConfig({ variableName: e.target.value })
+                            }
+                          />
+                          <p className="text-xs text-gray-500 mt-1">
+                            Name of variable to log (from Extract, Process, or HTTP nodes)
+                          </p>
+                        </div>
+                      ) : (selectedNode.data as NodeData).config?.messageType === "template" ? (
+                        <div>
+                          <label className="text-sm font-medium text-gray-600 mb-2 block">
+                            Template Message
+                          </label>
+                          <textarea
+                            className="w-full border-2 border-gray-200 rounded-lg px-3 py-2
+                                     focus:border-blue-400 focus:outline-none transition-colors resize-none font-mono text-sm"
+                            rows={3}
+                            placeholder="Extracted: ${extractedData}, Response: ${httpResponse}"
+                            value={(selectedNode.data as NodeData).config?.message || ""}
+                            onChange={(e) =>
+                              patchSelectedConfig({ message: e.target.value })
+                            }
+                          />
+                          <p className="text-xs text-gray-500 mt-1">
+                            Use ${`{variableName}`} to insert variables in your message
+                          </p>
+                        </div>
+                      ) : (
+                        <div>
+                          <label className="text-sm font-medium text-gray-600 mb-2 block">
+                            Message
+                          </label>
+                          <textarea
+                            className="w-full border-2 border-gray-200 rounded-lg px-3 py-2
+                                     focus:border-blue-400 focus:outline-none transition-colors resize-none"
+                            rows={3}
+                            placeholder="Log message..."
+                            value={(selectedNode.data as NodeData).config?.message || ""}
+                            onChange={(e) =>
+                              patchSelectedConfig({ message: e.target.value })
+                            }
+                          />
+                        </div>
+                      )}
+                    </div>
+                  )}
+
+                  {/* HTTP Request */}
+                  {(selectedNode.data as NodeData).kind === "HttpRequest" && (
+                    <div className="space-y-3">
+                      <div>
+                        <label className="text-sm font-medium text-gray-600 mb-2 block">
+                          Method
+                        </label>
+                        <select
+                          className="w-full border-2 border-gray-200 rounded-lg px-3 py-2
+                                   focus:border-blue-400 focus:outline-none transition-colors"
+                          value={(selectedNode.data as NodeData).config?.method || "POST"}
+                          onChange={(e) =>
+                            patchSelectedConfig({ method: e.target.value })
+                          }
+                        >
+                          <option value="GET">GET</option>
+                          <option value="POST">POST</option>
+                          <option value="PUT">PUT</option>
+                          <option value="DELETE">DELETE</option>
+                          <option value="PATCH">PATCH</option>
+                        </select>
+                      </div>
+
+                      <div>
+                        <label className="text-sm font-medium text-gray-600 mb-2 block">
+                          Endpoint URL
+                        </label>
+                        <input
+                          className="w-full border-2 border-gray-200 rounded-lg px-3 py-2
+                                   focus:border-blue-400 focus:outline-none transition-colors text-sm"
+                          placeholder="https://api.example.com/endpoint"
+                          value={(selectedNode.data as NodeData).config?.endpoint || ""}
+                          onChange={(e) =>
+                            patchSelectedConfig({ endpoint: e.target.value })
+                          }
+                        />
+                        <p className="text-xs text-gray-500 mt-1">
+                          Full URL including https://
+                        </p>
+                      </div>
+
+                      <div>
+                        <label className="text-sm font-medium text-gray-600 mb-2 block">
+                          Authentication Type
+                        </label>
+                        <select
+                          className="w-full border-2 border-gray-200 rounded-lg px-3 py-2
+                                   focus:border-blue-400 focus:outline-none transition-colors"
+                          value={(selectedNode.data as NodeData).config?.authType || "none"}
+                          onChange={(e) =>
+                            patchSelectedConfig({ authType: e.target.value })
+                          }
+                        >
+                          <option value="none">None</option>
+                          <option value="bearer">Bearer Token</option>
+                          <option value="apiKey">API Key</option>
+                        </select>
+                      </div>
+
+                      {(selectedNode.data as NodeData).config?.authType === "bearer" && (
+                        <div>
+                          <label className="text-sm font-medium text-gray-600 mb-2 block">
+                            Bearer Token
+                          </label>
+                          <input
+                            type="password"
+                            className="w-full border-2 border-gray-200 rounded-lg px-3 py-2
+                                     focus:border-blue-400 focus:outline-none transition-colors font-mono text-sm"
+                            placeholder="your-bearer-token"
+                            value={(selectedNode.data as NodeData).config?.authToken || ""}
+                            onChange={(e) =>
+                              patchSelectedConfig({ authToken: e.target.value })
+                            }
+                          />
+                          <p className="text-xs text-gray-500 mt-1">
+                            Enter token only (without "Bearer" prefix)
+                          </p>
+                        </div>
+                      )}
+
+                      {(selectedNode.data as NodeData).config?.authType === "apiKey" && (
+                        <>
+                          <div>
+                            <label className="text-sm font-medium text-gray-600 mb-2 block">
+                              API Key Header Name
+                            </label>
+                            <input
+                              className="w-full border-2 border-gray-200 rounded-lg px-3 py-2
+                                       focus:border-blue-400 focus:outline-none transition-colors"
+                              placeholder="X-API-Key"
+                              value={(selectedNode.data as NodeData).config?.apiKeyHeader || ""}
+                              onChange={(e) =>
+                                patchSelectedConfig({ apiKeyHeader: e.target.value })
+                              }
+                            />
+                          </div>
+                          <div>
+                            <label className="text-sm font-medium text-gray-600 mb-2 block">
+                              API Key Value
+                            </label>
+                            <input
+                              type="password"
+                              className="w-full border-2 border-gray-200 rounded-lg px-3 py-2
+                                       focus:border-blue-400 focus:outline-none transition-colors font-mono text-sm"
+                              placeholder="your-api-key"
+                              value={(selectedNode.data as NodeData).config?.apiKeyValue || ""}
+                              onChange={(e) =>
+                                patchSelectedConfig({ apiKeyValue: e.target.value })
+                              }
+                            />
+                          </div>
+                        </>
+                      )}
+
+                      <div>
+                        <label className="text-sm font-medium text-gray-600 mb-2 block">
+                          Request Body (JSON)
                         </label>
                         <textarea
                           className="w-full border-2 border-gray-200 rounded-lg px-3 py-2
-                                   focus:border-blue-400 focus:outline-none transition-colors resize-none"
-                          rows={3}
-                          placeholder="Log message..."
-                          value={(selectedNode.data as NodeData).config?.message || ""}
+                                   focus:border-blue-400 focus:outline-none transition-colors resize-none font-mono text-xs"
+                          rows={8}
+                          placeholder='{"key": "value", "text": "${extractedData}"}'
+                          value={typeof (selectedNode.data as NodeData).config?.body === 'object'
+                            ? JSON.stringify((selectedNode.data as NodeData).config?.body, null, 2)
+                            : (selectedNode.data as NodeData).config?.body || ""}
+                          onChange={(e) => {
+                            try {
+                              const parsed = JSON.parse(e.target.value);
+                              patchSelectedConfig({ body: parsed });
+                            } catch {
+                              patchSelectedConfig({ body: e.target.value });
+                            }
+                          }}
+                        />
+                        <p className="text-xs text-gray-500 mt-1">
+                          Use ${`{variableName}`} to inject variables from Extract/Process nodes
+                        </p>
+                      </div>
+
+                      <div>
+                        <label className="text-sm font-medium text-gray-600 mb-2 block">
+                          Response Variable Name
+                        </label>
+                        <input
+                          className="w-full border-2 border-gray-200 rounded-lg px-3 py-2
+                                   focus:border-blue-400 focus:outline-none transition-colors"
+                          placeholder="apiResponse"
+                          value={(selectedNode.data as NodeData).config?.responseVariable || "apiResponse"}
                           onChange={(e) =>
-                            patchSelectedConfig({ message: e.target.value })
+                            patchSelectedConfig({ responseVariable: e.target.value })
                           }
                         />
+                        <p className="text-xs text-gray-500 mt-1">
+                          Variable to store the response for use in other nodes
+                        </p>
+                      </div>
+
+                      <div>
+                        <label className="text-sm font-medium text-gray-600 mb-2 block">
+                          Timeout (ms)
+                        </label>
+                        <input
+                          type="number"
+                          className="w-full border-2 border-gray-200 rounded-lg px-3 py-2
+                                   focus:border-blue-400 focus:outline-none transition-colors"
+                          placeholder="30000"
+                          min="1000"
+                          value={(selectedNode.data as NodeData).config?.timeout || 30000}
+                          onChange={(e) =>
+                            patchSelectedConfig({ timeout: Number(e.target.value) })
+                          }
+                        />
+                        <p className="text-xs text-gray-500 mt-1">
+                          Request timeout in milliseconds
+                        </p>
                       </div>
                     </div>
                   )}
