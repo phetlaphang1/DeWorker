@@ -20,7 +20,18 @@ import { FlowDefinition, NodeKind, NodeData } from "./types";
 import { templateManager } from "../../../../server/scripts/templates/templateManager";
 import { Button } from "@/components/ui/button";
 import { useToast } from "@/hooks/use-toast";
-import { Globe, Type, MousePointer, Save, Download, FileJson, Play, Copy, Code, Navigation, Frame, Layers, ArrowDown, List, Repeat, Database, FileText, Trash2, Plus, Moon, Send } from "lucide-react";
+import {
+  validateConnection,
+  validateFlow,
+  topologicalSort,
+  HistoryManager,
+  duplicateNode,
+  exportFlowAsJSON,
+  generateNodeId,
+  hasUnsavedChanges
+} from "./utils";
+import { NodeContextMenu } from "./NodeContextMenu";
+import { Globe, Type, MousePointer, Save, Download, FileJson, Play, Copy, Code, Navigation, Frame, Layers, ArrowDown, List, Repeat, Database, FileText, Trash2, Plus, Moon, Send, Undo2, Redo2, CheckCircle, AlertCircle, CopyPlus, Clock, Bot } from "lucide-react";
 
 // Palette với icons và descriptions
 const PALETTE: { 
@@ -86,10 +97,10 @@ const PALETTE: {
     description: "Scroll to element or position",
     defaultConfig: { scrollType: "element", xpath: "" } 
   },
-  { 
-    kind: "Wait", 
-    label: "Wait", 
-    icon: <Navigation className="w-4 h-4" />,
+  {
+    kind: "Wait",
+    label: "Wait",
+    icon: <Clock className="w-4 h-4" />,
     description: "Wait for element or time",
     defaultConfig: { waitType: "element", xpath: "", timeout: 5000 } 
   },
@@ -156,20 +167,27 @@ const PALETTE: {
     icon: <Send className="w-4 h-4" />,
     description: "Make HTTP API calls",
     defaultConfig: {
-      method: "POST",
-      endpoint: "https://llmapi.roxane.one/v1/chat/completions",
-      authType: "bearer",
-      authToken: "linh-1752464641053-phonefarm",
+      method: "GET",
+      endpoint: "",
+      authType: "none",
+      authToken: "",
       bodyType: "json",
-      body: {
-        model: "text-model",
-        messages: [
-          { role: "system", content: "You are a helpful assistant that creates insightful comments for social media posts." },
-          { role: "user", content: "Please create a thoughtful comment for this post: ${data}" }
-        ]
-      },
-      responseVariable: "apiResponse",
+      body: {},
+      responseVariable: "httpResponse",
       timeout: 30000
+    }
+  },
+  {
+    kind: "AI",
+    label: "AI Assistant",
+    icon: <Bot className="w-4 h-4" />,
+    description: "Get AI responses using Roxane API",
+    defaultConfig: {
+      aiRole: "assistant",
+      aiPrompt: "",
+      aiInputType: "variable",
+      aiInputVariable: "extractedData",
+      aiResponseVariable: "aiResponse"
     }
   },
 ];
@@ -210,6 +228,8 @@ const CustomNodeComponent = ({ data, selected }: { data: NodeData; selected: boo
           ${data.kind === 'Extract' ? 'bg-gray-100' : ''}
           ${data.kind === 'DataProcess' ? 'bg-lime-100' : ''}
           ${data.kind === 'Log' ? 'bg-amber-100' : ''}
+          ${data.kind === 'HttpRequest' ? 'bg-indigo-100' : ''}
+          ${data.kind === 'AI' ? 'bg-purple-100' : ''}
         `}>
           {data.kind === "GoTo" && <Globe className="w-5 h-5 text-blue-600" />}
           {data.kind === "Navigation" && <Navigation className="w-5 h-5 text-blue-600" />}
@@ -219,7 +239,7 @@ const CustomNodeComponent = ({ data, selected }: { data: NodeData; selected: boo
           {data.kind === "SwitchFrame" && <Frame className="w-5 h-5 text-orange-600" />}
           {data.kind === "SwitchTab" && <Layers className="w-5 h-5 text-pink-600" />}
           {data.kind === "ScrollTo" && <ArrowDown className="w-5 h-5 text-teal-600" />}
-          {data.kind === "Wait" && <Navigation className="w-5 h-5 text-yellow-600" />}
+          {data.kind === "Wait" && <Clock className="w-5 h-5 text-yellow-600" />}
           {data.kind === "Sleep" && <Moon className="w-5 h-5 text-purple-600" />}
           {data.kind === "If" && <Navigation className="w-5 h-5 text-red-600" />}
           {data.kind === "Loop" && <Repeat className="w-5 h-5 text-cyan-600" />}
@@ -227,6 +247,8 @@ const CustomNodeComponent = ({ data, selected }: { data: NodeData; selected: boo
           {data.kind === "Extract" && <Database className="w-5 h-5 text-gray-600" />}
           {data.kind === "DataProcess" && <Database className="w-5 h-5 text-lime-600" />}
           {data.kind === "Log" && <FileText className="w-5 h-5 text-amber-600" />}
+          {data.kind === "HttpRequest" && <Send className="w-5 h-5 text-indigo-600" />}
+          {data.kind === "AI" && <Bot className="w-5 h-5 text-purple-600" />}
         </div>
         <div>
           <div className="text-sm font-bold text-gray-800">{data.label}</div>
@@ -263,6 +285,14 @@ function AutomationBuilderInner() {
   const [currentTemplateName, setCurrentTemplateName] = useState<string | null>(null);
   const [originalTemplateName, setOriginalTemplateName] = useState<string | null>(null);
 
+  // History Manager for undo/redo
+  const [historyManager] = useState(() => new HistoryManager());
+  const [canUndo, setCanUndo] = useState(false);
+  const [canRedo, setCanRedo] = useState(false);
+  const [savedState, setSavedState] = useState<{ nodes: any[], edges: any[] }>({ nodes: [], edges: [] });
+  const [validationErrors, setValidationErrors] = useState<string[]>([]);
+  const [contextMenu, setContextMenu] = useState<{ node: Node<NodeData> | null; position: { x: number; y: number } | null }>({ node: null, position: null });
+
   // Inspector
   const [selectedId, setSelectedId] = useState<string | null>(null);
   const selectedNode = useMemo(
@@ -272,8 +302,25 @@ function AutomationBuilderInner() {
 
   const onConnect = useCallback(
     (connection: Connection) => {
-      setEdges((eds) => addEdge({ 
-        ...connection, 
+      // Validate connection before adding
+      const sourceNode = nodes.find(n => n.id === connection.source);
+      const targetNode = nodes.find(n => n.id === connection.target);
+
+      if (sourceNode && targetNode) {
+        const validation = validateConnection(sourceNode as Node<NodeData>, targetNode as Node<NodeData>);
+
+        if (!validation.valid) {
+          toast({
+            title: "Invalid Connection",
+            description: validation.reason,
+            variant: "destructive"
+          });
+          return;
+        }
+      }
+
+      setEdges((eds) => addEdge({
+        ...connection,
         animated: true,
         style: { stroke: '#60a5fa', strokeWidth: 2 },
         markerEnd: {
@@ -281,9 +328,77 @@ function AutomationBuilderInner() {
           color: '#60a5fa',
         },
       }, eds));
+
+      // Save to history after connection
+      saveToHistory();
     },
-    [setEdges]
+    [setEdges, nodes, toast]
   );
+
+  // History management functions
+  const saveToHistory = useCallback(() => {
+    historyManager.push({ nodes: [...nodes], edges: [...edges] });
+    setCanUndo(historyManager.canUndo());
+    setCanRedo(historyManager.canRedo());
+  }, [nodes, edges, historyManager]);
+
+  const handleUndo = useCallback(() => {
+    const state = historyManager.undo();
+    if (state) {
+      setNodes(state.nodes);
+      setEdges(state.edges);
+      setCanUndo(historyManager.canUndo());
+      setCanRedo(historyManager.canRedo());
+      toast({ title: "Undo", description: "Action undone" });
+    }
+  }, [historyManager, setNodes, setEdges, toast]);
+
+  const handleRedo = useCallback(() => {
+    const state = historyManager.redo();
+    if (state) {
+      setNodes(state.nodes);
+      setEdges(state.edges);
+      setCanUndo(historyManager.canUndo());
+      setCanRedo(historyManager.canRedo());
+      toast({ title: "Redo", description: "Action redone" });
+    }
+  }, [historyManager, setNodes, setEdges, toast]);
+
+  // Duplicate selected node
+  const handleDuplicateNode = useCallback(() => {
+    if (!selectedId) {
+      toast({ title: "No Selection", description: "Please select a node to duplicate", variant: "destructive" });
+      return;
+    }
+
+    const nodeToDuplicate = nodes.find(n => n.id === selectedId);
+    if (nodeToDuplicate) {
+      const newNode = duplicateNode(nodeToDuplicate as Node<NodeData>);
+      setNodes(nds => [...nds, newNode]);
+      setSelectedId(newNode.id);
+      saveToHistory();
+      toast({ title: "Node Duplicated", description: `Created copy of "${nodeToDuplicate.data.label}"` });
+    }
+  }, [selectedId, nodes, setNodes, saveToHistory, toast]);
+
+  // Validate flow before export
+  const handleValidateFlow = useCallback(() => {
+    const validation = validateFlow(nodes as Node<NodeData>[], edges);
+    setValidationErrors(validation.errors);
+
+    if (validation.valid) {
+      toast({ title: "✓ Flow Valid", description: "Your flow is ready for export" });
+    } else {
+      toast({
+        title: "Flow Validation Failed",
+        description: `Found ${validation.errors.length} error(s). Check the validation panel.`,
+        variant: "destructive"
+      });
+    }
+
+    return validation.valid;
+  }, [nodes, edges, toast]);
+
 
   const onDragOver = (ev: React.DragEvent) => ev.preventDefault();
 
@@ -298,7 +413,7 @@ function AutomationBuilderInner() {
       y: ev.clientY - bounds.top,
     });
 
-    const id = `${kind}-${Date.now()}`;
+    const id = generateNodeId(kind);
     const def = PALETTE.find((p) => p.kind === kind)!;
 
     setNodes((nds) =>
@@ -314,6 +429,7 @@ function AutomationBuilderInner() {
       })
     );
     setSelectedId(id);
+    saveToHistory();
   };
 
   // Load a template from the templates list and set it as current editing template
@@ -974,6 +1090,61 @@ import * as act from "#act";
     });
   }, []);
 
+  // Keyboard shortcuts
+  useEffect(() => {
+    const handleKeyDown = (e: KeyboardEvent) => {
+      // Undo: Ctrl/Cmd + Z
+      if ((e.ctrlKey || e.metaKey) && e.key === 'z' && !e.shiftKey) {
+        e.preventDefault();
+        handleUndo();
+      }
+      // Redo: Ctrl/Cmd + Y or Ctrl/Cmd + Shift + Z
+      if ((e.ctrlKey || e.metaKey) && (e.key === 'y' || (e.key === 'z' && e.shiftKey))) {
+        e.preventDefault();
+        handleRedo();
+      }
+      // Duplicate: Ctrl/Cmd + D
+      if ((e.ctrlKey || e.metaKey) && e.key === 'd') {
+        e.preventDefault();
+        handleDuplicateNode();
+      }
+      // Delete selected node: Delete or Backspace
+      if ((e.key === 'Delete' || e.key === 'Backspace') && selectedId) {
+        // Check if user is typing in an input/textarea field
+        const activeElement = document.activeElement;
+        const isTyping = activeElement && (
+          activeElement.tagName === 'INPUT' ||
+          activeElement.tagName === 'TEXTAREA' ||
+          activeElement.tagName === 'SELECT' ||
+          activeElement.getAttribute('contenteditable') === 'true'
+        );
+
+        // Only delete node if NOT typing in a field
+        if (!isTyping) {
+          e.preventDefault();
+          setNodes(nds => nds.filter(n => n.id !== selectedId));
+          setEdges(eds => eds.filter(e => e.source !== selectedId && e.target !== selectedId));
+          setSelectedId(null);
+          saveToHistory();
+          toast({ title: "Node Deleted", description: "Node removed from flow" });
+        }
+      }
+      // Validate: Ctrl/Cmd + Enter
+      if ((e.ctrlKey || e.metaKey) && e.key === 'Enter') {
+        e.preventDefault();
+        handleValidateFlow();
+      }
+      // Save: Ctrl/Cmd + S
+      if ((e.ctrlKey || e.metaKey) && e.key === 's') {
+        e.preventDefault();
+        saveLocal();
+      }
+    };
+
+    window.addEventListener('keydown', handleKeyDown);
+    return () => window.removeEventListener('keydown', handleKeyDown);
+  }, [handleUndo, handleRedo, handleDuplicateNode, handleValidateFlow, selectedId, setNodes, setEdges, saveToHistory, toast, saveLocal]);
+
   // ==== Update helpers for Inspector ====
   const patchSelectedNode = (patch: Partial<NodeData>) => {
     if (!selectedId) return;
@@ -1041,23 +1212,23 @@ import * as act from "#act";
   const copyToClipboard = async (text: string) => {
     try {
       await navigator.clipboard.writeText(text);
-      toast({ title: "Copied", description: "Đã copy code vào clipboard." });
-    } catch {
-      // Fallback for older browsers - using clipboard API polyfill
-      const ta = document.createElement("textarea");
-      ta.value = text;
-      ta.style.position = "fixed";
-      ta.style.left = "-9999px";
-      document.body.appendChild(ta);
-      ta.select();
+      toast({ title: "Copied", description: "Code copied to clipboard." });
+    } catch (error) {
+      // Fallback method without using deprecated execCommand
       try {
-        // Using the deprecated API as fallback only
-        document.execCommand("copy");
-      } catch (e) {
-        console.error("Failed to copy:", e);
+        // Create a blob and use it to copy
+        const blob = new Blob([text], { type: 'text/plain' });
+        const clipboardItem = new ClipboardItem({ 'text/plain': blob });
+        await navigator.clipboard.write([clipboardItem]);
+        toast({ title: "Copied", description: "Code copied to clipboard." });
+      } catch (fallbackError) {
+        console.error("Failed to copy:", fallbackError);
+        toast({
+          title: "Copy Failed",
+          description: "Please select and copy the code manually.",
+          variant: "destructive"
+        });
       }
-      document.body.removeChild(ta);
-      toast({ title: "Copied", description: "Đã copy code vào clipboard." });
     }
   };
 
@@ -1082,6 +1253,8 @@ import * as act from "#act";
   const nodeMap = new Map(nodes.map((n) => [n.id, n]));
   const lines: string[] = [];
   let openLoops = 0; // Track open loops
+  let openIfs = 0; // Track open if statements
+  let hasElse = false; // Track if current if has else
 
   for (const id of order) {
     const n = nodeMap.get(id);
@@ -1191,7 +1364,13 @@ import * as act from "#act";
       const condition = d.config?.condition || "element_exists";
       const xpath = d.config?.xpath?.trim() || "";
       const value = d.config?.value || "";
-      
+
+      // Check if next node is Else
+      const currentIndex = order.indexOf(id);
+      const nextNodeId = order[currentIndex + 1];
+      const nextNode = nextNodeId ? nodeMap.get(nextNodeId) : null;
+      hasElse = !!(nextNode && (nextNode.data as NodeData).kind === "Else");
+
       if (condition === "element_exists") {
         lines.push(`if (await act.elementExists(page, ${JSON.stringify(xpath)})) {`);
       } else if (condition === "element_not_exists") {
@@ -1201,9 +1380,13 @@ import * as act from "#act";
       } else if (condition === "page_title_is") {
         lines.push(`if ((await page.title()) === ${JSON.stringify(value)}) {`);
       }
+      openIfs++;
     }
     if (d.kind === "Else") {
+      // Close the if block and open the else block
+      // The openIfs counter remains the same since we're replacing if with else
       lines.push(`} else {`);
+      lines.push(`  console.warn("Condition was false, executing else block");`);
     }
     if (d.kind === "Loop") {
       const loopCount = d.config?.loopCount ?? 5;
@@ -1422,12 +1605,118 @@ import * as act from "#act";
       lines.push(`})();`);
       lines.push(`console.log('Response stored in variable: ${responseVariable}');`);
     }
+    if (d.kind === "AI") {
+      const aiRole = d.config?.aiRole || "assistant";
+      const aiInputType = d.config?.aiInputType || "variable";
+      const aiInputVariable = d.config?.aiInputVariable || "extractedData";
+      const aiPrompt = d.config?.aiPrompt || "";
+      const aiResponseVariable = d.config?.aiResponseVariable || "aiResponse";
+
+      // Define system prompts based on role
+      const rolePrompts = {
+        assistant: "You are a helpful assistant. Answer directly and concisely. No explanations or formatting unless asked.",
+        social_commenter: "You are a social media user. Create ONE natural comment only. Rules:\n- Write ONLY the comment, nothing else\n- No quotes, brackets, or explanations\n- Be genuine and conversational\n- 1-2 sentences maximum\n- Match the language of the post\n- No formatting like *asterisks* or _underscores_",
+        content_creator: "You are a content writer. Write the content directly without any introduction or explanation. No formatting markers.",
+        translator: "Translate the text directly. Output ONLY the translation, no explanations or notes. Default to Vietnamese.",
+        summarizer: "Summarize in 1-2 sentences. Output ONLY the summary, no introductions like 'Here is the summary:'"
+      };
+
+      const systemPrompt = rolePrompts[aiRole] || rolePrompts.assistant;
+
+      lines.push(`// AI Assistant (${aiRole}) - Using Roxane API`);
+      lines.push(`const ${aiResponseVariable} = await (async () => {`);
+      lines.push(`  const axios = (await import('axios')).default;`);
+
+      // Determine the user message
+      let userMessage;
+      if (aiInputType === "custom" && aiPrompt) {
+        // Custom input with possible variable interpolation
+        if (aiPrompt.includes('${')) {
+          lines.push(`  // Process custom prompt with variables`);
+          lines.push(`  const userPrompt = \`${aiPrompt.replace(/`/g, '\\`')}\`;`);
+          userMessage = 'userPrompt';
+        } else {
+          userMessage = JSON.stringify(aiPrompt);
+        }
+      } else {
+        // Use variable from previous node
+        lines.push(`  // Using input from variable: ${aiInputVariable}`);
+
+        // Add role-specific instructions
+        if (aiRole === "social_commenter") {
+          lines.push(`  const userPrompt = \`Comment on this: \${${aiInputVariable}}\`;`);
+        } else if (aiRole === "content_creator") {
+          lines.push(`  const userPrompt = \`Write about: \${${aiInputVariable}}\`;`);
+        } else if (aiRole === "translator") {
+          lines.push(`  const userPrompt = \`Translate: \${${aiInputVariable}}\`;`);
+        } else if (aiRole === "summarizer") {
+          lines.push(`  const userPrompt = \`Summarize: \${${aiInputVariable}}\`;`);
+        } else {
+          lines.push(`  const userPrompt = \`\${${aiInputVariable}}\`;`);
+        }
+        userMessage = 'userPrompt';
+      }
+
+      lines.push(``);
+      lines.push(`  const requestConfig = {`);
+      lines.push(`    method: 'POST',`);
+      lines.push(`    url: 'https://llmapi.roxane.one/v1/chat/completions',`);
+      lines.push(`    headers: {`);
+      lines.push(`      'Content-Type': 'application/json',`);
+      lines.push(`      'Authorization': 'Bearer linh-1752464641053-phonefarm'`);
+      lines.push(`    },`);
+      lines.push(`    data: {`);
+      lines.push(`      model: 'text-model',`);
+      lines.push(`      messages: [`);
+      lines.push(`        { role: 'system', content: ${JSON.stringify(systemPrompt)} },`);
+      lines.push(`        { role: 'user', content: ${userMessage} }`);
+      lines.push(`      ],`);
+      lines.push(`      temperature: 0.8,`);
+      lines.push(`      max_tokens: 150`);
+      lines.push(`    }`);
+      lines.push(`  };`);
+      lines.push(``);
+      lines.push(`  try {`);
+      lines.push(`    console.log('Calling Roxane AI (${aiRole} mode)...');`);
+      lines.push(`    const response = await axios(requestConfig);`);
+      lines.push(`    let aiText = response.data.choices[0].message.content;`);
+      lines.push(`    `);
+      lines.push(`    // Clean the response`);
+      lines.push(`    aiText = aiText.trim();`);
+      lines.push(`    // Remove quotes if present`);
+      lines.push(`    aiText = aiText.replace(/^["']|["']$/g, '');`);
+      lines.push(`    // Remove common prefixes`);
+      lines.push(`    aiText = aiText.replace(/^(Comment:|Answer:|Response:|Here is|Here's)\\s*/i, '');`);
+      lines.push(`    // Remove markdown formatting`);
+      lines.push(`    aiText = aiText.replace(/\\*\\*(.*?)\\*\\*/g, '$1');`);
+      lines.push(`    aiText = aiText.replace(/__(.*?)__/g, '$1');`);
+      lines.push(`    aiText = aiText.replace(/\\*(.*?)\\*/g, '$1');`);
+      lines.push(`    aiText = aiText.replace(/_(.*?)_/g, '$1');`);
+      lines.push(`    `);
+      lines.push(`    console.log('AI Response:', aiText);`);
+      lines.push(`    return aiText;`);
+      lines.push(`  } catch (error) {`);
+      lines.push(`    console.error('Roxane AI Request failed:', error.message);`);
+      lines.push(`    if (error.response) {`);
+      lines.push(`      console.error('Error details:', error.response.data);`);
+      lines.push(`    }`);
+      lines.push(`    throw error;`);
+      lines.push(`  }`);
+      lines.push(`})();`);
+      lines.push(`console.log('AI response stored in: ${aiResponseVariable}');`);
+    }
   }
 
   // Auto-close any open loops
   while (openLoops > 0) {
     lines.push(`}`);
     openLoops--;
+  }
+
+  // Auto-close any open if/else blocks
+  while (openIfs > 0) {
+    lines.push(`}`);
+    openIfs--;
   }
 
   const header =
@@ -1667,6 +1956,70 @@ import * as act from "#act";
             Export JS
           </Button>
 
+          {/* Enhanced Controls */}
+          <div className="grid grid-cols-3 gap-2">
+            <Button
+              onClick={handleUndo}
+              disabled={!canUndo}
+              variant="outline"
+              size="sm"
+              title="Undo (Ctrl+Z)"
+            >
+              <Undo2 className="w-4 h-4" />
+            </Button>
+            <Button
+              onClick={handleRedo}
+              disabled={!canRedo}
+              variant="outline"
+              size="sm"
+              title="Redo (Ctrl+Y)"
+            >
+              <Redo2 className="w-4 h-4" />
+            </Button>
+            <Button
+              onClick={handleDuplicateNode}
+              disabled={!selectedId}
+              variant="outline"
+              size="sm"
+              title="Duplicate Node (Ctrl+D)"
+            >
+              <CopyPlus className="w-4 h-4" />
+            </Button>
+          </div>
+
+          {/* Validation Button */}
+          <Button
+            onClick={handleValidateFlow}
+            variant="outline"
+            className="w-full"
+            size="sm"
+          >
+            <CheckCircle className="w-4 h-4 mr-2" />
+            Validate Flow
+          </Button>
+
+          {/* Validation Errors Display */}
+          {validationErrors.length > 0 && (
+            <div className="bg-red-50 border border-red-200 rounded-lg p-3">
+              <div className="flex items-center gap-2 mb-2">
+                <AlertCircle className="w-4 h-4 text-red-600" />
+                <span className="text-sm font-semibold text-red-800">Validation Errors</span>
+              </div>
+              <ul className="space-y-1">
+                {validationErrors.slice(0, 3).map((error, idx) => (
+                  <li key={idx} className="text-xs text-red-700">
+                    • {error}
+                  </li>
+                ))}
+                {validationErrors.length > 3 && (
+                  <li className="text-xs text-red-600 font-medium">
+                    ... and {validationErrors.length - 3} more
+                  </li>
+                )}
+              </ul>
+            </div>
+          )}
+
           {/* Code Generation Section */}
           <div className="mt-4 pt-4 border-t border-gray-200">
             <h3 className="text-sm font-semibold text-gray-700 mb-3">Code Generation</h3>
@@ -1735,6 +2088,13 @@ import * as act from "#act";
             onEdgesChange={onEdgesChange}
             onConnect={onConnect}
             onNodeClick={(_, node) => setSelectedId(node.id)}
+            onNodeContextMenu={(event, node) => {
+              event.preventDefault();
+              setContextMenu({
+                node: node as Node<NodeData>,
+                position: { x: event.clientX, y: event.clientY }
+              });
+            }}
             connectionLineStyle={{ stroke: '#60a5fa', strokeWidth: 2 }}
             connectionLineType={ConnectionLineType.SmoothStep}
             defaultEdgeOptions={{ type: 'smoothstep' }}
@@ -1746,8 +2106,43 @@ import * as act from "#act";
           </ReactFlow>
         </div>
 
+        {/* Node Context Menu */}
+        <NodeContextMenu
+          node={contextMenu.node}
+          position={contextMenu.position}
+          onClose={() => setContextMenu({ node: null, position: null })}
+          onDuplicate={(node) => {
+            const newNode = duplicateNode(node);
+            setNodes(nds => [...nds, newNode]);
+            setSelectedId(newNode.id);
+            saveToHistory();
+            toast({ title: "Node Duplicated", description: `Created copy of "${node.data.label}"` });
+          }}
+          onDelete={(nodeId) => {
+            setNodes(nds => nds.filter(n => n.id !== nodeId));
+            setEdges(eds => eds.filter(e => e.source !== nodeId && e.target !== nodeId));
+            if (selectedId === nodeId) setSelectedId(null);
+            saveToHistory();
+            toast({ title: "Node Deleted", description: "Node removed from flow" });
+          }}
+          onEdit={(nodeId) => {
+            setSelectedId(nodeId);
+            // Focus on the inspector panel
+            const inspector = document.querySelector('.inspector-panel');
+            if (inspector) {
+              inspector.scrollIntoView({ behavior: 'smooth' });
+            }
+          }}
+          onInfo={(node) => {
+            toast({
+              title: node.data.label,
+              description: `Type: ${node.data.kind}\nID: ${node.id}\nPosition: (${Math.round(node.position.x)}, ${Math.round(node.position.y)})`
+            });
+          }}
+        />
+
         {/* Enhanced Inspector */}
-        <aside className="absolute top-0 right-0 h-full w-[380px] border-l bg-gradient-to-b from-white to-gray-50 shadow-lg overflow-auto">
+        <aside className="inspector-panel absolute top-0 right-0 h-full w-[380px] border-l bg-gradient-to-b from-white to-gray-50 shadow-lg overflow-auto">
           <div className="sticky top-0 bg-white border-b p-4 z-10">
             <h2 className="text-lg font-bold text-gray-800 flex items-center gap-2">
               <MousePointer className="w-5 h-5 text-blue-600" />
@@ -1787,7 +2182,7 @@ import * as act from "#act";
                     {(selectedNode.data as NodeData).kind === "SwitchFrame" && <Frame className="w-4 h-4" />}
                     {(selectedNode.data as NodeData).kind === "SwitchTab" && <Layers className="w-4 h-4" />}
                     {(selectedNode.data as NodeData).kind === "ScrollTo" && <ArrowDown className="w-4 h-4" />}
-                    {(selectedNode.data as NodeData).kind === "Wait" && <Navigation className="w-4 h-4" />}
+                    {(selectedNode.data as NodeData).kind === "Wait" && <Clock className="w-4 h-4" />}
                     {(selectedNode.data as NodeData).kind === "Sleep" && <Moon className="w-4 h-4" />}
                     {(selectedNode.data as NodeData).kind === "If" && <Navigation className="w-4 h-4" />}
                     {(selectedNode.data as NodeData).kind === "Loop" && <Repeat className="w-4 h-4" />}
@@ -1796,6 +2191,7 @@ import * as act from "#act";
                     {(selectedNode.data as NodeData).kind === "DataProcess" && <Database className="w-4 h-4" />}
                     {(selectedNode.data as NodeData).kind === "Log" && <FileText className="w-4 h-4" />}
                     {(selectedNode.data as NodeData).kind === "HttpRequest" && <Send className="w-4 h-4" />}
+                    {(selectedNode.data as NodeData).kind === "AI" && <Bot className="w-4 h-4" />}
                     {(selectedNode.data as NodeData).kind} Configuration
                   </h3>
 
@@ -2780,6 +3176,140 @@ import * as act from "#act";
                         />
                         <p className="text-xs text-gray-500 mt-1">
                           Request timeout in milliseconds
+                        </p>
+                      </div>
+                    </div>
+                  )}
+
+                  {/* AI Assistant */}
+                  {(selectedNode.data as NodeData).kind === "AI" && (
+                    <div className="space-y-3">
+                      <div>
+                        <label className="text-sm font-medium text-gray-600 mb-2 block">
+                          AI Role
+                        </label>
+                        <select
+                          className="w-full border-2 border-gray-200 rounded-lg px-3 py-2
+                                   focus:border-blue-400 focus:outline-none transition-colors"
+                          value={(selectedNode.data as NodeData).config?.aiRole || "assistant"}
+                          onChange={(e) =>
+                            patchSelectedConfig({ aiRole: e.target.value })
+                          }
+                        >
+                          <option value="assistant">🤖 Helpful Assistant</option>
+                          <option value="social_commenter">💬 Social Media Commenter</option>
+                          <option value="content_creator">✍️ Content Creator</option>
+                          <option value="translator">🌍 Translator</option>
+                          <option value="summarizer">📋 Summarizer</option>
+                        </select>
+                        <p className="text-xs text-gray-500 mt-1">
+                          {(selectedNode.data as NodeData).config?.aiRole === "assistant" && "General purpose AI assistant for any task"}
+                          {(selectedNode.data as NodeData).config?.aiRole === "social_commenter" && "Creates engaging comments for social media posts"}
+                          {(selectedNode.data as NodeData).config?.aiRole === "content_creator" && "Generates creative content and ideas"}
+                          {(selectedNode.data as NodeData).config?.aiRole === "translator" && "Translates text between languages"}
+                          {(selectedNode.data as NodeData).config?.aiRole === "summarizer" && "Creates concise summaries of long texts"}
+                        </p>
+                      </div>
+
+                      <div>
+                        <label className="text-sm font-medium text-gray-600 mb-2 block">
+                          Input Type
+                        </label>
+                        <select
+                          className="w-full border-2 border-gray-200 rounded-lg px-3 py-2
+                                   focus:border-blue-400 focus:outline-none transition-colors"
+                          value={(selectedNode.data as NodeData).config?.aiInputType || "variable"}
+                          onChange={(e) =>
+                            patchSelectedConfig({ aiInputType: e.target.value })
+                          }
+                        >
+                          <option value="variable">Use Variable from Previous Node</option>
+                          <option value="custom">Custom Input</option>
+                        </select>
+                      </div>
+
+                      {(selectedNode.data as NodeData).config?.aiInputType === "variable" ? (
+                        <div>
+                          <label className="text-sm font-medium text-gray-600 mb-2 block">
+                            Input Variable Name
+                          </label>
+                          <input
+                            className="w-full border-2 border-gray-200 rounded-lg px-3 py-2
+                                     focus:border-blue-400 focus:outline-none transition-colors"
+                            placeholder="extractedData"
+                            value={(selectedNode.data as NodeData).config?.aiInputVariable || "extractedData"}
+                            onChange={(e) =>
+                              patchSelectedConfig({ aiInputVariable: e.target.value })
+                            }
+                          />
+                          <p className="text-xs text-gray-500 mt-1">
+                            Variable from Extract/DataProcess nodes to send to AI
+                          </p>
+                        </div>
+                      ) : (
+                        <div>
+                          <label className="text-sm font-medium text-gray-600 mb-2 block">
+                            Custom Input
+                          </label>
+                          <textarea
+                            className="w-full border-2 border-gray-200 rounded-lg px-3 py-2
+                                     focus:border-blue-400 focus:outline-none transition-colors resize-none"
+                            rows={4}
+                            placeholder={(() => {
+                              const role = (selectedNode.data as NodeData).config?.aiRole;
+                              if (role === "social_commenter") return "Write a thoughtful comment about...";
+                              if (role === "content_creator") return "Create content about...";
+                              if (role === "translator") return "Translate this to Vietnamese...";
+                              if (role === "summarizer") return "Summarize this article...";
+                              return "Your request here...";
+                            })()}
+                            value={(selectedNode.data as NodeData).config?.aiPrompt || ""}
+                            onChange={(e) =>
+                              patchSelectedConfig({ aiPrompt: e.target.value })
+                            }
+                          />
+                          <p className="text-xs text-gray-500 mt-1">
+                            You can also use ${`{variableName}`} to inject data
+                          </p>
+                        </div>
+                      )}
+
+                      <div>
+                        <label className="text-sm font-medium text-gray-600 mb-2 block">
+                          Response Variable Name
+                        </label>
+                        <input
+                          className="w-full border-2 border-gray-200 rounded-lg px-3 py-2
+                                   focus:border-blue-400 focus:outline-none transition-colors"
+                          placeholder="aiResponse"
+                          value={(selectedNode.data as NodeData).config?.aiResponseVariable || "aiResponse"}
+                          onChange={(e) =>
+                            patchSelectedConfig({ aiResponseVariable: e.target.value })
+                          }
+                        />
+                        <p className="text-xs text-gray-500 mt-1">
+                          Variable to store AI response for use in other nodes (e.g., Type node)
+                        </p>
+                      </div>
+
+                      <div className="bg-purple-50 p-3 rounded-lg">
+                        <p className="text-sm font-medium text-purple-800 mb-2">🌟 Roxane AI Configuration</p>
+                        <div className="text-xs text-purple-700 space-y-1">
+                          <p>• <strong>API Endpoint:</strong> llmapi.roxane.one</p>
+                          <p>• <strong>Model:</strong> text-model (fast & efficient)</p>
+                          <p>• <strong>API Key:</strong> Built-in (linh-1752464641053-phonefarm)</p>
+                        </div>
+                      </div>
+
+                      {/* Example based on role */}
+                      <div className="bg-blue-50 p-3 rounded-lg">
+                        <p className="text-xs font-medium text-blue-800 mb-1">💡 Usage Example:</p>
+                        <p className="text-xs text-blue-700">
+                          {(selectedNode.data as NodeData).config?.aiRole === "assistant" && "Extract → AI (analyze) → Type"}
+                          {(selectedNode.data as NodeData).config?.aiRole === "social_commenter" && "Extract (post content) → AI (generate comment) → Type (post comment)"}
+                          {(selectedNode.data as NodeData).config?.aiRole === "content_creator" && "Extract (topic) → AI (create content) → Type (publish)"}
+                          {(selectedNode.data as NodeData).config?.aiRole === "translator" && "Extract (text) → AI (translate) → Type (translated text)"}
+                          {(selectedNode.data as NodeData).config?.aiRole === "summarizer" && "Extract (article) → AI (summarize) → Log (summary)"}
                         </p>
                       </div>
                     </div>

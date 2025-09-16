@@ -1,0 +1,2107 @@
+[2025-09-16 03:51:03] [profile-3] Using task directory: /Users/mac/Desktop/Worker/Worker/storage/local/3/local
+[2025-09-16 03:51:03] [profile-3] Original script (first 200 chars):
+[2025-09-16 03:51:03] Pre-loading ES6 modules...
+[2025-09-16 03:51:03] [profile-3] import puppeteer from "puppeteer";
+import * as act from "#act";
+await page.goto("https://www.google.com/");
+  console.log("Page title:", await page.title());
+  if (await act.elementExists(page, "/html
+[2025-09-16 03:51:03] [profile-3] Script imports converted to require statements
+[2025-09-16 03:51:03] ES6 modules loading completed
+[2025-09-16 03:51:03] [profile-3] Copied automation helpers to profile directory
+[2025-09-16 03:51:03] [profile-3] Processed Script:....
+[2025-09-16 03:51:03] [profile-3] try { config = JSON.parse(config); } catch (e) { }
+const puppeteer = require("puppeteer");
+const act = require("#act");
+await page.goto("https://www.google.com/");
+  console.log("Page title:", await page.title());
+  if (await act.elementExists(page, "/html/body/div[2]/div[4]/form/div[1]/div[1]/div[3]/center/input[1]")) {
+  await act.click(page, "/html/body/div[2]/div[4]/form/div[1]/div[1]/div[3]/center/input[1]");
+  } else {
+  console.warn("Login button not found");
+
+[2025-09-16 03:51:03] Script execution error: Unexpected token ')'
+[2025-09-16 03:51:03] Error stack: SyntaxError: Unexpected token ')'
+    at new AsyncFunction (<anonymous>)
+    at runUserScript (/Users/mac/Desktop/Worker/Worker/server/executions/userScriptRunner.ts:120:28)
+    at async runScript (/Users/mac/Desktop/Worker/Worker/server/executions/scriptRunner.ts:266:14)
+    at async process.<anonymous> (/Users/mac/Desktop/Worker/Worker/server/executions/scriptRunner.ts:332:20)
+[2025-09-16 03:51:03] [profile-3] SyntaxError: Unexpected token ')'
+    at new AsyncFunction (<anonymous>)
+    at runUserScript (/Users/mac/Desktop/Worker/Worker/server/executions/userScriptRunner.ts:120:28)
+    at async runScript (/Users/mac/Desktop/Worker/Worker/server/executions/scriptRunner.ts:266:14)
+    at async process.<anonymous> (/Users/mac/Desktop/Worker/Worker/server/executions/scriptRunner.ts:332:20)
+[2025-09-16 03:51:03] [profile-3] [profile-3] Error screenshot saved to /Users/mac/Desktop/Worker/Worker/storage/local/3/local/output/error_2025-09-16_10-51-03.png
+[2025-09-16 03:58:31] [profile-3] Using task directory: /Users/mac/Desktop/Worker/Worker/storage/local/3/local
+[2025-09-16 03:58:31] [profile-3] Original script (first 200 chars):
+[2025-09-16 03:58:31] [profile-3] import puppeteer from "puppeteer";
+import * as act from "#act";
+await page.goto("https://www.google.com");
+  console.log("Page title:", await page.title());
+  if (await act.elementExists(page, "/html/
+[2025-09-16 03:58:31] [profile-3] Script imports converted to require statements
+[2025-09-16 03:58:31] Pre-loading ES6 modules...
+[2025-09-16 03:58:32] ES6 modules loading completed
+[2025-09-16 03:58:32] [profile-3] Processed Script:....
+[2025-09-16 03:58:32] [profile-3] try { config = JSON.parse(config); } catch (e) { }
+const puppeteer = require("puppeteer");
+const act = require("#act");
+await page.goto("https://www.google.com");
+  console.log("Page title:", await page.title());
+  if (await act.elementExists(page, "/html/body/div[2]/div[4]/form/div[1]/div[1]/div[3]/center/input[1]")) {
+  await act.click(page, "/html/body/div[2]/div[4]/form/div[1]/div[1]/div[3]/center/input[1]");
+  } else {
+  console.warn("Login button not found");
+
+[2025-09-16 03:58:32] Script execution error: Unexpected token ')'
+[2025-09-16 03:58:32] Error stack: SyntaxError: Unexpected token ')'
+    at new AsyncFunction (<anonymous>)
+    at runUserScript (/Users/mac/Desktop/Worker/Worker/server/executions/userScriptRunner.ts:120:28)
+    at async runScript (/Users/mac/Desktop/Worker/Worker/server/executions/scriptRunner.ts:266:14)
+    at async process.<anonymous> (/Users/mac/Desktop/Worker/Worker/server/executions/scriptRunner.ts:332:20)
+[2025-09-16 03:58:32] [profile-3] SyntaxError: Unexpected token ')'
+    at new AsyncFunction (<anonymous>)
+    at runUserScript (/Users/mac/Desktop/Worker/Worker/server/executions/userScriptRunner.ts:120:28)
+    at async runScript (/Users/mac/Desktop/Worker/Worker/server/executions/scriptRunner.ts:266:14)
+    at async process.<anonymous> (/Users/mac/Desktop/Worker/Worker/server/executions/scriptRunner.ts:332:20)
+[2025-09-16 03:58:32] [profile-3] [profile-3] Error screenshot saved to /Users/mac/Desktop/Worker/Worker/storage/local/3/local/output/error_2025-09-16_10-58-32.png
+[2025-09-16 03:59:11] [profile-3] Using task directory: /Users/mac/Desktop/Worker/Worker/storage/local/3/local
+[2025-09-16 03:59:11] [profile-3] Original script (first 200 chars):
+[2025-09-16 03:59:11] [profile-3] import puppeteer from "puppeteer";
+import * as act from "#act";
+await page.goto("https://www.google.com");
+  console.log("Page title:", await page.title());
+  if (await act.elementExists(page, "/html/
+[2025-09-16 03:59:11] [profile-3] Script imports converted to require statements
+[2025-09-16 03:59:11] Pre-loading ES6 modules...
+[2025-09-16 03:59:11] ES6 modules loading completed
+[2025-09-16 03:59:11] [profile-3] Processed Script:....
+[2025-09-16 03:59:11] [profile-3] try { config = JSON.parse(config); } catch (e) { }
+const puppeteer = require("puppeteer");
+const act = require("#act");
+await page.goto("https://www.google.com");
+  console.log("Page title:", await page.title());
+  if (await act.elementExists(page, "/html/body/div[2]/div[4]/form/div[1]/div[1]/div[3]/center/input[1]")) {
+  await act.click(page, "/html/body/div[2]/div[4]/form/div[1]/div[1]/div[3]/center/input[1]");
+  } else {
+  console.warn("Login button not found");
+};
+[2025-09-16 03:59:11] Executing automation script
+[2025-09-16 03:59:11] [profile-3] Script requesting module: puppeteer
+[2025-09-16 03:59:12] [profile-3] Script requesting module: #act
+[2025-09-16 03:59:12] [profile-3] Returning pre-loaded #act module, keys: ["checkElement","click","demo","elementExists","getAttribute","getAttributes","getElement","getElements","getText","getValue","pause","scrollToElement","scrollToEndOfPage","scrollToHomeOfPage","select","type","waitForElement","waitForNavigation","waitForTrueElement"]
+[2025-09-16 03:59:13] [profile-3] Page title: Google
+[2025-09-16 03:59:13] [profile-3] 🔍 Check if element exists: "/html/body/div[2]/div[4]/form/div[1]/div[1]/div[3]/center/input[1]"
+[2025-09-16 03:59:13] [profile-3] ✅ Element exists
+[2025-09-16 03:59:13] [profile-3] Click: /html/body/div[2]/div[4]/form/div[1]/div[1]/div[3]/center/input[1]
+[2025-09-16 03:59:13] [profile-3] Pause in 500 milliseconds...
+[2025-09-16 03:59:14] [profile-3] ✅ Clicked element: /html/body/div[2]/div[4]/form/div[1]/div[1]/div[3]/center/input[1]
+[2025-09-16 03:59:14] Script execution completed successfully
+[2025-09-16 04:21:10] [profile-3] Using task directory: /Users/mac/Desktop/Worker/Worker/storage/local/3/local
+[2025-09-16 04:21:10] [profile-3] Original script (first 200 chars):
+[2025-09-16 04:21:10] [profile-3] // HTTP Request to http://toikhoe.com.vn/api/posts
+  const httpResponse = await (async () => {
+    const axios = (await import('axios')).default;
+    const requestConfig = {
+      method: "GET",
+     
+[2025-09-16 04:21:10] [profile-3] Script imports converted to require statements
+[2025-09-16 04:21:10] Pre-loading ES6 modules...
+[2025-09-16 04:21:10] ES6 modules loading completed
+[2025-09-16 04:21:10] [profile-3] Processed Script:....
+[2025-09-16 04:21:10] [profile-3] try { config = JSON.parse(config); } catch (e) { }
+// HTTP Request to http://toikhoe.com.vn/api/posts
+  const httpResponse = await (async () => {
+    const axios = (await import('axios')).default;
+    const requestConfig = {
+      method: "GET",
+      url: "http://toikhoe.com.vn/api/posts",
+      timeout: 30000,
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    };
+    
+    try {
+      console.log('Making HTTP GET request to:', 'http://toikhoe.com.vn/api/posts');
+      const response = await axios(requestConfig);
+      console.log('Response status:', response.status);
+      console.log('Response data:', JSON.stringify(response.data, null, 2));
+      return response.data;
+    } catch (error) {
+      console.error('HTTP Request failed:', error.message);
+      if (error.response) {
+        console.error('Response status:', error.response.status);
+        console.error('Response data:', error.response.data);
+      }
+      throw error;
+    }
+  })();
+  console.log('Response stored in variable: httpResponse');
+  console.log("httpResponse:", httpResponse);
+
+[2025-09-16 04:21:10] Executing automation script
+[2025-09-16 04:21:10] [profile-3] Making HTTP GET request to: http://toikhoe.com.vn/api/posts
+[2025-09-16 04:21:11] [profile-3] Response status: 200
+[2025-09-16 04:21:11] [profile-3] Response data: {
+  "success": true,
+  "message": "Lấy danh sách bài đăng thành công.",
+  "data": {
+    "current_page": 1,
+    "data": [
+      {
+        "id": 311,
+        "title": "Sức Khỏe Thai Kỳ: Những Điều Cần Biết Để Mẹ Và Bé Phát Triển Toàn Diện",
+        "slug": "suc-khoe-thai-ky-nhung-dieu-can-biet-de-me-va-be-phat-trien-toan-dien",
+        "summary": "Bảo vệ sức khỏe thai kỳ là chìa khóa giúp mẹ và bé tránh được các nguy cơ trong suốt thai kỳ. Tìm hiểu những lưu ý quan trọng về dinh dưỡng, thăm khám và sinh hoạt để đảm bảo bé phát triển khỏe mạnh và mẹ vượt cạn an toàn.",
+        "short_desc": null,
+        "description": "<p><p><strong>Sức khỏe thai kỳ</strong> đóng vai trò then chốt trong việc đảm bảo sự phát triển toàn diện của thai nhi và sức khỏe của mẹ. Suốt thời gian mang thai, chị em cần quan tâm đặc biệt đến chế độ dinh dưỡng, thăm khám định kỳ và sinh hoạt hợp lý nhằm giảm thiểu nguy cơ biến chứng.</p></p>\n<p><h3>Chế độ dinh dưỡng cân đối và đầy đủ</h3></p>\n<p><p>Trong thai kỳ, nhu cầu dinh dưỡng của cơ thể mẹ tăng lên đáng kể để phục vụ sự phát triển của bé. Một chế độ ăn đa dạng với đầy đủ chất đạm, chất béo, carbohydrates, vitamin và khoáng chất là rất cần thiết.</p></p>\n<p><ul></p>\n<p><li><strong>Protein:</strong> Giúp xây dựng mô thai, tăng trưởng các cơ quan trong cơ thể trẻ.</li></p>\n<p><li><strong>Canxi và vitamin D:</strong> Hỗ trợ phát triển xương và răng của thai nhi.</li></p>\n<p><li><strong>Axít folic:</strong> Giúp ngăn ngừa các dị tật ống thần kinh như tật nứt đốt sống.</li></p>\n<p><li><strong>Sắt:</strong> Ngăn ngừa thiếu máu ở mẹ, đảm bảo huyết lượng cung cấp đủ cho thai nhi.</li></p>\n<p><li><strong>Nhóm vitamin B, C, E:</strong> Tăng cường hệ miễn dịch và giảm nguy cơ các vấn đề sản khoa.</li></p>\n<p></ul></p>\n<p><h3>Thăm khám và theo dõi thai kỳ đều đặn</h3></p>\n<p><p>Khám thai định kỳ giúp phát hiện sớm các bất thường, từ đó có biện pháp can thiệp kịp thời. Thai phụ nên tuân thủ lịch khám theo tư vấn của bác sĩ, thường bắt đầu từ tuần thứ 6-8 của thai kỳ và kéo dài đến tuần cuối cùng.</p></p>\n<p><ul></p>\n<p><li>Siêu âm thai để đánh giá sự phát triển, vị trí và nhịp tim thai.</li></p>\n<p><li>Xét nghiệm máu và nước tiểu để phát hiện các bệnh lý như tiểu đường thai kỳ, thiếu máu, hoặc nhiễm trùng.</li></p>\n<p><li>Đo chiều cao tử cung và theo dõi cân nặng để đánh giá sự phát triển của thai.</li></p>\n<p></ul></p>\n<p><h3>Chế độ sinh hoạt khoa học, lành mạnh</h3></p>\n<p><p>Việc duy trì lối sống tích cực, tránh căng thẳng và các thói quen có hại là rất quan trọng trong thai kỳ. Mẹ bầu nên:</p></p>\n<p><ul></p>\n<p><li>Ngủ đủ 7-8 tiếng mỗi đêm, giữ tinh thần thoải mái.</li></p>\n<p><li>Tập luyện thể dục nhẹ nhàng, như đi bộ hay yoga dành cho bà bầu, giúp tăng cường sức khỏe và giảm các triệu chứng mệt mỏi.</li></p>\n<p><li>Tránh xa thuốc lá, rượu bia và các chất kích thích có thể gây ảnh hưởng xấu tới thai nhi.</li></p>\n<p><li>Uống đủ nước và hạn chế thực phẩm chứa nhiều đường, muối hoặc chất béo không lành mạnh.</li></p>\n<p></ul></p>\n<p><h3>Những lưu ý quan trọng giúp mẹ bầu an tâm đến ngày sinh</h3></p>\n<p><p>Bên cạnh việc ăn uống và sinh hoạt đúng cách, mẹ cần chú ý đến các dấu hiệu bất thường để đi khám ngay khi cần thiết, ví dụ:</p></p>\n<p><ul></p>\n<p><li>Chảy máu âm đạo hoặc đau bụng dữ dội.</li></p>\n<p><li>Sưng phù tay chân hoặc mặt, khó thở, tăng huyết áp.</li></p>\n<p><li>Thai máy giảm hoặc không còn cử động.</li></p>\n<p></ul></p>\n<p><p>Việc nhận biết sớm các biểu hiện này giúp phòng tránh các biến chứng nguy hiểm như sinh non, tiền sản giật hay thai chết lưu.</p></p>\n<p><h3>Tổng kết</h3></p>\n<p><p>Chăm sóc sức khỏe thai kỳ khoa học không chỉ bảo vệ mẹ mà còn tạo điều kiện tốt nhất cho sự phát triển toàn diện của bé ngay từ trong bụng mẹ. Mẹ bầu nên chú trọng dinh dưỡng, thường xuyên thăm khám và duy trì lối sống lành mạnh để cùng đồng hành an toàn suốt hành trình thai nghén.</p></p>\n<p><div class=\"source-info\"><p><em>Nguồn tham khảo: <a href=\"https://www.vietmec.com\" target=\"_blank\" rel=\"nofollow\">VietMec</a></em></p></div></p>",
+        "quote": null,
+        "photo": "https://cdn.diag.vn/2024/12/2fd1c60c-test-feature-image-landing-page-for-pregnancy_chuc-nang-cac-co-quan.png",
+        "tags": "sức khỏe thai kỳ, dinh dưỡng cho bà bầu, khám thai định kỳ, chăm sóc mẹ bầu, phát triển thai nhi",
+        "post_cat_id": "62",
+        "post_tag_id": null,
+        "added_by": "40",
+        "author_type": "user",
+        "status": "active",
+        "is_featured": false,
+        "created_at": "2025-06-26T10:30:26.000000Z",
+        "updated_at": "2025-07-25T08:44:23.000000Z",
+        "views": "11",
+        "post_type": "post",
+        "meta_data": {
+          "source_url": null,
+          "bot_type": "admin_bot",
+          "api_created": true,
+          "created_at_api": "2025-06-26T10:30:26.454630Z",
+          "auto_generated": true
+        },
+        "author_info": {
+          "id": 40,
+          "name": "ToiKhoe Admin",
+          "email": "admin.bot@toikhoe.net",
+          "phone": "0900000001",
+          "email_verified_at": null,
+          "photo": "https://codyhealth.s3.ap-southeast-2.amazonaws.com/imagesub/logo.png",
+          "role": "admin",
+          "provider": null,
+          "provider_id": null,
+          "status": "active",
+          "api_token": "suGhVmb5n4R1x09smeTvDl0oQ1vXVNwu5Qy4PPlCRj17PeLVme53ZGydg7odmstRMbFeSPteu6MZNDNQ",
+          "api_token_expires_at": null,
+          "last_api_access": null,
+          "created_at": "2025-06-11T10:27:37.000000Z",
+          "updated_at": "2025-06-11T10:27:37.000000Z",
+          "province": null,
+          "address": null,
+          "province_id": null
+        },
+        "category": {
+          "id": 62,
+          "name": "Khoa Phụ sản",
+          "slug": "khoa-phụ-sản",
+          "type": "other",
+          "parent_id": null,
+          "icon": "frontend/img/icons/pediatrics.png",
+          "status": "active",
+          "display_order": "0",
+          "summary": null,
+          "photo": null,
+          "created_at": "2025-05-10T13:44:26.000000Z",
+          "updated_at": "2025-05-23T10:19:34.000000Z"
+        },
+        "doctor": null,
+        "user": {
+          "id": 40,
+          "name": "ToiKhoe Admin",
+          "email": "admin.bot@toikhoe.net",
+          "phone": "0900000001",
+          "email_verified_at": null,
+          "photo": "https://codyhealth.s3.ap-southeast-2.amazonaws.com/imagesub/logo.png",
+          "role": "admin",
+          "provider": null,
+          "provider_id": null,
+          "status": "active",
+          "api_token": "suGhVmb5n4R1x09smeTvDl0oQ1vXVNwu5Qy4PPlCRj17PeLVme53ZGydg7odmstRMbFeSPteu6MZNDNQ",
+          "api_token_expires_at": null,
+          "last_api_access": null,
+          "created_at": "2025-06-11T10:27:37.000000Z",
+          "updated_at": "2025-06-11T10:27:37.000000Z",
+          "province": null,
+          "address": null,
+          "province_id": null
+        }
+      },
+      {
+        "id": 310,
+        "title": "Tế bào miễn dịch nhầm lẫn tấn công mô mỡ dưới da gây ra bệnh viêm mô mỡ",
+        "slug": "te-bao-mien-dich-nham-lan-tan-cong-mo-mo-duoi-da-gay-ra-benh-viem-mo-mo",
+        "summary": "Tế bào miễn dịch có thể tấn công nhầm mô mỡ dưới da, dẫn đến tình trạng viêm mô mỡ – một bệnh lý gây sưng đau và khó chịu. Hiểu rõ nguyên nhân và cơ chế của bệnh giúp người bệnh có hướng điều trị hiệu quả, nâng cao sức khỏe và chất lượng cuộc sống.",
+        "short_desc": null,
+        "description": "<p><p><strong>Viêm mô mỡ</strong> là tình trạng viêm nhiễm xảy ra ở lớp mô mỡ dưới da, gây ra các triệu chứng sưng tấy, đau nhức và khó chịu cho người bệnh. Một nghiên cứu gần đây đã chỉ ra rằng nguyên nhân xuất phát từ việc <strong>tế bào miễn dịch tấn công nhầm mô mỡ dưới da</strong>. Hiện tượng này làm phá hủy cấu trúc mô mỡ và gây ra phản ứng viêm kéo dài.</p></p>\n<p><h3>Nguyên nhân do tế bào miễn dịch tấn công nhầm mô mỡ</h3></p>\n<p><p>Trong hệ miễn dịch, <strong>tế bào lympho</strong> và <strong>đại thực bào</strong> có vai trò bảo vệ cơ thể khỏi tác nhân gây bệnh. Tuy nhiên, trong một số trường hợp, các tế bào này lại nhận diện nhầm mô mỡ dưới da là tác nhân có hại và tiến hành tấn công. Kết quả là lớp mô mỡ bị tổn thương, tạo điều kiện cho tình trạng viêm phát triển và biểu hiện thành bệnh lý.</p></p>\n<p><h3>Triệu chứng thường gặp khi tế bào miễn dịch gây viêm mô mỡ</h3></p>\n<p><p>Bệnh nhân khi bị viêm mô mỡ do tế bào miễn dịch tấn công nhầm sẽ xuất hiện các dấu hiệu sau:</p></p>\n<p><ul></p>\n<p><li>Sưng và đau vùng da dưới lớp mỡ, thường gặp ở các chi hoặc thân mình.</li></p>\n<p><li>Da có thể ửng đỏ, căng và cảm giác nóng rát tại vị trí tổn thương.</li></p>\n<p><li>Cảm giác mệt mỏi, sốt nhẹ hoặc các biểu hiện toàn thân khác nếu viêm nặng.</li></p>\n<p></ul></p>\n<p><h3>Phương pháp chẩn đoán và điều trị hiệu quả</h3></p>\n<p><p>Để xác định chính xác tình trạng viêm mô mỡ do tế bào miễn dịch, bác sĩ sẽ thực hiện các bước kiểm tra như khám lâm sàng, xét nghiệm máu và sinh thiết mô mỡ. Việc chẩn đoán đúng giúp đưa ra phác đồ điều trị phù hợp, thường bao gồm:</p></p>\n<p><ul></p>\n<p><li>Sử dụng thuốc <strong>kháng viêm</strong> và <strong>ức chế miễn dịch</strong> giúp giảm phản ứng viêm tại mô mỡ.</li></p>\n<p><li>Liệu pháp hỗ trợ cải thiện chức năng miễn dịch, hạn chế tình trạng tự miễn gây bệnh trở lại.</li></p>\n<p><li>Chăm sóc da và tăng cường dinh dưỡng để hỗ trợ sức khỏe mô mỡ và tổng trạng người bệnh.</li></p>\n<p></ul></p>\n<p><h3>Ý nghĩa và tầm quan trọng của việc nhận biết sớm</h3></p>\n<p><p>Hiểu được cơ chế tế bào miễn dịch tấn công nhầm mô mỡ cho thấy viêm mô mỡ không chỉ là vấn đề da liễu mà còn liên quan mật thiết đến hệ miễn dịch. Việc phát hiện sớm và can thiệp kịp thời sẽ giúp ngăn chặn tổn thương lan rộng, đồng thời giảm thiểu biến chứng lâu dài, cải thiện chất lượng cuộc sống cho người bệnh.</p></p>\n<p><h3>Lời khuyên dành cho người bệnh</h3></p>\n<p><ul></p>\n<p><li>Thăm khám định kỳ khi có dấu hiệu sưng đau bất thường dưới da.</li></p>\n<p><li>Duy trì chế độ ăn uống khoa học, giàu vitamin và khoáng chất hỗ trợ hệ miễn dịch.</li></p>\n<p><li>Tránh tiếp xúc với các tác nhân gây kích ứng hoặc làm tình trạng viêm nghiêm trọng hơn.</li></p>\n<p></ul></p>\n<p><p><strong>Tế bào miễn dịch tấn công nhầm mô mỡ dưới da</strong> là nguyên nhân quan trọng gây viêm mô mỡ. Việc trang bị kiến thức về căn bệnh này sẽ giúp người bệnh chủ động chăm sóc và bảo vệ sức khỏe một cách toàn diện hơn.</p></p>\n<p><div class=\"source-info\"><p><em>Nguồn tham khảo: <a href=\"https://news.google.com/rss/articles/CBMikgFBVV95cUxNRHo3MkdHZFowUUt0Q1pZTHpFN2tZVG5qNUdmekhfN3ZfRzNYellGMkY2QmVuSDZwRnp1S0dYRFZwQlFqUUo1dkxRaUVjODRKV0NoNmlwVjBXb3dRYVdHZmx5Rnh3YktEU2JudWNOZEw4ZTlUMFVkV2IxR204b2pDRFg5WFhfWlFfcDF2RGo1QjdjQQ?oc=5\" target=\"_blank\" rel=\"nofollow\">Tên website</a></em></p></div></p>",
+        "quote": null,
+        "photo": "https://suckhoe123.vn/uploads/suc-khoe/2021_05/20200206_063004_481108_tb-mien-dich.max-1800x1800.png",
+        "tags": "tế bào miễn dịch, viêm mô mỡ, mô mỡ dưới da, bệnh viêm, miễn dịch tự thân",
+        "post_cat_id": "48",
+        "post_tag_id": null,
+        "added_by": "40",
+        "author_type": "user",
+        "status": "active",
+        "is_featured": false,
+        "created_at": "2025-06-26T10:25:16.000000Z",
+        "updated_at": "2025-07-29T03:14:28.000000Z",
+        "views": "9",
+        "post_type": "post",
+        "meta_data": {
+          "source_url": null,
+          "bot_type": "admin_bot",
+          "api_created": true,
+          "created_at_api": "2025-06-26T10:25:16.496502Z",
+          "auto_generated": true
+        },
+        "author_info": {
+          "id": 40,
+          "name": "ToiKhoe Admin",
+          "email": "admin.bot@toikhoe.net",
+          "phone": "0900000001",
+          "email_verified_at": null,
+          "photo": "https://codyhealth.s3.ap-southeast-2.amazonaws.com/imagesub/logo.png",
+          "role": "admin",
+          "provider": null,
+          "provider_id": null,
+          "status": "active",
+          "api_token": "suGhVmb5n4R1x09smeTvDl0oQ1vXVNwu5Qy4PPlCRj17PeLVme53ZGydg7odmstRMbFeSPteu6MZNDNQ",
+          "api_token_expires_at": null,
+          "last_api_access": null,
+          "created_at": "2025-06-11T10:27:37.000000Z",
+          "updated_at": "2025-06-11T10:27:37.000000Z",
+          "province": null,
+          "address": null,
+          "province_id": null
+        },
+        "category": {
+          "id": 48,
+          "name": "Khoa Da Liễu",
+          "slug": "khoa-da-liễu",
+          "type": "other",
+          "parent_id": null,
+          "icon": "frontend/img/icons/dermatology.png",
+          "status": "active",
+          "display_order": "0",
+          "summary": null,
+          "photo": null,
+          "created_at": "2025-05-10T13:44:26.000000Z",
+          "updated_at": "2025-05-19T11:40:34.000000Z"
+        },
+        "doctor": null,
+        "user": {
+          "id": 40,
+          "name": "ToiKhoe Admin",
+          "email": "admin.bot@toikhoe.net",
+          "phone": "0900000001",
+          "email_verified_at": null,
+          "photo": "https://codyhealth.s3.ap-southeast-2.amazonaws.com/imagesub/logo.png",
+          "role": "admin",
+          "provider": null,
+          "provider_id": null,
+          "status": "active",
+          "api_token": "suGhVmb5n4R1x09smeTvDl0oQ1vXVNwu5Qy4PPlCRj17PeLVme53ZGydg7odmstRMbFeSPteu6MZNDNQ",
+          "api_token_expires_at": null,
+          "last_api_access": null,
+          "created_at": "2025-06-11T10:27:37.000000Z",
+          "updated_at": "2025-06-11T10:27:37.000000Z",
+          "province": null,
+          "address": null,
+          "province_id": null
+        }
+      },
+      {
+        "id": 309,
+        "title": "Ngủ ngáy do viêm amidan và hẹp eo họng: Nguyên nhân và cách khắc phục hiệu quả",
+        "slug": "ngu-ngay-do-viem-amidan-va-hep-eo-hong-nguyen-nhan-va-cach-khac-phuc-hieu-qua",
+        "summary": "Ngủ ngáy là hiện tượng phổ biến có thể bị gây ra bởi viêm amidan và hẹp eo họng. Bài viết phân tích nguyên nhân, tác động sức khỏe và các phương pháp điều trị hiệu quả giúp cải thiện giấc ngủ, giảm ngáy, bảo vệ hệ hô hấp, phù hợp với người bị chứng ngủ ngáy do bệnh lý đường thở trong amidan và eo họng.",
+        "short_desc": null,
+        "description": "<p><p><strong>Ngủ ngáy là hiện tượng thường gặp vào ban đêm, tuy nhiên khi tình trạng này xuất hiện do viêm amidan và hẹp eo họng, nó có thể gây ra nhiều hệ lụy ảnh hưởng đến sức khỏe. Việc hiểu rõ nguyên nhân cũng như các biện pháp phòng và chữa trị sẽ giúp cải thiện chất lượng giấc ngủ, tăng cường sức khỏe tổng thể.</strong></p></p>\n<p><h3>Nguyên nhân gây ngủ ngáy do viêm amidan và hẹp eo họng</h3></p>\n<p><p>Ngủ ngáy xảy ra khi luồng không khí qua đường hô hấp trên bị cản trở, dẫn đến rung động các mô mềm tạo ra tiếng ngáy. Hai nguyên nhân phổ biến liên quan bao gồm:</p></p>\n<p><ul></p>\n<p><li><strong>Viêm amidan:</strong> Amidan bị viêm, sưng to khiến cho không gian ở vùng họng bị thu hẹp, tạo điều kiện cho luồng khí đi qua bị cản trở, gây ra tiếng ngáy to hơn và kéo dài.</li></p>\n<p><li><strong>Hẹp eo họng:</strong> Eo họng, nằm ở vị trí nối giữa hầu họng và thanh quản, khi bị hẹp do viêm, sưng hoặc các tổn thương khác, luồng không khí bị hạn chế, làm tăng nguy cơ mắc chứng ngủ ngáy và thậm chí ngưng thở khi ngủ.</li></p>\n<p></ul></p>\n<p><h3>Tác hại của ngủ ngáy do viêm amidan và hẹp eo họng</h3></p>\n<p><p>Ngủ ngáy kéo dài không chỉ ảnh hưởng đến chất lượng giấc ngủ của người mắc mà còn tác động tiêu cực đến sức khỏe tổng thể:</p></p>\n<p><ul></p>\n<p><li>Gây mệt mỏi, uể oải vào ban ngày, giảm hiệu suất làm việc và học tập.</li></p>\n<p><li>Tăng nguy cơ mắc các bệnh lý tim mạch do thiếu oxy mãn tính khi ngủ.</li></p>\n<p><li>Gây căng thẳng, ảnh hưởng đến tâm lý và hạnh phúc gia đình do tiếng ngáy khó chịu.</li></p>\n<p><li>Trong trường hợp nặng, có thể dẫn đến hội chứng ngưng thở khi ngủ, gây biến chứng nguy hiểm.</li></p>\n<p></ul></p>\n<p><h3>Cách phòng ngừa và điều trị ngủ ngáy do viêm amidan, hẹp eo họng</h3></p>\n<p><p>Để giảm tình trạng ngủ ngáy do nguyên nhân viêm amidan và hẹp eo họng, người bệnh cần lưu ý các biện pháp sau:</p></p>\n<p><ul></p>\n<p><li><strong>Chăm sóc viêm amidan:</strong> Sử dụng thuốc theo chỉ định của bác sĩ để giảm viêm, sưng amidan. Trong trường hợp amidan quá to, có thể cân nhắc phẫu thuật cắt amidan.</li></p>\n<p><li><strong>Điều trị hẹp eo họng:</strong> Thăm khám để xác định nguyên nhân gây hẹp và lựa chọn phương pháp điều trị phù hợp như dùng thuốc chống viêm hoặc cần thiết có can thiệp y khoa.</li></p>\n<p><li><strong>Thay đổi thói quen sinh hoạt:</strong> Tránh sử dụng rượu bia, thuốc lá, giảm cân (nếu thừa cân), ngủ nghiêng để giảm áp lực lên vùng cổ họng.</li></p>\n<p><li><strong>Sử dụng máy hỗ trợ thở CPAP:</strong> Đối với những người bị ngưng thở khi ngủ nặng do hẹp đường thở, máy thở áp lực dương liên tục hỗ trợ hô hấp rất hiệu quả.</li></p>\n<p><li><strong>Thăm khám định kỳ:</strong> Khám chuyên khoa Tai Mũi Họng để theo dõi tiến triển bệnh và được tư vấn điều trị kịp thời.</li></p>\n<p></ul></p>\n<p><h3>Lời khuyên từ chuyên gia</h3></p>\n<p><p>Ngủ ngáy không chỉ là vấn đề đơn thuần về tiếng động mà còn là dấu hiệu cảnh báo các bệnh lý hô hấp nguy hiểm. Nếu bạn hoặc người thân thường xuyên gặp tình trạng ngủ ngáy kèm theo biểu hiện ngưng thở, mệt mỏi ban ngày, nên chủ động đến các cơ sở y tế chuyên khoa để được chẩn đoán chính xác và hỗ trợ điều trị đúng cách.</p></p>\n<p><p>Việc phát hiện sớm và xử lý kịp thời các tình trạng viêm amidan, hẹp eo họng không chỉ giảm triệu chứng ngủ ngáy mà còn giúp nâng cao chất lượng cuộc sống, tránh nguy cơ biến chứng lâu dài.</p></p>\n<p><div class=\"source-info\"><p><em>Nguồn tham khảo: <a href=\"https://news.google.com/rss/articles/CBMiekFVX3lxTE9KRmNxQ29pRWJ3c3dxRFhyUkZxcXZsbXQtblE0WW8yT0xCTnRKLUJ4cEpzQXg5MEN4c3BtdVVTTDZfR2NtS0JOQlppcjhXbU5ocTFXUkJnODdhR01mRVY3SWh1TXRtNzVlSUJUT3hSVndlcFhyOUhaS29n?oc=5\" target=\"_blank\" rel=\"nofollow\">Tên website</a></em></p></div></p>",
+        "quote": null,
+        "photo": "https://th.bing.com/th/id/OIP.3Yd0YAzvauNadrFuJ9Fd1gHaE8?o=7rm=3&rs=1&pid=ImgDetMain&cb=idpwebp2&o=7&rm=3",
+        "tags": "viêm amidan, ngủ ngáy, hẹp eo họng, ngưng thở khi ngủ, điều trị ngủ ngáy",
+        "post_cat_id": "48",
+        "post_tag_id": null,
+        "added_by": "32",
+        "author_type": "doctor",
+        "status": "active",
+        "is_featured": false,
+        "created_at": "2025-06-26T10:25:16.000000Z",
+        "updated_at": "2025-07-29T03:55:13.000000Z",
+        "views": "9",
+        "post_type": "post",
+        "meta_data": {
+          "source_url": null,
+          "bot_type": "doctor_bot",
+          "api_created": true,
+          "created_at_api": "2025-06-26T10:25:16.408183Z",
+          "auto_generated": true
+        },
+        "author_info": {
+          "id": 32,
+          "name": "BS. Hệ thống ToiKhoe",
+          "services": "Tư vấn sức khỏe tự động",
+          "experience": 10,
+          "working_hours": "Thứ 2 - Thứ 7, 09:00 - 18:00",
+          "location": "Online",
+          "workplace": "ToiKhoe.net",
+          "phone": "0900000002",
+          "email": "doctor.bot@toikhoe.net",
+          "photo": null,
+          "status": "active",
+          "rating": null,
+          "consultation_fee": "0.00",
+          "bio": "Tài khoản hệ thống auto post",
+          "short_bio": null,
+          "api_token": "uRaijM4YZ7hZmDR2JONFShh5S9Xc7dzqEZeFB7lTZqeUUfcWWrNsij8akI2Vo9OmCr8HqEgtNxZFw8Fm",
+          "api_token_expires_at": null,
+          "last_api_access": null,
+          "points": 0,
+          "created_at": "2025-06-11T10:27:38.000000Z",
+          "updated_at": "2025-06-24T04:47:29.000000Z",
+          "total_commission": 0
+        },
+        "category": {
+          "id": 48,
+          "name": "Khoa Da Liễu",
+          "slug": "khoa-da-liễu",
+          "type": "other",
+          "parent_id": null,
+          "icon": "frontend/img/icons/dermatology.png",
+          "status": "active",
+          "display_order": "0",
+          "summary": null,
+          "photo": null,
+          "created_at": "2025-05-10T13:44:26.000000Z",
+          "updated_at": "2025-05-19T11:40:34.000000Z"
+        },
+        "doctor": {
+          "id": 32,
+          "name": "BS. Hệ thống ToiKhoe",
+          "services": "Tư vấn sức khỏe tự động",
+          "experience": 10,
+          "working_hours": "Thứ 2 - Thứ 7, 09:00 - 18:00",
+          "location": "Online",
+          "workplace": "ToiKhoe.net",
+          "phone": "0900000002",
+          "email": "doctor.bot@toikhoe.net",
+          "photo": null,
+          "status": "active",
+          "rating": null,
+          "consultation_fee": "0.00",
+          "bio": "Tài khoản hệ thống auto post",
+          "short_bio": null,
+          "api_token": "uRaijM4YZ7hZmDR2JONFShh5S9Xc7dzqEZeFB7lTZqeUUfcWWrNsij8akI2Vo9OmCr8HqEgtNxZFw8Fm",
+          "api_token_expires_at": null,
+          "last_api_access": null,
+          "points": 0,
+          "created_at": "2025-06-11T10:27:38.000000Z",
+          "updated_at": "2025-06-24T04:47:29.000000Z",
+          "total_commission": 0
+        },
+        "user": {
+          "id": 32,
+          "name": "DanielMuh",
+          "email": "Yancarloszocevudiduqu@gmail.com",
+          "phone": "81186863646",
+          "email_verified_at": null,
+          "photo": null,
+          "role": "user",
+          "provider": null,
+          "provider_id": null,
+          "status": "active",
+          "api_token": null,
+          "api_token_expires_at": null,
+          "last_api_access": null,
+          "created_at": "2025-06-08T08:52:21.000000Z",
+          "updated_at": "2025-06-08T08:52:21.000000Z",
+          "province": null,
+          "address": null,
+          "province_id": null
+        }
+      },
+      {
+        "id": 308,
+        "title": "7 Triệu Chứng Bệnh Tiểu Đường Ai Cũng Nên Biết Để Phòng Ngừa Hiệu Quả",
+        "slug": "7-trieu-chung-benh-tieu-duong-ai-cung-nen-biet-de-phong-ngua-hieu-qua",
+        "summary": "Tiểu đường là bệnh lý phổ biến ảnh hưởng lớn đến sức khỏe nếu không được kiểm soát kịp thời. Bài viết giúp bạn nhận biết 7 triệu chứng tiểu đường dễ bị bỏ qua để chủ động phòng ngừa và điều trị hiệu quả, bảo vệ sức khỏe lâu dài.",
+        "short_desc": null,
+        "description": "<p><p><strong>Tiểu đường</strong> là một bệnh lý chuyển hóa mãn tính ngày càng phổ biến trên toàn thế giới, trong đó triệu chứng thường âm thầm nhưng gây ra nhiều biến chứng nghiêm trọng nếu không phát hiện sớm. Việc hiểu rõ những dấu hiệu cảnh báo bệnh tiểu đường sẽ giúp bạn chủ động hơn trong việc thăm khám và điều trị.</p></p>\n<p><h3>1. Tiểu nhiều và khát nước liên tục</h3></p>\n<p><p>Nồng độ đường cao trong máu khiến thận phải lọc nhiều hơn để đào thải đường qua nước tiểu. Điều này dẫn đến hiện tượng <strong>tiểu nhiều, tiểu đêm</strong> và kéo theo cảm giác khát nước liên tục do cơ thể mất nước nhanh.</p></p>\n<p><h3>2. Mệt mỏi kéo dài</h3></p>\n<p><p>Khi glucose không được chuyển hóa hiệu quả, cơ thể thiếu năng lượng gây ra tình trạng <strong>mệt mỏi, uể oải</strong> dù ngủ đủ giấc. Đây là dấu hiệu khá phổ biến nhưng thường bị bỏ qua.</p></p>\n<p><h3>3. Giảm cân không giải thích được</h3></p>\n<p><p>Dù ăn bình thường hoặc ăn nhiều, người bệnh tiểu đường thường <strong>giảm cân nhanh chóng</strong> vì cơ thể không hấp thụ được glucose và bắt đầu sử dụng mỡ dự trữ làm nguồn năng lượng.</p></p>\n<p><h3>4. Vết thương lâu lành và nhiễm trùng tái phát</h3></p>\n<p><p>Đường huyết cao làm suy giảm hệ miễn dịch, khiến <strong>vết thương</strong> khó hồi phục, dễ bị nhiễm trùng và tái phát nhiều lần, đặc biệt ở chân và vùng da có tổn thương.</p></p>\n<p><h3>5. Thị lực giảm sút</h3></p>\n<p><p>Đường huyết cao ảnh hưởng đến cấu trúc mạch máu trong mắt gây ra hiện tượng <strong>mờ mắt, nhìn kém rõ hoặc thậm chí mất thị lực ở giai đoạn muộn</strong>. Đây là dấu hiệu cảnh báo bệnh tiểu đường nên được chú ý.</p></p>\n<p><h3>6. Ngứa da và khô da</h3></p>\n<p><p>Tình trạng <strong>da khô, ngứa ngáy</strong> kéo dài, đặc biệt là ở vùng chân, bàn tay có thể là dấu hiệu cảnh báo đường huyết cao ảnh hưởng đến tuần hoàn và sự thanh lọc của da.</p></p>\n<p><h3>7. Tê bì và đau nhức chân tay</h3></p>\n<p><p>Bệnh tiểu đường có thể gây tổn thương dây thần kinh ngoại vi, dẫn đến cảm giác <strong>tê bì, đau nhức hoặc kiến bò ở bàn chân, bàn tay</strong>. Đây là biểu hiện của biến chứng thần kinh do đường huyết không kiểm soát tốt.</p></p>\n<p><h3>Phòng ngừa và xử lý khi xuất hiện triệu chứng tiểu đường</h3></p>\n<p><p>Để bảo vệ sức khỏe, khi nhận thấy một hoặc nhiều dấu hiệu trên, bạn nên đến cơ sở y tế để kiểm tra đường huyết, nhận tư vấn điều trị kịp thời. Bên cạnh đó, duy trì chế độ ăn uống lành mạnh, tập luyện thể dục thường xuyên, kiểm soát cân nặng và không hút thuốc lá là những biện pháp quan trọng để phòng ngừa và kiểm soát tiểu đường hiệu quả.</p></p>\n<p><p>Nắm bắt sớm các triệu chứng tiểu đường không chỉ giúp phát hiện bệnh kịp thời mà còn góp phần hạn chế biến chứng nguy hiểm, nâng cao chất lượng cuộc sống.</p></p>\n<p><div class=\"source-info\"><p><em>Nguồn tham khảo: <a href=\"https://www.vinmec.com\" target=\"_blank\" rel=\"nofollow\">Vinmec</a></em></p></div></p>",
+        "quote": null,
+        "photo": "https://th.bing.com/th/id/R.74772eefab45fad6ac979ca570254a84?rik=9d8IEgOTLdbYrg&pid=ImgRaw&r=0",
+        "tags": "bệnh tiểu đường, triệu chứng tiểu đường, dấu hiệu tiểu đường, phòng ngừa tiểu đường, kiểm soát đường huyết",
+        "post_cat_id": "43",
+        "post_tag_id": null,
+        "added_by": "40",
+        "author_type": "user",
+        "status": "active",
+        "is_featured": false,
+        "created_at": "2025-06-26T10:23:41.000000Z",
+        "updated_at": "2025-07-28T20:55:48.000000Z",
+        "views": "11",
+        "post_type": "post",
+        "meta_data": {
+          "source_url": null,
+          "bot_type": "admin_bot",
+          "api_created": true,
+          "created_at_api": "2025-06-26T10:23:41.210821Z",
+          "auto_generated": true
+        },
+        "author_info": {
+          "id": 40,
+          "name": "ToiKhoe Admin",
+          "email": "admin.bot@toikhoe.net",
+          "phone": "0900000001",
+          "email_verified_at": null,
+          "photo": "https://codyhealth.s3.ap-southeast-2.amazonaws.com/imagesub/logo.png",
+          "role": "admin",
+          "provider": null,
+          "provider_id": null,
+          "status": "active",
+          "api_token": "suGhVmb5n4R1x09smeTvDl0oQ1vXVNwu5Qy4PPlCRj17PeLVme53ZGydg7odmstRMbFeSPteu6MZNDNQ",
+          "api_token_expires_at": null,
+          "last_api_access": null,
+          "created_at": "2025-06-11T10:27:37.000000Z",
+          "updated_at": "2025-06-11T10:27:37.000000Z",
+          "province": null,
+          "address": null,
+          "province_id": null
+        },
+        "category": {
+          "id": 43,
+          "name": "Khoa Nội tiết",
+          "slug": "khoa-nội-tiết",
+          "type": "other",
+          "parent_id": null,
+          "icon": "frontend/img/icons/endocrine-system.png",
+          "status": "active",
+          "display_order": "0",
+          "summary": null,
+          "photo": null,
+          "created_at": "2025-05-10T13:44:26.000000Z",
+          "updated_at": "2025-05-19T11:40:27.000000Z"
+        },
+        "doctor": null,
+        "user": {
+          "id": 40,
+          "name": "ToiKhoe Admin",
+          "email": "admin.bot@toikhoe.net",
+          "phone": "0900000001",
+          "email_verified_at": null,
+          "photo": "https://codyhealth.s3.ap-southeast-2.amazonaws.com/imagesub/logo.png",
+          "role": "admin",
+          "provider": null,
+          "provider_id": null,
+          "status": "active",
+          "api_token": "suGhVmb5n4R1x09smeTvDl0oQ1vXVNwu5Qy4PPlCRj17PeLVme53ZGydg7odmstRMbFeSPteu6MZNDNQ",
+          "api_token_expires_at": null,
+          "last_api_access": null,
+          "created_at": "2025-06-11T10:27:37.000000Z",
+          "updated_at": "2025-06-11T10:27:37.000000Z",
+          "province": null,
+          "address": null,
+          "province_id": null
+        }
+      },
+      {
+        "id": 307,
+        "title": "Giải Pháp Hiệu Quả Cho Trẻ Bị Viêm Mũi Dị Ứng và Viêm Tai Mũi Họng Do Virus, Vi Khuẩn",
+        "slug": "giai-phap-hieu-qua-cho-tre-bi-viem-mui-di-ung-va-viem-tai-mui-hong-do-virus-vi-khuan",
+        "summary": "Viêm mũi dị ứng và viêm tai mũi họng do virus, vi khuẩn là bệnh lý phổ biến ở trẻ nhỏ, ảnh hưởng đến sức khỏe và sinh hoạt hàng ngày. Hiểu rõ nguyên nhân và áp dụng giải pháp điều trị phù hợp giúp hỗ trợ nhanh chóng cải thiện triệu chứng, phòng ngừa biến chứng nguy hiểm.",
+        "short_desc": null,
+        "description": "<p><p><strong>Viêm mũi dị ứng và viêm tai mũi họng do virus, vi khuẩn</strong> là tình trạng bệnh lý phổ biến ở trẻ em, đặc biệt trong những thời điểm giao mùa hoặc khi trẻ tiếp xúc với môi trường có nhiều yếu tố kích thích. Các bệnh lý này không chỉ gây khó chịu, ảnh hưởng đến giấc ngủ, ăn uống của trẻ mà còn tiềm ẩn nguy cơ dẫn đến các biến chứng nguy hiểm nếu không được xử trí đúng cách.</p></p>\n<p><h3>Nguyên nhân gây viêm mũi dị ứng và viêm tai mũi họng ở trẻ</h3></p>\n<p><p>Viêm mũi dị ứng xuất phát từ phản ứng quá mẫn cảm của hệ miễn dịch trước các dị nguyên như phấn hoa, bụi nhà, lông động vật hay các chất khí độc hại. Tình trạng này gây ra viêm niêm mạc mũi, làm trẻ ngạt mũi, hắt hơi, chảy nước mũi kéo dài.</p></p>\n<p><p>Trong khi đó, viêm tai mũi họng thường do nhiễm trùng bởi virus hoặc vi khuẩn. Vi khuẩn như Streptococcus, Haemophilus influenzae hay virus đường hô hấp—virus cúm, virus hợp bào hô hấp—là thủ phạm chính tạo điều kiện viêm nhiễm tại mũi, họng và tai. Trẻ nhỏ vì hệ miễn dịch chưa hoàn thiện dễ bị ảnh hưởng hơn người lớn.</p></p>\n<p><h3>Triệu chứng nhận biết và tác hại cần lưu ý</h3></p>\n<p><ul></p>\n<p><li>Chảy nước mũi, ngạt mũi kéo dài, hắt hơi nhiều lần</li></p>\n<p><li>Ngứa mũi, nhức mũi hoặc đau họng</li></p>\n<p><li>Ho khan hoặc ho có đờm, sốt nhẹ đến sốt cao</li></p>\n<p><li>Trẻ quấy khóc, biếng ăn, mệt mỏi</li></p>\n<p><li>Trong trường hợp viêm tai, trẻ có thể đau tai, nghe kém hoặc chảy dịch tai</li></p>\n<p></ul></p>\n<p><p>Nếu không được điều trị kịp thời, viêm mũi dị ứng và viêm tai mũi họng do virus, vi khuẩn có thể dẫn đến viêm xoang, viêm tai giữa mạn tính, viêm phổi hoặc ảnh hưởng đến sự phát triển về thính lực và hô hấp của trẻ.</p></p>\n<p><h3>Giải pháp điều trị và phòng ngừa hiệu quả</h3></p>\n<p><p><strong>Điều trị viêm mũi dị ứng</strong> chủ yếu tập trung vào việc tránh tiếp xúc với các tác nhân gây dị ứng. Sử dụng thuốc chống dị ứng (thuốc kháng histamin, corticosteroid xịt mũi) theo chỉ định bác sĩ giúp giảm triệu chứng nhanh chóng và an toàn. Ngoài ra, duy trì vệ sinh môi trường sạch sẽ, giữ ẩm không khí và vệ sinh mũi hàng ngày cũng hỗ trợ hiệu quả trong việc kiểm soát bệnh.</p></p>\n<p><p><strong>Điều trị viêm tai mũi họng do virus, vi khuẩn</strong> bao gồm:</p></p>\n<p><ul></p>\n<p><li>Phân biệt nguyên nhân virus hay vi khuẩn để sử dụng kháng sinh hợp lý (nếu do vi khuẩn)</li></p>\n<p><li>Sử dụng thuốc giảm sốt, giảm đau an toàn cho trẻ</li></p>\n<p><li>Cho trẻ nghỉ ngơi, uống nhiều nước và ăn uống đủ dinh dưỡng để tăng cường sức đề kháng</li></p>\n<p></ul></p>\n<p><p>Trong trường hợp viêm tai giữa, cần theo dõi tiến triển và phối hợp với bác sĩ chuyên khoa tai mũi họng để tránh các biến chứng nặng nề. Không tự ý dùng thuốc kháng sinh hoặc thuốc nhỏ tai nếu chưa có hướng dẫn của bác sĩ.</p></p>\n<p><h3>Lưu ý chăm sóc và theo dõi tại nhà</h3></p>\n<p><p>Phụ huynh cần chú ý giữ vệ sinh răng miệng, vệ sinh mũi họng cho trẻ bằng nước muối sinh lý để làm sạch dịch tiết, giảm viêm nhiễm. Hạn chế cho trẻ tiếp xúc với khói thuốc lá, bụi bẩn hoặc các môi trường ô nhiễm.</p></p>\n<p><p>Một chế độ dinh dưỡng lành mạnh giàu vitamin C, kẽm giúp tăng cường miễn dịch, đồng thời giữ cho môi trường sống sạch sẽ, thoáng mát giúp phòng tránh tái phát hoặc bùng phát bệnh.</p></p>\n<p><p>Việc chủ động thăm khám bác sĩ khi trẻ có dấu hiệu bệnh kéo dài hoặc nặng hơn sẽ giúp phát hiện kịp thời và xử lý đúng cách, hạn chế các biến chứng nguy hiểm. Đặc biệt, đối với trẻ hay mắc viêm mũi dị ứng, biện pháp phòng ngừa như tiêm phòng các loại vaccine và xây dựng môi trường sống lành mạnh là rất cần thiết.</p></p>\n<p><p><strong>Kết luận,</strong> viêm mũi dị ứng và viêm tai mũi họng do virus, vi khuẩn là những bệnh lý thường gặp ở trẻ nhỏ nhưng hoàn toàn có thể kiểm soát nếu áp dụng giải pháp điều trị phù hợp và chăm sóc đúng cách. Việc hiểu rõ triệu chứng, nguyên nhân cũng như tuân thủ hướng dẫn y tế sẽ góp phần bảo vệ sức khỏe hệ hô hấp và đường tai mũi họng của trẻ hiệu quả.</p></p>\n<p><div class=\"source-info\"><p><em>Nguồn tham khảo: <a href=\"https://news.google.com/rss/articles/CBMivgFBVV95cUxPMEZucFY2SFdkUDRUQ0dsdndCLWpIcmd5X0pxa1hIcmRFMDh5OTgySlJFeXZiOUZsZm1WQ0szeENta1o0dlBmN3RFcF9NRnVocnlZMTNQcDl2YUF1eXdFSm41MjVDVHZHQkF0S0pXT0w3U296QTEyallsdGlKZm5MZi1qeXJnUHI0RFo5UGJ1dENnTktRS1F5OElYWExGci1OUFFES1Z1MHFjTHRTdkxSYVlYOGVraG9sVGxsZ1JB?oc=5\" target=\"_blank\" rel=\"nofollow\">Báo Sức Khỏe và Đời Sống</a></em></p></div></p>",
+        "quote": null,
+        "photo": "https://benhvienthienduc.vn/media/data/20191007_085059_834362_nguyennhanviemxo.max1800x18001.jpg",
+        "tags": "viêm mũi dị ứng trẻ em, viêm tai mũi họng, viêm tai do vi khuẩn, bệnh hô hấp trẻ em, điều trị viêm mũi dị ứng",
+        "post_cat_id": "46",
+        "post_tag_id": null,
+        "added_by": "40",
+        "author_type": "user",
+        "status": "active",
+        "is_featured": false,
+        "created_at": "2025-06-26T10:20:37.000000Z",
+        "updated_at": "2025-07-28T20:15:16.000000Z",
+        "views": "10",
+        "post_type": "post",
+        "meta_data": {
+          "source_url": null,
+          "bot_type": "admin_bot",
+          "api_created": true,
+          "created_at_api": "2025-06-26T10:20:37.679002Z",
+          "auto_generated": true
+        },
+        "author_info": {
+          "id": 40,
+          "name": "ToiKhoe Admin",
+          "email": "admin.bot@toikhoe.net",
+          "phone": "0900000001",
+          "email_verified_at": null,
+          "photo": "https://codyhealth.s3.ap-southeast-2.amazonaws.com/imagesub/logo.png",
+          "role": "admin",
+          "provider": null,
+          "provider_id": null,
+          "status": "active",
+          "api_token": "suGhVmb5n4R1x09smeTvDl0oQ1vXVNwu5Qy4PPlCRj17PeLVme53ZGydg7odmstRMbFeSPteu6MZNDNQ",
+          "api_token_expires_at": null,
+          "last_api_access": null,
+          "created_at": "2025-06-11T10:27:37.000000Z",
+          "updated_at": "2025-06-11T10:27:37.000000Z",
+          "province": null,
+          "address": null,
+          "province_id": null
+        },
+        "category": {
+          "id": 46,
+          "name": "Khoa Truyền nhiễm",
+          "slug": "khoa-truyền-nhiễm",
+          "type": "other",
+          "parent_id": null,
+          "icon": "frontend/img/icons/coronavirus.png",
+          "status": "active",
+          "display_order": "0",
+          "summary": null,
+          "photo": null,
+          "created_at": "2025-05-10T13:44:26.000000Z",
+          "updated_at": "2025-05-19T11:40:31.000000Z"
+        },
+        "doctor": null,
+        "user": {
+          "id": 40,
+          "name": "ToiKhoe Admin",
+          "email": "admin.bot@toikhoe.net",
+          "phone": "0900000001",
+          "email_verified_at": null,
+          "photo": "https://codyhealth.s3.ap-southeast-2.amazonaws.com/imagesub/logo.png",
+          "role": "admin",
+          "provider": null,
+          "provider_id": null,
+          "status": "active",
+          "api_token": "suGhVmb5n4R1x09smeTvDl0oQ1vXVNwu5Qy4PPlCRj17PeLVme53ZGydg7odmstRMbFeSPteu6MZNDNQ",
+          "api_token_expires_at": null,
+          "last_api_access": null,
+          "created_at": "2025-06-11T10:27:37.000000Z",
+          "updated_at": "2025-06-11T10:27:37.000000Z",
+          "province": null,
+          "address": null,
+          "province_id": null
+        }
+      },
+      {
+        "id": 306,
+        "title": "Hôn Người Đang Ủ Bệnh Dại Có Lây Virus Dại Không? Giải Đáp Từ Chuyên Gia Y Tế",
+        "slug": "stronghon-nguoi-dang-u-benh-dai-co-lay-virus-dai-khong-giai-dap-tu-chuyen-gia-y-testrong",
+        "summary": "<p>Tìm hiểu liệu việc hôn người đang trong giai đoạn ủ bệnh dại có làm tăng nguy cơ lây truyền virus dại hay không. Bài viết cung cấp thông tin y khoa chính xác về đường lây và cách phòng tránh bệnh dại hiệu quả.</p>",
+        "short_desc": null,
+        "description": "<p><p><strong>Bệnh dại</strong> là một căn bệnh truyền nhiễm nguy hiểm do virus dại gây ra, thường lây qua vết cắn của động vật mang virus. Tuy nhiên, nhiều người thắc mắc liệu việc hôn người đang trong giai đoạn <strong>ủ bệnh dại</strong> có thể dẫn tới lây nhiễm hay không. Để giải đáp thắc mắc này, chúng ta cần hiểu về cách thức lây truyền và cơ chế phát triển của virus dại.</p></p>\n<p><h3>Virus dại lây truyền qua những đường nào?</h3></p>\n<p><p>Virus dại chủ yếu lây truyền qua:</p></p>\n<p><ul></p>\n<p><li>Vết cắn hoặc vết xước bị động vật mang virus như chó, mèo hoang, dơi cắn.</li></p>\n<p><li>Tiếp xúc trực tiếp với nước bọt hoặc mô thần kinh của động vật nhiễm virus qua các tổn thương trên da hoặc niêm mạc hở.</li></p>\n<p><li>Hiếm gặp: lây qua đường hô hấp hoặc ghép mô ở người.</li></p>\n<p></ul></p>\n<p><p>Trong đó, con đường phổ biến nhất và dễ gây nhiễm nhất là bị cắn bởi động vật chứa virus dại.</p></p>\n<p><h3>Giai đoạn ủ bệnh dại và nguy cơ lây nhiễm khi hôn</h3></p>\n<p><p>Giai đoạn ủ bệnh là khoảng thời gian sau khi virus xâm nhập vào cơ thể nhưng chưa có biểu hiện triệu chứng rõ ràng, có thể kéo dài từ vài tuần đến vài tháng. Trong thời gian này, virus chủ yếu nhân lên và di chuyển đến hệ thần kinh trung ương.</p></p>\n<p><p>Đáng chú ý, trong thời gian ủ bệnh, người bệnh thường không có virus trong nước bọt, do đó nguy cơ lây truyền qua tiếp xúc như <strong>hôn người đang ủ bệnh dại</strong> là rất thấp hoặc gần như không xảy ra. Virus dại có thể phát tán trong nước bọt khi người bệnh đã xuất hiện các dấu hiệu lâm sàng rõ rệt như sợ nước, khó nuốt, tăng tiết nước bọt.</p></p>\n<p><h3>Cần lưu ý gì để phòng ngừa bệnh dại?</h3></p>\n<p><p>Mặc dù khả năng lây truyền virus dại qua đường hôn trong giai đoạn ủ bệnh gần như không có, nhưng người dân vẫn cần nâng cao cảnh giác, đặc biệt khi tiếp xúc với người hoặc động vật nghi ngờ nhiễm virus dại.</p></p>\n<p><ul></p>\n<p><li>Không tiếp xúc gần với động vật hoang hoặc có dấu hiệu lạ, tránh bị cắn hoặc trầy xước da.</li></p>\n<p><li>Vệ sinh vết thương ngay lập tức bằng xà phòng và nước sạch khi bị động vật cắn hoặc xây xát.</li></p>\n<p><li>Tiêm phòng dại dự phòng nếu sống hoặc làm việc trong vùng có nguy cơ cao.</li></p>\n<p><li>Nếu xuất hiện dấu hiệu nghi ngờ hoặc bị vật nuôi nghi nhiễm cắn, hãy đi khám và được tư vấn tiêm vaccine dại kịp thời.</li></p>\n<p></ul></p>\n<p><h3>Kết luận</h3></p>\n<p><p>Việc <strong>hôn người đang ủ bệnh dại</strong> về cơ bản không làm tăng nguy cơ mắc bệnh dại do virus chưa có mặt trong nước bọt ở giai đoạn này. Tuy nhiên, khi người bệnh đã có triệu chứng rõ, virus có thể lan truyền qua nước bọt, làm gia tăng nguy cơ lây nhiễm qua tiếp xúc gần. Để bảo vệ sức khỏe, cần tuân thủ các biện pháp phòng ngừa an toàn và chủ động tiêm phòng dại đúng cách.</p></p>\n<p><div class=\"source-info\"><p><em>Nguồn tham khảo: <a href=\"https://news.google.com/rss/articles/CBMihgFBVV95cUxQZ21lQ0F1RzRSWlFNa3RFNHBYR2xYZm5aZTlQeXRDdThmTHI3bWNCOTZ6ejlVNEVwUm8xMllEMjhOclhLYjNXbVl1SXlwY0Rhb1pRMUZJSHE0M0xmUGRTbl91YUZMZTAwN2xaVVMyLUc3S284WWU1R28tRzhwRWNZdW9HRTJYUQ?oc=5\" target=\"_blank\" rel=\"nofollow\">VnExpress</a></em></p></div></p>",
+        "quote": null,
+        "photo": "https://cdn.nhathuoclongchau.com.vn/unsafe/800x0/filters:quality(95)/https://cms-prod.s3-sgn09.fptcloud.com/benh_dai_co_chua_duoc_khong_2_6ea82ae4f1.jpg",
+        "tags": "bệnh dại, virus dại, lây truyền bệnh dại, hôn có lây virus dại không, phòng ngừa bệnh dại",
+        "post_cat_id": "46",
+        "post_tag_id": null,
+        "added_by": "40",
+        "author_type": "user",
+        "status": "active",
+        "is_featured": false,
+        "created_at": "2025-06-26T10:20:37.000000Z",
+        "updated_at": "2025-07-28T19:28:11.000000Z",
+        "views": "15",
+        "post_type": "post",
+        "meta_data": {
+          "source_url": null,
+          "bot_type": "admin_bot",
+          "api_created": true,
+          "created_at_api": "2025-06-26T10:20:37.666592Z",
+          "auto_generated": true
+        },
+        "author_info": {
+          "id": 40,
+          "name": "ToiKhoe Admin",
+          "email": "admin.bot@toikhoe.net",
+          "phone": "0900000001",
+          "email_verified_at": null,
+          "photo": "https://codyhealth.s3.ap-southeast-2.amazonaws.com/imagesub/logo.png",
+          "role": "admin",
+          "provider": null,
+          "provider_id": null,
+          "status": "active",
+          "api_token": "suGhVmb5n4R1x09smeTvDl0oQ1vXVNwu5Qy4PPlCRj17PeLVme53ZGydg7odmstRMbFeSPteu6MZNDNQ",
+          "api_token_expires_at": null,
+          "last_api_access": null,
+          "created_at": "2025-06-11T10:27:37.000000Z",
+          "updated_at": "2025-06-11T10:27:37.000000Z",
+          "province": null,
+          "address": null,
+          "province_id": null
+        },
+        "category": {
+          "id": 46,
+          "name": "Khoa Truyền nhiễm",
+          "slug": "khoa-truyền-nhiễm",
+          "type": "other",
+          "parent_id": null,
+          "icon": "frontend/img/icons/coronavirus.png",
+          "status": "active",
+          "display_order": "0",
+          "summary": null,
+          "photo": null,
+          "created_at": "2025-05-10T13:44:26.000000Z",
+          "updated_at": "2025-05-19T11:40:31.000000Z"
+        },
+        "doctor": null,
+        "user": {
+          "id": 40,
+          "name": "ToiKhoe Admin",
+          "email": "admin.bot@toikhoe.net",
+          "phone": "0900000001",
+          "email_verified_at": null,
+          "photo": "https://codyhealth.s3.ap-southeast-2.amazonaws.com/imagesub/logo.png",
+          "role": "admin",
+          "provider": null,
+          "provider_id": null,
+          "status": "active",
+          "api_token": "suGhVmb5n4R1x09smeTvDl0oQ1vXVNwu5Qy4PPlCRj17PeLVme53ZGydg7odmstRMbFeSPteu6MZNDNQ",
+          "api_token_expires_at": null,
+          "last_api_access": null,
+          "created_at": "2025-06-11T10:27:37.000000Z",
+          "updated_at": "2025-06-11T10:27:37.000000Z",
+          "province": null,
+          "address": null,
+          "province_id": null
+        }
+      },
+      {
+        "id": 305,
+        "title": "Giải pháp ly giải vi khuẩn hiệu quả trong phòng ngừa nhiễm khuẩn tai mũi họng ở trẻ em",
+        "slug": "giai-phap-ly-giai-vi-khuan-hieu-qua-trong-phong-ngua-nhiem-khuan-tai-mui-hong-o-tre-em",
+        "summary": "Ly giải vi khuẩn là phương pháp hỗ trợ quan trọng trong việc phòng ngừa nhiễm khuẩn tai mũi họng ở trẻ nhỏ. Việc tiêu diệt vi khuẩn gây hại giúp giảm nguy cơ viêm nhiễm, cải thiện sức khỏe đường hô hấp và tăng cường miễn dịch cho trẻ một cách an toàn, hiệu quả.",
+        "short_desc": null,
+        "description": "<p><p>Nhiễm khuẩn tai mũi họng là một trong những bệnh lý phổ biến ở trẻ nhỏ, ảnh hưởng trực tiếp đến sức khỏe và sự phát triển toàn diện. Việc phòng ngừa các bệnh lý này từ giai đoạn đầu đóng vai trò rất quan trọng để tránh các biến chứng nguy hiểm như viêm tai giữa, viêm họng mãn tính hay viêm xoang kéo dài. </p></p>\n<p><h3>Ly giải vi khuẩn là gì và vai trò trong phòng ngừa nhiễm khuẩn</h3></p>\n<p><p><strong>Ly giải vi khuẩn</strong> là quá trình tiêu diệt hoặc phá hủy cấu trúc vi khuẩn để ngăn chặn sự phát triển và lan rộng của vi khuẩn gây bệnh. Đây là một bước quan trọng trong việc kiểm soát các tác nhân gây viêm nhiễm tai mũi họng, từ đó giúp bảo vệ đường hô hấp cho trẻ nhỏ.</p></p>\n<p><p>Phương pháp này dựa trên việc sử dụng các chế phẩm có khả năng phá vỡ màng tế bào vi khuẩn hoặc kích hoạt hệ miễn dịch, giúp loại bỏ hiệu quả các chủng vi khuẩn phổ biến như Streptococcus, Haemophilus influenzae và Moraxella catarrhalis.</p></p>\n<p><h3>Lợi ích khi áp dụng giải pháp ly giải vi khuẩn cho trẻ em</h3></p>\n<p><ul></p>\n<p><li><strong>Giảm nguy cơ viêm tai mũi họng:</strong> Ly giải vi khuẩn loại bỏ tác nhân gây bệnh, giúp hạn chế các đợt viêm nhiễm tái phát.</li></p>\n<p><li><strong>Tăng khả năng miễn dịch:</strong> Khi vi khuẩn bị phá hủy, hệ miễn dịch của trẻ được kích hoạt, tăng cường khả năng chống lại các tác nhân gây bệnh tiếp theo.</li></p>\n<p><li><strong>An toàn, ít tác dụng phụ:</strong> Việc sử dụng các sản phẩm hỗ trợ ly giải vi khuẩn đều tuân thủ nguyên tắc an toàn, không gây tổn hại cho niêm mạc tai mũi họng của trẻ.</li></p>\n<p><li><strong>Giúp cải thiện sức khỏe tổng thể:</strong> Phòng ngừa viêm nhiễm tái phát đồng nghĩa với việc trẻ phát triển khỏe mạnh hơn, hạn chế bệnh tật kéo dài.</li></p>\n<p></ul></p>\n<p><h3>Phương pháp và sản phẩm hỗ trợ ly giải vi khuẩn</h3></p>\n<p><p>Hiện nay, trên thị trường có nhiều sản phẩm hỗ trợ ly giải vi khuẩn được bào chế dưới dạng dung dịch nhỏ, xịt hoặc viên ngậm dành cho trẻ em. Những sản phẩm này thường chứa các thành phần tự nhiên hoặc dược liệu có khả năng:</p></p>\n<p><ul></p>\n<p><li>Phá vỡ màng tế bào vi khuẩn</li></p>\n<p><li>Kích thích miễn dịch tại chỗ </li></p>\n<p><li>Tăng cường sức đề kháng hệ hô hấp trên</li></p>\n<p></ul></p>\n<p><p>Bên cạnh việc sử dụng sản phẩm hỗ trợ, bố mẹ cũng cần chú ý vệ sinh tai mũi họng đúng cách, giữ vệ sinh môi trường sống, và đưa trẻ đi khám kịp thời khi có dấu hiệu viêm nhiễm để phòng ngừa hiệu quả.</p></p>\n<p><h3>Lưu ý khi lựa chọn và sử dụng các giải pháp ly giải vi khuẩn cho trẻ</h3></p>\n<p><p>Để đảm bảo an toàn và hiệu quả, phụ huynh cần lưu ý một số điểm sau:</p></p>\n<p><ul></p>\n<p><li>Chọn sản phẩm có nguồn gốc rõ ràng, được cấp phép lưu hành tại Việt Nam</li></p>\n<p><li>Tuân thủ đúng hướng dẫn sử dụng, liều lượng của bác sĩ hoặc nhà sản xuất</li></p>\n<p><li>Không tự ý kết hợp nhiều sản phẩm để tránh tương tác không mong muốn</li></p>\n<p><li>Quan sát kỹ tình trạng trẻ trong quá trình sử dụng, nếu có dấu hiệu bất thường cần ngưng dùng và liên hệ bác sĩ</li></p>\n<p></ul></p>\n<p><p>Tóm lại, ly giải vi khuẩn là giải pháp hỗ trợ hữu hiệu giúp phòng ngừa nhiễm khuẩn tai mũi họng, đặc biệt quan trọng với trẻ nhỏ do hệ miễn dịch đang phát triển. Sự kết hợp giữa biện pháp này với chăm sóc sức khỏe đúng cách sẽ đảm bảo trẻ được bảo vệ toàn diện, hạn chế nguy cơ mắc các bệnh nhiễm trùng đường hô hấp trên.</p></p>\n<p><div class=\"source-info\"><p><em>Nguồn tham khảo: <a href=\"https://news.google.com/rss/articles/CBMizgFBVV95cUxQZ2xTay1NbEtlMWlvTjVRcHlXWlZEZnpDOG1qMkFOUFpVUV8xdlBDc1pzZUhRSjhVRnhSczQzVERuX1NrWkxyN1dDbC1UWW82QmhkdnhTeXU0TnNkRHdkNUZHUmRhYnZWbi0yTl9VQmVoZ2Ywd19kdHd0YXRac01maU9mZzN6bEZDWFJGZVppUlRKQ3BQVFBFTFRqODlsa1FtTTd4Tm1Oc1RpYU5TT3pWWkt5MUlWanhIbHU3WkFwSFFmU281VTBEZThGcWcwQQ?oc=5\" target=\"_blank\" rel=\"nofollow\">Tên website</a></em></p></div></p>",
+        "quote": null,
+        "photo": "https://suckhoedoisong.qltns.mediacdn.vn/zoom/600_315/324455921873985536/2024/3/8/image-1709887198252504186898-24-0-316-468-crop-1709887203939128254543.png",
+        "tags": "ly giải vi khuẩn, nhiễm khuẩn tai mũi họng, phòng ngừa viêm tai mũi họng, sức khỏe trẻ em, vi khuẩn đường hô hấp",
+        "post_cat_id": "46",
+        "post_tag_id": null,
+        "added_by": "32",
+        "author_type": "doctor",
+        "status": "active",
+        "is_featured": false,
+        "created_at": "2025-06-26T10:20:37.000000Z",
+        "updated_at": "2025-07-25T12:49:40.000000Z",
+        "views": "5",
+        "post_type": "post",
+        "meta_data": {
+          "source_url": null,
+          "bot_type": "doctor_bot",
+          "api_created": true,
+          "created_at_api": "2025-06-26T10:20:37.405545Z",
+          "auto_generated": true
+        },
+        "author_info": {
+          "id": 32,
+          "name": "BS. Hệ thống ToiKhoe",
+          "services": "Tư vấn sức khỏe tự động",
+          "experience": 10,
+          "working_hours": "Thứ 2 - Thứ 7, 09:00 - 18:00",
+          "location": "Online",
+          "workplace": "ToiKhoe.net",
+          "phone": "0900000002",
+          "email": "doctor.bot@toikhoe.net",
+          "photo": null,
+          "status": "active",
+          "rating": null,
+          "consultation_fee": "0.00",
+          "bio": "Tài khoản hệ thống auto post",
+          "short_bio": null,
+          "api_token": "uRaijM4YZ7hZmDR2JONFShh5S9Xc7dzqEZeFB7lTZqeUUfcWWrNsij8akI2Vo9OmCr8HqEgtNxZFw8Fm",
+          "api_token_expires_at": null,
+          "last_api_access": null,
+          "points": 0,
+          "created_at": "2025-06-11T10:27:38.000000Z",
+          "updated_at": "2025-06-24T04:47:29.000000Z",
+          "total_commission": 0
+        },
+        "category": {
+          "id": 46,
+          "name": "Khoa Truyền nhiễm",
+          "slug": "khoa-truyền-nhiễm",
+          "type": "other",
+          "parent_id": null,
+          "icon": "frontend/img/icons/coronavirus.png",
+          "status": "active",
+          "display_order": "0",
+          "summary": null,
+          "photo": null,
+          "created_at": "2025-05-10T13:44:26.000000Z",
+          "updated_at": "2025-05-19T11:40:31.000000Z"
+        },
+        "doctor": {
+          "id": 32,
+          "name": "BS. Hệ thống ToiKhoe",
+          "services": "Tư vấn sức khỏe tự động",
+          "experience": 10,
+          "working_hours": "Thứ 2 - Thứ 7, 09:00 - 18:00",
+          "location": "Online",
+          "workplace": "ToiKhoe.net",
+          "phone": "0900000002",
+          "email": "doctor.bot@toikhoe.net",
+          "photo": null,
+          "status": "active",
+          "rating": null,
+          "consultation_fee": "0.00",
+          "bio": "Tài khoản hệ thống auto post",
+          "short_bio": null,
+          "api_token": "uRaijM4YZ7hZmDR2JONFShh5S9Xc7dzqEZeFB7lTZqeUUfcWWrNsij8akI2Vo9OmCr8HqEgtNxZFw8Fm",
+          "api_token_expires_at": null,
+          "last_api_access": null,
+          "points": 0,
+          "created_at": "2025-06-11T10:27:38.000000Z",
+          "updated_at": "2025-06-24T04:47:29.000000Z",
+          "total_commission": 0
+        },
+        "user": {
+          "id": 32,
+          "name": "DanielMuh",
+          "email": "Yancarloszocevudiduqu@gmail.com",
+          "phone": "81186863646",
+          "email_verified_at": null,
+          "photo": null,
+          "role": "user",
+          "provider": null,
+          "provider_id": null,
+          "status": "active",
+          "api_token": null,
+          "api_token_expires_at": null,
+          "last_api_access": null,
+          "created_at": "2025-06-08T08:52:21.000000Z",
+          "updated_at": "2025-06-08T08:52:21.000000Z",
+          "province": null,
+          "address": null,
+          "province_id": null
+        }
+      },
+      {
+        "id": 298,
+        "title": "Bí Quyết Duy Trì Sức Khỏe Toàn Diện: Những Điều Người Việt Nên Biết",
+        "slug": "bi-quyet-duy-tri-suc-khoe-toan-dien-nhung-dieu-nguoi-viet-nen-biet",
+        "summary": "Duy trì sức khỏe toàn diện đóng vai trò quan trọng trong cuộc sống hiện đại. Bài viết phân tích chi tiết cách chăm sóc sức khỏe hiệu quả, từ chế độ dinh dưỡng, vận động đến quản lý stress, giúp người Việt nâng cao chất lượng cuộc sống. Tìm hiểu ngay các mẹo chăm sóc sức khỏe chuẩn xác, khoa học và dễ áp dụng.",
+        "short_desc": null,
+        "description": "<p><p>Trong bối cảnh cuộc sống ngày càng bận rộn và áp lực, việc duy trì <strong>sức khỏe toàn diện</strong> trở thành ưu tiên hàng đầu của mọi người, đặc biệt là người Việt. Bài viết dưới đây sẽ cung cấp những kiến thức cơ bản và thiết thực về chăm sóc sức khỏe một cách hiệu quả, giúp bạn xây dựng lối sống lành mạnh và phòng tránh các bệnh lý phổ biến.</p></p>\n<p><h3>1. Vai Trò Quan Trọng Của Chế Độ Dinh Dưỡng Đa Dạng</h3></p>\n<p><p>Chế độ ăn uống hợp lý là nền tảng để duy trì sức khỏe bền lâu. Người Việt nên chú trọng vào việc cân bằng các nhóm thực phẩm chính:</p></p>\n<p><ul></p>\n<p><li><strong>Carbohydrate:</strong> nguồn năng lượng chủ yếu, ưu tiên ngũ cốc nguyên hạt, cơm gạo lứt.</li></p>\n<p><li><strong>Protein:</strong> giúp tăng cường cơ bắp và tế bào, bao gồm cá, thịt gia cầm, đậu nành và các loại hạt.</li></p>\n<p><li><strong>Chất béo lành mạnh:</strong> có trong dầu oliu, dầu cá, giúp bảo vệ tim mạch.</li></p>\n<p><li><strong>Vitamin và khoáng chất:</strong> từ rau xanh, trái cây tươi hỗ trợ chức năng miễn dịch và chống oxy hóa.</li></p>\n<p><li><strong>Hạn chế đường và muối:</strong> giảm nguy cơ mắc bệnh tiểu đường, tăng huyết áp và các bệnh mãn tính.</li></p>\n<p></ul></p>\n<p><h3>2. Vận Động Thường Xuyên Giúp Cơ Thể Khỏe Mạnh</h3></p>\n<p><p>Hoạt động thể chất đóng vai trò thiết yếu trong việc cải thiện sức khỏe tim mạch, điều hòa huyết áp và tăng cường sức đề kháng. Người Việt nên dành ít nhất 30 phút mỗi ngày cho các bài tập như:</p></p>\n<p><ul></p>\n<p><li>Đi bộ nhanh hoặc chạy bộ nhẹ nhàng.</li></p>\n<p><li>Tham gia yoga hoặc các bài tập giãn cơ.</li></p>\n<p><li>Thể dục nhịp điệu hoặc khiêu vũ.</li></p>\n<p></ul></p>\n<p><p>Thói quen vận động đều đặn còn giúp giảm thiểu căng thẳng, cải thiện giấc ngủ và duy trì cân nặng ổn định.</p></p>\n<p><h3>3. Quản Lý Stress và Giấc Ngủ Chất Lượng</h3></p>\n<p><p><strong>Stress kéo dài</strong> là nguyên nhân tiềm ẩn gây ra nhiều bệnh lý nghiêm trọng, từ rối loạn tiêu hóa đến các vấn đề về tim mạch. Vì thế, việc kiểm soát stress thông qua các phương pháp như thiền, tập thở sâu hoặc các hoạt động giải trí là rất cần thiết.</p></p>\n<p><p>Bên cạnh đó, giấc ngủ đóng vai trò quan trọng trong việc phục hồi năng lượng và duy trì chức năng não bộ. Người lớn nên cố gắng ngủ đủ từ 7 đến 8 giờ mỗi đêm để đạt được hiệu quả tối ưu.</p></p>\n<p><h3>4. Tầm Quan Trọng Của Khám Sức Khỏe Định Kỳ</h3></p>\n<p><p>Kiểm tra sức khỏe thường xuyên giúp phát hiện sớm các dấu hiệu bệnh lý, từ đó nâng cao khả năng điều trị thành công và giảm thiểu rủi ro. Người Việt nên thực hiện các xét nghiệm cơ bản ít nhất 1-2 lần mỗi năm, bao gồm:</p></p>\n<p><ul></p>\n<p><li>Đo huyết áp.</li></p>\n<p><li>Xét nghiệm máu tổng quát.</li></p>\n<p><li>Kiểm tra mức đường huyết và cholesterol.</li></p>\n<p><li>Khám sức khỏe riêng biệt theo độ tuổi và giới tính.</li></p>\n<p></ul></p>\n<p><h3>Kết Luận</h3></p>\n<p><p>Duy trì sức khỏe toàn diện đòi hỏi sự kết hợp hài hòa giữa chế độ dinh dưỡng hợp lý, vận động đều đặn, quản lý stress hiệu quả và khám sức khỏe định kỳ. Việc xây dựng thói quen lành mạnh không chỉ giúp giảm thiểu nguy cơ mắc bệnh mà còn nâng cao chất lượng cuộc sống cho người Việt trong mọi giai đoạn.</p></p>\n<p><div class=\"source-info\"><p><em>Nguồn tham khảo: <a href=\"https://suckhoeviet.vn\" target=\"_blank\" rel=\"nofollow\">Sức Khỏe Việt</a></em></p></div></p>",
+        "quote": null,
+        "photo": "https://th.bing.com/th/id/OIP.6pq0X2SxdYrGFO6les-yIQHaDi?rs=1&pid=ImgDetMain&cb=idpwebp2&o=7&rm=3",
+        "tags": "sức khỏe toàn diện, dinh dưỡng hợp lý, vận động thể chất, quản lý stress, khám sức khỏe định kỳ",
+        "post_cat_id": "74",
+        "post_tag_id": null,
+        "added_by": "40",
+        "author_type": "user",
+        "status": "active",
+        "is_featured": false,
+        "created_at": "2025-06-26T10:08:37.000000Z",
+        "updated_at": "2025-07-25T08:11:23.000000Z",
+        "views": "9",
+        "post_type": "post",
+        "meta_data": {
+          "source_url": null,
+          "bot_type": "admin_bot",
+          "api_created": true,
+          "created_at_api": "2025-06-26T10:08:37.640621Z",
+          "auto_generated": true
+        },
+        "author_info": {
+          "id": 40,
+          "name": "ToiKhoe Admin",
+          "email": "admin.bot@toikhoe.net",
+          "phone": "0900000001",
+          "email_verified_at": null,
+          "photo": "https://codyhealth.s3.ap-southeast-2.amazonaws.com/imagesub/logo.png",
+          "role": "admin",
+          "provider": null,
+          "provider_id": null,
+          "status": "active",
+          "api_token": "suGhVmb5n4R1x09smeTvDl0oQ1vXVNwu5Qy4PPlCRj17PeLVme53ZGydg7odmstRMbFeSPteu6MZNDNQ",
+          "api_token_expires_at": null,
+          "last_api_access": null,
+          "created_at": "2025-06-11T10:27:37.000000Z",
+          "updated_at": "2025-06-11T10:27:37.000000Z",
+          "province": null,
+          "address": null,
+          "province_id": null
+        },
+        "category": {
+          "id": 74,
+          "name": "Khoa Dinh dưỡng",
+          "slug": "khoa-dinh-dưỡng",
+          "type": "other",
+          "parent_id": null,
+          "icon": "frontend/img/icons/nutrition-plan.png",
+          "status": "active",
+          "display_order": "0",
+          "summary": null,
+          "photo": null,
+          "created_at": "2025-05-10T13:44:26.000000Z",
+          "updated_at": "2025-05-24T03:46:49.000000Z"
+        },
+        "doctor": null,
+        "user": {
+          "id": 40,
+          "name": "ToiKhoe Admin",
+          "email": "admin.bot@toikhoe.net",
+          "phone": "0900000001",
+          "email_verified_at": null,
+          "photo": "https://codyhealth.s3.ap-southeast-2.amazonaws.com/imagesub/logo.png",
+          "role": "admin",
+          "provider": null,
+          "provider_id": null,
+          "status": "active",
+          "api_token": "suGhVmb5n4R1x09smeTvDl0oQ1vXVNwu5Qy4PPlCRj17PeLVme53ZGydg7odmstRMbFeSPteu6MZNDNQ",
+          "api_token_expires_at": null,
+          "last_api_access": null,
+          "created_at": "2025-06-11T10:27:37.000000Z",
+          "updated_at": "2025-06-11T10:27:37.000000Z",
+          "province": null,
+          "address": null,
+          "province_id": null
+        }
+      },
+      {
+        "id": 297,
+        "title": "Hướng Dẫn Chăm Sóc Người Bệnh Tiểu Đường Hiệu Quả Tại Nhà",
+        "slug": "huong-dan-cham-soc-nguoi-benh-tieu-duong-hieu-qua-tai-nha",
+        "summary": "Tìm hiểu cách chăm sóc người bệnh tiểu đường tại nhà với các phương pháp khoa học, giúp kiểm soát đường huyết và phòng ngừa biến chứng. Bài viết cung cấp hướng dẫn chi tiết chăm sóc, dinh dưỡng và thói quen sinh hoạt tốt nhất cho bệnh nhân tiểu đường.",
+        "short_desc": null,
+        "description": "<p><p><strong>Tiểu đường</strong> là một trong những bệnh lý mạn tính phổ biến hiện nay, ảnh hưởng lớn đến chất lượng cuộc sống người bệnh. Việc chăm sóc bệnh nhân tiểu đường đúng cách tại nhà đóng vai trò thiết yếu trong việc kiểm soát đường huyết và ngăn ngừa các biến chứng nguy hiểm.</p></p>\n<p><h3>Vai trò quan trọng của chăm sóc người bệnh tiểu đường</h3></p>\n<p><p>Chăm sóc toàn diện giúp người bệnh duy trì mức đường huyết ổn định, giảm nguy cơ tổn thương các cơ quan như tim, thận, thần kinh và mắt. Ngoài ra, quá trình chăm sóc còn góp phần nâng cao sức khỏe tâm thần, cải thiện tinh thần và giảm áp lực mệt mỏi do bệnh gây ra.</p></p>\n<p><h3>Nguyên tắc chăm sóc bệnh nhân tiểu đường tại nhà</h3></p>\n<p><ul></p>\n<p><li><strong>Kiểm tra và theo dõi đường huyết đều đặn:</strong> Sử dụng máy đo đường huyết để theo dõi chỉ số thường xuyên, giúp kịp thời điều chỉnh chế độ ăn uống hoặc thuốc điều trị.</li></p>\n<p><li><strong>Tuân thủ chế độ dinh dưỡng hợp lý:</strong> Ưu tiên thực phẩm giàu chất xơ, hạn chế đường, tinh bột nhanh và chất béo bão hòa. Chia nhỏ bữa ăn, tránh nhịn đói hoặc ăn quá nhiều cùng lúc.</li></p>\n<p><li><strong>Duy trì hoạt động thể chất:</strong> Tập luyện nhẹ nhàng hàng ngày như đi bộ, yoga giúp tăng cường chuyển hóa glucose và cải thiện sức khỏe tổng thể.</li></p>\n<p><li><strong>Tuân thủ sử dụng thuốc theo hướng dẫn của bác sĩ:</strong> Không tự ý thay đổi liều hoặc ngừng thuốc mà không có chỉ định y tế.</li></p>\n<p><li><strong>Chăm sóc da và chân cẩn thận:</strong> Tiểu đường làm tăng nguy cơ nhiễm trùng và loét da, do đó cần thường xuyên kiểm tra, giữ vệ sinh và tránh tổn thương.</li></p>\n<p><li><strong>Giữ tinh thần lạc quan, tránh stress:</strong> Stress có thể làm gia tăng đường huyết nên hỗ trợ tinh thần tích cực rất quan trọng.</li></p>\n<p></ul></p>\n<p><h3>Chế độ dinh dưỡng tốt cho người bệnh tiểu đường</h3></p>\n<p><p>Chế độ ăn đóng vai trò then chốt giúp ổn định lượng đường trong máu. Người bệnh nên ưu tiên các thực phẩm tự nhiên, hạn chế đồ ăn chế biến sẵn và nhiều đường:</p></p>\n<p><ul></p>\n<p><li>Rau xanh, trái cây tươi ít ngọt và giàu chất xơ</li></p>\n<p><li>Ngũ cốc nguyên hạt như yến mạch, lúa mì, gạo lứt</li></p>\n<p><li>Protein từ thịt nạc, cá hồi, đậu hạt và sữa không đường</li></p>\n<p><li>Hạn chế ăn đồ ngọt, bánh kẹo, nước ngọt có gas và tinh bột tinh chế</li></p>\n<p></ul></p>\n<p><h3>Lưu ý khi chăm sóc bệnh nhân tiểu đường</h3></p>\n<p><ul></p>\n<p><li>Không bỏ qua việc kiểm tra sức khỏe định kỳ để phát hiện sớm biến chứng</li></p>\n<p><li>Giữ môi trường sống sạch sẽ, thoáng đãng</li></p>\n<p><li>Khuyến khích người bệnh thực hiện tự theo dõi sức khỏe, báo ngay cho bác sĩ khi có dấu hiệu bất thường như mệt mỏi bất thường, tăng hoặc giảm cân nhanh</li></p>\n<p></ul></p>\n<p><p>Việc chăm sóc người bệnh tiểu đường tại nhà cần sự phối hợp đồng bộ giữa chế độ dinh dưỡng, tập luyện và tuân thủ điều trị y tế. Khi gia đình có đầy đủ kiến thức và kỹ năng, người bệnh sẽ duy trì được sức khỏe ổn định, giảm thiểu tối đa các biến chứng nghiêm trọng.</p></p>\n<p><div class=\"source-info\"><p><em>Nguồn tham khảo: <a href=\"https://www.vinmec.com/vi/tu-van-suc-khoe/benh-tieu-duong-va-cham-soc-tai-nha/\" target=\"_blank\" rel=\"nofollow\">Vinmec</a></em></p></div></p>",
+        "quote": null,
+        "photo": "https://th.bing.com/th/id/R.1cc114d80e2499bc2c95433bb617d826?rik=gAK998%2fqI8TWIw&riu=http%3a%2f%2ftrungtamytemongcai.vn%2fupload%2f1000983%2f20210407%2fgrabab456TT_Ki_E1_BB_83m_so_C3_A1t_b_E1_BB_87nh_t_E1_BA_ADt_QN_kh_C3_A1m_s_E1_BB_A9c_kh_E1_BB_8Fe__C4_91o__C4_91_C6_B0_E1_BB_9Dng_huy_E1_BA_BFt_t_E1_BA_A1i_nh_C3_A0_1_scaled.jpg&ehk=ZDjCx%2fVLSWHnWTd5fbbX%2bYKjyCtHWYa%2fmxMaWcVdRLg%3d&risl=&pid=ImgRaw&r=0",
+        "tags": "tiểu đường, chăm sóc người bệnh tiểu đường, chế độ dinh dưỡng tiểu đường, kiểm soát đường huyết, lối sống lành mạnh",
+        "post_cat_id": "43",
+        "post_tag_id": null,
+        "added_by": "40",
+        "author_type": "user",
+        "status": "active",
+        "is_featured": false,
+        "created_at": "2025-06-26T10:04:51.000000Z",
+        "updated_at": "2025-07-28T00:16:21.000000Z",
+        "views": "9",
+        "post_type": "post",
+        "meta_data": {
+          "source_url": null,
+          "bot_type": "admin_bot",
+          "api_created": true,
+          "created_at_api": "2025-06-26T10:04:51.654305Z",
+          "auto_generated": true
+        },
+        "author_info": {
+          "id": 40,
+          "name": "ToiKhoe Admin",
+          "email": "admin.bot@toikhoe.net",
+          "phone": "0900000001",
+          "email_verified_at": null,
+          "photo": "https://codyhealth.s3.ap-southeast-2.amazonaws.com/imagesub/logo.png",
+          "role": "admin",
+          "provider": null,
+          "provider_id": null,
+          "status": "active",
+          "api_token": "suGhVmb5n4R1x09smeTvDl0oQ1vXVNwu5Qy4PPlCRj17PeLVme53ZGydg7odmstRMbFeSPteu6MZNDNQ",
+          "api_token_expires_at": null,
+          "last_api_access": null,
+          "created_at": "2025-06-11T10:27:37.000000Z",
+          "updated_at": "2025-06-11T10:27:37.000000Z",
+          "province": null,
+          "address": null,
+          "province_id": null
+        },
+        "category": {
+          "id": 43,
+          "name": "Khoa Nội tiết",
+          "slug": "khoa-nội-tiết",
+          "type": "other",
+          "parent_id": null,
+          "icon": "frontend/img/icons/endocrine-system.png",
+          "status": "active",
+          "display_order": "0",
+          "summary": null,
+          "photo": null,
+          "created_at": "2025-05-10T13:44:26.000000Z",
+          "updated_at": "2025-05-19T11:40:27.000000Z"
+        },
+        "doctor": null,
+        "user": {
+          "id": 40,
+          "name": "ToiKhoe Admin",
+          "email": "admin.bot@toikhoe.net",
+          "phone": "0900000001",
+          "email_verified_at": null,
+          "photo": "https://codyhealth.s3.ap-southeast-2.amazonaws.com/imagesub/logo.png",
+          "role": "admin",
+          "provider": null,
+          "provider_id": null,
+          "status": "active",
+          "api_token": "suGhVmb5n4R1x09smeTvDl0oQ1vXVNwu5Qy4PPlCRj17PeLVme53ZGydg7odmstRMbFeSPteu6MZNDNQ",
+          "api_token_expires_at": null,
+          "last_api_access": null,
+          "created_at": "2025-06-11T10:27:37.000000Z",
+          "updated_at": "2025-06-11T10:27:37.000000Z",
+          "province": null,
+          "address": null,
+          "province_id": null
+        }
+      },
+      {
+        "id": 296,
+        "title": "Tầm Quan Trọng Của Giấc Ngủ Đối Với Sức Khỏe và Cách Cải Thiện Chất Lượng Giấc Ngủ",
+        "slug": "tam-quan-trong-cua-giac-ngu-doi-voi-suc-khoe-va-cach-cai-thien-chat-luong-giac-ngu",
+        "summary": "Giấc ngủ đóng vai trò thiết yếu trong việc duy trì sức khỏe toàn diện. Bài viết giúp bạn hiểu rõ tầm quan trọng của giấc ngủ, nguyên nhân gây mất ngủ và phương pháp cải thiện để tận hưởng giấc ngủ sâu, từ đó nâng cao chất lượng cuộc sống.",
+        "short_desc": null,
+        "description": "<p><p><strong>Giấc ngủ</strong> không chỉ là thời gian nghỉ ngơi mà còn là quá trình phục hồi quan trọng cho cơ thể và não bộ. Thiếu ngủ hoặc ngủ không đủ chất lượng có thể dẫn đến nhiều vấn đề sức khỏe nghiêm trọng như suy giảm miễn dịch, tăng nguy cơ bệnh tim mạch, tiểu đường và rối loạn tâm thần.</p></p>\n<p><h3>Tại sao giấc ngủ lại quan trọng?</h3></p>\n<p><p>Trong quá trình ngủ, cơ thể tiến hành sửa chữa các tổn thương tế bào, củng cố trí nhớ, cân bằng hormone và điều chỉnh các chức năng chuyển hóa. Một giấc ngủ chất lượng giúp tăng cường sự tập trung, giảm căng thẳng và cải thiện tâm trạng.</p></p>\n<p><p>Ngược lại, nếu giấc ngủ bị gián đoạn hoặc không đầy đủ, cơ thể sẽ rơi vào trạng thái mệt mỏi mãn tính, giảm khả năng làm việc và dễ mắc phải các bệnh lý. Đặc biệt, giấc ngủ kém còn liên quan đến nguy cơ tăng cân và suy giảm sức khỏe tinh thần.</p></p>\n<p><h3>Nguyên nhân gây mất ngủ phổ biến</h3></p>\n<p><p>Mất ngủ có thể bắt nguồn từ nhiều yếu tố như:</p></p>\n<p><ul></p>\n<p><li><strong>Căng thẳng, lo âu:</strong> Áp lực công việc hoặc cuộc sống khiến não bộ khó thư giãn.</li></p>\n<p><li><strong>Thói quen sinh hoạt không khoa học:</strong> Thức khuya, sử dụng điện thoại hay máy tính trước giờ ngủ.</li></p>\n<p><li><strong>Môi trường ngủ không phù hợp:</strong> Tiếng ồn, ánh sáng mạnh hoặc nhiệt độ không thoải mái.</li></p>\n<p><li><strong>Các bệnh lý nền:</strong> Đau mạn tính, rối loạn hô hấp khi ngủ, trầm cảm hoặc các rối loạn thần kinh.</li></p>\n<p><li><strong>Sử dụng chất kích thích:</strong> Cafein, rượu bia hoặc thuốc lá cũng ảnh hưởng đến giấc ngủ.</li></p>\n<p></ul></p>\n<p><h3>Cách nâng cao chất lượng giấc ngủ hiệu quả</h3></p>\n<p><p>Để cải thiện giấc ngủ, bạn nên áp dụng một số nguyên tắc sau:</p></p>\n<p><ul></p>\n<p><li><strong>Duy trì thói quen đi ngủ đúng giờ:</strong> Cố gắng thức dậy và đi ngủ cùng một khung giờ mỗi ngày, kể cả cuối tuần.</li></p>\n<p><li><strong>Tạo môi trường ngủ yên tĩnh và tối:</strong> Giữ phòng ngủ sạch sẽ, thoáng mát, hạn chế ánh sáng và tiếng ồn.</li></p>\n<p><li><strong>Hạn chế sử dụng thiết bị điện tử trước khi ngủ:</strong> Ánh sáng xanh từ màn hình có thể làm giảm sản xuất melatonin – hormone giúp bạn ngủ ngon.</li></p>\n<p><li><strong>Tránh ăn quá no hoặc uống cafein vào buổi tối:</strong> Điều này giúp hệ tiêu hóa không bị quá tải và giảm kích thích thần kinh làm tỉnh táo.</li></p>\n<p><li><strong>Thực hành các bài tập thư giãn:</strong> Thiền, hít thở sâu hay yoga nhẹ nhàng có thể giúp bạn thư giãn tinh thần trước khi đi ngủ.</li></p>\n<p><li><strong>Điều trị các bệnh lý liên quan nếu có:</strong> Thăm khám bác sĩ kịp thời để kiểm soát đau, ngưng thở khi ngủ hay các vấn đề tâm lý.</li></p>\n<p></ul></p>\n<p><h3>Khi nào cần gặp bác sĩ?</h3></p>\n<p><p>Nếu bạn đã áp dụng các biện pháp cải thiện nhưng vẫn gặp khó khăn với giấc ngủ kéo dài hơn 3 tuần, hoặc xuất hiện triệu chứng như mệt mỏi quá mức ban ngày, cáu gắt, khó tập trung, cần chủ động tìm sự hỗ trợ chuyên môn. Bác sĩ sẽ giúp chẩn đoán chính xác nguyên nhân và đề xuất phương pháp điều trị phù hợp như liệu pháp hành vi nhận thức hoặc dùng thuốc khi cần thiết.</p></p>\n<p><p><strong>Tóm lại, giấc ngủ chất lượng là yếu tố không thể thiếu để duy trì sức khỏe và nâng cao hiệu suất làm việc hàng ngày. Việc chăm sóc giấc ngủ đúng cách đóng vai trò then chốt giúp bạn có cuộc sống khỏe mạnh và tinh thần minh mẫn.</strong></p></p>\n<p><div class=\"source-info\"><p><em>Nguồn tham khảo: <a href=\"https://www.webmd.com/sleep-disorders/guide/sleep-hygiene\" target=\"_blank\" rel=\"nofollow\">WebMD</a></em></p></div></p>",
+        "quote": null,
+        "photo": "https://th.bing.com/th/id/OIP.-9HHSD20p4xW3XvdCDHFHQHaD4?rs=1&pid=ImgDetMain&cb=idpwebp2&o=7&rm=3",
+        "tags": "giấc ngủ, sức khỏe giấc ngủ, mất ngủ, cải thiện giấc ngủ, thói quen ngủ tốt",
+        "post_cat_id": "49",
+        "post_tag_id": null,
+        "added_by": "40",
+        "author_type": "user",
+        "status": "active",
+        "is_featured": false,
+        "created_at": "2025-06-26T10:02:28.000000Z",
+        "updated_at": "2025-07-25T12:50:21.000000Z",
+        "views": "8",
+        "post_type": "post",
+        "meta_data": {
+          "source_url": null,
+          "bot_type": "admin_bot",
+          "api_created": true,
+          "created_at_api": "2025-06-26T10:02:28.941936Z",
+          "auto_generated": true
+        },
+        "author_info": {
+          "id": 40,
+          "name": "ToiKhoe Admin",
+          "email": "admin.bot@toikhoe.net",
+          "phone": "0900000001",
+          "email_verified_at": null,
+          "photo": "https://codyhealth.s3.ap-southeast-2.amazonaws.com/imagesub/logo.png",
+          "role": "admin",
+          "provider": null,
+          "provider_id": null,
+          "status": "active",
+          "api_token": "suGhVmb5n4R1x09smeTvDl0oQ1vXVNwu5Qy4PPlCRj17PeLVme53ZGydg7odmstRMbFeSPteu6MZNDNQ",
+          "api_token_expires_at": null,
+          "last_api_access": null,
+          "created_at": "2025-06-11T10:27:37.000000Z",
+          "updated_at": "2025-06-11T10:27:37.000000Z",
+          "province": null,
+          "address": null,
+          "province_id": null
+        },
+        "category": {
+          "id": 49,
+          "name": "Khoa Thần kinh",
+          "slug": "khoa-thần-kinh",
+          "type": "other",
+          "parent_id": null,
+          "icon": "frontend/img/icons/brain.png",
+          "status": "active",
+          "display_order": "0",
+          "summary": null,
+          "photo": null,
+          "created_at": "2025-05-10T13:44:26.000000Z",
+          "updated_at": "2025-05-19T11:40:36.000000Z"
+        },
+        "doctor": null,
+        "user": {
+          "id": 40,
+          "name": "ToiKhoe Admin",
+          "email": "admin.bot@toikhoe.net",
+          "phone": "0900000001",
+          "email_verified_at": null,
+          "photo": "https://codyhealth.s3.ap-southeast-2.amazonaws.com/imagesub/logo.png",
+          "role": "admin",
+          "provider": null,
+          "provider_id": null,
+          "status": "active",
+          "api_token": "suGhVmb5n4R1x09smeTvDl0oQ1vXVNwu5Qy4PPlCRj17PeLVme53ZGydg7odmstRMbFeSPteu6MZNDNQ",
+          "api_token_expires_at": null,
+          "last_api_access": null,
+          "created_at": "2025-06-11T10:27:37.000000Z",
+          "updated_at": "2025-06-11T10:27:37.000000Z",
+          "province": null,
+          "address": null,
+          "province_id": null
+        }
+      }
+    ],
+    "first_page_url": "https://toikhoe.com.vn/api/posts?page=1",
+    "from": 1,
+    "last_page": 25,
+    "last_page_url": "https://toikhoe.com.vn/api/posts?page=25",
+    "links": [
+      {
+        "url": null,
+        "label": "&laquo; Trước đó",
+        "active": false
+      },
+      {
+        "url": "https://toikhoe.com.vn/api/posts?page=1",
+        "label": "1",
+        "active": true
+      },
+      {
+        "url": "https://toikhoe.com.vn/api/posts?page=2",
+        "label": "2",
+        "active": false
+      },
+      {
+        "url": "https://toikhoe.com.vn/api/posts?page=3",
+        "label": "3",
+        "active": false
+      },
+      {
+        "url": "https://toikhoe.com.vn/api/posts?page=4",
+        "label": "4",
+        "active": false
+      },
+      {
+        "url": "https://toikhoe.com.vn/api/posts?page=5",
+        "label": "5",
+        "active": false
+      },
+      {
+        "url": "https://toikhoe.com.vn/api/posts?page=6",
+        "label": "6",
+        "active": false
+      },
+      {
+        "url": "https://toikhoe.com.vn/api/posts?page=7",
+        "label": "7",
+        "active": false
+      },
+      {
+        "url": "https://toikhoe.com.vn/api/posts?page=8",
+        "label": "8",
+        "active": false
+      },
+      {
+        "url": "https://toikhoe.com.vn/api/posts?page=9",
+        "label": "9",
+        "active": false
+      },
+      {
+        "url": "https://toikhoe.com.vn/api/posts?page=10",
+        "label": "10",
+        "active": false
+      },
+      {
+        "url": null,
+        "label": "...",
+        "active": false
+      },
+      {
+        "url": "https://toikhoe.com.vn/api/posts?page=24",
+        "label": "24",
+        "active": false
+      },
+      {
+        "url": "https://toikhoe.com.vn/api/posts?page=25",
+        "label": "25",
+        "active": false
+      },
+      {
+        "url": "https://toikhoe.com.vn/api/posts?page=2",
+        "label": "Tiếp theo &raquo;",
+        "active": false
+      }
+    ],
+    "next_page_url": "https://toikhoe.com.vn/api/posts?page=2",
+    "path": "https://toikhoe.com.vn/api/posts",
+    "per_page": 10,
+    "prev_page_url": null,
+    "to": 10,
+    "total": 247
+  }
+}
+[2025-09-16 04:21:11] [profile-3] Response stored in variable: httpResponse
+[2025-09-16 04:21:11] [profile-3] httpResponse: {
+  "success": true,
+  "message": "Lấy danh sách bài đăng thành công.",
+  "data": {
+    "current_page": 1,
+    "data": [
+      {
+        "id": 311,
+        "title": "Sức Khỏe Thai Kỳ: Những Điều Cần Biết Để Mẹ Và Bé Phát Triển Toàn Diện",
+        "slug": "suc-khoe-thai-ky-nhung-dieu-can-biet-de-me-va-be-phat-trien-toan-dien",
+        "summary": "Bảo vệ sức khỏe thai kỳ là chìa khóa giúp mẹ và bé tránh được các nguy cơ trong suốt thai kỳ. Tìm hiểu những lưu ý quan trọng về dinh dưỡng, thăm khám và sinh hoạt để đảm bảo bé phát triển khỏe mạnh và mẹ vượt cạn an toàn.",
+        "short_desc": null,
+        "description": "<p><p><strong>Sức khỏe thai kỳ</strong> đóng vai trò then chốt trong việc đảm bảo sự phát triển toàn diện của thai nhi và sức khỏe của mẹ. Suốt thời gian mang thai, chị em cần quan tâm đặc biệt đến chế độ dinh dưỡng, thăm khám định kỳ và sinh hoạt hợp lý nhằm giảm thiểu nguy cơ biến chứng.</p></p>\n<p><h3>Chế độ dinh dưỡng cân đối và đầy đủ</h3></p>\n<p><p>Trong thai kỳ, nhu cầu dinh dưỡng của cơ thể mẹ tăng lên đáng kể để phục vụ sự phát triển của bé. Một chế độ ăn đa dạng với đầy đủ chất đạm, chất béo, carbohydrates, vitamin và khoáng chất là rất cần thiết.</p></p>\n<p><ul></p>\n<p><li><strong>Protein:</strong> Giúp xây dựng mô thai, tăng trưởng các cơ quan trong cơ thể trẻ.</li></p>\n<p><li><strong>Canxi và vitamin D:</strong> Hỗ trợ phát triển xương và răng của thai nhi.</li></p>\n<p><li><strong>Axít folic:</strong> Giúp ngăn ngừa các dị tật ống thần kinh như tật nứt đốt sống.</li></p>\n<p><li><strong>Sắt:</strong> Ngăn ngừa thiếu máu ở mẹ, đảm bảo huyết lượng cung cấp đủ cho thai nhi.</li></p>\n<p><li><strong>Nhóm vitamin B, C, E:</strong> Tăng cường hệ miễn dịch và giảm nguy cơ các vấn đề sản khoa.</li></p>\n<p></ul></p>\n<p><h3>Thăm khám và theo dõi thai kỳ đều đặn</h3></p>\n<p><p>Khám thai định kỳ giúp phát hiện sớm các bất thường, từ đó có biện pháp can thiệp kịp thời. Thai phụ nên tuân thủ lịch khám theo tư vấn của bác sĩ, thường bắt đầu từ tuần thứ 6-8 của thai kỳ và kéo dài đến tuần cuối cùng.</p></p>\n<p><ul></p>\n<p><li>Siêu âm thai để đánh giá sự phát triển, vị trí và nhịp tim thai.</li></p>\n<p><li>Xét nghiệm máu và nước tiểu để phát hiện các bệnh lý như tiểu đường thai kỳ, thiếu máu, hoặc nhiễm trùng.</li></p>\n<p><li>Đo chiều cao tử cung và theo dõi cân nặng để đánh giá sự phát triển của thai.</li></p>\n<p></ul></p>\n<p><h3>Chế độ sinh hoạt khoa học, lành mạnh</h3></p>\n<p><p>Việc duy trì lối sống tích cực, tránh căng thẳng và các thói quen có hại là rất quan trọng trong thai kỳ. Mẹ bầu nên:</p></p>\n<p><ul></p>\n<p><li>Ngủ đủ 7-8 tiếng mỗi đêm, giữ tinh thần thoải mái.</li></p>\n<p><li>Tập luyện thể dục nhẹ nhàng, như đi bộ hay yoga dành cho bà bầu, giúp tăng cường sức khỏe và giảm các triệu chứng mệt mỏi.</li></p>\n<p><li>Tránh xa thuốc lá, rượu bia và các chất kích thích có thể gây ảnh hưởng xấu tới thai nhi.</li></p>\n<p><li>Uống đủ nước và hạn chế thực phẩm chứa nhiều đường, muối hoặc chất béo không lành mạnh.</li></p>\n<p></ul></p>\n<p><h3>Những lưu ý quan trọng giúp mẹ bầu an tâm đến ngày sinh</h3></p>\n<p><p>Bên cạnh việc ăn uống và sinh hoạt đúng cách, mẹ cần chú ý đến các dấu hiệu bất thường để đi khám ngay khi cần thiết, ví dụ:</p></p>\n<p><ul></p>\n<p><li>Chảy máu âm đạo hoặc đau bụng dữ dội.</li></p>\n<p><li>Sưng phù tay chân hoặc mặt, khó thở, tăng huyết áp.</li></p>\n<p><li>Thai máy giảm hoặc không còn cử động.</li></p>\n<p></ul></p>\n<p><p>Việc nhận biết sớm các biểu hiện này giúp phòng tránh các biến chứng nguy hiểm như sinh non, tiền sản giật hay thai chết lưu.</p></p>\n<p><h3>Tổng kết</h3></p>\n<p><p>Chăm sóc sức khỏe thai kỳ khoa học không chỉ bảo vệ mẹ mà còn tạo điều kiện tốt nhất cho sự phát triển toàn diện của bé ngay từ trong bụng mẹ. Mẹ bầu nên chú trọng dinh dưỡng, thường xuyên thăm khám và duy trì lối sống lành mạnh để cùng đồng hành an toàn suốt hành trình thai nghén.</p></p>\n<p><div class=\"source-info\"><p><em>Nguồn tham khảo: <a href=\"https://www.vietmec.com\" target=\"_blank\" rel=\"nofollow\">VietMec</a></em></p></div></p>",
+        "quote": null,
+        "photo": "https://cdn.diag.vn/2024/12/2fd1c60c-test-feature-image-landing-page-for-pregnancy_chuc-nang-cac-co-quan.png",
+        "tags": "sức khỏe thai kỳ, dinh dưỡng cho bà bầu, khám thai định kỳ, chăm sóc mẹ bầu, phát triển thai nhi",
+        "post_cat_id": "62",
+        "post_tag_id": null,
+        "added_by": "40",
+        "author_type": "user",
+        "status": "active",
+        "is_featured": false,
+        "created_at": "2025-06-26T10:30:26.000000Z",
+        "updated_at": "2025-07-25T08:44:23.000000Z",
+        "views": "11",
+        "post_type": "post",
+        "meta_data": {
+          "source_url": null,
+          "bot_type": "admin_bot",
+          "api_created": true,
+          "created_at_api": "2025-06-26T10:30:26.454630Z",
+          "auto_generated": true
+        },
+        "author_info": {
+          "id": 40,
+          "name": "ToiKhoe Admin",
+          "email": "admin.bot@toikhoe.net",
+          "phone": "0900000001",
+          "email_verified_at": null,
+          "photo": "https://codyhealth.s3.ap-southeast-2.amazonaws.com/imagesub/logo.png",
+          "role": "admin",
+          "provider": null,
+          "provider_id": null,
+          "status": "active",
+          "api_token": "suGhVmb5n4R1x09smeTvDl0oQ1vXVNwu5Qy4PPlCRj17PeLVme53ZGydg7odmstRMbFeSPteu6MZNDNQ",
+          "api_token_expires_at": null,
+          "last_api_access": null,
+          "created_at": "2025-06-11T10:27:37.000000Z",
+          "updated_at": "2025-06-11T10:27:37.000000Z",
+          "province": null,
+          "address": null,
+          "province_id": null
+        },
+        "category": {
+          "id": 62,
+          "name": "Khoa Phụ sản",
+          "slug": "khoa-phụ-sản",
+          "type": "other",
+          "parent_id": null,
+          "icon": "frontend/img/icons/pediatrics.png",
+          "status": "active",
+          "display_order": "0",
+          "summary": null,
+          "photo": null,
+          "created_at": "2025-05-10T13:44:26.000000Z",
+          "updated_at": "2025-05-23T10:19:34.000000Z"
+        },
+        "doctor": null,
+        "user": {
+          "id": 40,
+          "name": "ToiKhoe Admin",
+          "email": "admin.bot@toikhoe.net",
+          "phone": "0900000001",
+          "email_verified_at": null,
+          "photo": "https://codyhealth.s3.ap-southeast-2.amazonaws.com/imagesub/logo.png",
+          "role": "admin",
+          "provider": null,
+          "provider_id": null,
+          "status": "active",
+          "api_token": "suGhVmb5n4R1x09smeTvDl0oQ1vXVNwu5Qy4PPlCRj17PeLVme53ZGydg7odmstRMbFeSPteu6MZNDNQ",
+          "api_token_expires_at": null,
+          "last_api_access": null,
+          "created_at": "2025-06-11T10:27:37.000000Z",
+          "updated_at": "2025-06-11T10:27:37.000000Z",
+          "province": null,
+          "address": null,
+          "province_id": null
+        }
+      },
+      {
+        "id": 310,
+        "title": "Tế bào miễn dịch nhầm lẫn tấn công mô mỡ dưới da gây ra bệnh viêm mô mỡ",
+        "slug": "te-bao-mien-dich-nham-lan-tan-cong-mo-mo-duoi-da-gay-ra-benh-viem-mo-mo",
+        "summary": "Tế bào miễn dịch có thể tấn công nhầm mô mỡ dưới da, dẫn đến tình trạng viêm mô mỡ – một bệnh lý gây sưng đau và khó chịu. Hiểu rõ nguyên nhân và cơ chế của bệnh giúp người bệnh có hướng điều trị hiệu quả, nâng cao sức khỏe và chất lượng cuộc sống.",
+        "short_desc": null,
+        "description": "<p><p><strong>Viêm mô mỡ</strong> là tình trạng viêm nhiễm xảy ra ở lớp mô mỡ dưới da, gây ra các triệu chứng sưng tấy, đau nhức và khó chịu cho người bệnh. Một nghiên cứu gần đây đã chỉ ra rằng nguyên nhân xuất phát từ việc <strong>tế bào miễn dịch tấn công nhầm mô mỡ dưới da</strong>. Hiện tượng này làm phá hủy cấu trúc mô mỡ và gây ra phản ứng viêm kéo dài.</p></p>\n<p><h3>Nguyên nhân do tế bào miễn dịch tấn công nhầm mô mỡ</h3></p>\n<p><p>Trong hệ miễn dịch, <strong>tế bào lympho</strong> và <strong>đại thực bào</strong> có vai trò bảo vệ cơ thể khỏi tác nhân gây bệnh. Tuy nhiên, trong một số trường hợp, các tế bào này lại nhận diện nhầm mô mỡ dưới da là tác nhân có hại và tiến hành tấn công. Kết quả là lớp mô mỡ bị tổn thương, tạo điều kiện cho tình trạng viêm phát triển và biểu hiện thành bệnh lý.</p></p>\n<p><h3>Triệu chứng thường gặp khi tế bào miễn dịch gây viêm mô mỡ</h3></p>\n<p><p>Bệnh nhân khi bị viêm mô mỡ do tế bào miễn dịch tấn công nhầm sẽ xuất hiện các dấu hiệu sau:</p></p>\n<p><ul></p>\n<p><li>Sưng và đau vùng da dưới lớp mỡ, thường gặp ở các chi hoặc thân mình.</li></p>\n<p><li>Da có thể ửng đỏ, căng và cảm giác nóng rát tại vị trí tổn thương.</li></p>\n<p><li>Cảm giác mệt mỏi, sốt nhẹ hoặc các biểu hiện toàn thân khác nếu viêm nặng.</li></p>\n<p></ul></p>\n<p><h3>Phương pháp chẩn đoán và điều trị hiệu quả</h3></p>\n<p><p>Để xác định chính xác tình trạng viêm mô mỡ do tế bào miễn dịch, bác sĩ sẽ thực hiện các bước kiểm tra như khám lâm sàng, xét nghiệm máu và sinh thiết mô mỡ. Việc chẩn đoán đúng giúp đưa ra phác đồ điều trị phù hợp, thường bao gồm:</p></p>\n<p><ul></p>\n<p><li>Sử dụng thuốc <strong>kháng viêm</strong> và <strong>ức chế miễn dịch</strong> giúp giảm phản ứng viêm tại mô mỡ.</li></p>\n<p><li>Liệu pháp hỗ trợ cải thiện chức năng miễn dịch, hạn chế tình trạng tự miễn gây bệnh trở lại.</li></p>\n<p><li>Chăm sóc da và tăng cường dinh dưỡng để hỗ trợ sức khỏe mô mỡ và tổng trạng người bệnh.</li></p>\n<p></ul></p>\n<p><h3>Ý nghĩa và tầm quan trọng của việc nhận biết sớm</h3></p>\n<p><p>Hiểu được cơ chế tế bào miễn dịch tấn công nhầm mô mỡ cho thấy viêm mô mỡ không chỉ là vấn đề da liễu mà còn liên quan mật thiết đến hệ miễn dịch. Việc phát hiện sớm và can thiệp kịp thời sẽ giúp ngăn chặn tổn thương lan rộng, đồng thời giảm thiểu biến chứng lâu dài, cải thiện chất lượng cuộc sống cho người bệnh.</p></p>\n<p><h3>Lời khuyên dành cho người bệnh</h3></p>\n<p><ul></p>\n<p><li>Thăm khám định kỳ khi có dấu hiệu sưng đau bất thường dưới da.</li></p>\n<p><li>Duy trì chế độ ăn uống khoa học, giàu vitamin và khoáng chất hỗ trợ hệ miễn dịch.</li></p>\n<p><li>Tránh tiếp xúc với các tác nhân gây kích ứng hoặc làm tình trạng viêm nghiêm trọng hơn.</li></p>\n<p></ul></p>\n<p><p><strong>Tế bào miễn dịch tấn công nhầm mô mỡ dưới da</strong> là nguyên nhân quan trọng gây viêm mô mỡ. Việc trang bị kiến thức về căn bệnh này sẽ giúp người bệnh chủ động chăm sóc và bảo vệ sức khỏe một cách toàn diện hơn.</p></p>\n<p><div class=\"source-info\"><p><em>Nguồn tham khảo: <a href=\"https://news.google.com/rss/articles/CBMikgFBVV95cUxNRHo3MkdHZFowUUt0Q1pZTHpFN2tZVG5qNUdmekhfN3ZfRzNYellGMkY2QmVuSDZwRnp1S0dYRFZwQlFqUUo1dkxRaUVjODRKV0NoNmlwVjBXb3dRYVdHZmx5Rnh3YktEU2JudWNOZEw4ZTlUMFVkV2IxR204b2pDRFg5WFhfWlFfcDF2RGo1QjdjQQ?oc=5\" target=\"_blank\" rel=\"nofollow\">Tên website</a></em></p></div></p>",
+        "quote": null,
+        "photo": "https://suckhoe123.vn/uploads/suc-khoe/2021_05/20200206_063004_481108_tb-mien-dich.max-1800x1800.png",
+        "tags": "tế bào miễn dịch, viêm mô mỡ, mô mỡ dưới da, bệnh viêm, miễn dịch tự thân",
+        "post_cat_id": "48",
+        "post_tag_id": null,
+        "added_by": "40",
+        "author_type": "user",
+        "status": "active",
+        "is_featured": false,
+        "created_at": "2025-06-26T10:25:16.000000Z",
+        "updated_at": "2025-07-29T03:14:28.000000Z",
+        "views": "9",
+        "post_type": "post",
+        "meta_data": {
+          "source_url": null,
+          "bot_type": "admin_bot",
+          "api_created": true,
+          "created_at_api": "2025-06-26T10:25:16.496502Z",
+          "auto_generated": true
+        },
+        "author_info": {
+          "id": 40,
+          "name": "ToiKhoe Admin",
+          "email": "admin.bot@toikhoe.net",
+          "phone": "0900000001",
+          "email_verified_at": null,
+          "photo": "https://codyhealth.s3.ap-southeast-2.amazonaws.com/imagesub/logo.png",
+          "role": "admin",
+          "provider": null,
+          "provider_id": null,
+          "status": "active",
+          "api_token": "suGhVmb5n4R1x09smeTvDl0oQ1vXVNwu5Qy4PPlCRj17PeLVme53ZGydg7odmstRMbFeSPteu6MZNDNQ",
+          "api_token_expires_at": null,
+          "last_api_access": null,
+          "created_at": "2025-06-11T10:27:37.000000Z",
+          "updated_at": "2025-06-11T10:27:37.000000Z",
+          "province": null,
+          "address": null,
+          "province_id": null
+        },
+        "category": {
+          "id": 48,
+          "name": "Khoa Da Liễu",
+          "slug": "khoa-da-liễu",
+          "type": "other",
+          "parent_id": null,
+          "icon": "frontend/img/icons/dermatology.png",
+          "status": "active",
+          "display_order": "0",
+          "summary": null,
+          "photo": null,
+          "created_at": "2025-05-10T13:44:26.000000Z",
+          "updated_at": "2025-05-19T11:40:34.000000Z"
+        },
+        "doctor": null,
+        "user": {
+          "id": 40,
+          "name": "ToiKhoe Admin",
+          "email": "admin.bot@toikhoe.net",
+          "phone": "0900000001",
+          "email_verified_at": null,
+          "photo": "https://codyhealth.s3.ap-southeast-2.amazonaws.com/imagesub/logo.png",
+          "role": "admin",
+          "provider": null,
+          "provider_id": null,
+          "status": "active",
+          "api_token": "suGhVmb5n4R1x09smeTvDl0oQ1vXVNwu5Qy4PPlCRj17PeLVme53ZGydg7odmstRMbFeSPteu6MZNDNQ",
+          "api_token_expires_at": null,
+          "last_api_access": null,
+          "created_at": "2025-06-11T10:27:37.000000Z",
+          "updated_at": "2025-06-11T10:27:37.000000Z",
+          "province": null,
+          "address": null,
+          "province_id": null
+        }
+      },
+      {
+        "id": 309,
+        "title": "Ngủ ngáy do viêm amidan và hẹp eo họng: Nguyên nhân và cách khắc phục hiệu quả",
+        "slug": "ngu-ngay-do-viem-amidan-va-hep-eo-hong-nguyen-nhan-va-cach-khac-phuc-hieu-qua",
+        "summary": "Ngủ ngáy là hiện tượng phổ biến có thể bị gây ra bởi viêm amidan và hẹp eo họng. Bài viết phân tích nguyên nhân, tác động sức khỏe và các phương pháp điều trị hiệu quả giúp cải thiện giấc ngủ, giảm ngáy, bảo vệ hệ hô hấp, phù hợp với người bị chứng ngủ ngáy do bệnh lý đường thở trong amidan và eo họng.",
+        "short_desc": null,
+        "description": "<p><p><strong>Ngủ ngáy là hiện tượng thường gặp vào ban đêm, tuy nhiên khi tình trạng này xuất hiện do viêm amidan và hẹp eo họng, nó có thể gây ra nhiều hệ lụy ảnh hưởng đến sức khỏe. Việc hiểu rõ nguyên nhân cũng như các biện pháp phòng và chữa trị sẽ giúp cải thiện chất lượng giấc ngủ, tăng cường sức khỏe tổng thể.</strong></p></p>\n<p><h3>Nguyên nhân gây ngủ ngáy do viêm amidan và hẹp eo họng</h3></p>\n<p><p>Ngủ ngáy xảy ra khi luồng không khí qua đường hô hấp trên bị cản trở, dẫn đến rung động các mô mềm tạo ra tiếng ngáy. Hai nguyên nhân phổ biến liên quan bao gồm:</p></p>\n<p><ul></p>\n<p><li><strong>Viêm amidan:</strong> Amidan bị viêm, sưng to khiến cho không gian ở vùng họng bị thu hẹp, tạo điều kiện cho luồng khí đi qua bị cản trở, gây ra tiếng ngáy to hơn và kéo dài.</li></p>\n<p><li><strong>Hẹp eo họng:</strong> Eo họng, nằm ở vị trí nối giữa hầu họng và thanh quản, khi bị hẹp do viêm, sưng hoặc các tổn thương khác, luồng không khí bị hạn chế, làm tăng nguy cơ mắc chứng ngủ ngáy và thậm chí ngưng thở khi ngủ.</li></p>\n<p></ul></p>\n<p><h3>Tác hại của ngủ ngáy do viêm amidan và hẹp eo họng</h3></p>\n<p><p>Ngủ ngáy kéo dài không chỉ ảnh hưởng đến chất lượng giấc ngủ của người mắc mà còn tác động tiêu cực đến sức khỏe tổng thể:</p></p>\n<p><ul></p>\n<p><li>Gây mệt mỏi, uể oải vào ban ngày, giảm hiệu suất làm việc và học tập.</li></p>\n<p><li>Tăng nguy cơ mắc các bệnh lý tim mạch do thiếu oxy mãn tính khi ngủ.</li></p>\n<p><li>Gây căng thẳng, ảnh hưởng đến tâm lý và hạnh phúc gia đình do tiếng ngáy khó chịu.</li></p>\n<p><li>Trong trường hợp nặng, có thể dẫn đến hội chứng ngưng thở khi ngủ, gây biến chứng nguy hiểm.</li></p>\n<p></ul></p>\n<p><h3>Cách phòng ngừa và điều trị ngủ ngáy do viêm amidan, hẹp eo họng</h3></p>\n<p><p>Để giảm tình trạng ngủ ngáy do nguyên nhân viêm amidan và hẹp eo họng, người bệnh cần lưu ý các biện pháp sau:</p></p>\n<p><ul></p>\n<p><li><strong>Chăm sóc viêm amidan:</strong> Sử dụng thuốc theo chỉ định của bác sĩ để giảm viêm, sưng amidan. Trong trường hợp amidan quá to, có thể cân nhắc phẫu thuật cắt amidan.</li></p>\n<p><li><strong>Điều trị hẹp eo họng:</strong> Thăm khám để xác định nguyên nhân gây hẹp và lựa chọn phương pháp điều trị phù hợp như dùng thuốc chống viêm hoặc cần thiết có can thiệp y khoa.</li></p>\n<p><li><strong>Thay đổi thói quen sinh hoạt:</strong> Tránh sử dụng rượu bia, thuốc lá, giảm cân (nếu thừa cân), ngủ nghiêng để giảm áp lực lên vùng cổ họng.</li></p>\n<p><li><strong>Sử dụng máy hỗ trợ thở CPAP:</strong> Đối với những người bị ngưng thở khi ngủ nặng do hẹp đường thở, máy thở áp lực dương liên tục hỗ trợ hô hấp rất hiệu quả.</li></p>\n<p><li><strong>Thăm khám định kỳ:</strong> Khám chuyên khoa Tai Mũi Họng để theo dõi tiến triển bệnh và được tư vấn điều trị kịp thời.</li></p>\n<p></ul></p>\n<p><h3>Lời khuyên từ chuyên gia</h3></p>\n<p><p>Ngủ ngáy không chỉ là vấn đề đơn thuần về tiếng động mà còn là dấu hiệu cảnh báo các bệnh lý hô hấp nguy hiểm. Nếu bạn hoặc người thân thường xuyên gặp tình trạng ngủ ngáy kèm theo biểu hiện ngưng thở, mệt mỏi ban ngày, nên chủ động đến các cơ sở y tế chuyên khoa để được chẩn đoán chính xác và hỗ trợ điều trị đúng cách.</p></p>\n<p><p>Việc phát hiện sớm và xử lý kịp thời các tình trạng viêm amidan, hẹp eo họng không chỉ giảm triệu chứng ngủ ngáy mà còn giúp nâng cao chất lượng cuộc sống, tránh nguy cơ biến chứng lâu dài.</p></p>\n<p><div class=\"source-info\"><p><em>Nguồn tham khảo: <a href=\"https://news.google.com/rss/articles/CBMiekFVX3lxTE9KRmNxQ29pRWJ3c3dxRFhyUkZxcXZsbXQtblE0WW8yT0xCTnRKLUJ4cEpzQXg5MEN4c3BtdVVTTDZfR2NtS0JOQlppcjhXbU5ocTFXUkJnODdhR01mRVY3SWh1TXRtNzVlSUJUT3hSVndlcFhyOUhaS29n?oc=5\" target=\"_blank\" rel=\"nofollow\">Tên website</a></em></p></div></p>",
+        "quote": null,
+        "photo": "https://th.bing.com/th/id/OIP.3Yd0YAzvauNadrFuJ9Fd1gHaE8?o=7rm=3&rs=1&pid=ImgDetMain&cb=idpwebp2&o=7&rm=3",
+        "tags": "viêm amidan, ngủ ngáy, hẹp eo họng, ngưng thở khi ngủ, điều trị ngủ ngáy",
+        "post_cat_id": "48",
+        "post_tag_id": null,
+        "added_by": "32",
+        "author_type": "doctor",
+        "status": "active",
+        "is_featured": false,
+        "created_at": "2025-06-26T10:25:16.000000Z",
+        "updated_at": "2025-07-29T03:55:13.000000Z",
+        "views": "9",
+        "post_type": "post",
+        "meta_data": {
+          "source_url": null,
+          "bot_type": "doctor_bot",
+          "api_created": true,
+          "created_at_api": "2025-06-26T10:25:16.408183Z",
+          "auto_generated": true
+        },
+        "author_info": {
+          "id": 32,
+          "name": "BS. Hệ thống ToiKhoe",
+          "services": "Tư vấn sức khỏe tự động",
+          "experience": 10,
+          "working_hours": "Thứ 2 - Thứ 7, 09:00 - 18:00",
+          "location": "Online",
+          "workplace": "ToiKhoe.net",
+          "phone": "0900000002",
+          "email": "doctor.bot@toikhoe.net",
+          "photo": null,
+          "status": "active",
+          "rating": null,
+          "consultation_fee": "0.00",
+          "bio": "Tài khoản hệ thống auto post",
+          "short_bio": null,
+          "api_token": "uRaijM4YZ7hZmDR2JONFShh5S9Xc7dzqEZeFB7lTZqeUUfcWWrNsij8akI2Vo9OmCr8HqEgtNxZFw8Fm",
+          "api_token_expires_at": null,
+          "last_api_access": null,
+          "points": 0,
+          "created_at": "2025-06-11T10:27:38.000000Z",
+          "updated_at": "2025-06-24T04:47:29.000000Z",
+          "total_commission": 0
+        },
+        "category": {
+          "id": 48,
+          "name": "Khoa Da Liễu",
+          "slug": "khoa-da-liễu",
+          "type": "other",
+          "parent_id": null,
+          "icon": "frontend/img/icons/dermatology.png",
+          "status": "active",
+          "display_order": "0",
+          "summary": null,
+          "photo": null,
+          "created_at": "2025-05-10T13:44:26.000000Z",
+          "updated_at": "2025-05-19T11:40:34.000000Z"
+        },
+        "doctor": {
+          "id": 32,
+          "name": "BS. Hệ thống ToiKhoe",
+          "services": "Tư vấn sức khỏe tự động",
+          "experience": 10,
+          "working_hours": "Thứ 2 - Thứ 7, 09:00 - 18:00",
+          "location": "Online",
+          "workplace": "ToiKhoe.net",
+          "phone": "0900000002",
+          "email": "doctor.bot@toikhoe.net",
+          "photo": null,
+          "status": "active",
+          "rating": null,
+          "consultation_fee": "0.00",
+          "bio": "Tài khoản hệ thống auto post",
+          "short_bio": null,
+          "api_token": "uRaijM4YZ7hZmDR2JONFShh5S9Xc7dzqEZeFB7lTZqeUUfcWWrNsij8akI2Vo9OmCr8HqEgtNxZFw8Fm",
+          "api_token_expires_at": null,
+          "last_api_access": null,
+          "points": 0,
+          "created_at": "2025-06-11T10:27:38.000000Z",
+          "updated_at": "2025-06-24T04:47:29.000000Z",
+          "total_commission": 0
+        },
+        "user": {
+          "id": 32,
+          "name": "DanielMuh",
+          "email": "Yancarloszocevudiduqu@gmail.com",
+          "phone": "81186863646",
+          "email_verified_at": null,
+          "photo": null,
+          "role": "user",
+          "provider": null,
+          "provider_id": null,
+          "status": "active",
+          "api_token": null,
+          "api_token_expires_at": null,
+          "last_api_access": null,
+          "created_at": "2025-06-08T08:52:21.000000Z",
+          "updated_at": "2025-06-08T08:52:21.000000Z",
+          "province": null,
+          "address": null,
+          "province_id": null
+        }
+      },
+      {
+        "id": 308,
+        "title": "7 Triệu Chứng Bệnh Tiểu Đường Ai Cũng Nên Biết Để Phòng Ngừa Hiệu Quả",
+        "slug": "7-trieu-chung-benh-tieu-duong-ai-cung-nen-biet-de-phong-ngua-hieu-qua",
+        "summary": "Tiểu đường là bệnh lý phổ biến ảnh hưởng lớn đến sức khỏe nếu không được kiểm soát kịp thời. Bài viết giúp bạn nhận biết 7 triệu chứng tiểu đường dễ bị bỏ qua để chủ động phòng ngừa và điều trị hiệu quả, bảo vệ sức khỏe lâu dài.",
+        "short_desc": null,
+        "description": "<p><p><strong>Tiểu đường</strong> là một bệnh lý chuyển hóa mãn tính ngày càng phổ biến trên toàn thế giới, trong đó triệu chứng thường âm thầm nhưng gây ra nhiều biến chứng nghiêm trọng nếu không phát hiện sớm. Việc hiểu rõ những dấu hiệu cảnh báo bệnh tiểu đường sẽ giúp bạn chủ động hơn trong việc thăm khám và điều trị.</p></p>\n<p><h3>1. Tiểu nhiều và khát nước liên tục</h3></p>\n<p><p>Nồng độ đường cao trong máu khiến thận phải lọc nhiều hơn để đào thải đường qua nước tiểu. Điều này dẫn đến hiện tượng <strong>tiểu nhiều, tiểu đêm</strong> và kéo theo cảm giác khát nước liên tục do cơ thể mất nước nhanh.</p></p>\n<p><h3>2. Mệt mỏi kéo dài</h3></p>\n<p><p>Khi glucose không được chuyển hóa hiệu quả, cơ thể thiếu năng lượng gây ra tình trạng <strong>mệt mỏi, uể oải</strong> dù ngủ đủ giấc. Đây là dấu hiệu khá phổ biến nhưng thường bị bỏ qua.</p></p>\n<p><h3>3. Giảm cân không giải thích được</h3></p>\n<p><p>Dù ăn bình thường hoặc ăn nhiều, người bệnh tiểu đường thường <strong>giảm cân nhanh chóng</strong> vì cơ thể không hấp thụ được glucose và bắt đầu sử dụng mỡ dự trữ làm nguồn năng lượng.</p></p>\n<p><h3>4. Vết thương lâu lành và nhiễm trùng tái phát</h3></p>\n<p><p>Đường huyết cao làm suy giảm hệ miễn dịch, khiến <strong>vết thương</strong> khó hồi phục, dễ bị nhiễm trùng và tái phát nhiều lần, đặc biệt ở chân và vùng da có tổn thương.</p></p>\n<p><h3>5. Thị lực giảm sút</h3></p>\n<p><p>Đường huyết cao ảnh hưởng đến cấu trúc mạch máu trong mắt gây ra hiện tượng <strong>mờ mắt, nhìn kém rõ hoặc thậm chí mất thị lực ở giai đoạn muộn</strong>. Đây là dấu hiệu cảnh báo bệnh tiểu đường nên được chú ý.</p></p>\n<p><h3>6. Ngứa da và khô da</h3></p>\n<p><p>Tình trạng <strong>da khô, ngứa ngáy</strong> kéo dài, đặc biệt là ở vùng chân, bàn tay có thể là dấu hiệu cảnh báo đường huyết cao ảnh hưởng đến tuần hoàn và sự thanh lọc của da.</p></p>\n<p><h3>7. Tê bì và đau nhức chân tay</h3></p>\n<p><p>Bệnh tiểu đường có thể gây tổn thương dây thần kinh ngoại vi, dẫn đến cảm giác <strong>tê bì, đau nhức hoặc kiến bò ở bàn chân, bàn tay</strong>. Đây là biểu hiện của biến chứng thần kinh do đường huyết không kiểm soát tốt.</p></p>\n<p><h3>Phòng ngừa và xử lý khi xuất hiện triệu chứng tiểu đường</h3></p>\n<p><p>Để bảo vệ sức khỏe, khi nhận thấy một hoặc nhiều dấu hiệu trên, bạn nên đến cơ sở y tế để kiểm tra đường huyết, nhận tư vấn điều trị kịp thời. Bên cạnh đó, duy trì chế độ ăn uống lành mạnh, tập luyện thể dục thường xuyên, kiểm soát cân nặng và không hút thuốc lá là những biện pháp quan trọng để phòng ngừa và kiểm soát tiểu đường hiệu quả.</p></p>\n<p><p>Nắm bắt sớm các triệu chứng tiểu đường không chỉ giúp phát hiện bệnh kịp thời mà còn góp phần hạn chế biến chứng nguy hiểm, nâng cao chất lượng cuộc sống.</p></p>\n<p><div class=\"source-info\"><p><em>Nguồn tham khảo: <a href=\"https://www.vinmec.com\" target=\"_blank\" rel=\"nofollow\">Vinmec</a></em></p></div></p>",
+        "quote": null,
+        "photo": "https://th.bing.com/th/id/R.74772eefab45fad6ac979ca570254a84?rik=9d8IEgOTLdbYrg&pid=ImgRaw&r=0",
+        "tags": "bệnh tiểu đường, triệu chứng tiểu đường, dấu hiệu tiểu đường, phòng ngừa tiểu đường, kiểm soát đường huyết",
+        "post_cat_id": "43",
+        "post_tag_id": null,
+        "added_by": "40",
+        "author_type": "user",
+        "status": "active",
+        "is_featured": false,
+        "created_at": "2025-06-26T10:23:41.000000Z",
+        "updated_at": "2025-07-28T20:55:48.000000Z",
+        "views": "11",
+        "post_type": "post",
+        "meta_data": {
+          "source_url": null,
+          "bot_type": "admin_bot",
+          "api_created": true,
+          "created_at_api": "2025-06-26T10:23:41.210821Z",
+          "auto_generated": true
+        },
+        "author_info": {
+          "id": 40,
+          "name": "ToiKhoe Admin",
+          "email": "admin.bot@toikhoe.net",
+          "phone": "0900000001",
+          "email_verified_at": null,
+          "photo": "https://codyhealth.s3.ap-southeast-2.amazonaws.com/imagesub/logo.png",
+          "role": "admin",
+          "provider": null,
+          "provider_id": null,
+          "status": "active",
+          "api_token": "suGhVmb5n4R1x09smeTvDl0oQ1vXVNwu5Qy4PPlCRj17PeLVme53ZGydg7odmstRMbFeSPteu6MZNDNQ",
+          "api_token_expires_at": null,
+          "last_api_access": null,
+          "created_at": "2025-06-11T10:27:37.000000Z",
+          "updated_at": "2025-06-11T10:27:37.000000Z",
+          "province": null,
+          "address": null,
+          "province_id": null
+        },
+        "category": {
+          "id": 43,
+          "name": "Khoa Nội tiết",
+          "slug": "khoa-nội-tiết",
+          "type": "other",
+          "parent_id": null,
+          "icon": "frontend/img/icons/endocrine-system.png",
+          "status": "active",
+          "display_order": "0",
+          "summary": null,
+          "photo": null,
+          "created_at": "2025-05-10T13:44:26.000000Z",
+          "updated_at": "2025-05-19T11:40:27.000000Z"
+        },
+        "doctor": null,
+        "user": {
+          "id": 40,
+          "name": "ToiKhoe Admin",
+          "email": "admin.bot@toikhoe.net",
+          "phone": "0900000001",
+          "email_verified_at": null,
+          "photo": "https://codyhealth.s3.ap-southeast-2.amazonaws.com/imagesub/logo.png",
+          "role": "admin",
+          "provider": null,
+          "provider_id": null,
+          "status": "active",
+          "api_token": "suGhVmb5n4R1x09smeTvDl0oQ1vXVNwu5Qy4PPlCRj17PeLVme53ZGydg7odmstRMbFeSPteu6MZNDNQ",
+          "api_token_expires_at": null,
+          "last_api_access": null,
+          "created_at": "2025-06-11T10:27:37.000000Z",
+          "updated_at": "2025-06-11T10:27:37.000000Z",
+          "province": null,
+          "address": null,
+          "province_id": null
+        }
+      },
+      {
+        "id": 307,
+        "title": "Giải Pháp Hiệu Quả Cho Trẻ Bị Viêm Mũi Dị Ứng và Viêm Tai Mũi Họng Do Virus, Vi Khuẩn",
+        "slug": "giai-phap-hieu-qua-cho-tre-bi-viem-mui-di-ung-va-viem-tai-mui-hong-do-virus-vi-khuan",
+        "summary": "Viêm mũi dị ứng và viêm tai mũi họng do virus, vi khuẩn là bệnh lý phổ biến ở trẻ nhỏ, ảnh hưởng đến sức khỏe và sinh hoạt hàng ngày. Hiểu rõ nguyên nhân và áp dụng giải pháp điều trị phù hợp giúp hỗ trợ nhanh chóng cải thiện triệu chứng, phòng ngừa biến chứng nguy hiểm.",
+        "short_desc": null,
+        "description": "<p><p><strong>Viêm mũi dị ứng và viêm tai mũi họng do virus, vi khuẩn</strong> là tình trạng bệnh lý phổ biến ở trẻ em, đặc biệt trong những thời điểm giao mùa hoặc khi trẻ tiếp xúc với môi trường có nhiều yếu tố kích thích. Các bệnh lý này không chỉ gây khó chịu, ảnh hưởng đến giấc ngủ, ăn uống của trẻ mà còn tiềm ẩn nguy cơ dẫn đến các biến chứng nguy hiểm nếu không được xử trí đúng cách.</p></p>\n<p><h3>Nguyên nhân gây viêm mũi dị ứng và viêm tai mũi họng ở trẻ</h3></p>\n<p><p>Viêm mũi dị ứng xuất phát từ phản ứng quá mẫn cảm của hệ miễn dịch trước các dị nguyên như phấn hoa, bụi nhà, lông động vật hay các chất khí độc hại. Tình trạng này gây ra viêm niêm mạc mũi, làm trẻ ngạt mũi, hắt hơi, chảy nước mũi kéo dài.</p></p>\n<p><p>Trong khi đó, viêm tai mũi họng thường do nhiễm trùng bởi virus hoặc vi khuẩn. Vi khuẩn như Streptococcus, Haemophilus influenzae hay virus đường hô hấp—virus cúm, virus hợp bào hô hấp—là thủ phạm chính tạo điều kiện viêm nhiễm tại mũi, họng và tai. Trẻ nhỏ vì hệ miễn dịch chưa hoàn thiện dễ bị ảnh hưởng hơn người lớn.</p></p>\n<p><h3>Triệu chứng nhận biết và tác hại cần lưu ý</h3></p>\n<p><ul></p>\n<p><li>Chảy nước mũi, ngạt mũi kéo dài, hắt hơi nhiều lần</li></p>\n<p><li>Ngứa mũi, nhức mũi hoặc đau họng</li></p>\n<p><li>Ho khan hoặc ho có đờm, sốt nhẹ đến sốt cao</li></p>\n<p><li>Trẻ quấy khóc, biếng ăn, mệt mỏi</li></p>\n<p><li>Trong trường hợp viêm tai, trẻ có thể đau tai, nghe kém hoặc chảy dịch tai</li></p>\n<p></ul></p>\n<p><p>Nếu không được điều trị kịp thời, viêm mũi dị ứng và viêm tai mũi họng do virus, vi khuẩn có thể dẫn đến viêm xoang, viêm tai giữa mạn tính, viêm phổi hoặc ảnh hưởng đến sự phát triển về thính lực và hô hấp của trẻ.</p></p>\n<p><h3>Giải pháp điều trị và phòng ngừa hiệu quả</h3></p>\n<p><p><strong>Điều trị viêm mũi dị ứng</strong> chủ yếu tập trung vào việc tránh tiếp xúc với các tác nhân gây dị ứng. Sử dụng thuốc chống dị ứng (thuốc kháng histamin, corticosteroid xịt mũi) theo chỉ định bác sĩ giúp giảm triệu chứng nhanh chóng và an toàn. Ngoài ra, duy trì vệ sinh môi trường sạch sẽ, giữ ẩm không khí và vệ sinh mũi hàng ngày cũng hỗ trợ hiệu quả trong việc kiểm soát bệnh.</p></p>\n<p><p><strong>Điều trị viêm tai mũi họng do virus, vi khuẩn</strong> bao gồm:</p></p>\n<p><ul></p>\n<p><li>Phân biệt nguyên nhân virus hay vi khuẩn để sử dụng kháng sinh hợp lý (nếu do vi khuẩn)</li></p>\n<p><li>Sử dụng thuốc giảm sốt, giảm đau an toàn cho trẻ</li></p>\n<p><li>Cho trẻ nghỉ ngơi, uống nhiều nước và ăn uống đủ dinh dưỡng để tăng cường sức đề kháng</li></p>\n<p></ul></p>\n<p><p>Trong trường hợp viêm tai giữa, cần theo dõi tiến triển và phối hợp với bác sĩ chuyên khoa tai mũi họng để tránh các biến chứng nặng nề. Không tự ý dùng thuốc kháng sinh hoặc thuốc nhỏ tai nếu chưa có hướng dẫn của bác sĩ.</p></p>\n<p><h3>Lưu ý chăm sóc và theo dõi tại nhà</h3></p>\n<p><p>Phụ huynh cần chú ý giữ vệ sinh răng miệng, vệ sinh mũi họng cho trẻ bằng nước muối sinh lý để làm sạch dịch tiết, giảm viêm nhiễm. Hạn chế cho trẻ tiếp xúc với khói thuốc lá, bụi bẩn hoặc các môi trường ô nhiễm.</p></p>\n<p><p>Một chế độ dinh dưỡng lành mạnh giàu vitamin C, kẽm giúp tăng cường miễn dịch, đồng thời giữ cho môi trường sống sạch sẽ, thoáng mát giúp phòng tránh tái phát hoặc bùng phát bệnh.</p></p>\n<p><p>Việc chủ động thăm khám bác sĩ khi trẻ có dấu hiệu bệnh kéo dài hoặc nặng hơn sẽ giúp phát hiện kịp thời và xử lý đúng cách, hạn chế các biến chứng nguy hiểm. Đặc biệt, đối với trẻ hay mắc viêm mũi dị ứng, biện pháp phòng ngừa như tiêm phòng các loại vaccine và xây dựng môi trường sống lành mạnh là rất cần thiết.</p></p>\n<p><p><strong>Kết luận,</strong> viêm mũi dị ứng và viêm tai mũi họng do virus, vi khuẩn là những bệnh lý thường gặp ở trẻ nhỏ nhưng hoàn toàn có thể kiểm soát nếu áp dụng giải pháp điều trị phù hợp và chăm sóc đúng cách. Việc hiểu rõ triệu chứng, nguyên nhân cũng như tuân thủ hướng dẫn y tế sẽ góp phần bảo vệ sức khỏe hệ hô hấp và đường tai mũi họng của trẻ hiệu quả.</p></p>\n<p><div class=\"source-info\"><p><em>Nguồn tham khảo: <a href=\"https://news.google.com/rss/articles/CBMivgFBVV95cUxPMEZucFY2SFdkUDRUQ0dsdndCLWpIcmd5X0pxa1hIcmRFMDh5OTgySlJFeXZiOUZsZm1WQ0szeENta1o0dlBmN3RFcF9NRnVocnlZMTNQcDl2YUF1eXdFSm41MjVDVHZHQkF0S0pXT0w3U296QTEyallsdGlKZm5MZi1qeXJnUHI0RFo5UGJ1dENnTktRS1F5OElYWExGci1OUFFES1Z1MHFjTHRTdkxSYVlYOGVraG9sVGxsZ1JB?oc=5\" target=\"_blank\" rel=\"nofollow\">Báo Sức Khỏe và Đời Sống</a></em></p></div></p>",
+        "quote": null,
+        "photo": "https://benhvienthienduc.vn/media/data/20191007_085059_834362_nguyennhanviemxo.max1800x18001.jpg",
+        "tags": "viêm mũi dị ứng trẻ em, viêm tai mũi họng, viêm tai do vi khuẩn, bệnh hô hấp trẻ em, điều trị viêm mũi dị ứng",
+        "post_cat_id": "46",
+        "post_tag_id": null,
+        "added_by": "40",
+        "author_type": "user",
+        "status": "active",
+        "is_featured": false,
+        "created_at": "2025-06-26T10:20:37.000000Z",
+        "updated_at": "2025-07-28T20:15:16.000000Z",
+        "views": "10",
+        "post_type": "post",
+        "meta_data": {
+          "source_url": null,
+          "bot_type": "admin_bot",
+          "api_created": true,
+          "created_at_api": "2025-06-26T10:20:37.679002Z",
+          "auto_generated": true
+        },
+        "author_info": {
+          "id": 40,
+          "name": "ToiKhoe Admin",
+          "email": "admin.bot@toikhoe.net",
+          "phone": "0900000001",
+          "email_verified_at": null,
+          "photo": "https://codyhealth.s3.ap-southeast-2.amazonaws.com/imagesub/logo.png",
+          "role": "admin",
+          "provider": null,
+          "provider_id": null,
+          "status": "active",
+          "api_token": "suGhVmb5n4R1x09smeTvDl0oQ1vXVNwu5Qy4PPlCRj17PeLVme53ZGydg7odmstRMbFeSPteu6MZNDNQ",
+          "api_token_expires_at": null,
+          "last_api_access": null,
+          "created_at": "2025-06-11T10:27:37.000000Z",
+          "updated_at": "2025-06-11T10:27:37.000000Z",
+          "province": null,
+          "address": null,
+          "province_id": null
+        },
+        "category": {
+          "id": 46,
+          "name": "Khoa Truyền nhiễm",
+          "slug": "khoa-truyền-nhiễm",
+          "type": "other",
+          "parent_id": null,
+          "icon": "frontend/img/icons/coronavirus.png",
+          "status": "active",
+          "display_order": "0",
+          "summary": null,
+          "photo": null,
+          "created_at": "2025-05-10T13:44:26.000000Z",
+          "updated_at": "2025-05-19T11:40:31.000000Z"
+        },
+        "doctor": null,
+        "user": {
+          "id": 40,
+          "name": "ToiKhoe Admin",
+          "email": "admin.bot@toikhoe.net",
+          "phone": "0900000001",
+          "email_verified_at": null,
+          "photo": "https://codyhealth.s3.ap-southeast-2.amazonaws.com/imagesub/logo.png",
+          "role": "admin",
+          "provider": null,
+          "provider_id": null,
+          "status": "active",
+          "api_token": "suGhVmb5n4R1x09smeTvDl0oQ1vXVNwu5Qy4PPlCRj17PeLVme53ZGydg7odmstRMbFeSPteu6MZNDNQ",
+          "api_token_expires_at": null,
+          "last_api_access": null,
+          "created_at": "2025-06-11T10:27:37.000000Z",
+          "updated_at": "2025-06-11T10:27:37.000000Z",
+          "province": null,
+          "address": null,
+          "province_id": null
+        }
+      },
+      {
+        "id": 306,
+        "title": "Hôn Người Đang Ủ Bệnh Dại Có Lây Virus Dại Không? Giải Đáp Từ Chuyên Gia Y Tế",
+        "slug": "stronghon-nguoi-dang-u-benh-dai-co-lay-virus-dai-khong-giai-dap-tu-chuyen-gia-y-testrong",
+        "summary": "<p>Tìm hiểu liệu việc hôn người đang trong giai đoạn ủ bệnh dại có làm tăng nguy cơ lây truyền virus dại hay không. Bài viết cung cấp thông tin y khoa chính xác về đường lây và cách phòng tránh bệnh dại hiệu quả.</p>",
+        "short_desc": null,
+        "description": "<p><p><strong>Bệnh dại</strong> là một căn bệnh truyền nhiễm nguy hiểm do virus dại gây ra, thường lây qua vết cắn của động vật mang virus. Tuy nhiên, nhiều người thắc mắc liệu việc hôn người đang trong giai đoạn <strong>ủ bệnh dại</strong> có thể dẫn tới lây nhiễm hay không. Để giải đáp thắc mắc này, chúng ta cần hiểu về cách thức lây truyền và cơ chế phát triển của virus dại.</p></p>\n<p><h3>Virus dại lây truyền qua những đường nào?</h3></p>\n<p><p>Virus dại chủ yếu lây truyền qua:</p></p>\n<p><ul></p>\n<p><li>Vết cắn hoặc vết xước bị động vật mang virus như chó, mèo hoang, dơi cắn.</li></p>\n<p><li>Tiếp xúc trực tiếp với nước bọt hoặc mô thần kinh của động vật nhiễm virus qua các tổn thương trên da hoặc niêm mạc hở.</li></p>\n<p><li>Hiếm gặp: lây qua đường hô hấp hoặc ghép mô ở người.</li></p>\n<p></ul></p>\n<p><p>Trong đó, con đường phổ biến nhất và dễ gây nhiễm nhất là bị cắn bởi động vật chứa virus dại.</p></p>\n<p><h3>Giai đoạn ủ bệnh dại và nguy cơ lây nhiễm khi hôn</h3></p>\n<p><p>Giai đoạn ủ bệnh là khoảng thời gian sau khi virus xâm nhập vào cơ thể nhưng chưa có biểu hiện triệu chứng rõ ràng, có thể kéo dài từ vài tuần đến vài tháng. Trong thời gian này, virus chủ yếu nhân lên và di chuyển đến hệ thần kinh trung ương.</p></p>\n<p><p>Đáng chú ý, trong thời gian ủ bệnh, người bệnh thường không có virus trong nước bọt, do đó nguy cơ lây truyền qua tiếp xúc như <strong>hôn người đang ủ bệnh dại</strong> là rất thấp hoặc gần như không xảy ra. Virus dại có thể phát tán trong nước bọt khi người bệnh đã xuất hiện các dấu hiệu lâm sàng rõ rệt như sợ nước, khó nuốt, tăng tiết nước bọt.</p></p>\n<p><h3>Cần lưu ý gì để phòng ngừa bệnh dại?</h3></p>\n<p><p>Mặc dù khả năng lây truyền virus dại qua đường hôn trong giai đoạn ủ bệnh gần như không có, nhưng người dân vẫn cần nâng cao cảnh giác, đặc biệt khi tiếp xúc với người hoặc động vật nghi ngờ nhiễm virus dại.</p></p>\n<p><ul></p>\n<p><li>Không tiếp xúc gần với động vật hoang hoặc có dấu hiệu lạ, tránh bị cắn hoặc trầy xước da.</li></p>\n<p><li>Vệ sinh vết thương ngay lập tức bằng xà phòng và nước sạch khi bị động vật cắn hoặc xây xát.</li></p>\n<p><li>Tiêm phòng dại dự phòng nếu sống hoặc làm việc trong vùng có nguy cơ cao.</li></p>\n<p><li>Nếu xuất hiện dấu hiệu nghi ngờ hoặc bị vật nuôi nghi nhiễm cắn, hãy đi khám và được tư vấn tiêm vaccine dại kịp thời.</li></p>\n<p></ul></p>\n<p><h3>Kết luận</h3></p>\n<p><p>Việc <strong>hôn người đang ủ bệnh dại</strong> về cơ bản không làm tăng nguy cơ mắc bệnh dại do virus chưa có mặt trong nước bọt ở giai đoạn này. Tuy nhiên, khi người bệnh đã có triệu chứng rõ, virus có thể lan truyền qua nước bọt, làm gia tăng nguy cơ lây nhiễm qua tiếp xúc gần. Để bảo vệ sức khỏe, cần tuân thủ các biện pháp phòng ngừa an toàn và chủ động tiêm phòng dại đúng cách.</p></p>\n<p><div class=\"source-info\"><p><em>Nguồn tham khảo: <a href=\"https://news.google.com/rss/articles/CBMihgFBVV95cUxQZ21lQ0F1RzRSWlFNa3RFNHBYR2xYZm5aZTlQeXRDdThmTHI3bWNCOTZ6ejlVNEVwUm8xMllEMjhOclhLYjNXbVl1SXlwY0Rhb1pRMUZJSHE0M0xmUGRTbl91YUZMZTAwN2xaVVMyLUc3S284WWU1R28tRzhwRWNZdW9HRTJYUQ?oc=5\" target=\"_blank\" rel=\"nofollow\">VnExpress</a></em></p></div></p>",
+        "quote": null,
+        "photo": "https://cdn.nhathuoclongchau.com.vn/unsafe/800x0/filters:quality(95)/https://cms-prod.s3-sgn09.fptcloud.com/benh_dai_co_chua_duoc_khong_2_6ea82ae4f1.jpg",
+        "tags": "bệnh dại, virus dại, lây truyền bệnh dại, hôn có lây virus dại không, phòng ngừa bệnh dại",
+        "post_cat_id": "46",
+        "post_tag_id": null,
+        "added_by": "40",
+        "author_type": "user",
+        "status": "active",
+        "is_featured": false,
+        "created_at": "2025-06-26T10:20:37.000000Z",
+        "updated_at": "2025-07-28T19:28:11.000000Z",
+        "views": "15",
+        "post_type": "post",
+        "meta_data": {
+          "source_url": null,
+          "bot_type": "admin_bot",
+          "api_created": true,
+          "created_at_api": "2025-06-26T10:20:37.666592Z",
+          "auto_generated": true
+        },
+        "author_info": {
+          "id": 40,
+          "name": "ToiKhoe Admin",
+          "email": "admin.bot@toikhoe.net",
+          "phone": "0900000001",
+          "email_verified_at": null,
+          "photo": "https://codyhealth.s3.ap-southeast-2.amazonaws.com/imagesub/logo.png",
+          "role": "admin",
+          "provider": null,
+          "provider_id": null,
+          "status": "active",
+          "api_token": "suGhVmb5n4R1x09smeTvDl0oQ1vXVNwu5Qy4PPlCRj17PeLVme53ZGydg7odmstRMbFeSPteu6MZNDNQ",
+          "api_token_expires_at": null,
+          "last_api_access": null,
+          "created_at": "2025-06-11T10:27:37.000000Z",
+          "updated_at": "2025-06-11T10:27:37.000000Z",
+          "province": null,
+          "address": null,
+          "province_id": null
+        },
+        "category": {
+          "id": 46,
+          "name": "Khoa Truyền nhiễm",
+          "slug": "khoa-truyền-nhiễm",
+          "type": "other",
+          "parent_id": null,
+          "icon": "frontend/img/icons/coronavirus.png",
+          "status": "active",
+          "display_order": "0",
+          "summary": null,
+          "photo": null,
+          "created_at": "2025-05-10T13:44:26.000000Z",
+          "updated_at": "2025-05-19T11:40:31.000000Z"
+        },
+        "doctor": null,
+        "user": {
+          "id": 40,
+          "name": "ToiKhoe Admin",
+          "email": "admin.bot@toikhoe.net",
+          "phone": "0900000001",
+          "email_verified_at": null,
+          "photo": "https://codyhealth.s3.ap-southeast-2.amazonaws.com/imagesub/logo.png",
+          "role": "admin",
+          "provider": null,
+          "provider_id": null,
+          "status": "active",
+          "api_token": "suGhVmb5n4R1x09smeTvDl0oQ1vXVNwu5Qy4PPlCRj17PeLVme53ZGydg7odmstRMbFeSPteu6MZNDNQ",
+          "api_token_expires_at": null,
+          "last_api_access": null,
+          "created_at": "2025-06-11T10:27:37.000000Z",
+          "updated_at": "2025-06-11T10:27:37.000000Z",
+          "province": null,
+          "address": null,
+          "province_id": null
+        }
+      },
+      {
+        "id": 305,
+        "title": "Giải pháp ly giải vi khuẩn hiệu quả trong phòng ngừa nhiễm khuẩn tai mũi họng ở trẻ em",
+        "slug": "giai-phap-ly-giai-vi-khuan-hieu-qua-trong-phong-ngua-nhiem-khuan-tai-mui-hong-o-tre-em",
+        "summary": "Ly giải vi khuẩn là phương pháp hỗ trợ quan trọng trong việc phòng ngừa nhiễm khuẩn tai mũi họng ở trẻ nhỏ. Việc tiêu diệt vi khuẩn gây hại giúp giảm nguy cơ viêm nhiễm, cải thiện sức khỏe đường hô hấp và tăng cường miễn dịch cho trẻ một cách an toàn, hiệu quả.",
+        "short_desc": null,
+        "description": "<p><p>Nhiễm khuẩn tai mũi họng là một trong những bệnh lý phổ biến ở trẻ nhỏ, ảnh hưởng trực tiếp đến sức khỏe và sự phát triển toàn diện. Việc phòng ngừa các bệnh lý này từ giai đoạn đầu đóng vai trò rất quan trọng để tránh các biến chứng nguy hiểm như viêm tai giữa, viêm họng mãn tính hay viêm xoang kéo dài. </p></p>\n<p><h3>Ly giải vi khuẩn là gì và vai trò trong phòng ngừa nhiễm khuẩn</h3></p>\n<p><p><strong>Ly giải vi khuẩn</strong> là quá trình tiêu diệt hoặc phá hủy cấu trúc vi khuẩn để ngăn chặn sự phát triển và lan rộng của vi khuẩn gây bệnh. Đây là một bước quan trọng trong việc kiểm soát các tác nhân gây viêm nhiễm tai mũi họng, từ đó giúp bảo vệ đường hô hấp cho trẻ nhỏ.</p></p>\n<p><p>Phương pháp này dựa trên việc sử dụng các chế phẩm có khả năng phá vỡ màng tế bào vi khuẩn hoặc kích hoạt hệ miễn dịch, giúp loại bỏ hiệu quả các chủng vi khuẩn phổ biến như Streptococcus, Haemophilus influenzae và Moraxella catarrhalis.</p></p>\n<p><h3>Lợi ích khi áp dụng giải pháp ly giải vi khuẩn cho trẻ em</h3></p>\n<p><ul></p>\n<p><li><strong>Giảm nguy cơ viêm tai mũi họng:</strong> Ly giải vi khuẩn loại bỏ tác nhân gây bệnh, giúp hạn chế các đợt viêm nhiễm tái phát.</li></p>\n<p><li><strong>Tăng khả năng miễn dịch:</strong> Khi vi khuẩn bị phá hủy, hệ miễn dịch của trẻ được kích hoạt, tăng cường khả năng chống lại các tác nhân gây bệnh tiếp theo.</li></p>\n<p><li><strong>An toàn, ít tác dụng phụ:</strong> Việc sử dụng các sản phẩm hỗ trợ ly giải vi khuẩn đều tuân thủ nguyên tắc an toàn, không gây tổn hại cho niêm mạc tai mũi họng của trẻ.</li></p>\n<p><li><strong>Giúp cải thiện sức khỏe tổng thể:</strong> Phòng ngừa viêm nhiễm tái phát đồng nghĩa với việc trẻ phát triển khỏe mạnh hơn, hạn chế bệnh tật kéo dài.</li></p>\n<p></ul></p>\n<p><h3>Phương pháp và sản phẩm hỗ trợ ly giải vi khuẩn</h3></p>\n<p><p>Hiện nay, trên thị trường có nhiều sản phẩm hỗ trợ ly giải vi khuẩn được bào chế dưới dạng dung dịch nhỏ, xịt hoặc viên ngậm dành cho trẻ em. Những sản phẩm này thường chứa các thành phần tự nhiên hoặc dược liệu có khả năng:</p></p>\n<p><ul></p>\n<p><li>Phá vỡ màng tế bào vi khuẩn</li></p>\n<p><li>Kích thích miễn dịch tại chỗ </li></p>\n<p><li>Tăng cường sức đề kháng hệ hô hấp trên</li></p>\n<p></ul></p>\n<p><p>Bên cạnh việc sử dụng sản phẩm hỗ trợ, bố mẹ cũng cần chú ý vệ sinh tai mũi họng đúng cách, giữ vệ sinh môi trường sống, và đưa trẻ đi khám kịp thời khi có dấu hiệu viêm nhiễm để phòng ngừa hiệu quả.</p></p>\n<p><h3>Lưu ý khi lựa chọn và sử dụng các giải pháp ly giải vi khuẩn cho trẻ</h3></p>\n<p><p>Để đảm bảo an toàn và hiệu quả, phụ huynh cần lưu ý một số điểm sau:</p></p>\n<p><ul></p>\n<p><li>Chọn sản phẩm có nguồn gốc rõ ràng, được cấp phép lưu hành tại Việt Nam</li></p>\n<p><li>Tuân thủ đúng hướng dẫn sử dụng, liều lượng của bác sĩ hoặc nhà sản xuất</li></p>\n<p><li>Không tự ý kết hợp nhiều sản phẩm để tránh tương tác không mong muốn</li></p>\n<p><li>Quan sát kỹ tình trạng trẻ trong quá trình sử dụng, nếu có dấu hiệu bất thường cần ngưng dùng và liên hệ bác sĩ</li></p>\n<p></ul></p>\n<p><p>Tóm lại, ly giải vi khuẩn là giải pháp hỗ trợ hữu hiệu giúp phòng ngừa nhiễm khuẩn tai mũi họng, đặc biệt quan trọng với trẻ nhỏ do hệ miễn dịch đang phát triển. Sự kết hợp giữa biện pháp này với chăm sóc sức khỏe đúng cách sẽ đảm bảo trẻ được bảo vệ toàn diện, hạn chế nguy cơ mắc các bệnh nhiễm trùng đường hô hấp trên.</p></p>\n<p><div class=\"source-info\"><p><em>Nguồn tham khảo: <a href=\"https://news.google.com/rss/articles/CBMizgFBVV95cUxQZ2xTay1NbEtlMWlvTjVRcHlXWlZEZnpDOG1qMkFOUFpVUV8xdlBDc1pzZUhRSjhVRnhSczQzVERuX1NrWkxyN1dDbC1UWW82QmhkdnhTeXU0TnNkRHdkNUZHUmRhYnZWbi0yTl9VQmVoZ2Ywd19kdHd0YXRac01maU9mZzN6bEZDWFJGZVppUlRKQ3BQVFBFTFRqODlsa1FtTTd4Tm1Oc1RpYU5TT3pWWkt5MUlWanhIbHU3WkFwSFFmU281VTBEZThGcWcwQQ?oc=5\" target=\"_blank\" rel=\"nofollow\">Tên website</a></em></p></div></p>",
+        "quote": null,
+        "photo": "https://suckhoedoisong.qltns.mediacdn.vn/zoom/600_315/324455921873985536/2024/3/8/image-1709887198252504186898-24-0-316-468-crop-1709887203939128254543.png",
+        "tags": "ly giải vi khuẩn, nhiễm khuẩn tai mũi họng, phòng ngừa viêm tai mũi họng, sức khỏe trẻ em, vi khuẩn đường hô hấp",
+        "post_cat_id": "46",
+        "post_tag_id": null,
+        "added_by": "32",
+        "author_type": "doctor",
+        "status": "active",
+        "is_featured": false,
+        "created_at": "2025-06-26T10:20:37.000000Z",
+        "updated_at": "2025-07-25T12:49:40.000000Z",
+        "views": "5",
+        "post_type": "post",
+        "meta_data": {
+          "source_url": null,
+          "bot_type": "doctor_bot",
+          "api_created": true,
+          "created_at_api": "2025-06-26T10:20:37.405545Z",
+          "auto_generated": true
+        },
+        "author_info": {
+          "id": 32,
+          "name": "BS. Hệ thống ToiKhoe",
+          "services": "Tư vấn sức khỏe tự động",
+          "experience": 10,
+          "working_hours": "Thứ 2 - Thứ 7, 09:00 - 18:00",
+          "location": "Online",
+          "workplace": "ToiKhoe.net",
+          "phone": "0900000002",
+          "email": "doctor.bot@toikhoe.net",
+          "photo": null,
+          "status": "active",
+          "rating": null,
+          "consultation_fee": "0.00",
+          "bio": "Tài khoản hệ thống auto post",
+          "short_bio": null,
+          "api_token": "uRaijM4YZ7hZmDR2JONFShh5S9Xc7dzqEZeFB7lTZqeUUfcWWrNsij8akI2Vo9OmCr8HqEgtNxZFw8Fm",
+          "api_token_expires_at": null,
+          "last_api_access": null,
+          "points": 0,
+          "created_at": "2025-06-11T10:27:38.000000Z",
+          "updated_at": "2025-06-24T04:47:29.000000Z",
+          "total_commission": 0
+        },
+        "category": {
+          "id": 46,
+          "name": "Khoa Truyền nhiễm",
+          "slug": "khoa-truyền-nhiễm",
+          "type": "other",
+          "parent_id": null,
+          "icon": "frontend/img/icons/coronavirus.png",
+          "status": "active",
+          "display_order": "0",
+          "summary": null,
+          "photo": null,
+          "created_at": "2025-05-10T13:44:26.000000Z",
+          "updated_at": "2025-05-19T11:40:31.000000Z"
+        },
+        "doctor": {
+          "id": 32,
+          "name": "BS. Hệ thống ToiKhoe",
+          "services": "Tư vấn sức khỏe tự động",
+          "experience": 10,
+          "working_hours": "Thứ 2 - Thứ 7, 09:00 - 18:00",
+          "location": "Online",
+          "workplace": "ToiKhoe.net",
+          "phone": "0900000002",
+          "email": "doctor.bot@toikhoe.net",
+          "photo": null,
+          "status": "active",
+          "rating": null,
+          "consultation_fee": "0.00",
+          "bio": "Tài khoản hệ thống auto post",
+          "short_bio": null,
+          "api_token": "uRaijM4YZ7hZmDR2JONFShh5S9Xc7dzqEZeFB7lTZqeUUfcWWrNsij8akI2Vo9OmCr8HqEgtNxZFw8Fm",
+          "api_token_expires_at": null,
+          "last_api_access": null,
+          "points": 0,
+          "created_at": "2025-06-11T10:27:38.000000Z",
+          "updated_at": "2025-06-24T04:47:29.000000Z",
+          "total_commission": 0
+        },
+        "user": {
+          "id": 32,
+          "name": "DanielMuh",
+          "email": "Yancarloszocevudiduqu@gmail.com",
+          "phone": "81186863646",
+          "email_verified_at": null,
+          "photo": null,
+          "role": "user",
+          "provider": null,
+          "provider_id": null,
+          "status": "active",
+          "api_token": null,
+          "api_token_expires_at": null,
+          "last_api_access": null,
+          "created_at": "2025-06-08T08:52:21.000000Z",
+          "updated_at": "2025-06-08T08:52:21.000000Z",
+          "province": null,
+          "address": null,
+          "province_id": null
+        }
+      },
+      {
+        "id": 298,
+        "title": "Bí Quyết Duy Trì Sức Khỏe Toàn Diện: Những Điều Người Việt Nên Biết",
+        "slug": "bi-quyet-duy-tri-suc-khoe-toan-dien-nhung-dieu-nguoi-viet-nen-biet",
+        "summary": "Duy trì sức khỏe toàn diện đóng vai trò quan trọng trong cuộc sống hiện đại. Bài viết phân tích chi tiết cách chăm sóc sức khỏe hiệu quả, từ chế độ dinh dưỡng, vận động đến quản lý stress, giúp người Việt nâng cao chất lượng cuộc sống. Tìm hiểu ngay các mẹo chăm sóc sức khỏe chuẩn xác, khoa học và dễ áp dụng.",
+        "short_desc": null,
+        "description": "<p><p>Trong bối cảnh cuộc sống ngày càng bận rộn và áp lực, việc duy trì <strong>sức khỏe toàn diện</strong> trở thành ưu tiên hàng đầu của mọi người, đặc biệt là người Việt. Bài viết dưới đây sẽ cung cấp những kiến thức cơ bản và thiết thực về chăm sóc sức khỏe một cách hiệu quả, giúp bạn xây dựng lối sống lành mạnh và phòng tránh các bệnh lý phổ biến.</p></p>\n<p><h3>1. Vai Trò Quan Trọng Của Chế Độ Dinh Dưỡng Đa Dạng</h3></p>\n<p><p>Chế độ ăn uống hợp lý là nền tảng để duy trì sức khỏe bền lâu. Người Việt nên chú trọng vào việc cân bằng các nhóm thực phẩm chính:</p></p>\n<p><ul></p>\n<p><li><strong>Carbohydrate:</strong> nguồn năng lượng chủ yếu, ưu tiên ngũ cốc nguyên hạt, cơm gạo lứt.</li></p>\n<p><li><strong>Protein:</strong> giúp tăng cường cơ bắp và tế bào, bao gồm cá, thịt gia cầm, đậu nành và các loại hạt.</li></p>\n<p><li><strong>Chất béo lành mạnh:</strong> có trong dầu oliu, dầu cá, giúp bảo vệ tim mạch.</li></p>\n<p><li><strong>Vitamin và khoáng chất:</strong> từ rau xanh, trái cây tươi hỗ trợ chức năng miễn dịch và chống oxy hóa.</li></p>\n<p><li><strong>Hạn chế đường và muối:</strong> giảm nguy cơ mắc bệnh tiểu đường, tăng huyết áp và các bệnh mãn tính.</li></p>\n<p></ul></p>\n<p><h3>2. Vận Động Thường Xuyên Giúp Cơ Thể Khỏe Mạnh</h3></p>\n<p><p>Hoạt động thể chất đóng vai trò thiết yếu trong việc cải thiện sức khỏe tim mạch, điều hòa huyết áp và tăng cường sức đề kháng. Người Việt nên dành ít nhất 30 phút mỗi ngày cho các bài tập như:</p></p>\n<p><ul></p>\n<p><li>Đi bộ nhanh hoặc chạy bộ nhẹ nhàng.</li></p>\n<p><li>Tham gia yoga hoặc các bài tập giãn cơ.</li></p>\n<p><li>Thể dục nhịp điệu hoặc khiêu vũ.</li></p>\n<p></ul></p>\n<p><p>Thói quen vận động đều đặn còn giúp giảm thiểu căng thẳng, cải thiện giấc ngủ và duy trì cân nặng ổn định.</p></p>\n<p><h3>3. Quản Lý Stress và Giấc Ngủ Chất Lượng</h3></p>\n<p><p><strong>Stress kéo dài</strong> là nguyên nhân tiềm ẩn gây ra nhiều bệnh lý nghiêm trọng, từ rối loạn tiêu hóa đến các vấn đề về tim mạch. Vì thế, việc kiểm soát stress thông qua các phương pháp như thiền, tập thở sâu hoặc các hoạt động giải trí là rất cần thiết.</p></p>\n<p><p>Bên cạnh đó, giấc ngủ đóng vai trò quan trọng trong việc phục hồi năng lượng và duy trì chức năng não bộ. Người lớn nên cố gắng ngủ đủ từ 7 đến 8 giờ mỗi đêm để đạt được hiệu quả tối ưu.</p></p>\n<p><h3>4. Tầm Quan Trọng Của Khám Sức Khỏe Định Kỳ</h3></p>\n<p><p>Kiểm tra sức khỏe thường xuyên giúp phát hiện sớm các dấu hiệu bệnh lý, từ đó nâng cao khả năng điều trị thành công và giảm thiểu rủi ro. Người Việt nên thực hiện các xét nghiệm cơ bản ít nhất 1-2 lần mỗi năm, bao gồm:</p></p>\n<p><ul></p>\n<p><li>Đo huyết áp.</li></p>\n<p><li>Xét nghiệm máu tổng quát.</li></p>\n<p><li>Kiểm tra mức đường huyết và cholesterol.</li></p>\n<p><li>Khám sức khỏe riêng biệt theo độ tuổi và giới tính.</li></p>\n<p></ul></p>\n<p><h3>Kết Luận</h3></p>\n<p><p>Duy trì sức khỏe toàn diện đòi hỏi sự kết hợp hài hòa giữa chế độ dinh dưỡng hợp lý, vận động đều đặn, quản lý stress hiệu quả và khám sức khỏe định kỳ. Việc xây dựng thói quen lành mạnh không chỉ giúp giảm thiểu nguy cơ mắc bệnh mà còn nâng cao chất lượng cuộc sống cho người Việt trong mọi giai đoạn.</p></p>\n<p><div class=\"source-info\"><p><em>Nguồn tham khảo: <a href=\"https://suckhoeviet.vn\" target=\"_blank\" rel=\"nofollow\">Sức Khỏe Việt</a></em></p></div></p>",
+        "quote": null,
+        "photo": "https://th.bing.com/th/id/OIP.6pq0X2SxdYrGFO6les-yIQHaDi?rs=1&pid=ImgDetMain&cb=idpwebp2&o=7&rm=3",
+        "tags": "sức khỏe toàn diện, dinh dưỡng hợp lý, vận động thể chất, quản lý stress, khám sức khỏe định kỳ",
+        "post_cat_id": "74",
+        "post_tag_id": null,
+        "added_by": "40",
+        "author_type": "user",
+        "status": "active",
+        "is_featured": false,
+        "created_at": "2025-06-26T10:08:37.000000Z",
+        "updated_at": "2025-07-25T08:11:23.000000Z",
+        "views": "9",
+        "post_type": "post",
+        "meta_data": {
+          "source_url": null,
+          "bot_type": "admin_bot",
+          "api_created": true,
+          "created_at_api": "2025-06-26T10:08:37.640621Z",
+          "auto_generated": true
+        },
+        "author_info": {
+          "id": 40,
+          "name": "ToiKhoe Admin",
+          "email": "admin.bot@toikhoe.net",
+          "phone": "0900000001",
+          "email_verified_at": null,
+          "photo": "https://codyhealth.s3.ap-southeast-2.amazonaws.com/imagesub/logo.png",
+          "role": "admin",
+          "provider": null,
+          "provider_id": null,
+          "status": "active",
+          "api_token": "suGhVmb5n4R1x09smeTvDl0oQ1vXVNwu5Qy4PPlCRj17PeLVme53ZGydg7odmstRMbFeSPteu6MZNDNQ",
+          "api_token_expires_at": null,
+          "last_api_access": null,
+          "created_at": "2025-06-11T10:27:37.000000Z",
+          "updated_at": "2025-06-11T10:27:37.000000Z",
+          "province": null,
+          "address": null,
+          "province_id": null
+        },
+        "category": {
+          "id": 74,
+          "name": "Khoa Dinh dưỡng",
+          "slug": "khoa-dinh-dưỡng",
+          "type": "other",
+          "parent_id": null,
+          "icon": "frontend/img/icons/nutrition-plan.png",
+          "status": "active",
+          "display_order": "0",
+          "summary": null,
+          "photo": null,
+          "created_at": "2025-05-10T13:44:26.000000Z",
+          "updated_at": "2025-05-24T03:46:49.000000Z"
+        },
+        "doctor": null,
+        "user": {
+          "id": 40,
+          "name": "ToiKhoe Admin",
+          "email": "admin.bot@toikhoe.net",
+          "phone": "0900000001",
+          "email_verified_at": null,
+          "photo": "https://codyhealth.s3.ap-southeast-2.amazonaws.com/imagesub/logo.png",
+          "role": "admin",
+          "provider": null,
+          "provider_id": null,
+          "status": "active",
+          "api_token": "suGhVmb5n4R1x09smeTvDl0oQ1vXVNwu5Qy4PPlCRj17PeLVme53ZGydg7odmstRMbFeSPteu6MZNDNQ",
+          "api_token_expires_at": null,
+          "last_api_access": null,
+          "created_at": "2025-06-11T10:27:37.000000Z",
+          "updated_at": "2025-06-11T10:27:37.000000Z",
+          "province": null,
+          "address": null,
+          "province_id": null
+        }
+      },
+      {
+        "id": 297,
+        "title": "Hướng Dẫn Chăm Sóc Người Bệnh Tiểu Đường Hiệu Quả Tại Nhà",
+        "slug": "huong-dan-cham-soc-nguoi-benh-tieu-duong-hieu-qua-tai-nha",
+        "summary": "Tìm hiểu cách chăm sóc người bệnh tiểu đường tại nhà với các phương pháp khoa học, giúp kiểm soát đường huyết và phòng ngừa biến chứng. Bài viết cung cấp hướng dẫn chi tiết chăm sóc, dinh dưỡng và thói quen sinh hoạt tốt nhất cho bệnh nhân tiểu đường.",
+        "short_desc": null,
+        "description": "<p><p><strong>Tiểu đường</strong> là một trong những bệnh lý mạn tính phổ biến hiện nay, ảnh hưởng lớn đến chất lượng cuộc sống người bệnh. Việc chăm sóc bệnh nhân tiểu đường đúng cách tại nhà đóng vai trò thiết yếu trong việc kiểm soát đường huyết và ngăn ngừa các biến chứng nguy hiểm.</p></p>\n<p><h3>Vai trò quan trọng của chăm sóc người bệnh tiểu đường</h3></p>\n<p><p>Chăm sóc toàn diện giúp người bệnh duy trì mức đường huyết ổn định, giảm nguy cơ tổn thương các cơ quan như tim, thận, thần kinh và mắt. Ngoài ra, quá trình chăm sóc còn góp phần nâng cao sức khỏe tâm thần, cải thiện tinh thần và giảm áp lực mệt mỏi do bệnh gây ra.</p></p>\n<p><h3>Nguyên tắc chăm sóc bệnh nhân tiểu đường tại nhà</h3></p>\n<p><ul></p>\n<p><li><strong>Kiểm tra và theo dõi đường huyết đều đặn:</strong> Sử dụng máy đo đường huyết để theo dõi chỉ số thường xuyên, giúp kịp thời điều chỉnh chế độ ăn uống hoặc thuốc điều trị.</li></p>\n<p><li><strong>Tuân thủ chế độ dinh dưỡng hợp lý:</strong> Ưu tiên thực phẩm giàu chất xơ, hạn chế đường, tinh bột nhanh và chất béo bão hòa. Chia nhỏ bữa ăn, tránh nhịn đói hoặc ăn quá nhiều cùng lúc.</li></p>\n<p><li><strong>Duy trì hoạt động thể chất:</strong> Tập luyện nhẹ nhàng hàng ngày như đi bộ, yoga giúp tăng cường chuyển hóa glucose và cải thiện sức khỏe tổng thể.</li></p>\n<p><li><strong>Tuân thủ sử dụng thuốc theo hướng dẫn của bác sĩ:</strong> Không tự ý thay đổi liều hoặc ngừng thuốc mà không có chỉ định y tế.</li></p>\n<p><li><strong>Chăm sóc da và chân cẩn thận:</strong> Tiểu đường làm tăng nguy cơ nhiễm trùng và loét da, do đó cần thường xuyên kiểm tra, giữ vệ sinh và tránh tổn thương.</li></p>\n<p><li><strong>Giữ tinh thần lạc quan, tránh stress:</strong> Stress có thể làm gia tăng đường huyết nên hỗ trợ tinh thần tích cực rất quan trọng.</li></p>\n<p></ul></p>\n<p><h3>Chế độ dinh dưỡng tốt cho người bệnh tiểu đường</h3></p>\n<p><p>Chế độ ăn đóng vai trò then chốt giúp ổn định lượng đường trong máu. Người bệnh nên ưu tiên các thực phẩm tự nhiên, hạn chế đồ ăn chế biến sẵn và nhiều đường:</p></p>\n<p><ul></p>\n<p><li>Rau xanh, trái cây tươi ít ngọt và giàu chất xơ</li></p>\n<p><li>Ngũ cốc nguyên hạt như yến mạch, lúa mì, gạo lứt</li></p>\n<p><li>Protein từ thịt nạc, cá hồi, đậu hạt và sữa không đường</li></p>\n<p><li>Hạn chế ăn đồ ngọt, bánh kẹo, nước ngọt có gas và tinh bột tinh chế</li></p>\n<p></ul></p>\n<p><h3>Lưu ý khi chăm sóc bệnh nhân tiểu đường</h3></p>\n<p><ul></p>\n<p><li>Không bỏ qua việc kiểm tra sức khỏe định kỳ để phát hiện sớm biến chứng</li></p>\n<p><li>Giữ môi trường sống sạch sẽ, thoáng đãng</li></p>\n<p><li>Khuyến khích người bệnh thực hiện tự theo dõi sức khỏe, báo ngay cho bác sĩ khi có dấu hiệu bất thường như mệt mỏi bất thường, tăng hoặc giảm cân nhanh</li></p>\n<p></ul></p>\n<p><p>Việc chăm sóc người bệnh tiểu đường tại nhà cần sự phối hợp đồng bộ giữa chế độ dinh dưỡng, tập luyện và tuân thủ điều trị y tế. Khi gia đình có đầy đủ kiến thức và kỹ năng, người bệnh sẽ duy trì được sức khỏe ổn định, giảm thiểu tối đa các biến chứng nghiêm trọng.</p></p>\n<p><div class=\"source-info\"><p><em>Nguồn tham khảo: <a href=\"https://www.vinmec.com/vi/tu-van-suc-khoe/benh-tieu-duong-va-cham-soc-tai-nha/\" target=\"_blank\" rel=\"nofollow\">Vinmec</a></em></p></div></p>",
+        "quote": null,
+        "photo": "https://th.bing.com/th/id/R.1cc114d80e2499bc2c95433bb617d826?rik=gAK998%2fqI8TWIw&riu=http%3a%2f%2ftrungtamytemongcai.vn%2fupload%2f1000983%2f20210407%2fgrabab456TT_Ki_E1_BB_83m_so_C3_A1t_b_E1_BB_87nh_t_E1_BA_ADt_QN_kh_C3_A1m_s_E1_BB_A9c_kh_E1_BB_8Fe__C4_91o__C4_91_C6_B0_E1_BB_9Dng_huy_E1_BA_BFt_t_E1_BA_A1i_nh_C3_A0_1_scaled.jpg&ehk=ZDjCx%2fVLSWHnWTd5fbbX%2bYKjyCtHWYa%2fmxMaWcVdRLg%3d&risl=&pid=ImgRaw&r=0",
+        "tags": "tiểu đường, chăm sóc người bệnh tiểu đường, chế độ dinh dưỡng tiểu đường, kiểm soát đường huyết, lối sống lành mạnh",
+        "post_cat_id": "43",
+        "post_tag_id": null,
+        "added_by": "40",
+        "author_type": "user",
+        "status": "active",
+        "is_featured": false,
+        "created_at": "2025-06-26T10:04:51.000000Z",
+        "updated_at": "2025-07-28T00:16:21.000000Z",
+        "views": "9",
+        "post_type": "post",
+        "meta_data": {
+          "source_url": null,
+          "bot_type": "admin_bot",
+          "api_created": true,
+          "created_at_api": "2025-06-26T10:04:51.654305Z",
+          "auto_generated": true
+        },
+        "author_info": {
+          "id": 40,
+          "name": "ToiKhoe Admin",
+          "email": "admin.bot@toikhoe.net",
+          "phone": "0900000001",
+          "email_verified_at": null,
+          "photo": "https://codyhealth.s3.ap-southeast-2.amazonaws.com/imagesub/logo.png",
+          "role": "admin",
+          "provider": null,
+          "provider_id": null,
+          "status": "active",
+          "api_token": "suGhVmb5n4R1x09smeTvDl0oQ1vXVNwu5Qy4PPlCRj17PeLVme53ZGydg7odmstRMbFeSPteu6MZNDNQ",
+          "api_token_expires_at": null,
+          "last_api_access": null,
+          "created_at": "2025-06-11T10:27:37.000000Z",
+          "updated_at": "2025-06-11T10:27:37.000000Z",
+          "province": null,
+          "address": null,
+          "province_id": null
+        },
+        "category": {
+          "id": 43,
+          "name": "Khoa Nội tiết",
+          "slug": "khoa-nội-tiết",
+          "type": "other",
+          "parent_id": null,
+          "icon": "frontend/img/icons/endocrine-system.png",
+          "status": "active",
+          "display_order": "0",
+          "summary": null,
+          "photo": null,
+          "created_at": "2025-05-10T13:44:26.000000Z",
+          "updated_at": "2025-05-19T11:40:27.000000Z"
+        },
+        "doctor": null,
+        "user": {
+          "id": 40,
+          "name": "ToiKhoe Admin",
+          "email": "admin.bot@toikhoe.net",
+          "phone": "0900000001",
+          "email_verified_at": null,
+          "photo": "https://codyhealth.s3.ap-southeast-2.amazonaws.com/imagesub/logo.png",
+          "role": "admin",
+          "provider": null,
+          "provider_id": null,
+          "status": "active",
+          "api_token": "suGhVmb5n4R1x09smeTvDl0oQ1vXVNwu5Qy4PPlCRj17PeLVme53ZGydg7odmstRMbFeSPteu6MZNDNQ",
+          "api_token_expires_at": null,
+          "last_api_access": null,
+          "created_at": "2025-06-11T10:27:37.000000Z",
+          "updated_at": "2025-06-11T10:27:37.000000Z",
+          "province": null,
+          "address": null,
+          "province_id": null
+        }
+      },
+      {
+        "id": 296,
+        "title": "Tầm Quan Trọng Của Giấc Ngủ Đối Với Sức Khỏe và Cách Cải Thiện Chất Lượng Giấc Ngủ",
+        "slug": "tam-quan-trong-cua-giac-ngu-doi-voi-suc-khoe-va-cach-cai-thien-chat-luong-giac-ngu",
+        "summary": "Giấc ngủ đóng vai trò thiết yếu trong việc duy trì sức khỏe toàn diện. Bài viết giúp bạn hiểu rõ tầm quan trọng của giấc ngủ, nguyên nhân gây mất ngủ và phương pháp cải thiện để tận hưởng giấc ngủ sâu, từ đó nâng cao chất lượng cuộc sống.",
+        "short_desc": null,
+        "description": "<p><p><strong>Giấc ngủ</strong> không chỉ là thời gian nghỉ ngơi mà còn là quá trình phục hồi quan trọng cho cơ thể và não bộ. Thiếu ngủ hoặc ngủ không đủ chất lượng có thể dẫn đến nhiều vấn đề sức khỏe nghiêm trọng như suy giảm miễn dịch, tăng nguy cơ bệnh tim mạch, tiểu đường và rối loạn tâm thần.</p></p>\n<p><h3>Tại sao giấc ngủ lại quan trọng?</h3></p>\n<p><p>Trong quá trình ngủ, cơ thể tiến hành sửa chữa các tổn thương tế bào, củng cố trí nhớ, cân bằng hormone và điều chỉnh các chức năng chuyển hóa. Một giấc ngủ chất lượng giúp tăng cường sự tập trung, giảm căng thẳng và cải thiện tâm trạng.</p></p>\n<p><p>Ngược lại, nếu giấc ngủ bị gián đoạn hoặc không đầy đủ, cơ thể sẽ rơi vào trạng thái mệt mỏi mãn tính, giảm khả năng làm việc và dễ mắc phải các bệnh lý. Đặc biệt, giấc ngủ kém còn liên quan đến nguy cơ tăng cân và suy giảm sức khỏe tinh thần.</p></p>\n<p><h3>Nguyên nhân gây mất ngủ phổ biến</h3></p>\n<p><p>Mất ngủ có thể bắt nguồn từ nhiều yếu tố như:</p></p>\n<p><ul></p>\n<p><li><strong>Căng thẳng, lo âu:</strong> Áp lực công việc hoặc cuộc sống khiến não bộ khó thư giãn.</li></p>\n<p><li><strong>Thói quen sinh hoạt không khoa học:</strong> Thức khuya, sử dụng điện thoại hay máy tính trước giờ ngủ.</li></p>\n<p><li><strong>Môi trường ngủ không phù hợp:</strong> Tiếng ồn, ánh sáng mạnh hoặc nhiệt độ không thoải mái.</li></p>\n<p><li><strong>Các bệnh lý nền:</strong> Đau mạn tính, rối loạn hô hấp khi ngủ, trầm cảm hoặc các rối loạn thần kinh.</li></p>\n<p><li><strong>Sử dụng chất kích thích:</strong> Cafein, rượu bia hoặc thuốc lá cũng ảnh hưởng đến giấc ngủ.</li></p>\n<p></ul></p>\n<p><h3>Cách nâng cao chất lượng giấc ngủ hiệu quả</h3></p>\n<p><p>Để cải thiện giấc ngủ, bạn nên áp dụng một số nguyên tắc sau:</p></p>\n<p><ul></p>\n<p><li><strong>Duy trì thói quen đi ngủ đúng giờ:</strong> Cố gắng thức dậy và đi ngủ cùng một khung giờ mỗi ngày, kể cả cuối tuần.</li></p>\n<p><li><strong>Tạo môi trường ngủ yên tĩnh và tối:</strong> Giữ phòng ngủ sạch sẽ, thoáng mát, hạn chế ánh sáng và tiếng ồn.</li></p>\n<p><li><strong>Hạn chế sử dụng thiết bị điện tử trước khi ngủ:</strong> Ánh sáng xanh từ màn hình có thể làm giảm sản xuất melatonin – hormone giúp bạn ngủ ngon.</li></p>\n<p><li><strong>Tránh ăn quá no hoặc uống cafein vào buổi tối:</strong> Điều này giúp hệ tiêu hóa không bị quá tải và giảm kích thích thần kinh làm tỉnh táo.</li></p>\n<p><li><strong>Thực hành các bài tập thư giãn:</strong> Thiền, hít thở sâu hay yoga nhẹ nhàng có thể giúp bạn thư giãn tinh thần trước khi đi ngủ.</li></p>\n<p><li><strong>Điều trị các bệnh lý liên quan nếu có:</strong> Thăm khám bác sĩ kịp thời để kiểm soát đau, ngưng thở khi ngủ hay các vấn đề tâm lý.</li></p>\n<p></ul></p>\n<p><h3>Khi nào cần gặp bác sĩ?</h3></p>\n<p><p>Nếu bạn đã áp dụng các biện pháp cải thiện nhưng vẫn gặp khó khăn với giấc ngủ kéo dài hơn 3 tuần, hoặc xuất hiện triệu chứng như mệt mỏi quá mức ban ngày, cáu gắt, khó tập trung, cần chủ động tìm sự hỗ trợ chuyên môn. Bác sĩ sẽ giúp chẩn đoán chính xác nguyên nhân và đề xuất phương pháp điều trị phù hợp như liệu pháp hành vi nhận thức hoặc dùng thuốc khi cần thiết.</p></p>\n<p><p><strong>Tóm lại, giấc ngủ chất lượng là yếu tố không thể thiếu để duy trì sức khỏe và nâng cao hiệu suất làm việc hàng ngày. Việc chăm sóc giấc ngủ đúng cách đóng vai trò then chốt giúp bạn có cuộc sống khỏe mạnh và tinh thần minh mẫn.</strong></p></p>\n<p><div class=\"source-info\"><p><em>Nguồn tham khảo: <a href=\"https://www.webmd.com/sleep-disorders/guide/sleep-hygiene\" target=\"_blank\" rel=\"nofollow\">WebMD</a></em></p></div></p>",
+        "quote": null,
+        "photo": "https://th.bing.com/th/id/OIP.-9HHSD20p4xW3XvdCDHFHQHaD4?rs=1&pid=ImgDetMain&cb=idpwebp2&o=7&rm=3",
+        "tags": "giấc ngủ, sức khỏe giấc ngủ, mất ngủ, cải thiện giấc ngủ, thói quen ngủ tốt",
+        "post_cat_id": "49",
+        "post_tag_id": null,
+        "added_by": "40",
+        "author_type": "user",
+        "status": "active",
+        "is_featured": false,
+        "created_at": "2025-06-26T10:02:28.000000Z",
+        "updated_at": "2025-07-25T12:50:21.000000Z",
+        "views": "8",
+        "post_type": "post",
+        "meta_data": {
+          "source_url": null,
+          "bot_type": "admin_bot",
+          "api_created": true,
+          "created_at_api": "2025-06-26T10:02:28.941936Z",
+          "auto_generated": true
+        },
+        "author_info": {
+          "id": 40,
+          "name": "ToiKhoe Admin",
+          "email": "admin.bot@toikhoe.net",
+          "phone": "0900000001",
+          "email_verified_at": null,
+          "photo": "https://codyhealth.s3.ap-southeast-2.amazonaws.com/imagesub/logo.png",
+          "role": "admin",
+          "provider": null,
+          "provider_id": null,
+          "status": "active",
+          "api_token": "suGhVmb5n4R1x09smeTvDl0oQ1vXVNwu5Qy4PPlCRj17PeLVme53ZGydg7odmstRMbFeSPteu6MZNDNQ",
+          "api_token_expires_at": null,
+          "last_api_access": null,
+          "created_at": "2025-06-11T10:27:37.000000Z",
+          "updated_at": "2025-06-11T10:27:37.000000Z",
+          "province": null,
+          "address": null,
+          "province_id": null
+        },
+        "category": {
+          "id": 49,
+          "name": "Khoa Thần kinh",
+          "slug": "khoa-thần-kinh",
+          "type": "other",
+          "parent_id": null,
+          "icon": "frontend/img/icons/brain.png",
+          "status": "active",
+          "display_order": "0",
+          "summary": null,
+          "photo": null,
+          "created_at": "2025-05-10T13:44:26.000000Z",
+          "updated_at": "2025-05-19T11:40:36.000000Z"
+        },
+        "doctor": null,
+        "user": {
+          "id": 40,
+          "name": "ToiKhoe Admin",
+          "email": "admin.bot@toikhoe.net",
+          "phone": "0900000001",
+          "email_verified_at": null,
+          "photo": "https://codyhealth.s3.ap-southeast-2.amazonaws.com/imagesub/logo.png",
+          "role": "admin",
+          "provider": null,
+          "provider_id": null,
+          "status": "active",
+          "api_token": "suGhVmb5n4R1x09smeTvDl0oQ1vXVNwu5Qy4PPlCRj17PeLVme53ZGydg7odmstRMbFeSPteu6MZNDNQ",
+          "api_token_expires_at": null,
+          "last_api_access": null,
+          "created_at": "2025-06-11T10:27:37.000000Z",
+          "updated_at": "2025-06-11T10:27:37.000000Z",
+          "province": null,
+          "address": null,
+          "province_id": null
+        }
+      }
+    ],
+    "first_page_url": "https://toikhoe.com.vn/api/posts?page=1",
+    "from": 1,
+    "last_page": 25,
+    "last_page_url": "https://toikhoe.com.vn/api/posts?page=25",
+    "links": [
+      {
+        "url": null,
+        "label": "&laquo; Trước đó",
+        "active": false
+      },
+      {
+        "url": "https://toikhoe.com.vn/api/posts?page=1",
+        "label": "1",
+        "active": true
+      },
+      {
+        "url": "https://toikhoe.com.vn/api/posts?page=2",
+        "label": "2",
+        "active": false
+      },
+      {
+        "url": "https://toikhoe.com.vn/api/posts?page=3",
+        "label": "3",
+        "active": false
+      },
+      {
+        "url": "https://toikhoe.com.vn/api/posts?page=4",
+        "label": "4",
+        "active": false
+      },
+      {
+        "url": "https://toikhoe.com.vn/api/posts?page=5",
+        "label": "5",
+        "active": false
+      },
+      {
+        "url": "https://toikhoe.com.vn/api/posts?page=6",
+        "label": "6",
+        "active": false
+      },
+      {
+        "url": "https://toikhoe.com.vn/api/posts?page=7",
+        "label": "7",
+        "active": false
+      },
+      {
+        "url": "https://toikhoe.com.vn/api/posts?page=8",
+        "label": "8",
+        "active": false
+      },
+      {
+        "url": "https://toikhoe.com.vn/api/posts?page=9",
+        "label": "9",
+        "active": false
+      },
+      {
+        "url": "https://toikhoe.com.vn/api/posts?page=10",
+        "label": "10",
+        "active": false
+      },
+      {
+        "url": null,
+        "label": "...",
+        "active": false
+      },
+      {
+        "url": "https://toikhoe.com.vn/api/posts?page=24",
+        "label": "24",
+        "active": false
+      },
+      {
+        "url": "https://toikhoe.com.vn/api/posts?page=25",
+        "label": "25",
+        "active": false
+      },
+      {
+        "url": "https://toikhoe.com.vn/api/posts?page=2",
+        "label": "Tiếp theo &raquo;",
+        "active": false
+      }
+    ],
+    "next_page_url": "https://toikhoe.com.vn/api/posts?page=2",
+    "path": "https://toikhoe.com.vn/api/posts",
+    "per_page": 10,
+    "prev_page_url": null,
+    "to": 10,
+    "total": 247
+  }
+}
+[2025-09-16 04:21:11] Script execution completed successfully

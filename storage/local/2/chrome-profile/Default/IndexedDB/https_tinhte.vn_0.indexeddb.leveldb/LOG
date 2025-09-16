@@ -1,0 +1,25 @@
+2025/09/16-11:12:34.772 2dea2 Reusing MANIFEST /Users/mac/Desktop/Worker/Worker/storage/local/2/chrome-profile/Default/IndexedDB/https_tinhte.vn_0.indexeddb.leveldb/MANIFEST-000001
+2025/09/16-11:12:34.773 2dea2 Recovering log #21
+2025/09/16-11:12:34.774 2dea2 Reusing old log /Users/mac/Desktop/Worker/Worker/storage/local/2/chrome-profile/Default/IndexedDB/https_tinhte.vn_0.indexeddb.leveldb/000021.log 
+2025/09/16-11:12:34.774 2dea2 Delete type=2 #19
+2025/09/16-11:12:37.240 2de91 Level-0 table #26: started
+2025/09/16-11:12:37.244 2de91 Level-0 table #26: 2043 bytes OK
+2025/09/16-11:12:37.246 2de91 Delete type=0 #21
+2025/09/16-11:12:37.246 2de91 Manual compaction at level-0 from '\x00\x0d\x00\x00\x00' @ 72057594037927935 : 1 .. '\x00\x0e\x00\x00\x00' @ 0 : 0; will stop at '\x00\x0d\x00\x00\x05' @ 600 : 1
+2025/09/16-11:12:37.246 2de91 Compacting 1@0 + 1@1 files
+2025/09/16-11:12:37.247 2de91 Generated table #27@0: 32 keys, 1470 bytes
+2025/09/16-11:12:37.247 2de91 Compacted 1@0 + 1@1 files => 1470 bytes
+2025/09/16-11:12:37.248 2de91 compacted to: files[ 0 1 1 0 0 0 0 ]
+2025/09/16-11:12:37.249 2de91 Delete type=2 #26
+2025/09/16-11:12:37.249 2de90 Manual compaction at level-0 from '\x00\x0d\x00\x00\x05' @ 600 : 1 .. '\x00\x0e\x00\x00\x00' @ 0 : 0; will stop at (end)
+2025/09/16-11:12:43.357 2de91 Level-0 table #29: started
+2025/09/16-11:12:43.360 2de91 Level-0 table #29: 2047 bytes OK
+2025/09/16-11:12:43.363 2de91 Delete type=2 #23
+2025/09/16-11:12:43.364 2de91 Delete type=0 #25
+2025/09/16-11:12:43.366 2de8e Manual compaction at level-0 from '\x00\x0e\x00\x00\x00' @ 72057594037927935 : 1 .. '\x00\x0f\x00\x00\x00' @ 0 : 0; will stop at '\x00\x0e\x00\x00\x05' @ 643 : 1
+2025/09/16-11:12:43.366 2de8e Compacting 1@0 + 1@1 files
+2025/09/16-11:12:43.368 2de8e Generated table #30@0: 32 keys, 1472 bytes
+2025/09/16-11:12:43.368 2de8e Compacted 1@0 + 1@1 files => 1472 bytes
+2025/09/16-11:12:43.369 2de8e compacted to: files[ 0 1 1 0 0 0 0 ]
+2025/09/16-11:12:43.370 2de8e Delete type=2 #29
+2025/09/16-11:12:43.370 2de8e Manual compaction at level-0 from '\x00\x0e\x00\x00\x05' @ 643 : 1 .. '\x00\x0f\x00\x00\x00' @ 0 : 0; will stop at (end)

@@ -1,5 +1,5 @@
 // Node types
-export type NodeKind = "GoTo" | "Type" | "Click" | "MultiType" | "If" | "Else" | "Wait" | "Sleep" | "For" | "While" | "Variable" | "Extract" | "Navigation" | "SwitchFrame" | "SwitchTab" | "ScrollTo" | "Select" | "Loop" | "EndLoop" | "DataProcess" | "Log" | "HttpRequest";
+export type NodeKind = "GoTo" | "Type" | "Click" | "MultiType" | "If" | "Else" | "Wait" | "Sleep" | "For" | "While" | "Variable" | "Extract" | "Navigation" | "SwitchFrame" | "SwitchTab" | "ScrollTo" | "Select" | "Loop" | "EndLoop" | "DataProcess" | "Log" | "HttpRequest" | "AI";
 
 // Cấu hình của từng node
 export type NodeData = {
@@ -79,6 +79,12 @@ export type NodeData = {
     apiKeyHeader?: string;
     apiKeyValue?: string;
     timeout?: number;
+    // AI
+    aiRole?: "assistant" | "social_commenter" | "content_creator" | "translator" | "summarizer";
+    aiPrompt?: string;
+    aiInputType?: "variable" | "custom";
+    aiInputVariable?: string;
+    aiResponseVariable?: string;
   };
 };
 

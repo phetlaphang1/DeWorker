@@ -1,0 +1,5 @@
+2025/09/16-11:12:32.867 2df07 Reusing MANIFEST /Users/mac/Desktop/Worker/Worker/storage/local/2/chrome-profile/Default/Local Storage/leveldb/MANIFEST-000001
+2025/09/16-11:12:32.875 2df07 Recovering log #10
+2025/09/16-11:12:32.876 2df07 Reusing old log /Users/mac/Desktop/Worker/Worker/storage/local/2/chrome-profile/Default/Local Storage/leveldb/000010.log 
+2025/09/16-11:12:51.314 2df07 Level-0 table #14: started
+2025/09/16-11:12:51.358 2df07 Level-0 table #14: 13562 bytes OK
