@@ -1,2 +1,3 @@
-2025/09/16-10:49:26.156 27dc1 Creating DB /Users/mac/Desktop/Worker/Worker/storage/local/3/chrome-profile/Default/GCM Store/Encryption since it was missing.
-2025/09/16-10:49:26.184 27dc1 Reusing MANIFEST /Users/mac/Desktop/Worker/Worker/storage/local/3/chrome-profile/Default/GCM Store/Encryption/MANIFEST-000001
+2025/09/19-10:24:58.429 1fe52 Reusing MANIFEST /Users/mac/Desktop/Worker/Worker/storage/local/3/chrome-profile/Default/GCM Store/Encryption/MANIFEST-000001
+2025/09/19-10:24:58.430 1fe52 Recovering log #3
+2025/09/19-10:24:58.430 1fe52 Reusing old log /Users/mac/Desktop/Worker/Worker/storage/local/3/chrome-profile/Default/GCM Store/Encryption/000003.log 

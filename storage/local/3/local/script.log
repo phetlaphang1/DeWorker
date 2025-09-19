@@ -2105,3 +2105,2760 @@ await page.goto("https://www.google.com");
   }
 }
 [2025-09-16 04:21:11] Script execution completed successfully
+[2025-09-19 02:56:29] [profile-3] Using task directory: /Users/mac/Desktop/Worker/Worker/storage/local/3/local
+[2025-09-19 02:56:29] [profile-3] Original script (first 200 chars):
+[2025-09-19 02:56:29] [profile-3] import puppeteer from "puppeteer";
+import * as act from "#act";
+await page.goto("https://tinhte.vn/");
+  console.log("Page title:", await page.title());
+  await act.click(page, "//*[@id=\"__next\"]/di
+[2025-09-19 02:56:29] [profile-3] Script imports converted to require statements
+[2025-09-19 02:56:29] Pre-loading ES6 modules...
+[2025-09-19 02:56:29] ES6 modules loading completed
+[2025-09-19 02:56:29] [profile-3] Processed Script:....
+[2025-09-19 02:56:29] [profile-3] try { config = JSON.parse(config); } catch (e) { }
+const puppeteer = require("puppeteer");
+const act = require("#act");
+await page.goto("https://tinhte.vn/");
+  console.log("Page title:", await page.title());
+  await act.click(page, "//*[@id=\"__next\"]/div[1]/div[1]/div[2]/div/div/div[1]/div[1]/ol/li[1]/div[2]/article/div/h4/a", 0);
+  // Extract text content from element
+  const extractedData = await act.getText(page, "//*[@id=\"__next\"]/div[1]/div/div[2]/div[2]/div[1]/div/div/div[1]/main");
+  console.log("Extracted text into 'extractedData':", extractedData);
+  // Assign variable from extractedData to data
+  const data = extractedData;
+  console.log("Assigned 'data':", data);
+  // AI Assistant (assistant) - Using Roxane API
+  const aiResponse = await (async () => {
+    const axios = (await import('axios')).default;
+    // Using input from variable: data
+    const userPrompt = `${data}`;
+  
+    const requestConfig = {
+      method: 'POST',
+      url: 'https://llmapi.roxane.one/v1/chat/completions',
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer linh-1752464641053-phonefarm'
+      },
+      data: {
+        model: 'text-model',
+        messages: [
+          { role: 'system', content: "You are a helpful assistant. Answer directly and concisely. No explanations or formatting unless asked." },
+          { role: 'user', content: userPrompt }
+        ],
+        temperature: 0.8,
+        max_tokens: 150
+      }
+    };
+  
+    try {
+      console.log('Calling Roxane AI (assistant mode)...');
+      const response = await axios(requestConfig);
+      let aiText = response.data.choices[0].message.content;
+      
+      // Clean the response
+      aiText = aiText.trim();
+      // Remove quotes if present
+      aiText = aiText.replace(/^["']|["']$/g, '');
+      // Remove common prefixes
+      aiText = aiText.replace(/^(Comment:|Answer:|Response:|Here is|Here's)\s*/i, '');
+      // Remove markdown formatting
+      aiText = aiText.replace(/\*\*(.*?)\*\*/g, '$1');
+      aiText = aiText.replace(/__(.*?)__/g, '$1');
+      aiText = aiText.replace(/\*(.*?)\*/g, '$1');
+      aiText = aiText.replace(/_(.*?)_/g, '$1');
+      
+      console.log('AI Response:', aiText);
+      return aiText;
+    } catch (error) {
+      console.error('Roxane AI Request failed:', error.message);
+      if (error.response) {
+        console.error('Error details:', error.response.data);
+      }
+      throw error;
+    }
+  })();
+  console.log('AI response stored in: aiResponse');
+  console.log("aiResponse:", aiResponse);
+
+[2025-09-19 02:56:29] Executing automation script
+[2025-09-19 02:56:29] [profile-3] Script requesting module: puppeteer
+[2025-09-19 02:56:29] [profile-3] Script requesting module: #act
+[2025-09-19 02:56:29] [profile-3] Returning pre-loaded #act module, keys: ["checkElement","click","demo","elementExists","getAttribute","getAttributes","getElement","getElements","getText","getValue","pause","scrollToElement","scrollToEndOfPage","scrollToHomeOfPage","select","type","waitForElement","waitForNavigation","waitForTrueElement"]
+[2025-09-19 02:56:35] [profile-3] Page title: Tinhte.vn - MXH Hỏi đáp, Review, Thông tin công nghệ
+[2025-09-19 02:56:35] [profile-3] Click: //*[@id="__next"]/div[1]/div[1]/div[2]/div/div/div[1]/div[1]/ol/li[1]/div[2]/article/div/h4/a
+[2025-09-19 02:56:35] [profile-3] Pause in 500 milliseconds...
+[2025-09-19 02:56:36] [profile-3] ✅ Clicked element: //*[@id="__next"]/div[1]/div[1]/div[2]/div/div/div[1]/div[1]/ol/li[1]/div[2]/article/div/h4/a
+[2025-09-19 02:56:36] [profile-3] 📝 Get Text: "//*[@id="__next"]/div[1]/div/div[2]/div[2]/div[1]/div/div/div[1]/main" (attempt 1/3)
+[2025-09-19 02:56:42] [profile-3] ✅ Extracted text: "Review kính Rayban Meta AI: quay phim đẹp, góc số 1cuhiep+ Theo dõi3/8/2025 17:18Phản hồi: 83FactTin..."
+[2025-09-19 02:56:42] [profile-3] Extracted text into 'extractedData': Review kính Rayban Meta AI: quay phim đẹp, góc số 1cuhiep+ Theo dõi3/8/2025 17:18Phản hồi: 83FactTinhte FactFacebookXem nhanhẨnMục đích của kính được làm ra và thực tế sử dụngThiết kế và hoàn thiệnQuay phim và chất lượng phim quay raTỉ lệ video 3:4: tỉ lệ này xem trên màn hình điện thoại hợp lý hơn là 16:9 hay 9:16Độ phân giải khoảng 1500px x 2000 px và số lượng khung hình là 30fpsMàu sắc và ánh sáng: khá đậm và tương phản tốtÂm thanh thu từ mic của kínhApp và chép phim vào điện thoạiCác video đã quay bằng Rayban Meta AIKết: hài lòng, sẽ mua bản nâng cấpChiếc Rayban Meta AI mình dùng và review trong chủ đề này là một chiếc kính Rayban Wayfarer và được Facebook (Meta) trang bị camera, mic, loa, vi xử lý, wifi… và kết hợp với app trên điện thoại để copy video, hình, update phần mềm, điều khiển AI…
+ 
+Mục đích của kính được làm ra và thực tế sử dụng
+Giúp Facebook hay Mark Xoăn lấy được hình ảnh theo góc nhìn của người dùng, hay gọi là góc nhìn số 1, nhưng với người review hay giới thiệu sản phẩm thì góc nhìn này giúp người xem cảm nhận được đúng như cảm nhận của người review hay giới thiệu.
+Nội dung nhìn từ kính được dùng để trao đổi với AI giúp AI có thông tin để trả lời thắc mắc của người dùng, hỗ trợ người dùng. Tuy nhiên tính năng này mình không dùng vì AI kính ở Meta chưa khả dụng ở Việt Nam, chưa hỗ trợ Tiếng Việt… và đặc biệt là AI qua mic và loa còn chưa hiệu quả.
+Mic và Loa trên kính dùng như tai nghe Bluetooth, giống như Bose trước đây có làm tai nghe trên kính vậy.
+ 
+
+
+
+	
+    
+
+	
+		
+			
+				
+			
+		
+	
+
+ 
+Như vậy tính năng sử dụng và review với anh em chỉ có quay phim và dùng kính để nghe gì đó hay nói chuyện điện thoại. Có thể chụp hình bằng kính nhưng mình không dùng tính năng này nhiều.
+ 
+Thiết kế và hoàn thiện 
+Kính mình dùng trong bài này gọi là Rayban Wayfarer. Rayban còn hai gọng khác là Headliner và Skyler với hình dáng vui vẻ hơn, mềm mại hơn, nữ tính hơn. Mình thử online thì thấy mặt mình hợp với Wayfarer nhất nên chọn kính này. 
+ 
+Oakley cũng mới ra mắt một số mẫu kính làm chung với Meta. Như vậy có rất nhiều lựa chọn về kiểu dáng hay thiết kế để anh em có thể chọn. Trong tương tai mình sẽ chọn một kiểu gọng khác nhìn vui vẻ hơn gọng màu đen bóng như cái anh em thấy trong bài này.
+ 
+
+	
+	
+		
+			
+		
+
+		
+			Trên tay hộp da cho kính RayBan Wayfarer gập
+			Mình để một cái kính ở cửa xe để khi nào trời nắng quá thì mình đeo vào cho đỡ chói. Chiếc RayBan gập lại được này làm mình hài lòng vì kích thước nhỏ gọn của nó khi gập lại. Và khi nó nhỏ gọn, gập lại được thì khả năng nó bị hư hại do va đập hay...
+
+			
+				
+					 tinhte.vn
+				
+			
+		
+	
+
+
+ 
+Về hoàn thiện thì mình đánh giá thấp, hoàn thiện của Rayban Meta Wayfarer nhìn không được mượt mà, cạnh kính phía trên vẫn còn rất sắc. Cho nên nếu anh em chốt mua kính này thì nên chọn bản màu khác đừng chọn màu đen bóng như của mình.
+ 
+Bề mặt hoàn thiện của kính rất dễ trày và nhìn khó chịu. Mình mới dùng bình thường, thậm chí là giữ gìn kỹ vì khi đeo xong đều bỏ vào hộp để sạc nhưng mà nó vẫn trày sứt rất nhiều.
+ 
+
+	
+
+
+	
+		
+
+		
+
+
+	
+
+
+
+	
+
+
+	
+
+
+	
+		
+
+		
+
+
+	
+
+
+
+	
+
+
+
+
+
+
+
+
+
+
+
+
+
+ 
+Quay phim và chất lượng phim quay ra 
+Kính Rayban Meta AI quay phim theo tỉ lệ 3:4 tức là dọc chứ không phải ngang. Chất lượng video theo mình là tốt, sử dụng được cho nhiều mục đích. Việc điều khiển quay phim cũng diễn ra đời giản, dễ dàng chỉ bằng nút bấm trên gọng kính bên phải.
+  Quảng cáoAdmicro AdX
+if (typeof(admsspPosition) == "undefined") {_admloadJs("//media1.admicro.vn/core/ssppage.js", function () {admsspPosition({sspid:10166,w:728,h:90, group: ""}); });} else {admsspPosition({sspid:10166,w:728,h:90, group: "", isNoBrand:false});}
+admssppageMobile({adslot:10172,w:300,h:250,zcp:"kmd75yxs",adslots:"","zones":"","sspid":"2018951", isNoBrand:false });
+Tỉ lệ video 3:4: tỉ lệ này xem trên màn hình điện thoại hợp lý hơn là 16:9 hay 9:16 
+Tỉ lệ video quay bằng Rayban Meta AI là 3:4 tức là giống như tỉ lệ màn hình iPad khi mà để dọc. Và tỉ lệ này khác rất nhiều so với tỉ lệ ngang 16:9 mà các thiết bị quay phim khác đang sử dụng hoặc 9:16 khi mà xoay dọc camera lại.
+ 
+Tỉ lệ này anh em có thể crop để đưa về rộng, dùng làm các cảnh cho video dọc hoặc ngang. Theo mình thì nó dễ dùng hơn tỉ lệ 9:16 khi để dọc và nó coi trên di động tốt hơn là tỉ lệ ngang 16:9.
+ 
+Tuy nhiên nó hơi nghịch với lại việc hai con mắt chúng ta nhìn sự việc xunh quanh và nó sẽ hơi lệch sang bên trái. Trên Rayban Meta Ai thì camera nằm ở phía bên trái, bên phải là một cái nhìn như camera thôi chứ nó chỉ là cái đèn báo đang quay hay là chụp hình. Camera chỉ có một bên thôi.
+ 
+
+ 
+Độ phân giải khoảng 1500px x 2000 px và số lượng khung hình là 30fps 
+Theo mình thì độ phân giải này và số khung hình này là đủ ổn để sử dụng thoải mái. Mỗi video 3 phút mình thấy thường có dung lượng khoảng 300Mb, cũng không quá nặng nên anh em xử lý ngay trên điện thoại hay truyền không dây vào điện thoại cũng dễ dàng. Chúng ta không thay đổi được khung hình cũng như độ phân giải.
+  Quảng cáo
+Màu sắc và ánh sáng: khá đậm và tương phản tốt 
+Sự khác biệt về chất lượng quay video của Rayban Meta AI so với các camera nhỏ gọn, camera hành trình, hành động hay smartphone khác đó là cách mà người ta cân chỉnh màu sắc và độ tương phản. Trong khi hầu hết các máy quay nhỏ gọn, smartphone khác thường thích hình ảnh sáng bừng, sáng toàn khung hình thì mình thấy màu sắc và ánh sáng của Rayban Meta AI phản ánh đúng thực tế. Đặc biệt là khi quay tối thì nó thường tối và sáng tối rõ ràng chứ không theo xu hướng áng bừng lên.
+ 
+
+
+
+	
+    
+
+	
+		
+			
+				
+			
+		
+	
+
+ 
+
+
+
+	
+    
+
+	
+		
+			
+				
+			
+		
+	
+
+ 
+
+
+
+	
+    
+
+	
+		
+			
+				
+			
+		
+	
+
+ 
+Âm thanh thu từ mic của kính 
+Đây là phần mình đánh giá rất cao. Âm thanh rõ ràng, không bị ảnh hưởng nhiểu bởi âm thanh ồn ào xung quanh, thậm chí là hơn cả các mic mà anh em làm content đang dùng.
+ 
+
+
+
+	
+    
+
+	
+		
+			
+				
+			
+		
+	
+
+ 
+App và chép phim vào điện thoại 
+Trên điện thoại anh em cài ứng dụng Meta AI từ đó kết nối kính vào điện thoại và để chép phim, hình vào điện thoại cũng như update firmware, tùy chỉnh AI, xem người khác… Trong quá trình sử dụng của mình chỉ dùng để update firmware và import hình, video từ kính vào điện thoại.
+ 
+Kính sẽ là một AP và điện thoại sẽ kết nối vào để truyền cho nhanh hơn. Việc kết nối cũng đơn giản, nhanh chóng, tự động, kết nối ngay cả khi để kính trong hộp.
+ 
+Nếu kính quay nhiều hay đang sạc mà nóng quá, hay môi trường nóng quá làm cho kính nóng thì nó sẽ không cho anh em chép.
+ 
+
+	
+
+
+	
+		
+
+		
+
+
+	
+
+
+
+	
+
+ 
+Các video đã quay bằng Rayban Meta AI 
+Việc quay phim với Rayban Meta AI dễ dàng và đơn giản hơn nên anh em có thể thực hiện được những video đời thực đơn giản, nhanh chóng.
+ 
+
+
+
+	
+    
+
+	
+		
+			
+				
+			
+		
+	
+
+ 
+
+
+
+	
+    
+
+	
+		
+			
+				
+			
+		
+	
+
+ 
+
+
+
+	
+    
+
+	
+		
+			
+				
+			
+		
+	
+
+ 
+
+
+
+	
+    
+
+	
+		
+			
+				
+			
+		
+	
+
+ 
+Kết: hài lòng, sẽ mua bản nâng cấp 
+Mình hài lòng với Rayban Meta AI về nhiệm vụ quay phim của nó. Khi có nó mình làm được nhiều việc hơn. Anh em đợi review của @Didu nhé.
+[2025-09-19 02:56:42] [profile-3] Assigned 'data': Review kính Rayban Meta AI: quay phim đẹp, góc số 1cuhiep+ Theo dõi3/8/2025 17:18Phản hồi: 83FactTinhte FactFacebookXem nhanhẨnMục đích của kính được làm ra và thực tế sử dụngThiết kế và hoàn thiệnQuay phim và chất lượng phim quay raTỉ lệ video 3:4: tỉ lệ này xem trên màn hình điện thoại hợp lý hơn là 16:9 hay 9:16Độ phân giải khoảng 1500px x 2000 px và số lượng khung hình là 30fpsMàu sắc và ánh sáng: khá đậm và tương phản tốtÂm thanh thu từ mic của kínhApp và chép phim vào điện thoạiCác video đã quay bằng Rayban Meta AIKết: hài lòng, sẽ mua bản nâng cấpChiếc Rayban Meta AI mình dùng và review trong chủ đề này là một chiếc kính Rayban Wayfarer và được Facebook (Meta) trang bị camera, mic, loa, vi xử lý, wifi… và kết hợp với app trên điện thoại để copy video, hình, update phần mềm, điều khiển AI…
+ 
+Mục đích của kính được làm ra và thực tế sử dụng
+Giúp Facebook hay Mark Xoăn lấy được hình ảnh theo góc nhìn của người dùng, hay gọi là góc nhìn số 1, nhưng với người review hay giới thiệu sản phẩm thì góc nhìn này giúp người xem cảm nhận được đúng như cảm nhận của người review hay giới thiệu.
+Nội dung nhìn từ kính được dùng để trao đổi với AI giúp AI có thông tin để trả lời thắc mắc của người dùng, hỗ trợ người dùng. Tuy nhiên tính năng này mình không dùng vì AI kính ở Meta chưa khả dụng ở Việt Nam, chưa hỗ trợ Tiếng Việt… và đặc biệt là AI qua mic và loa còn chưa hiệu quả.
+Mic và Loa trên kính dùng như tai nghe Bluetooth, giống như Bose trước đây có làm tai nghe trên kính vậy.
+ 
+
+
+
+	
+    
+
+	
+		
+			
+				
+			
+		
+	
+
+ 
+Như vậy tính năng sử dụng và review với anh em chỉ có quay phim và dùng kính để nghe gì đó hay nói chuyện điện thoại. Có thể chụp hình bằng kính nhưng mình không dùng tính năng này nhiều.
+ 
+Thiết kế và hoàn thiện 
+Kính mình dùng trong bài này gọi là Rayban Wayfarer. Rayban còn hai gọng khác là Headliner và Skyler với hình dáng vui vẻ hơn, mềm mại hơn, nữ tính hơn. Mình thử online thì thấy mặt mình hợp với Wayfarer nhất nên chọn kính này. 
+ 
+Oakley cũng mới ra mắt một số mẫu kính làm chung với Meta. Như vậy có rất nhiều lựa chọn về kiểu dáng hay thiết kế để anh em có thể chọn. Trong tương tai mình sẽ chọn một kiểu gọng khác nhìn vui vẻ hơn gọng màu đen bóng như cái anh em thấy trong bài này.
+ 
+
+	
+	
+		
+			
+		
+
+		
+			Trên tay hộp da cho kính RayBan Wayfarer gập
+			Mình để một cái kính ở cửa xe để khi nào trời nắng quá thì mình đeo vào cho đỡ chói. Chiếc RayBan gập lại được này làm mình hài lòng vì kích thước nhỏ gọn của nó khi gập lại. Và khi nó nhỏ gọn, gập lại được thì khả năng nó bị hư hại do va đập hay...
+
+			
+				
+					 tinhte.vn
+				
+			
+		
+	
+
+
+ 
+Về hoàn thiện thì mình đánh giá thấp, hoàn thiện của Rayban Meta Wayfarer nhìn không được mượt mà, cạnh kính phía trên vẫn còn rất sắc. Cho nên nếu anh em chốt mua kính này thì nên chọn bản màu khác đừng chọn màu đen bóng như của mình.
+ 
+Bề mặt hoàn thiện của kính rất dễ trày và nhìn khó chịu. Mình mới dùng bình thường, thậm chí là giữ gìn kỹ vì khi đeo xong đều bỏ vào hộp để sạc nhưng mà nó vẫn trày sứt rất nhiều.
+ 
+
+	
+
+
+	
+		
+
+		
+
+
+	
+
+
+
+	
+
+
+	
+
+
+	
+		
+
+		
+
+
+	
+
+
+
+	
+
+
+
+
+
+
+
+
+
+
+
+
+
+ 
+Quay phim và chất lượng phim quay ra 
+Kính Rayban Meta AI quay phim theo tỉ lệ 3:4 tức là dọc chứ không phải ngang. Chất lượng video theo mình là tốt, sử dụng được cho nhiều mục đích. Việc điều khiển quay phim cũng diễn ra đời giản, dễ dàng chỉ bằng nút bấm trên gọng kính bên phải.
+  Quảng cáoAdmicro AdX
+if (typeof(admsspPosition) == "undefined") {_admloadJs("//media1.admicro.vn/core/ssppage.js", function () {admsspPosition({sspid:10166,w:728,h:90, group: ""}); });} else {admsspPosition({sspid:10166,w:728,h:90, group: "", isNoBrand:false});}
+admssppageMobile({adslot:10172,w:300,h:250,zcp:"kmd75yxs",adslots:"","zones":"","sspid":"2018951", isNoBrand:false });
+Tỉ lệ video 3:4: tỉ lệ này xem trên màn hình điện thoại hợp lý hơn là 16:9 hay 9:16 
+Tỉ lệ video quay bằng Rayban Meta AI là 3:4 tức là giống như tỉ lệ màn hình iPad khi mà để dọc. Và tỉ lệ này khác rất nhiều so với tỉ lệ ngang 16:9 mà các thiết bị quay phim khác đang sử dụng hoặc 9:16 khi mà xoay dọc camera lại.
+ 
+Tỉ lệ này anh em có thể crop để đưa về rộng, dùng làm các cảnh cho video dọc hoặc ngang. Theo mình thì nó dễ dùng hơn tỉ lệ 9:16 khi để dọc và nó coi trên di động tốt hơn là tỉ lệ ngang 16:9.
+ 
+Tuy nhiên nó hơi nghịch với lại việc hai con mắt chúng ta nhìn sự việc xunh quanh và nó sẽ hơi lệch sang bên trái. Trên Rayban Meta Ai thì camera nằm ở phía bên trái, bên phải là một cái nhìn như camera thôi chứ nó chỉ là cái đèn báo đang quay hay là chụp hình. Camera chỉ có một bên thôi.
+ 
+
+ 
+Độ phân giải khoảng 1500px x 2000 px và số lượng khung hình là 30fps 
+Theo mình thì độ phân giải này và số khung hình này là đủ ổn để sử dụng thoải mái. Mỗi video 3 phút mình thấy thường có dung lượng khoảng 300Mb, cũng không quá nặng nên anh em xử lý ngay trên điện thoại hay truyền không dây vào điện thoại cũng dễ dàng. Chúng ta không thay đổi được khung hình cũng như độ phân giải.
+  Quảng cáo
+Màu sắc và ánh sáng: khá đậm và tương phản tốt 
+Sự khác biệt về chất lượng quay video của Rayban Meta AI so với các camera nhỏ gọn, camera hành trình, hành động hay smartphone khác đó là cách mà người ta cân chỉnh màu sắc và độ tương phản. Trong khi hầu hết các máy quay nhỏ gọn, smartphone khác thường thích hình ảnh sáng bừng, sáng toàn khung hình thì mình thấy màu sắc và ánh sáng của Rayban Meta AI phản ánh đúng thực tế. Đặc biệt là khi quay tối thì nó thường tối và sáng tối rõ ràng chứ không theo xu hướng áng bừng lên.
+ 
+
+
+
+	
+    
+
+	
+		
+			
+				
+			
+		
+	
+
+ 
+
+
+
+	
+    
+
+	
+		
+			
+				
+			
+		
+	
+
+ 
+
+
+
+	
+    
+
+	
+		
+			
+				
+			
+		
+	
+
+ 
+Âm thanh thu từ mic của kính 
+Đây là phần mình đánh giá rất cao. Âm thanh rõ ràng, không bị ảnh hưởng nhiểu bởi âm thanh ồn ào xung quanh, thậm chí là hơn cả các mic mà anh em làm content đang dùng.
+ 
+
+
+
+	
+    
+
+	
+		
+			
+				
+			
+		
+	
+
+ 
+App và chép phim vào điện thoại 
+Trên điện thoại anh em cài ứng dụng Meta AI từ đó kết nối kính vào điện thoại và để chép phim, hình vào điện thoại cũng như update firmware, tùy chỉnh AI, xem người khác… Trong quá trình sử dụng của mình chỉ dùng để update firmware và import hình, video từ kính vào điện thoại.
+ 
+Kính sẽ là một AP và điện thoại sẽ kết nối vào để truyền cho nhanh hơn. Việc kết nối cũng đơn giản, nhanh chóng, tự động, kết nối ngay cả khi để kính trong hộp.
+ 
+Nếu kính quay nhiều hay đang sạc mà nóng quá, hay môi trường nóng quá làm cho kính nóng thì nó sẽ không cho anh em chép.
+ 
+
+	
+
+
+	
+		
+
+		
+
+
+	
+
+
+
+	
+
+ 
+Các video đã quay bằng Rayban Meta AI 
+Việc quay phim với Rayban Meta AI dễ dàng và đơn giản hơn nên anh em có thể thực hiện được những video đời thực đơn giản, nhanh chóng.
+ 
+
+
+
+	
+    
+
+	
+		
+			
+				
+			
+		
+	
+
+ 
+
+
+
+	
+    
+
+	
+		
+			
+				
+			
+		
+	
+
+ 
+
+
+
+	
+    
+
+	
+		
+			
+				
+			
+		
+	
+
+ 
+
+
+
+	
+    
+
+	
+		
+			
+				
+			
+		
+	
+
+ 
+Kết: hài lòng, sẽ mua bản nâng cấp 
+Mình hài lòng với Rayban Meta AI về nhiệm vụ quay phim của nó. Khi có nó mình làm được nhiều việc hơn. Anh em đợi review của @Didu nhé.
+[2025-09-19 02:56:42] [profile-3] Calling Roxane AI (assistant mode)...
+[2025-09-19 02:56:54] [profile-3] AI Response: - Purpose: Captures user's perspective ("first-person view") for AI training and user content creation.
+- Design: Ray-Ban Wayfarer model; other styles (Headliner, Skyler, Oakley) available. Surface prone to scratches.
+- Video Quality: 3:4 aspect ratio, 1500px x 2000px resolution, 30fps. Good color and contrast. Audio recording is excellent.
+- App: Used for firmware updates, video transfer, and AI customization.
+[2025-09-19 02:56:54] [profile-3] AI response stored in: aiResponse
+[2025-09-19 02:56:54] [profile-3] aiResponse: - Purpose: Captures user's perspective ("first-person view") for AI training and user content creation.
+- Design: Ray-Ban Wayfarer model; other styles (Headliner, Skyler, Oakley) available. Surface prone to scratches.
+- Video Quality: 3:4 aspect ratio, 1500px x 2000px resolution, 30fps. Good color and contrast. Audio recording is excellent.
+- App: Used for firmware updates, video transfer, and AI customization.
+[2025-09-19 02:56:54] Script execution completed successfully
+[2025-09-19 03:10:27] [profile-3] Using task directory: /Users/mac/Desktop/Worker/Worker/storage/local/3/local
+[2025-09-19 03:10:27] [profile-3] Original script (first 200 chars):
+[2025-09-19 03:10:27] [profile-3] import puppeteer from "puppeteer";
+import * as act from "#act";
+await page.goto("https://tinhte.vn/");
+console.log("Page title:", await page.title());
+await act.click(page, "//*[@id=\"__next\"]/div[1]
+[2025-09-19 03:10:27] [profile-3] Script imports converted to require statements
+[2025-09-19 03:10:27] Pre-loading ES6 modules...
+[2025-09-19 03:10:27] ES6 modules loading completed
+[2025-09-19 03:10:27] [profile-3] Processed Script:....
+[2025-09-19 03:10:27] [profile-3] try { config = JSON.parse(config); } catch (e) { }
+const puppeteer = require("puppeteer");
+const act = require("#act");
+await page.goto("https://tinhte.vn/");
+console.log("Page title:", await page.title());
+await act.click(page, "//*[@id=\"__next\"]/div[1]/div[1]/div[2]/div/div/div[1]/div[1]/ol/li[1]/div[2]/article/div/h4/a", 0);
+// Extract text content from element
+const extractedData = await act.getText(page, "//*[@id=\"__next\"]/div[1]/div/div[2]/div[2]/div[1]/div/div/div[1]/main");
+console.log("Extracted text into 'extractedData':", extractedData);
+// Assign variable from extractedData to data
+const data = extractedData;
+console.log("Assigned 'data':", data);
+// AI Assistant (assistant) - Using Roxane API
+const aiResponse = await (async () => {
+  const axios = (await import('axios')).default;
+  // Using input from variable: data
+  const userPrompt = `${data}`;
+
+  const requestConfig = {
+    method: 'POST',
+    url: 'https://llmapi.roxane.one/v1/chat/completions',
+    headers: {
+      'Content-Type': 'application/json',
+      'Authorization': 'Bearer linh-1752464641053-phonefarm'
+    },
+    data: {
+      model: 'text-model',
+      messages: [
+        { role: 'system', content: "You are a helpful assistant. Answer directly and concisely. No explanations or formatting unless asked." },
+        { role: 'user', content: userPrompt }
+      ],
+      temperature: 0.8,
+      max_tokens: 150
+    }
+  };
+
+  try {
+    console.log('Calling Roxane AI (assistant mode)...');
+    const response = await axios(requestConfig);
+    let aiText = response.data.choices[0].message.content;
+    
+    // Clean the response
+    aiText = aiText.trim();
+    // Remove quotes if present
+    aiText = aiText.replace(/^["']|["']$/g, '');
+    // Remove common prefixes
+    aiText = aiText.replace(/^(Comment:|Answer:|Response:|Here is|Here's)\s*/i, '');
+    // Remove markdown formatting
+    aiText = aiText.replace(/\*\*(.*?)\*\*/g, '$1');
+    aiText = aiText.replace(/__(.*?)__/g, '$1');
+    aiText = aiText.replace(/\*(.*?)\*/g, '$1');
+    aiText = aiText.replace(/_(.*?)_/g, '$1');
+    
+    console.log('AI Response:', aiText);
+    return aiText;
+  } catch (error) {
+    console.error('Roxane AI Request failed:', error.message);
+    if (error.response) {
+      console.error('Error details:', error.response.data);
+    }
+    throw error;
+  }
+})();
+console.log('AI response stored in: aiResponse');
+console.log("aiResponse:", aiResponse);
+
+[2025-09-19 03:10:27] Executing automation script
+[2025-09-19 03:10:27] [profile-3] Script requesting module: puppeteer
+[2025-09-19 03:10:27] [profile-3] Script requesting module: #act
+[2025-09-19 03:10:27] [profile-3] Returning pre-loaded #act module, keys: ["checkElement","click","demo","elementExists","getAttribute","getAttributes","getElement","getElements","getText","getValue","pause","scrollToElement","scrollToEndOfPage","scrollToHomeOfPage","select","type","waitForElement","waitForNavigation","waitForTrueElement"]
+[2025-09-19 03:10:31] [profile-3] Page title: Tinhte.vn - MXH Hỏi đáp, Review, Thông tin công nghệ
+[2025-09-19 03:10:31] [profile-3] Click: //*[@id="__next"]/div[1]/div[1]/div[2]/div/div/div[1]/div[1]/ol/li[1]/div[2]/article/div/h4/a
+[2025-09-19 03:10:32] [profile-3] Pause in 500 milliseconds...
+[2025-09-19 03:10:32] [profile-3] ✅ Clicked element: //*[@id="__next"]/div[1]/div[1]/div[2]/div/div/div[1]/div[1]/ol/li[1]/div[2]/article/div/h4/a
+[2025-09-19 03:10:32] [profile-3] 📝 Get Text: "//*[@id="__next"]/div[1]/div/div[2]/div[2]/div[1]/div/div/div[1]/main" (attempt 1/3)
+[2025-09-19 03:10:37] [profile-3] ✅ Extracted text: "Logitech G ra mắt nhiều thiết bị gaming nổi bậtLê Huyền Vân+ Theo dõi18/9/2025 20:12Phản hồi: 0FactT..."
+[2025-09-19 03:10:37] [profile-3] Assigned 'data': Logitech G ra mắt nhiều thiết bị gaming nổi bậtLê Huyền Vân+ Theo dõi18/9/2025 20:12Phản hồi: 0FactTinhte FactFacebookXem nhanhẨnLogitech G PRO X SUPERLIGHT 2c: Nhỏ gọn, hiệu suất vượt trộiLogitech G515 RAPID TKL: Tốc độ tối đa, hiệu năng tối ưuLogitech G321 LIGHTSPEED: tai nghe không dây đa năngLogitech G ASTRO A20 X: kết nối kép cho game thủ consoleTại sự kiện Logitech G Play 2025, Logitech G chính thức giới thiệu hàng loạt sản phẩm, thiết bị
+gamning nổi bật nhằm hỗ trợ các game thủ.
+ 
+Logitech G PRO X SUPERLIGHT 2c: Nhỏ gọn, hiệu suất vượt trội 
+
+
+
+	View attachment 8369744
+	
+
+
+Logitech G PRO X SUPERLIGHT 2c là phiên bản thu gọn, nhẹ hơn của dòng chuột PRO
+X SUPERLIGHT, hướng đến game thủ có bàn tay nhỏ hoặc ưa chuộng kiểu cầm nhỏ gọn. Với trọng lượng chỉ 51g – 53g, và kích thước giảm 5%, chuột mang lại cảm giác thoải mái, giảm mỏi khi chơi game lâu.
+ 
+Chuột vẫn tích hợp công nghệ hàng đầu: cảm biến HERO 2 với độ phân giải ên đến 44.000 DPI và tốc độ theo dõi 888 inch/giây, cho độ chính xác cao. Công tắc lai LIGHTFORCE mang lại cảm giác bấm sắc nét, phản hồi nhanh. Kết nối không dây LIGHTSPEED với tốc độ phản hồi 8kHz giúp duy trì độ ổn định tối đa, tương thích sạc không dây POWERPLAY. 
+ 
+G PRO X SUPERLIGHT 2c có ba màu: đen, trắng, hồng. Phù hợp cho những ai tìm kiếm sự kết hợp giữa hiệu suất, thiết kế nhỏ gọn và phong cách.
+ 
+Logitech G515 RAPID TKL: Tốc độ tối đa, hiệu năng tối ưu 
+
+	
+
+
+	
+		
+
+		
+
+
+	
+
+
+
+	
+
+Logitech G515 RAPID TKL là bàn phím cơ gaming thiết kế không phím số, nhỏ gọn. Điểm nổi bật chính là công tắc analog từ tính cấu hình thấp (chỉ 22mm), mang lại tốc độ phản hồi cực nhanh.
+Hành trình phím 2.5mm, với điểm kích hoạt tùy chỉnh từ 0.1mm – 2.5mm, cho phép người chơi tinh chỉnh từng phím theo ý muốn.
+Bàn phím sử dụng switch đã bôi trơn sẵn, kết hợp với keycaps PBT đúc hai lớp. Thiết kế mỏng, mặt trên bằng thép không gỉ, cùng kết cấu chống ồn nhiều lớp giúp trải nghiệm gõ chắc chắn và êm ái.
+ 
+G515 RAPID TKL hỗ trợ LIGHTSYNC RGB, tùy chỉnh qua phần mềm Logitech G HUB, cho phép tạo macro, hồ sơ game và cá nhân hóa ánh sáng. Tương thích với PC/Mac và các hệ máy như Xbox, PlayStation, Nintendo Switch.
+ 
+Logitech G321 LIGHTSPEED: tai nghe không dây đa năng 
+
+	
+
+
+	
+		
+
+		
+
+
+	
+
+
+
+	
+
+Logitech G321 LIGHTSPEED là tai nghe không dây gaming mang đến sự kết hợp hoàn
+hảo giữa thoải mái, hiệu năng cao và tính đa dụng. Đệm đầu dày và chụp tai bằng mút hoạt tính bọc vải dệt kim mang lại cảm giác êm ái và vừa vặn cho nhiều kích cỡ đầu. Tai nghe sử dụng kết nối không dây LIGHTSPEED với độ trễ cực thấp trong phạm vi 10m, cùng thời lượng pin trên 20 giờ. Màng loa 40mm tái tạo âm thanh sống động, micro cần gạt 16kHz tích hợp có thể gập để tắt tiếng, giúp giao tiếp rõ ràng, tiện lợi.
+  Quảng cáoAdmicro AdX
+if (typeof(admsspPosition) == "undefined") {_admloadJs("//media1.admicro.vn/core/ssppage.js", function () {admsspPosition({sspid:10166,w:728,h:90, group: ""}); });} else {admsspPosition({sspid:10166,w:728,h:90, group: "", isNoBrand:false});}
+admssppageMobile({adslot:10172,w:300,h:250,zcp:"kmd75yxs",adslots:"","zones":"","sspid":"2018951", isNoBrand:false });
+Ngoài ra, G321 hỗ trợ Bluetooth 5.2, tương thích với PC/Mac, thiết bị di động và các hệ máy console như Xbox, PS4/PS5, Switch, lý tưởng cho chơi game, nghe nhạc, gọi Discord.
+ 
+Logitech G ASTRO A20 X: kết nối kép cho game thủ console 
+
+	
+
+
+	
+		
+
+		
+
+
+	
+
+
+
+	
+
+Logitech G ASTRO A20 X là tai nghe không dây lý tưởng cho game thủ console, mang
+đến âm thanh mạnh mẽ, kết nối linh hoạt và tùy biến cao. A20 X nổi bật với PLAYSYNC AUDIO – cho phép kết nối đồng thời hai hệ máy console (như PS5 và Xbox Series X|S) và dễ dàng chuyển đổi chỉ với một nút bấm. Tích hợp LIGHTSYNC RGB với 8 vùng tùy chỉnh màu sắc, mang đến khả năng cá nhân hóa theo phong cách riêng.
+ 
+Về âm thanh, A20 X dùng màng loa PRO-G 40mm, micro tháo rời đạt chất lượng phát sóng 48kHz, hỗ trợ tắt tiếng nhanh và có đèn báo riêng biệt. MixAmp tích hợp giúp điều chỉnh âm lượng game/chat trực tiếp, trong khi Blue VO!CE cho phép tùy chỉnh giọng nói chuyên nghiệp.
+ 
+
+	
+
+
+	
+		
+
+		
+
+
+	
+
+
+
+	
+
+Ngoài ra, Logitech G còn giới thiệu chuột gaming Logitech G PRO X2 SUPERSTRIKE với công nghệ SUPERSTRIKE độc quyền, giúp giảm độ trễ nhấp chuột lên tới 30 ms. Chuột nặng chỉ 65g nhưng trang bị cảm biến HERO 2 tiên tiến với 44.000 DPI và tốc độ 888 IPS. Công nghệ LIGHTSPEED đảm bảo kết nối ổn định với tốc độ 8 kHz. Thời lượng pin 90 giờ cùng khả năng tùy chỉnh 10 bước kích hoạt, mang lại lợi thế cạnh tranh vượt trội cho game thủ.
+[2025-09-19 03:10:37] [profile-3] Extracted text into 'extractedData': Logitech G ra mắt nhiều thiết bị gaming nổi bậtLê Huyền Vân+ Theo dõi18/9/2025 20:12Phản hồi: 0FactTinhte FactFacebookXem nhanhẨnLogitech G PRO X SUPERLIGHT 2c: Nhỏ gọn, hiệu suất vượt trộiLogitech G515 RAPID TKL: Tốc độ tối đa, hiệu năng tối ưuLogitech G321 LIGHTSPEED: tai nghe không dây đa năngLogitech G ASTRO A20 X: kết nối kép cho game thủ consoleTại sự kiện Logitech G Play 2025, Logitech G chính thức giới thiệu hàng loạt sản phẩm, thiết bị
+gamning nổi bật nhằm hỗ trợ các game thủ.
+ 
+Logitech G PRO X SUPERLIGHT 2c: Nhỏ gọn, hiệu suất vượt trội 
+
+
+
+	View attachment 8369744
+	
+
+
+Logitech G PRO X SUPERLIGHT 2c là phiên bản thu gọn, nhẹ hơn của dòng chuột PRO
+X SUPERLIGHT, hướng đến game thủ có bàn tay nhỏ hoặc ưa chuộng kiểu cầm nhỏ gọn. Với trọng lượng chỉ 51g – 53g, và kích thước giảm 5%, chuột mang lại cảm giác thoải mái, giảm mỏi khi chơi game lâu.
+ 
+Chuột vẫn tích hợp công nghệ hàng đầu: cảm biến HERO 2 với độ phân giải ên đến 44.000 DPI và tốc độ theo dõi 888 inch/giây, cho độ chính xác cao. Công tắc lai LIGHTFORCE mang lại cảm giác bấm sắc nét, phản hồi nhanh. Kết nối không dây LIGHTSPEED với tốc độ phản hồi 8kHz giúp duy trì độ ổn định tối đa, tương thích sạc không dây POWERPLAY. 
+ 
+G PRO X SUPERLIGHT 2c có ba màu: đen, trắng, hồng. Phù hợp cho những ai tìm kiếm sự kết hợp giữa hiệu suất, thiết kế nhỏ gọn và phong cách.
+ 
+Logitech G515 RAPID TKL: Tốc độ tối đa, hiệu năng tối ưu 
+
+	
+
+
+	
+		
+
+		
+
+
+	
+
+
+
+	
+
+Logitech G515 RAPID TKL là bàn phím cơ gaming thiết kế không phím số, nhỏ gọn. Điểm nổi bật chính là công tắc analog từ tính cấu hình thấp (chỉ 22mm), mang lại tốc độ phản hồi cực nhanh.
+Hành trình phím 2.5mm, với điểm kích hoạt tùy chỉnh từ 0.1mm – 2.5mm, cho phép người chơi tinh chỉnh từng phím theo ý muốn.
+Bàn phím sử dụng switch đã bôi trơn sẵn, kết hợp với keycaps PBT đúc hai lớp. Thiết kế mỏng, mặt trên bằng thép không gỉ, cùng kết cấu chống ồn nhiều lớp giúp trải nghiệm gõ chắc chắn và êm ái.
+ 
+G515 RAPID TKL hỗ trợ LIGHTSYNC RGB, tùy chỉnh qua phần mềm Logitech G HUB, cho phép tạo macro, hồ sơ game và cá nhân hóa ánh sáng. Tương thích với PC/Mac và các hệ máy như Xbox, PlayStation, Nintendo Switch.
+ 
+Logitech G321 LIGHTSPEED: tai nghe không dây đa năng 
+
+	
+
+
+	
+		
+
+		
+
+
+	
+
+
+
+	
+
+Logitech G321 LIGHTSPEED là tai nghe không dây gaming mang đến sự kết hợp hoàn
+hảo giữa thoải mái, hiệu năng cao và tính đa dụng. Đệm đầu dày và chụp tai bằng mút hoạt tính bọc vải dệt kim mang lại cảm giác êm ái và vừa vặn cho nhiều kích cỡ đầu. Tai nghe sử dụng kết nối không dây LIGHTSPEED với độ trễ cực thấp trong phạm vi 10m, cùng thời lượng pin trên 20 giờ. Màng loa 40mm tái tạo âm thanh sống động, micro cần gạt 16kHz tích hợp có thể gập để tắt tiếng, giúp giao tiếp rõ ràng, tiện lợi.
+  Quảng cáoAdmicro AdX
+if (typeof(admsspPosition) == "undefined") {_admloadJs("//media1.admicro.vn/core/ssppage.js", function () {admsspPosition({sspid:10166,w:728,h:90, group: ""}); });} else {admsspPosition({sspid:10166,w:728,h:90, group: "", isNoBrand:false});}
+admssppageMobile({adslot:10172,w:300,h:250,zcp:"kmd75yxs",adslots:"","zones":"","sspid":"2018951", isNoBrand:false });
+Ngoài ra, G321 hỗ trợ Bluetooth 5.2, tương thích với PC/Mac, thiết bị di động và các hệ máy console như Xbox, PS4/PS5, Switch, lý tưởng cho chơi game, nghe nhạc, gọi Discord.
+ 
+Logitech G ASTRO A20 X: kết nối kép cho game thủ console 
+
+	
+
+
+	
+		
+
+		
+
+
+	
+
+
+
+	
+
+Logitech G ASTRO A20 X là tai nghe không dây lý tưởng cho game thủ console, mang
+đến âm thanh mạnh mẽ, kết nối linh hoạt và tùy biến cao. A20 X nổi bật với PLAYSYNC AUDIO – cho phép kết nối đồng thời hai hệ máy console (như PS5 và Xbox Series X|S) và dễ dàng chuyển đổi chỉ với một nút bấm. Tích hợp LIGHTSYNC RGB với 8 vùng tùy chỉnh màu sắc, mang đến khả năng cá nhân hóa theo phong cách riêng.
+ 
+Về âm thanh, A20 X dùng màng loa PRO-G 40mm, micro tháo rời đạt chất lượng phát sóng 48kHz, hỗ trợ tắt tiếng nhanh và có đèn báo riêng biệt. MixAmp tích hợp giúp điều chỉnh âm lượng game/chat trực tiếp, trong khi Blue VO!CE cho phép tùy chỉnh giọng nói chuyên nghiệp.
+ 
+
+	
+
+
+	
+		
+
+		
+
+
+	
+
+
+
+	
+
+Ngoài ra, Logitech G còn giới thiệu chuột gaming Logitech G PRO X2 SUPERSTRIKE với công nghệ SUPERSTRIKE độc quyền, giúp giảm độ trễ nhấp chuột lên tới 30 ms. Chuột nặng chỉ 65g nhưng trang bị cảm biến HERO 2 tiên tiến với 44.000 DPI và tốc độ 888 IPS. Công nghệ LIGHTSPEED đảm bảo kết nối ổn định với tốc độ 8 kHz. Thời lượng pin 90 giờ cùng khả năng tùy chỉnh 10 bước kích hoạt, mang lại lợi thế cạnh tranh vượt trội cho game thủ.
+[2025-09-19 03:10:37] [profile-3] Calling Roxane AI (assistant mode)...
+[2025-09-19 03:10:48] [profile-3] AI Response: a concise summary of the Logitech G product announcements:
+
+*   Logitech G PRO X SUPERLIGHT 2c: Lightweight (51-53g), compact wireless mouse with HERO 2 sensor.
+*   Logitech G515 RAPID TKL: Compact mechanical keyboard with low-profile analog magnetic switches.
+*   Logitech G321 LIGHTSPEED: Wireless gaming headset with LIGHTSPEED technology, Bluetooth 5.2, and long battery life.
+*   Logitech G ASTRO A20 X: Wireless headset for console gamers with dual-console connectivity (PLAYSYNC).
+*   Logitech G PRO X2 SUPERSTRIKE: Lightweight mouse with
+[2025-09-19 03:10:48] [profile-3] AI response stored in: aiResponse
+[2025-09-19 03:10:48] [profile-3] aiResponse: a concise summary of the Logitech G product announcements:
+
+*   Logitech G PRO X SUPERLIGHT 2c: Lightweight (51-53g), compact wireless mouse with HERO 2 sensor.
+*   Logitech G515 RAPID TKL: Compact mechanical keyboard with low-profile analog magnetic switches.
+*   Logitech G321 LIGHTSPEED: Wireless gaming headset with LIGHTSPEED technology, Bluetooth 5.2, and long battery life.
+*   Logitech G ASTRO A20 X: Wireless headset for console gamers with dual-console connectivity (PLAYSYNC).
+*   Logitech G PRO X2 SUPERSTRIKE: Lightweight mouse with
+[2025-09-19 03:10:48] Script execution completed successfully
+[2025-09-19 03:14:30] [profile-3] Using task directory: /Users/mac/Desktop/Worker/Worker/storage/local/3/local
+[2025-09-19 03:14:30] [profile-3] Original script (first 200 chars):
+[2025-09-19 03:14:30] [profile-3] import puppeteer from "puppeteer";
+import * as act from "#act";
+await page.goto("https://tinhte.vn/");
+console.log("Page title:", await page.title());
+await act.click(page, "//*[@id=\"__next\"]/div[1]
+[2025-09-19 03:14:30] [profile-3] Script imports converted to require statements
+[2025-09-19 03:14:30] Pre-loading ES6 modules...
+[2025-09-19 03:14:30] ES6 modules loading completed
+[2025-09-19 03:14:30] [profile-3] Processed Script:....
+[2025-09-19 03:14:30] [profile-3] try { config = JSON.parse(config); } catch (e) { }
+const puppeteer = require("puppeteer");
+const act = require("#act");
+await page.goto("https://tinhte.vn/");
+console.log("Page title:", await page.title());
+await act.click(page, "//*[@id=\"__next\"]/div[1]/div[1]/div[2]/div/div/div[1]/div[1]/ol/li[1]/div[2]/article/div/h4/a", 0);
+// Extract text content from element
+const extractedData = await act.getText(page, "//*[@id=\"__next\"]/div[1]/div/div[2]/div[2]/div[1]/div/div/div[1]/main");
+console.log("Extracted text into 'extractedData':", extractedData);
+// Assign variable from extractedData to data
+const data = extractedData;
+console.log("Assigned 'data':", data);
+// AI Assistant (assistant) - Using Roxane API
+const aiResponse = await (async () => {
+  const axios = (await import('axios')).default;
+  // Using input from variable: data
+  const userPrompt = `${data}`;
+
+  const requestConfig = {
+    method: 'POST',
+    url: 'https://llmapi.roxane.one/v1/chat/completions',
+    headers: {
+      'Content-Type': 'application/json',
+      'Authorization': 'Bearer linh-1752464641053-phonefarm'
+    },
+    data: {
+      model: 'text-model',
+      messages: [
+        { role: 'system', content: "You are a helpful assistant. Answer directly and concisely. No explanations or formatting unless asked." },
+        { role: 'user', content: userPrompt }
+      ],
+      temperature: 0.8,
+      max_tokens: 150
+    }
+  };
+
+  try {
+    console.log('Calling Roxane AI (assistant mode)...');
+    const response = await axios(requestConfig);
+    let aiText = response.data.choices[0].message.content;
+    
+    // Clean the response
+    aiText = aiText.trim();
+    // Remove quotes if present
+    aiText = aiText.replace(/^["']|["']$/g, '');
+    // Remove common prefixes
+    aiText = aiText.replace(/^(Comment:|Answer:|Response:|Here is|Here's)\s*/i, '');
+    // Remove markdown formatting
+    aiText = aiText.replace(/\*\*(.*?)\*\*/g, '$1');
+    aiText = aiText.replace(/__(.*?)__/g, '$1');
+    aiText = aiText.replace(/\*(.*?)\*/g, '$1');
+    aiText = aiText.replace(/_(.*?)_/g, '$1');
+    
+    console.log('AI Response:', aiText);
+    return aiText;
+  } catch (error) {
+    console.error('Roxane AI Request failed:', error.message);
+    if (error.response) {
+      console.error('Error details:', error.response.data);
+    }
+    throw error;
+  }
+})();
+console.log('AI response stored in: aiResponse');
+console.log("aiResponse:", aiResponse);
+[2025-09-19 03:14:30] Executing automation script
+[2025-09-19 03:14:30] [profile-3] Script requesting module: puppeteer
+[2025-09-19 03:14:30] [profile-3] Script requesting module: #act
+[2025-09-19 03:14:30] [profile-3] Returning pre-loaded #act module, keys: ["checkElement","click","demo","elementExists","getAttribute","getAttributes","getElement","getElements","getText","getValue","pause","scrollToElement","scrollToEndOfPage","scrollToHomeOfPage","select","type","waitForElement","waitForNavigation","waitForTrueElement"]
+[2025-09-19 03:14:34] [profile-3] Page title: Tinhte.vn - MXH Hỏi đáp, Review, Thông tin công nghệ
+[2025-09-19 03:14:34] [profile-3] Click: //*[@id="__next"]/div[1]/div[1]/div[2]/div/div/div[1]/div[1]/ol/li[1]/div[2]/article/div/h4/a
+[2025-09-19 03:14:35] [profile-3] Pause in 500 milliseconds...
+[2025-09-19 03:14:35] [profile-3] ✅ Clicked element: //*[@id="__next"]/div[1]/div[1]/div[2]/div/div/div[1]/div[1]/ol/li[1]/div[2]/article/div/h4/a
+[2025-09-19 03:14:35] [profile-3] 📝 Get Text: "//*[@id="__next"]/div[1]/div/div[2]/div[2]/div[1]/div/div/div[1]/main" (attempt 1/3)
+[2025-09-19 03:14:39] [profile-3] ✅ Extracted text: "Logitech G ra mắt nhiều thiết bị gaming nổi bậtLê Huyền Vân+ Theo dõi18/9/2025 20:12Phản hồi: 0FactT..."
+[2025-09-19 03:14:39] [profile-3] Assigned 'data': Logitech G ra mắt nhiều thiết bị gaming nổi bậtLê Huyền Vân+ Theo dõi18/9/2025 20:12Phản hồi: 0FactTinhte FactFacebookXem nhanhẨnLogitech G PRO X SUPERLIGHT 2c: Nhỏ gọn, hiệu suất vượt trộiLogitech G515 RAPID TKL: Tốc độ tối đa, hiệu năng tối ưuLogitech G321 LIGHTSPEED: tai nghe không dây đa năngLogitech G ASTRO A20 X: kết nối kép cho game thủ consoleTại sự kiện Logitech G Play 2025, Logitech G chính thức giới thiệu hàng loạt sản phẩm, thiết bị
+gamning nổi bật nhằm hỗ trợ các game thủ.
+ 
+Logitech G PRO X SUPERLIGHT 2c: Nhỏ gọn, hiệu suất vượt trội 
+
+
+
+	View attachment 8369744
+	
+
+
+Logitech G PRO X SUPERLIGHT 2c là phiên bản thu gọn, nhẹ hơn của dòng chuột PRO
+X SUPERLIGHT, hướng đến game thủ có bàn tay nhỏ hoặc ưa chuộng kiểu cầm nhỏ gọn. Với trọng lượng chỉ 51g – 53g, và kích thước giảm 5%, chuột mang lại cảm giác thoải mái, giảm mỏi khi chơi game lâu.
+ 
+Chuột vẫn tích hợp công nghệ hàng đầu: cảm biến HERO 2 với độ phân giải ên đến 44.000 DPI và tốc độ theo dõi 888 inch/giây, cho độ chính xác cao. Công tắc lai LIGHTFORCE mang lại cảm giác bấm sắc nét, phản hồi nhanh. Kết nối không dây LIGHTSPEED với tốc độ phản hồi 8kHz giúp duy trì độ ổn định tối đa, tương thích sạc không dây POWERPLAY. 
+ 
+G PRO X SUPERLIGHT 2c có ba màu: đen, trắng, hồng. Phù hợp cho những ai tìm kiếm sự kết hợp giữa hiệu suất, thiết kế nhỏ gọn và phong cách.
+ 
+Logitech G515 RAPID TKL: Tốc độ tối đa, hiệu năng tối ưu 
+
+	
+
+
+	
+		
+
+		
+
+
+	
+
+
+
+	
+
+Logitech G515 RAPID TKL là bàn phím cơ gaming thiết kế không phím số, nhỏ gọn. Điểm nổi bật chính là công tắc analog từ tính cấu hình thấp (chỉ 22mm), mang lại tốc độ phản hồi cực nhanh.
+Hành trình phím 2.5mm, với điểm kích hoạt tùy chỉnh từ 0.1mm – 2.5mm, cho phép người chơi tinh chỉnh từng phím theo ý muốn.
+Bàn phím sử dụng switch đã bôi trơn sẵn, kết hợp với keycaps PBT đúc hai lớp. Thiết kế mỏng, mặt trên bằng thép không gỉ, cùng kết cấu chống ồn nhiều lớp giúp trải nghiệm gõ chắc chắn và êm ái.
+ 
+G515 RAPID TKL hỗ trợ LIGHTSYNC RGB, tùy chỉnh qua phần mềm Logitech G HUB, cho phép tạo macro, hồ sơ game và cá nhân hóa ánh sáng. Tương thích với PC/Mac và các hệ máy như Xbox, PlayStation, Nintendo Switch.
+ 
+Logitech G321 LIGHTSPEED: tai nghe không dây đa năng 
+
+	
+
+
+	
+		
+
+		
+
+
+	
+
+
+
+	
+
+Logitech G321 LIGHTSPEED là tai nghe không dây gaming mang đến sự kết hợp hoàn
+hảo giữa thoải mái, hiệu năng cao và tính đa dụng. Đệm đầu dày và chụp tai bằng mút hoạt tính bọc vải dệt kim mang lại cảm giác êm ái và vừa vặn cho nhiều kích cỡ đầu. Tai nghe sử dụng kết nối không dây LIGHTSPEED với độ trễ cực thấp trong phạm vi 10m, cùng thời lượng pin trên 20 giờ. Màng loa 40mm tái tạo âm thanh sống động, micro cần gạt 16kHz tích hợp có thể gập để tắt tiếng, giúp giao tiếp rõ ràng, tiện lợi.
+  Quảng cáoAdmicro AdX
+if (typeof(admsspPosition) == "undefined") {_admloadJs("//media1.admicro.vn/core/ssppage.js", function () {admsspPosition({sspid:10166,w:728,h:90, group: ""}); });} else {admsspPosition({sspid:10166,w:728,h:90, group: "", isNoBrand:false});}
+admssppageMobile({adslot:10172,w:300,h:250,zcp:"kmd75yxs",adslots:"","zones":"","sspid":"2018951", isNoBrand:false });
+Ngoài ra, G321 hỗ trợ Bluetooth 5.2, tương thích với PC/Mac, thiết bị di động và các hệ máy console như Xbox, PS4/PS5, Switch, lý tưởng cho chơi game, nghe nhạc, gọi Discord.
+ 
+Logitech G ASTRO A20 X: kết nối kép cho game thủ console 
+
+	
+
+
+	
+		
+
+		
+
+
+	
+
+
+
+	
+
+Logitech G ASTRO A20 X là tai nghe không dây lý tưởng cho game thủ console, mang
+đến âm thanh mạnh mẽ, kết nối linh hoạt và tùy biến cao. A20 X nổi bật với PLAYSYNC AUDIO – cho phép kết nối đồng thời hai hệ máy console (như PS5 và Xbox Series X|S) và dễ dàng chuyển đổi chỉ với một nút bấm. Tích hợp LIGHTSYNC RGB với 8 vùng tùy chỉnh màu sắc, mang đến khả năng cá nhân hóa theo phong cách riêng.
+ 
+Về âm thanh, A20 X dùng màng loa PRO-G 40mm, micro tháo rời đạt chất lượng phát sóng 48kHz, hỗ trợ tắt tiếng nhanh và có đèn báo riêng biệt. MixAmp tích hợp giúp điều chỉnh âm lượng game/chat trực tiếp, trong khi Blue VO!CE cho phép tùy chỉnh giọng nói chuyên nghiệp.
+ 
+
+	
+
+
+	
+		
+
+		
+
+
+	
+
+
+
+	
+
+Ngoài ra, Logitech G còn giới thiệu chuột gaming Logitech G PRO X2 SUPERSTRIKE với công nghệ SUPERSTRIKE độc quyền, giúp giảm độ trễ nhấp chuột lên tới 30 ms. Chuột nặng chỉ 65g nhưng trang bị cảm biến HERO 2 tiên tiến với 44.000 DPI và tốc độ 888 IPS. Công nghệ LIGHTSPEED đảm bảo kết nối ổn định với tốc độ 8 kHz. Thời lượng pin 90 giờ cùng khả năng tùy chỉnh 10 bước kích hoạt, mang lại lợi thế cạnh tranh vượt trội cho game thủ.
+[2025-09-19 03:14:39] [profile-3] Extracted text into 'extractedData': Logitech G ra mắt nhiều thiết bị gaming nổi bậtLê Huyền Vân+ Theo dõi18/9/2025 20:12Phản hồi: 0FactTinhte FactFacebookXem nhanhẨnLogitech G PRO X SUPERLIGHT 2c: Nhỏ gọn, hiệu suất vượt trộiLogitech G515 RAPID TKL: Tốc độ tối đa, hiệu năng tối ưuLogitech G321 LIGHTSPEED: tai nghe không dây đa năngLogitech G ASTRO A20 X: kết nối kép cho game thủ consoleTại sự kiện Logitech G Play 2025, Logitech G chính thức giới thiệu hàng loạt sản phẩm, thiết bị
+gamning nổi bật nhằm hỗ trợ các game thủ.
+ 
+Logitech G PRO X SUPERLIGHT 2c: Nhỏ gọn, hiệu suất vượt trội 
+
+
+
+	View attachment 8369744
+	
+
+
+Logitech G PRO X SUPERLIGHT 2c là phiên bản thu gọn, nhẹ hơn của dòng chuột PRO
+X SUPERLIGHT, hướng đến game thủ có bàn tay nhỏ hoặc ưa chuộng kiểu cầm nhỏ gọn. Với trọng lượng chỉ 51g – 53g, và kích thước giảm 5%, chuột mang lại cảm giác thoải mái, giảm mỏi khi chơi game lâu.
+ 
+Chuột vẫn tích hợp công nghệ hàng đầu: cảm biến HERO 2 với độ phân giải ên đến 44.000 DPI và tốc độ theo dõi 888 inch/giây, cho độ chính xác cao. Công tắc lai LIGHTFORCE mang lại cảm giác bấm sắc nét, phản hồi nhanh. Kết nối không dây LIGHTSPEED với tốc độ phản hồi 8kHz giúp duy trì độ ổn định tối đa, tương thích sạc không dây POWERPLAY. 
+ 
+G PRO X SUPERLIGHT 2c có ba màu: đen, trắng, hồng. Phù hợp cho những ai tìm kiếm sự kết hợp giữa hiệu suất, thiết kế nhỏ gọn và phong cách.
+ 
+Logitech G515 RAPID TKL: Tốc độ tối đa, hiệu năng tối ưu 
+
+	
+
+
+	
+		
+
+		
+
+
+	
+
+
+
+	
+
+Logitech G515 RAPID TKL là bàn phím cơ gaming thiết kế không phím số, nhỏ gọn. Điểm nổi bật chính là công tắc analog từ tính cấu hình thấp (chỉ 22mm), mang lại tốc độ phản hồi cực nhanh.
+Hành trình phím 2.5mm, với điểm kích hoạt tùy chỉnh từ 0.1mm – 2.5mm, cho phép người chơi tinh chỉnh từng phím theo ý muốn.
+Bàn phím sử dụng switch đã bôi trơn sẵn, kết hợp với keycaps PBT đúc hai lớp. Thiết kế mỏng, mặt trên bằng thép không gỉ, cùng kết cấu chống ồn nhiều lớp giúp trải nghiệm gõ chắc chắn và êm ái.
+ 
+G515 RAPID TKL hỗ trợ LIGHTSYNC RGB, tùy chỉnh qua phần mềm Logitech G HUB, cho phép tạo macro, hồ sơ game và cá nhân hóa ánh sáng. Tương thích với PC/Mac và các hệ máy như Xbox, PlayStation, Nintendo Switch.
+ 
+Logitech G321 LIGHTSPEED: tai nghe không dây đa năng 
+
+	
+
+
+	
+		
+
+		
+
+
+	
+
+
+
+	
+
+Logitech G321 LIGHTSPEED là tai nghe không dây gaming mang đến sự kết hợp hoàn
+hảo giữa thoải mái, hiệu năng cao và tính đa dụng. Đệm đầu dày và chụp tai bằng mút hoạt tính bọc vải dệt kim mang lại cảm giác êm ái và vừa vặn cho nhiều kích cỡ đầu. Tai nghe sử dụng kết nối không dây LIGHTSPEED với độ trễ cực thấp trong phạm vi 10m, cùng thời lượng pin trên 20 giờ. Màng loa 40mm tái tạo âm thanh sống động, micro cần gạt 16kHz tích hợp có thể gập để tắt tiếng, giúp giao tiếp rõ ràng, tiện lợi.
+  Quảng cáoAdmicro AdX
+if (typeof(admsspPosition) == "undefined") {_admloadJs("//media1.admicro.vn/core/ssppage.js", function () {admsspPosition({sspid:10166,w:728,h:90, group: ""}); });} else {admsspPosition({sspid:10166,w:728,h:90, group: "", isNoBrand:false});}
+admssppageMobile({adslot:10172,w:300,h:250,zcp:"kmd75yxs",adslots:"","zones":"","sspid":"2018951", isNoBrand:false });
+Ngoài ra, G321 hỗ trợ Bluetooth 5.2, tương thích với PC/Mac, thiết bị di động và các hệ máy console như Xbox, PS4/PS5, Switch, lý tưởng cho chơi game, nghe nhạc, gọi Discord.
+ 
+Logitech G ASTRO A20 X: kết nối kép cho game thủ console 
+
+	
+
+
+	
+		
+
+		
+
+
+	
+
+
+
+	
+
+Logitech G ASTRO A20 X là tai nghe không dây lý tưởng cho game thủ console, mang
+đến âm thanh mạnh mẽ, kết nối linh hoạt và tùy biến cao. A20 X nổi bật với PLAYSYNC AUDIO – cho phép kết nối đồng thời hai hệ máy console (như PS5 và Xbox Series X|S) và dễ dàng chuyển đổi chỉ với một nút bấm. Tích hợp LIGHTSYNC RGB với 8 vùng tùy chỉnh màu sắc, mang đến khả năng cá nhân hóa theo phong cách riêng.
+ 
+Về âm thanh, A20 X dùng màng loa PRO-G 40mm, micro tháo rời đạt chất lượng phát sóng 48kHz, hỗ trợ tắt tiếng nhanh và có đèn báo riêng biệt. MixAmp tích hợp giúp điều chỉnh âm lượng game/chat trực tiếp, trong khi Blue VO!CE cho phép tùy chỉnh giọng nói chuyên nghiệp.
+ 
+
+	
+
+
+	
+		
+
+		
+
+
+	
+
+
+
+	
+
+Ngoài ra, Logitech G còn giới thiệu chuột gaming Logitech G PRO X2 SUPERSTRIKE với công nghệ SUPERSTRIKE độc quyền, giúp giảm độ trễ nhấp chuột lên tới 30 ms. Chuột nặng chỉ 65g nhưng trang bị cảm biến HERO 2 tiên tiến với 44.000 DPI và tốc độ 888 IPS. Công nghệ LIGHTSPEED đảm bảo kết nối ổn định với tốc độ 8 kHz. Thời lượng pin 90 giờ cùng khả năng tùy chỉnh 10 bước kích hoạt, mang lại lợi thế cạnh tranh vượt trội cho game thủ.
+[2025-09-19 03:14:39] [profile-3] Calling Roxane AI (assistant mode)...
+[2025-09-19 03:14:49] [profile-3] AI Response: *   Logitech G PRO X SUPERLIGHT 2c: Chuột không dây 51-53g, cảm biến HERO 2 (44,000 DPI), công tắc LIGHTFORCE, LIGHTSPEED kết nối.
+*   Logitech G515 RAPID TKL: Bàn phím cơ gaming thiếu phím số, switch analog từ tính, hành trình phím 2.5mm, tùy chỉnh LIGHTSYNC RGB.
+*   Logitech G321 LIGHTSPEED: Tai nghe không dây, LIGHTSPEED kết nối (10m), thời lượng pin >20 giờ, Bluetooth 5.2.
+   *Logitech G ASTRO A20
+[2025-09-19 03:14:49] [profile-3] AI response stored in: aiResponse
+[2025-09-19 03:14:49] [profile-3] aiResponse: *   Logitech G PRO X SUPERLIGHT 2c: Chuột không dây 51-53g, cảm biến HERO 2 (44,000 DPI), công tắc LIGHTFORCE, LIGHTSPEED kết nối.
+*   Logitech G515 RAPID TKL: Bàn phím cơ gaming thiếu phím số, switch analog từ tính, hành trình phím 2.5mm, tùy chỉnh LIGHTSYNC RGB.
+*   Logitech G321 LIGHTSPEED: Tai nghe không dây, LIGHTSPEED kết nối (10m), thời lượng pin >20 giờ, Bluetooth 5.2.
+   *Logitech G ASTRO A20
+[2025-09-19 03:14:49] Script execution completed successfully
+[2025-09-19 03:20:25] [profile-3] Using task directory: /Users/mac/Desktop/Worker/Worker/storage/local/3/local
+[2025-09-19 03:20:25] [profile-3] Original script (first 200 chars):
+[2025-09-19 03:20:25] [profile-3] import puppeteer from "puppeteer";
+import * as act from "#act";
+await page.goto("https://tinhte.vn/");
+console.log("Page title:", await page.title());
+await act.click(page, "//*[@id=\"__next\"]/div[1]
+[2025-09-19 03:20:25] [profile-3] Script imports converted to require statements
+[2025-09-19 03:20:25] Pre-loading ES6 modules...
+[2025-09-19 03:20:26] ES6 modules loading completed
+[2025-09-19 03:20:26] [profile-3] Processed Script:....
+[2025-09-19 03:20:26] [profile-3] try { config = JSON.parse(config); } catch (e) { }
+const puppeteer = require("puppeteer");
+const act = require("#act");
+await page.goto("https://tinhte.vn/");
+console.log("Page title:", await page.title());
+await act.click(page, "//*[@id=\"__next\"]/div[1]/div[1]/div[2]/div/div/div[1]/div[1]/ol/li[1]/div[2]/article/div/h4/a", 0);
+// Extract text content from element
+const extractedData = await act.getText(page, "//*[@id=\"__next\"]/div[1]/div/div[2]/div[2]/div[1]/div/div/div[1]/main");
+console.log("Extracted text into 'extractedData':", extractedData);
+// Assign variable from extractedData to data
+const data = extractedData;
+console.log("Assigned 'data':", data);
+// AI Assistant (social_commenter) - Using Roxane API
+const aiResponse = await (async () => {
+  const axios = (await import('axios')).default;
+  // Using input from variable: data
+  const userPrompt = `Comment on this: ${data}`;
+
+  const requestConfig = {
+    method: 'POST',
+    url: 'https://llmapi.roxane.one/v1/chat/completions',
+    headers: {
+      'Content-Type': 'application/json',
+      'Authorization': 'Bearer linh-1752464641053-phonefarm'
+    },
+    data: {
+      model: 'text-model',
+      messages: [
+        { role: 'system', content: "You are a social media user. Create ONE natural comment only. Rules:\n- Write ONLY the comment, nothing else\n- No quotes, brackets, or explanations\n- Be genuine and conversational\n- 1-2 sentences maximum\n- Match the language of the post\n- No formatting like *asterisks* or _underscores_" },
+        { role: 'user', content: userPrompt }
+      ],
+      temperature: 0.8,
+      max_tokens: 150
+    }
+  };
+
+  try {
+    console.log('Calling Roxane AI (social_commenter mode)...');
+    const response = await axios(requestConfig);
+    let aiText = response.data.choices[0].message.content;
+    
+    // Clean the response
+    aiText = aiText.trim();
+    // Remove quotes if present
+    aiText = aiText.replace(/^["']|["']$/g, '');
+    // Remove common prefixes
+    aiText = aiText.replace(/^(Comment:|Answer:|Response:|Here is|Here's)\s*/i, '');
+    // Remove markdown formatting
+    aiText = aiText.replace(/\*\*(.*?)\*\*/g, '$1');
+    aiText = aiText.replace(/__(.*?)__/g, '$1');
+    aiText = aiText.replace(/\*(.*?)\*/g, '$1');
+    aiText = aiText.replace(/_(.*?)_/g, '$1');
+    
+    console.log('AI Response:', aiText);
+    return aiText;
+  } catch (error) {
+    console.error('Roxane AI Request failed:', error.message);
+    if (error.response) {
+      console.error('Error details:', error.response.data);
+    }
+    throw error;
+  }
+})();
+console.log('AI response stored in: aiResponse');
+console.log("aiResponse:", aiResponse);
+
+[2025-09-19 03:20:26] Executing automation script
+[2025-09-19 03:20:26] [profile-3] Script requesting module: #act
+[2025-09-19 03:20:26] [profile-3] Script requesting module: puppeteer
+[2025-09-19 03:20:26] [profile-3] Returning pre-loaded #act module, keys: ["checkElement","click","demo","elementExists","getAttribute","getAttributes","getElement","getElements","getText","getValue","pause","scrollToElement","scrollToEndOfPage","scrollToHomeOfPage","select","type","waitForElement","waitForNavigation","waitForTrueElement"]
+[2025-09-19 03:20:32] [profile-3] Page title: Tinhte.vn - MXH Hỏi đáp, Review, Thông tin công nghệ
+[2025-09-19 03:20:32] [profile-3] Click: //*[@id="__next"]/div[1]/div[1]/div[2]/div/div/div[1]/div[1]/ol/li[1]/div[2]/article/div/h4/a
+[2025-09-19 03:20:32] [profile-3] Pause in 500 milliseconds...
+[2025-09-19 03:20:32] [profile-3] ✅ Clicked element: //*[@id="__next"]/div[1]/div[1]/div[2]/div/div/div[1]/div[1]/ol/li[1]/div[2]/article/div/h4/a
+[2025-09-19 03:20:32] [profile-3] 📝 Get Text: "//*[@id="__next"]/div[1]/div/div[2]/div[2]/div[1]/div/div/div[1]/main" (attempt 1/3)
+[2025-09-19 03:20:37] [profile-3] ✅ Extracted text: "Logitech G ra mắt nhiều thiết bị gaming nổi bậtLê Huyền Vân+ Theo dõi18/9/2025 20:12Phản hồi: 0FactT..."
+[2025-09-19 03:20:37] [profile-3] Assigned 'data': Logitech G ra mắt nhiều thiết bị gaming nổi bậtLê Huyền Vân+ Theo dõi18/9/2025 20:12Phản hồi: 0FactTinhte FactFacebookXem nhanhẨnLogitech G PRO X SUPERLIGHT 2c: Nhỏ gọn, hiệu suất vượt trộiLogitech G515 RAPID TKL: Tốc độ tối đa, hiệu năng tối ưuLogitech G321 LIGHTSPEED: tai nghe không dây đa năngLogitech G ASTRO A20 X: kết nối kép cho game thủ consoleTại sự kiện Logitech G Play 2025, Logitech G chính thức giới thiệu hàng loạt sản phẩm, thiết bị
+gamning nổi bật nhằm hỗ trợ các game thủ.
+ 
+Logitech G PRO X SUPERLIGHT 2c: Nhỏ gọn, hiệu suất vượt trội 
+
+
+
+	View attachment 8369744
+	
+
+
+Logitech G PRO X SUPERLIGHT 2c là phiên bản thu gọn, nhẹ hơn của dòng chuột PRO
+X SUPERLIGHT, hướng đến game thủ có bàn tay nhỏ hoặc ưa chuộng kiểu cầm nhỏ gọn. Với trọng lượng chỉ 51g – 53g, và kích thước giảm 5%, chuột mang lại cảm giác thoải mái, giảm mỏi khi chơi game lâu.
+ 
+Chuột vẫn tích hợp công nghệ hàng đầu: cảm biến HERO 2 với độ phân giải ên đến 44.000 DPI và tốc độ theo dõi 888 inch/giây, cho độ chính xác cao. Công tắc lai LIGHTFORCE mang lại cảm giác bấm sắc nét, phản hồi nhanh. Kết nối không dây LIGHTSPEED với tốc độ phản hồi 8kHz giúp duy trì độ ổn định tối đa, tương thích sạc không dây POWERPLAY. 
+ 
+G PRO X SUPERLIGHT 2c có ba màu: đen, trắng, hồng. Phù hợp cho những ai tìm kiếm sự kết hợp giữa hiệu suất, thiết kế nhỏ gọn và phong cách.
+ 
+Logitech G515 RAPID TKL: Tốc độ tối đa, hiệu năng tối ưu 
+
+	
+
+
+	
+		
+
+		
+
+
+	
+
+
+
+	
+
+Logitech G515 RAPID TKL là bàn phím cơ gaming thiết kế không phím số, nhỏ gọn. Điểm nổi bật chính là công tắc analog từ tính cấu hình thấp (chỉ 22mm), mang lại tốc độ phản hồi cực nhanh.
+Hành trình phím 2.5mm, với điểm kích hoạt tùy chỉnh từ 0.1mm – 2.5mm, cho phép người chơi tinh chỉnh từng phím theo ý muốn.
+Bàn phím sử dụng switch đã bôi trơn sẵn, kết hợp với keycaps PBT đúc hai lớp. Thiết kế mỏng, mặt trên bằng thép không gỉ, cùng kết cấu chống ồn nhiều lớp giúp trải nghiệm gõ chắc chắn và êm ái.
+ 
+G515 RAPID TKL hỗ trợ LIGHTSYNC RGB, tùy chỉnh qua phần mềm Logitech G HUB, cho phép tạo macro, hồ sơ game và cá nhân hóa ánh sáng. Tương thích với PC/Mac và các hệ máy như Xbox, PlayStation, Nintendo Switch.
+ 
+Logitech G321 LIGHTSPEED: tai nghe không dây đa năng 
+
+	
+
+
+	
+		
+
+		
+
+
+	
+
+
+
+	
+
+Logitech G321 LIGHTSPEED là tai nghe không dây gaming mang đến sự kết hợp hoàn
+hảo giữa thoải mái, hiệu năng cao và tính đa dụng. Đệm đầu dày và chụp tai bằng mút hoạt tính bọc vải dệt kim mang lại cảm giác êm ái và vừa vặn cho nhiều kích cỡ đầu. Tai nghe sử dụng kết nối không dây LIGHTSPEED với độ trễ cực thấp trong phạm vi 10m, cùng thời lượng pin trên 20 giờ. Màng loa 40mm tái tạo âm thanh sống động, micro cần gạt 16kHz tích hợp có thể gập để tắt tiếng, giúp giao tiếp rõ ràng, tiện lợi.
+  Quảng cáoAdmicro AdX
+if (typeof(admsspPosition) == "undefined") {_admloadJs("//media1.admicro.vn/core/ssppage.js", function () {admsspPosition({sspid:10166,w:728,h:90, group: ""}); });} else {admsspPosition({sspid:10166,w:728,h:90, group: "", isNoBrand:false});}
+admssppageMobile({adslot:10172,w:300,h:250,zcp:"kmd75yxs",adslots:"","zones":"","sspid":"2018951", isNoBrand:false });
+Ngoài ra, G321 hỗ trợ Bluetooth 5.2, tương thích với PC/Mac, thiết bị di động và các hệ máy console như Xbox, PS4/PS5, Switch, lý tưởng cho chơi game, nghe nhạc, gọi Discord.
+ 
+Logitech G ASTRO A20 X: kết nối kép cho game thủ console 
+
+	
+
+
+	
+		
+
+		
+
+
+	
+
+
+
+	
+
+Logitech G ASTRO A20 X là tai nghe không dây lý tưởng cho game thủ console, mang
+đến âm thanh mạnh mẽ, kết nối linh hoạt và tùy biến cao. A20 X nổi bật với PLAYSYNC AUDIO – cho phép kết nối đồng thời hai hệ máy console (như PS5 và Xbox Series X|S) và dễ dàng chuyển đổi chỉ với một nút bấm. Tích hợp LIGHTSYNC RGB với 8 vùng tùy chỉnh màu sắc, mang đến khả năng cá nhân hóa theo phong cách riêng.
+ 
+Về âm thanh, A20 X dùng màng loa PRO-G 40mm, micro tháo rời đạt chất lượng phát sóng 48kHz, hỗ trợ tắt tiếng nhanh và có đèn báo riêng biệt. MixAmp tích hợp giúp điều chỉnh âm lượng game/chat trực tiếp, trong khi Blue VO!CE cho phép tùy chỉnh giọng nói chuyên nghiệp.
+ 
+
+	
+
+
+	
+		
+
+		
+
+
+	
+
+
+
+	
+
+Ngoài ra, Logitech G còn giới thiệu chuột gaming Logitech G PRO X2 SUPERSTRIKE với công nghệ SUPERSTRIKE độc quyền, giúp giảm độ trễ nhấp chuột lên tới 30 ms. Chuột nặng chỉ 65g nhưng trang bị cảm biến HERO 2 tiên tiến với 44.000 DPI và tốc độ 888 IPS. Công nghệ LIGHTSPEED đảm bảo kết nối ổn định với tốc độ 8 kHz. Thời lượng pin 90 giờ cùng khả năng tùy chỉnh 10 bước kích hoạt, mang lại lợi thế cạnh tranh vượt trội cho game thủ.
+[2025-09-19 03:20:37] [profile-3] Extracted text into 'extractedData': Logitech G ra mắt nhiều thiết bị gaming nổi bậtLê Huyền Vân+ Theo dõi18/9/2025 20:12Phản hồi: 0FactTinhte FactFacebookXem nhanhẨnLogitech G PRO X SUPERLIGHT 2c: Nhỏ gọn, hiệu suất vượt trộiLogitech G515 RAPID TKL: Tốc độ tối đa, hiệu năng tối ưuLogitech G321 LIGHTSPEED: tai nghe không dây đa năngLogitech G ASTRO A20 X: kết nối kép cho game thủ consoleTại sự kiện Logitech G Play 2025, Logitech G chính thức giới thiệu hàng loạt sản phẩm, thiết bị
+gamning nổi bật nhằm hỗ trợ các game thủ.
+ 
+Logitech G PRO X SUPERLIGHT 2c: Nhỏ gọn, hiệu suất vượt trội 
+
+
+
+	View attachment 8369744
+	
+
+
+Logitech G PRO X SUPERLIGHT 2c là phiên bản thu gọn, nhẹ hơn của dòng chuột PRO
+X SUPERLIGHT, hướng đến game thủ có bàn tay nhỏ hoặc ưa chuộng kiểu cầm nhỏ gọn. Với trọng lượng chỉ 51g – 53g, và kích thước giảm 5%, chuột mang lại cảm giác thoải mái, giảm mỏi khi chơi game lâu.
+ 
+Chuột vẫn tích hợp công nghệ hàng đầu: cảm biến HERO 2 với độ phân giải ên đến 44.000 DPI và tốc độ theo dõi 888 inch/giây, cho độ chính xác cao. Công tắc lai LIGHTFORCE mang lại cảm giác bấm sắc nét, phản hồi nhanh. Kết nối không dây LIGHTSPEED với tốc độ phản hồi 8kHz giúp duy trì độ ổn định tối đa, tương thích sạc không dây POWERPLAY. 
+ 
+G PRO X SUPERLIGHT 2c có ba màu: đen, trắng, hồng. Phù hợp cho những ai tìm kiếm sự kết hợp giữa hiệu suất, thiết kế nhỏ gọn và phong cách.
+ 
+Logitech G515 RAPID TKL: Tốc độ tối đa, hiệu năng tối ưu 
+
+	
+
+
+	
+		
+
+		
+
+
+	
+
+
+
+	
+
+Logitech G515 RAPID TKL là bàn phím cơ gaming thiết kế không phím số, nhỏ gọn. Điểm nổi bật chính là công tắc analog từ tính cấu hình thấp (chỉ 22mm), mang lại tốc độ phản hồi cực nhanh.
+Hành trình phím 2.5mm, với điểm kích hoạt tùy chỉnh từ 0.1mm – 2.5mm, cho phép người chơi tinh chỉnh từng phím theo ý muốn.
+Bàn phím sử dụng switch đã bôi trơn sẵn, kết hợp với keycaps PBT đúc hai lớp. Thiết kế mỏng, mặt trên bằng thép không gỉ, cùng kết cấu chống ồn nhiều lớp giúp trải nghiệm gõ chắc chắn và êm ái.
+ 
+G515 RAPID TKL hỗ trợ LIGHTSYNC RGB, tùy chỉnh qua phần mềm Logitech G HUB, cho phép tạo macro, hồ sơ game và cá nhân hóa ánh sáng. Tương thích với PC/Mac và các hệ máy như Xbox, PlayStation, Nintendo Switch.
+ 
+Logitech G321 LIGHTSPEED: tai nghe không dây đa năng 
+
+	
+
+
+	
+		
+
+		
+
+
+	
+
+
+
+	
+
+Logitech G321 LIGHTSPEED là tai nghe không dây gaming mang đến sự kết hợp hoàn
+hảo giữa thoải mái, hiệu năng cao và tính đa dụng. Đệm đầu dày và chụp tai bằng mút hoạt tính bọc vải dệt kim mang lại cảm giác êm ái và vừa vặn cho nhiều kích cỡ đầu. Tai nghe sử dụng kết nối không dây LIGHTSPEED với độ trễ cực thấp trong phạm vi 10m, cùng thời lượng pin trên 20 giờ. Màng loa 40mm tái tạo âm thanh sống động, micro cần gạt 16kHz tích hợp có thể gập để tắt tiếng, giúp giao tiếp rõ ràng, tiện lợi.
+  Quảng cáoAdmicro AdX
+if (typeof(admsspPosition) == "undefined") {_admloadJs("//media1.admicro.vn/core/ssppage.js", function () {admsspPosition({sspid:10166,w:728,h:90, group: ""}); });} else {admsspPosition({sspid:10166,w:728,h:90, group: "", isNoBrand:false});}
+admssppageMobile({adslot:10172,w:300,h:250,zcp:"kmd75yxs",adslots:"","zones":"","sspid":"2018951", isNoBrand:false });
+Ngoài ra, G321 hỗ trợ Bluetooth 5.2, tương thích với PC/Mac, thiết bị di động và các hệ máy console như Xbox, PS4/PS5, Switch, lý tưởng cho chơi game, nghe nhạc, gọi Discord.
+ 
+Logitech G ASTRO A20 X: kết nối kép cho game thủ console 
+
+	
+
+
+	
+		
+
+		
+
+
+	
+
+
+
+	
+
+Logitech G ASTRO A20 X là tai nghe không dây lý tưởng cho game thủ console, mang
+đến âm thanh mạnh mẽ, kết nối linh hoạt và tùy biến cao. A20 X nổi bật với PLAYSYNC AUDIO – cho phép kết nối đồng thời hai hệ máy console (như PS5 và Xbox Series X|S) và dễ dàng chuyển đổi chỉ với một nút bấm. Tích hợp LIGHTSYNC RGB với 8 vùng tùy chỉnh màu sắc, mang đến khả năng cá nhân hóa theo phong cách riêng.
+ 
+Về âm thanh, A20 X dùng màng loa PRO-G 40mm, micro tháo rời đạt chất lượng phát sóng 48kHz, hỗ trợ tắt tiếng nhanh và có đèn báo riêng biệt. MixAmp tích hợp giúp điều chỉnh âm lượng game/chat trực tiếp, trong khi Blue VO!CE cho phép tùy chỉnh giọng nói chuyên nghiệp.
+ 
+
+	
+
+
+	
+		
+
+		
+
+
+	
+
+
+
+	
+
+Ngoài ra, Logitech G còn giới thiệu chuột gaming Logitech G PRO X2 SUPERSTRIKE với công nghệ SUPERSTRIKE độc quyền, giúp giảm độ trễ nhấp chuột lên tới 30 ms. Chuột nặng chỉ 65g nhưng trang bị cảm biến HERO 2 tiên tiến với 44.000 DPI và tốc độ 888 IPS. Công nghệ LIGHTSPEED đảm bảo kết nối ổn định với tốc độ 8 kHz. Thời lượng pin 90 giờ cùng khả năng tùy chỉnh 10 bước kích hoạt, mang lại lợi thế cạnh tranh vượt trội cho game thủ.
+[2025-09-19 03:20:37] [profile-3] Calling Roxane AI (social_commenter mode)...
+[2025-09-19 03:20:45] [profile-3] AI Response: Ui nhìn nhiều sản phẩm quá, nhất là cái tai nghe A20 X kết nối kép chắc game thủ console khoái lắm đây!
+[2025-09-19 03:20:45] [profile-3] aiResponse: Ui nhìn nhiều sản phẩm quá, nhất là cái tai nghe A20 X kết nối kép chắc game thủ console khoái lắm đây!
+[2025-09-19 03:20:45] Script execution completed successfully
+[2025-09-19 03:20:45] [profile-3] AI response stored in: aiResponse
+[2025-09-19 03:22:47] [profile-3] Using task directory: /Users/mac/Desktop/Worker/Worker/storage/local/3/local
+[2025-09-19 03:22:47] [profile-3] Original script (first 200 chars):
+[2025-09-19 03:22:47] [profile-3] import puppeteer from "puppeteer";
+import * as act from "#act";
+await page.goto("https://tinhte.vn/");
+console.log("Page title:", await page.title());
+await act.click(page, "//*[@id=\"__next\"]/div[1]
+[2025-09-19 03:22:47] [profile-3] Script imports converted to require statements
+[2025-09-19 03:22:47] Pre-loading ES6 modules...
+[2025-09-19 03:22:48] ES6 modules loading completed
+[2025-09-19 03:22:48] [profile-3] Processed Script:....
+[2025-09-19 03:22:48] [profile-3] try { config = JSON.parse(config); } catch (e) { }
+const puppeteer = require("puppeteer");
+const act = require("#act");
+await page.goto("https://tinhte.vn/");
+console.log("Page title:", await page.title());
+await act.click(page, "//*[@id=\"__next\"]/div[1]/div[1]/div[2]/div/div/div[1]/div[1]/ol/li[1]/div[2]/article/div/h4/a", 0);
+// Extract text content from element
+const extractedData = await act.getText(page, "//*[@id=\"__next\"]/div[1]/div/div[2]/div[2]/div[1]/div/div/div[1]/main");
+console.log("Extracted text into 'extractedData':", extractedData);
+// Assign variable from extractedData to data
+const data = extractedData;
+console.log("Assigned 'data':", data);
+// AI Assistant (social_commenter) - Using Roxane API
+const aiResponse = await (async () => {
+  const axios = (await import('axios')).default;
+  // Using input from variable: data
+  const userPrompt = `Comment on this: ${data}`;
+
+  const requestConfig = {
+    method: 'POST',
+    url: 'https://llmapi.roxane.one/v1/chat/completions',
+    headers: {
+      'Content-Type': 'application/json',
+      'Authorization': 'Bearer linh-1752464641053-phonefarm'
+    },
+    data: {
+      model: 'text-model',
+      messages: [
+        { role: 'system', content: "You are a social media user. Create ONE natural comment only. Rules:\n- Write ONLY the comment, nothing else\n- No quotes, brackets, or explanations\n- Be genuine and conversational\n- 1-2 sentences maximum\n- Match the language of the post\n- No formatting like *asterisks* or _underscores_" },
+        { role: 'user', content: userPrompt }
+      ],
+      temperature: 0.8,
+      max_tokens: 150
+    }
+  };
+
+  try {
+    console.log('Calling Roxane AI (social_commenter mode)...');
+    const response = await axios(requestConfig);
+    let aiText = response.data.choices[0].message.content;
+    
+    // Clean the response
+    aiText = aiText.trim();
+    // Remove quotes if present
+    aiText = aiText.replace(/^["']|["']$/g, '');
+    // Remove common prefixes
+    aiText = aiText.replace(/^(Comment:|Answer:|Response:|Here is|Here's)\s*/i, '');
+    // Remove markdown formatting
+    aiText = aiText.replace(/\*\*(.*?)\*\*/g, '$1');
+    aiText = aiText.replace(/__(.*?)__/g, '$1');
+    aiText = aiText.replace(/\*(.*?)\*/g, '$1');
+    aiText = aiText.replace(/_(.*?)_/g, '$1');
+    
+    console.log('AI Response:', aiText);
+    return aiText;
+  } catch (error) {
+    console.error('Roxane AI Request failed:', error.message);
+    if (error.response) {
+      console.error('Error details:', error.response.data);
+    }
+    throw error;
+  }
+})();
+console.log('AI response stored in: aiResponse');
+console.log("aiResponse:", aiResponse);
+
+[2025-09-19 03:22:48] Executing automation script
+[2025-09-19 03:22:48] [profile-3] Script requesting module: puppeteer
+[2025-09-19 03:22:48] [profile-3] Script requesting module: #act
+[2025-09-19 03:22:48] [profile-3] Returning pre-loaded #act module, keys: ["checkElement","click","demo","elementExists","getAttribute","getAttributes","getElement","getElements","getText","getValue","pause","scrollToElement","scrollToEndOfPage","scrollToHomeOfPage","select","type","waitForElement","waitForNavigation","waitForTrueElement"]
+[2025-09-19 03:22:53] [profile-3] Page title: Tinhte.vn - MXH Hỏi đáp, Review, Thông tin công nghệ
+[2025-09-19 03:22:53] [profile-3] Click: //*[@id="__next"]/div[1]/div[1]/div[2]/div/div/div[1]/div[1]/ol/li[1]/div[2]/article/div/h4/a
+[2025-09-19 03:22:53] [profile-3] Pause in 500 milliseconds...
+[2025-09-19 03:22:54] [profile-3] ✅ Clicked element: //*[@id="__next"]/div[1]/div[1]/div[2]/div/div/div[1]/div[1]/ol/li[1]/div[2]/article/div/h4/a
+[2025-09-19 03:22:54] [profile-3] 📝 Get Text: "//*[@id="__next"]/div[1]/div/div[2]/div[2]/div[1]/div/div/div[1]/main" (attempt 1/3)
+[2025-09-19 03:22:59] [profile-3] ✅ Extracted text: "Logitech G ra mắt nhiều thiết bị gaming nổi bậtLê Huyền Vân+ Theo dõi18/9/2025 20:12Phản hồi: 0FactT..."
+[2025-09-19 03:22:59] [profile-3] Extracted text into 'extractedData': Logitech G ra mắt nhiều thiết bị gaming nổi bậtLê Huyền Vân+ Theo dõi18/9/2025 20:12Phản hồi: 0FactTinhte FactFacebookXem nhanhẨnLogitech G PRO X SUPERLIGHT 2c: Nhỏ gọn, hiệu suất vượt trộiLogitech G515 RAPID TKL: Tốc độ tối đa, hiệu năng tối ưuLogitech G321 LIGHTSPEED: tai nghe không dây đa năngLogitech G ASTRO A20 X: kết nối kép cho game thủ consoleTại sự kiện Logitech G Play 2025, Logitech G chính thức giới thiệu hàng loạt sản phẩm, thiết bị
+gamning nổi bật nhằm hỗ trợ các game thủ.
+ 
+Logitech G PRO X SUPERLIGHT 2c: Nhỏ gọn, hiệu suất vượt trội 
+
+
+
+	View attachment 8369744
+	
+
+
+Logitech G PRO X SUPERLIGHT 2c là phiên bản thu gọn, nhẹ hơn của dòng chuột PRO
+X SUPERLIGHT, hướng đến game thủ có bàn tay nhỏ hoặc ưa chuộng kiểu cầm nhỏ gọn. Với trọng lượng chỉ 51g – 53g, và kích thước giảm 5%, chuột mang lại cảm giác thoải mái, giảm mỏi khi chơi game lâu.
+ 
+Chuột vẫn tích hợp công nghệ hàng đầu: cảm biến HERO 2 với độ phân giải ên đến 44.000 DPI và tốc độ theo dõi 888 inch/giây, cho độ chính xác cao. Công tắc lai LIGHTFORCE mang lại cảm giác bấm sắc nét, phản hồi nhanh. Kết nối không dây LIGHTSPEED với tốc độ phản hồi 8kHz giúp duy trì độ ổn định tối đa, tương thích sạc không dây POWERPLAY. 
+ 
+G PRO X SUPERLIGHT 2c có ba màu: đen, trắng, hồng. Phù hợp cho những ai tìm kiếm sự kết hợp giữa hiệu suất, thiết kế nhỏ gọn và phong cách.
+ 
+Logitech G515 RAPID TKL: Tốc độ tối đa, hiệu năng tối ưu 
+
+	
+
+
+	
+		
+
+		
+
+
+	
+
+
+
+	
+
+Logitech G515 RAPID TKL là bàn phím cơ gaming thiết kế không phím số, nhỏ gọn. Điểm nổi bật chính là công tắc analog từ tính cấu hình thấp (chỉ 22mm), mang lại tốc độ phản hồi cực nhanh.
+Hành trình phím 2.5mm, với điểm kích hoạt tùy chỉnh từ 0.1mm – 2.5mm, cho phép người chơi tinh chỉnh từng phím theo ý muốn.
+Bàn phím sử dụng switch đã bôi trơn sẵn, kết hợp với keycaps PBT đúc hai lớp. Thiết kế mỏng, mặt trên bằng thép không gỉ, cùng kết cấu chống ồn nhiều lớp giúp trải nghiệm gõ chắc chắn và êm ái.
+ 
+G515 RAPID TKL hỗ trợ LIGHTSYNC RGB, tùy chỉnh qua phần mềm Logitech G HUB, cho phép tạo macro, hồ sơ game và cá nhân hóa ánh sáng. Tương thích với PC/Mac và các hệ máy như Xbox, PlayStation, Nintendo Switch.
+ 
+Logitech G321 LIGHTSPEED: tai nghe không dây đa năng 
+
+	
+
+
+	
+		
+
+		
+
+
+	
+
+
+
+	
+
+Logitech G321 LIGHTSPEED là tai nghe không dây gaming mang đến sự kết hợp hoàn
+hảo giữa thoải mái, hiệu năng cao và tính đa dụng. Đệm đầu dày và chụp tai bằng mút hoạt tính bọc vải dệt kim mang lại cảm giác êm ái và vừa vặn cho nhiều kích cỡ đầu. Tai nghe sử dụng kết nối không dây LIGHTSPEED với độ trễ cực thấp trong phạm vi 10m, cùng thời lượng pin trên 20 giờ. Màng loa 40mm tái tạo âm thanh sống động, micro cần gạt 16kHz tích hợp có thể gập để tắt tiếng, giúp giao tiếp rõ ràng, tiện lợi.
+  Quảng cáoAdmicro AdX
+if (typeof(admsspPosition) == "undefined") {_admloadJs("//media1.admicro.vn/core/ssppage.js", function () {admsspPosition({sspid:10166,w:728,h:90, group: ""}); });} else {admsspPosition({sspid:10166,w:728,h:90, group: "", isNoBrand:false});}
+admssppageMobile({adslot:10172,w:300,h:250,zcp:"kmd75yxs",adslots:"","zones":"","sspid":"2018951", isNoBrand:false });
+Ngoài ra, G321 hỗ trợ Bluetooth 5.2, tương thích với PC/Mac, thiết bị di động và các hệ máy console như Xbox, PS4/PS5, Switch, lý tưởng cho chơi game, nghe nhạc, gọi Discord.
+ 
+Logitech G ASTRO A20 X: kết nối kép cho game thủ console 
+
+	
+
+
+	
+		
+
+		
+
+
+	
+
+
+
+	
+
+Logitech G ASTRO A20 X là tai nghe không dây lý tưởng cho game thủ console, mang
+đến âm thanh mạnh mẽ, kết nối linh hoạt và tùy biến cao. A20 X nổi bật với PLAYSYNC AUDIO – cho phép kết nối đồng thời hai hệ máy console (như PS5 và Xbox Series X|S) và dễ dàng chuyển đổi chỉ với một nút bấm. Tích hợp LIGHTSYNC RGB với 8 vùng tùy chỉnh màu sắc, mang đến khả năng cá nhân hóa theo phong cách riêng.
+ 
+Về âm thanh, A20 X dùng màng loa PRO-G 40mm, micro tháo rời đạt chất lượng phát sóng 48kHz, hỗ trợ tắt tiếng nhanh và có đèn báo riêng biệt. MixAmp tích hợp giúp điều chỉnh âm lượng game/chat trực tiếp, trong khi Blue VO!CE cho phép tùy chỉnh giọng nói chuyên nghiệp.
+ 
+
+	
+
+
+	
+		
+
+		
+
+
+	
+
+
+
+	
+
+Ngoài ra, Logitech G còn giới thiệu chuột gaming Logitech G PRO X2 SUPERSTRIKE với công nghệ SUPERSTRIKE độc quyền, giúp giảm độ trễ nhấp chuột lên tới 30 ms. Chuột nặng chỉ 65g nhưng trang bị cảm biến HERO 2 tiên tiến với 44.000 DPI và tốc độ 888 IPS. Công nghệ LIGHTSPEED đảm bảo kết nối ổn định với tốc độ 8 kHz. Thời lượng pin 90 giờ cùng khả năng tùy chỉnh 10 bước kích hoạt, mang lại lợi thế cạnh tranh vượt trội cho game thủ.
+[2025-09-19 03:22:59] [profile-3] Assigned 'data': Logitech G ra mắt nhiều thiết bị gaming nổi bậtLê Huyền Vân+ Theo dõi18/9/2025 20:12Phản hồi: 0FactTinhte FactFacebookXem nhanhẨnLogitech G PRO X SUPERLIGHT 2c: Nhỏ gọn, hiệu suất vượt trộiLogitech G515 RAPID TKL: Tốc độ tối đa, hiệu năng tối ưuLogitech G321 LIGHTSPEED: tai nghe không dây đa năngLogitech G ASTRO A20 X: kết nối kép cho game thủ consoleTại sự kiện Logitech G Play 2025, Logitech G chính thức giới thiệu hàng loạt sản phẩm, thiết bị
+gamning nổi bật nhằm hỗ trợ các game thủ.
+ 
+Logitech G PRO X SUPERLIGHT 2c: Nhỏ gọn, hiệu suất vượt trội 
+
+
+
+	View attachment 8369744
+	
+
+
+Logitech G PRO X SUPERLIGHT 2c là phiên bản thu gọn, nhẹ hơn của dòng chuột PRO
+X SUPERLIGHT, hướng đến game thủ có bàn tay nhỏ hoặc ưa chuộng kiểu cầm nhỏ gọn. Với trọng lượng chỉ 51g – 53g, và kích thước giảm 5%, chuột mang lại cảm giác thoải mái, giảm mỏi khi chơi game lâu.
+ 
+Chuột vẫn tích hợp công nghệ hàng đầu: cảm biến HERO 2 với độ phân giải ên đến 44.000 DPI và tốc độ theo dõi 888 inch/giây, cho độ chính xác cao. Công tắc lai LIGHTFORCE mang lại cảm giác bấm sắc nét, phản hồi nhanh. Kết nối không dây LIGHTSPEED với tốc độ phản hồi 8kHz giúp duy trì độ ổn định tối đa, tương thích sạc không dây POWERPLAY. 
+ 
+G PRO X SUPERLIGHT 2c có ba màu: đen, trắng, hồng. Phù hợp cho những ai tìm kiếm sự kết hợp giữa hiệu suất, thiết kế nhỏ gọn và phong cách.
+ 
+Logitech G515 RAPID TKL: Tốc độ tối đa, hiệu năng tối ưu 
+
+	
+
+
+	
+		
+
+		
+
+
+	
+
+
+
+	
+
+Logitech G515 RAPID TKL là bàn phím cơ gaming thiết kế không phím số, nhỏ gọn. Điểm nổi bật chính là công tắc analog từ tính cấu hình thấp (chỉ 22mm), mang lại tốc độ phản hồi cực nhanh.
+Hành trình phím 2.5mm, với điểm kích hoạt tùy chỉnh từ 0.1mm – 2.5mm, cho phép người chơi tinh chỉnh từng phím theo ý muốn.
+Bàn phím sử dụng switch đã bôi trơn sẵn, kết hợp với keycaps PBT đúc hai lớp. Thiết kế mỏng, mặt trên bằng thép không gỉ, cùng kết cấu chống ồn nhiều lớp giúp trải nghiệm gõ chắc chắn và êm ái.
+ 
+G515 RAPID TKL hỗ trợ LIGHTSYNC RGB, tùy chỉnh qua phần mềm Logitech G HUB, cho phép tạo macro, hồ sơ game và cá nhân hóa ánh sáng. Tương thích với PC/Mac và các hệ máy như Xbox, PlayStation, Nintendo Switch.
+ 
+Logitech G321 LIGHTSPEED: tai nghe không dây đa năng 
+
+	
+
+
+	
+		
+
+		
+
+
+	
+
+
+
+	
+
+Logitech G321 LIGHTSPEED là tai nghe không dây gaming mang đến sự kết hợp hoàn
+hảo giữa thoải mái, hiệu năng cao và tính đa dụng. Đệm đầu dày và chụp tai bằng mút hoạt tính bọc vải dệt kim mang lại cảm giác êm ái và vừa vặn cho nhiều kích cỡ đầu. Tai nghe sử dụng kết nối không dây LIGHTSPEED với độ trễ cực thấp trong phạm vi 10m, cùng thời lượng pin trên 20 giờ. Màng loa 40mm tái tạo âm thanh sống động, micro cần gạt 16kHz tích hợp có thể gập để tắt tiếng, giúp giao tiếp rõ ràng, tiện lợi.
+  Quảng cáoAdmicro AdX
+if (typeof(admsspPosition) == "undefined") {_admloadJs("//media1.admicro.vn/core/ssppage.js", function () {admsspPosition({sspid:10166,w:728,h:90, group: ""}); });} else {admsspPosition({sspid:10166,w:728,h:90, group: "", isNoBrand:false});}
+admssppageMobile({adslot:10172,w:300,h:250,zcp:"kmd75yxs",adslots:"","zones":"","sspid":"2018951", isNoBrand:false });
+Ngoài ra, G321 hỗ trợ Bluetooth 5.2, tương thích với PC/Mac, thiết bị di động và các hệ máy console như Xbox, PS4/PS5, Switch, lý tưởng cho chơi game, nghe nhạc, gọi Discord.
+ 
+Logitech G ASTRO A20 X: kết nối kép cho game thủ console 
+
+	
+
+
+	
+		
+
+		
+
+
+	
+
+
+
+	
+
+Logitech G ASTRO A20 X là tai nghe không dây lý tưởng cho game thủ console, mang
+đến âm thanh mạnh mẽ, kết nối linh hoạt và tùy biến cao. A20 X nổi bật với PLAYSYNC AUDIO – cho phép kết nối đồng thời hai hệ máy console (như PS5 và Xbox Series X|S) và dễ dàng chuyển đổi chỉ với một nút bấm. Tích hợp LIGHTSYNC RGB với 8 vùng tùy chỉnh màu sắc, mang đến khả năng cá nhân hóa theo phong cách riêng.
+ 
+Về âm thanh, A20 X dùng màng loa PRO-G 40mm, micro tháo rời đạt chất lượng phát sóng 48kHz, hỗ trợ tắt tiếng nhanh và có đèn báo riêng biệt. MixAmp tích hợp giúp điều chỉnh âm lượng game/chat trực tiếp, trong khi Blue VO!CE cho phép tùy chỉnh giọng nói chuyên nghiệp.
+ 
+
+	
+
+
+	
+		
+
+		
+
+
+	
+
+
+
+	
+
+Ngoài ra, Logitech G còn giới thiệu chuột gaming Logitech G PRO X2 SUPERSTRIKE với công nghệ SUPERSTRIKE độc quyền, giúp giảm độ trễ nhấp chuột lên tới 30 ms. Chuột nặng chỉ 65g nhưng trang bị cảm biến HERO 2 tiên tiến với 44.000 DPI và tốc độ 888 IPS. Công nghệ LIGHTSPEED đảm bảo kết nối ổn định với tốc độ 8 kHz. Thời lượng pin 90 giờ cùng khả năng tùy chỉnh 10 bước kích hoạt, mang lại lợi thế cạnh tranh vượt trội cho game thủ.
+[2025-09-19 03:22:59] [profile-3] Calling Roxane AI (social_commenter mode)...
+[2025-09-19 03:23:05] [profile-3] AI Response: Ui nhìn dàn sản phẩm mới quá! Chắc phải cân nhắc mua em tai nghe không dây G321 LIGHTSPEED xem sao.
+[2025-09-19 03:23:05] [profile-3] aiResponse: Ui nhìn dàn sản phẩm mới quá! Chắc phải cân nhắc mua em tai nghe không dây G321 LIGHTSPEED xem sao.
+[2025-09-19 03:23:05] [profile-3] AI response stored in: aiResponse
+[2025-09-19 03:23:05] Script execution completed successfully
+[2025-09-19 03:24:13] [profile-3] Original script (first 200 chars):
+[2025-09-19 03:24:13] [profile-3] Using task directory: /Users/mac/Desktop/Worker/Worker/storage/local/3/local
+[2025-09-19 03:24:13] [profile-3] Script imports converted to require statements
+[2025-09-19 03:24:13] Pre-loading ES6 modules...
+[2025-09-19 03:24:13] [profile-3] import puppeteer from "puppeteer";
+import * as act from "#act";
+await page.goto("https://tinhte.vn/");
+console.log("Page title:", await page.title());
+await act.click(page, "//*[@id=\"__next\"]/div[1]
+[2025-09-19 03:24:13] ES6 modules loading completed
+[2025-09-19 03:24:13] [profile-3] Processed Script:....
+[2025-09-19 03:24:13] [profile-3] try { config = JSON.parse(config); } catch (e) { }
+const puppeteer = require("puppeteer");
+const act = require("#act");
+await page.goto("https://tinhte.vn/");
+console.log("Page title:", await page.title());
+await act.click(page, "//*[@id=\"__next\"]/div[1]/div[1]/div[2]/div/div/div[1]/div[1]/ol/li[1]/div[2]/article/div/h4/a", 0);
+// Extract text content from element
+const extractedData = await act.getText(page, "//*[@id=\"__next\"]/div[1]/div/div[2]/div[2]/div[1]/div/div/div[1]/main");
+console.log("Extracted text into 'extractedData':", extractedData);
+// Assign variable from extractedData to data
+const data = extractedData;
+console.log("Assigned 'data':", data);
+// AI Assistant (social_commenter) - Using Roxane API
+const aiResponse = await (async () => {
+  const axios = (await import('axios')).default;
+  // Using input from variable: data
+  const userPrompt = `Comment on this: ${data}`;
+
+  const requestConfig = {
+    method: 'POST',
+    url: 'https://llmapi.roxane.one/v1/chat/completions',
+    headers: {
+      'Content-Type': 'application/json',
+      'Authorization': 'Bearer linh-1752464641053-phonefarm'
+    },
+    data: {
+      model: 'text-model',
+      messages: [
+        { role: 'system', content: "You are a social media user. Create ONE natural comment only. Rules:\n- Write ONLY the comment, nothing else\n- No quotes, brackets, or explanations\n- Be genuine and conversational\n- 1-2 sentences maximum\n- Match the language of the post\n- No formatting like *asterisks* or _underscores_" },
+        { role: 'user', content: userPrompt }
+      ],
+      temperature: 0.8,
+      max_tokens: 150
+    }
+  };
+
+  try {
+    console.log('Calling Roxane AI (social_commenter mode)...');
+    const response = await axios(requestConfig);
+    let aiText = response.data.choices[0].message.content;
+    
+    // Clean the response
+    aiText = aiText.trim();
+    // Remove quotes if present
+    aiText = aiText.replace(/^["']|["']$/g, '');
+    // Remove common prefixes
+    aiText = aiText.replace(/^(Comment:|Answer:|Response:|Here is|Here's)\s*/i, '');
+    // Remove markdown formatting
+    aiText = aiText.replace(/\*\*(.*?)\*\*/g, '$1');
+    aiText = aiText.replace(/__(.*?)__/g, '$1');
+    aiText = aiText.replace(/\*(.*?)\*/g, '$1');
+    aiText = aiText.replace(/_(.*?)_/g, '$1');
+    
+    console.log('AI Response:', aiText);
+    return aiText;
+  } catch (error) {
+    console.error('Roxane AI Request failed:', error.message);
+    if (error.response) {
+      console.error('Error details:', error.response.data);
+    }
+    throw error;
+  }
+})();
+console.log('AI response stored in: aiResponse');
+console.log("aiResponse:", aiResponse);
+
+[2025-09-19 03:24:13] Executing automation script
+[2025-09-19 03:24:13] [profile-3] Script requesting module: puppeteer
+[2025-09-19 03:24:14] [profile-3] Script requesting module: #act
+[2025-09-19 03:24:14] [profile-3] Returning pre-loaded #act module, keys: ["checkElement","click","demo","elementExists","getAttribute","getAttributes","getElement","getElements","getText","getValue","pause","scrollToElement","scrollToEndOfPage","scrollToHomeOfPage","select","type","waitForElement","waitForNavigation","waitForTrueElement"]
+[2025-09-19 03:24:18] [profile-3] Page title: Tinhte.vn - MXH Hỏi đáp, Review, Thông tin công nghệ
+[2025-09-19 03:24:18] [profile-3] Click: //*[@id="__next"]/div[1]/div[1]/div[2]/div/div/div[1]/div[1]/ol/li[1]/div[2]/article/div/h4/a
+[2025-09-19 03:24:20] [profile-3] Pause in 500 milliseconds...
+[2025-09-19 03:24:20] [profile-3] ✅ Clicked element: //*[@id="__next"]/div[1]/div[1]/div[2]/div/div/div[1]/div[1]/ol/li[1]/div[2]/article/div/h4/a
+[2025-09-19 03:24:20] [profile-3] 📝 Get Text: "//*[@id="__next"]/div[1]/div/div[2]/div[2]/div[1]/div/div/div[1]/main" (attempt 1/3)
+[2025-09-19 03:24:26] [profile-3] ✅ Extracted text: "Logitech G ra mắt nhiều thiết bị gaming nổi bậtLê Huyền Vân+ Theo dõi18/9/2025 20:12Phản hồi: 0FactT..."
+[2025-09-19 03:24:26] [profile-3] Assigned 'data': Logitech G ra mắt nhiều thiết bị gaming nổi bậtLê Huyền Vân+ Theo dõi18/9/2025 20:12Phản hồi: 0FactTinhte FactFacebookXem nhanhẨnLogitech G PRO X SUPERLIGHT 2c: Nhỏ gọn, hiệu suất vượt trộiLogitech G515 RAPID TKL: Tốc độ tối đa, hiệu năng tối ưuLogitech G321 LIGHTSPEED: tai nghe không dây đa năngLogitech G ASTRO A20 X: kết nối kép cho game thủ consoleTại sự kiện Logitech G Play 2025, Logitech G chính thức giới thiệu hàng loạt sản phẩm, thiết bị
+gamning nổi bật nhằm hỗ trợ các game thủ.
+ 
+Logitech G PRO X SUPERLIGHT 2c: Nhỏ gọn, hiệu suất vượt trội 
+
+
+
+	View attachment 8369744
+	
+
+
+Logitech G PRO X SUPERLIGHT 2c là phiên bản thu gọn, nhẹ hơn của dòng chuột PRO
+X SUPERLIGHT, hướng đến game thủ có bàn tay nhỏ hoặc ưa chuộng kiểu cầm nhỏ gọn. Với trọng lượng chỉ 51g – 53g, và kích thước giảm 5%, chuột mang lại cảm giác thoải mái, giảm mỏi khi chơi game lâu.
+ 
+Chuột vẫn tích hợp công nghệ hàng đầu: cảm biến HERO 2 với độ phân giải ên đến 44.000 DPI và tốc độ theo dõi 888 inch/giây, cho độ chính xác cao. Công tắc lai LIGHTFORCE mang lại cảm giác bấm sắc nét, phản hồi nhanh. Kết nối không dây LIGHTSPEED với tốc độ phản hồi 8kHz giúp duy trì độ ổn định tối đa, tương thích sạc không dây POWERPLAY. 
+ 
+G PRO X SUPERLIGHT 2c có ba màu: đen, trắng, hồng. Phù hợp cho những ai tìm kiếm sự kết hợp giữa hiệu suất, thiết kế nhỏ gọn và phong cách.
+ 
+Logitech G515 RAPID TKL: Tốc độ tối đa, hiệu năng tối ưu 
+
+	
+
+
+	
+		
+
+		
+
+
+	
+
+
+
+	
+
+Logitech G515 RAPID TKL là bàn phím cơ gaming thiết kế không phím số, nhỏ gọn. Điểm nổi bật chính là công tắc analog từ tính cấu hình thấp (chỉ 22mm), mang lại tốc độ phản hồi cực nhanh.
+Hành trình phím 2.5mm, với điểm kích hoạt tùy chỉnh từ 0.1mm – 2.5mm, cho phép người chơi tinh chỉnh từng phím theo ý muốn.
+Bàn phím sử dụng switch đã bôi trơn sẵn, kết hợp với keycaps PBT đúc hai lớp. Thiết kế mỏng, mặt trên bằng thép không gỉ, cùng kết cấu chống ồn nhiều lớp giúp trải nghiệm gõ chắc chắn và êm ái.
+ 
+G515 RAPID TKL hỗ trợ LIGHTSYNC RGB, tùy chỉnh qua phần mềm Logitech G HUB, cho phép tạo macro, hồ sơ game và cá nhân hóa ánh sáng. Tương thích với PC/Mac và các hệ máy như Xbox, PlayStation, Nintendo Switch.
+ 
+Logitech G321 LIGHTSPEED: tai nghe không dây đa năng 
+
+	
+
+
+	
+		
+
+		
+
+
+	
+
+
+
+	
+
+Logitech G321 LIGHTSPEED là tai nghe không dây gaming mang đến sự kết hợp hoàn
+hảo giữa thoải mái, hiệu năng cao và tính đa dụng. Đệm đầu dày và chụp tai bằng mút hoạt tính bọc vải dệt kim mang lại cảm giác êm ái và vừa vặn cho nhiều kích cỡ đầu. Tai nghe sử dụng kết nối không dây LIGHTSPEED với độ trễ cực thấp trong phạm vi 10m, cùng thời lượng pin trên 20 giờ. Màng loa 40mm tái tạo âm thanh sống động, micro cần gạt 16kHz tích hợp có thể gập để tắt tiếng, giúp giao tiếp rõ ràng, tiện lợi.
+  Quảng cáoAdmicro AdX
+if (typeof(admsspPosition) == "undefined") {_admloadJs("//media1.admicro.vn/core/ssppage.js", function () {admsspPosition({sspid:10166,w:728,h:90, group: ""}); });} else {admsspPosition({sspid:10166,w:728,h:90, group: "", isNoBrand:false});}
+admssppageMobile({adslot:10172,w:300,h:250,zcp:"kmd75yxs",adslots:"","zones":"","sspid":"2018951", isNoBrand:false });
+Ngoài ra, G321 hỗ trợ Bluetooth 5.2, tương thích với PC/Mac, thiết bị di động và các hệ máy console như Xbox, PS4/PS5, Switch, lý tưởng cho chơi game, nghe nhạc, gọi Discord.
+ 
+Logitech G ASTRO A20 X: kết nối kép cho game thủ console 
+
+	
+
+
+	
+		
+
+		
+
+
+	
+
+
+
+	
+
+Logitech G ASTRO A20 X là tai nghe không dây lý tưởng cho game thủ console, mang
+đến âm thanh mạnh mẽ, kết nối linh hoạt và tùy biến cao. A20 X nổi bật với PLAYSYNC AUDIO – cho phép kết nối đồng thời hai hệ máy console (như PS5 và Xbox Series X|S) và dễ dàng chuyển đổi chỉ với một nút bấm. Tích hợp LIGHTSYNC RGB với 8 vùng tùy chỉnh màu sắc, mang đến khả năng cá nhân hóa theo phong cách riêng.
+ 
+Về âm thanh, A20 X dùng màng loa PRO-G 40mm, micro tháo rời đạt chất lượng phát sóng 48kHz, hỗ trợ tắt tiếng nhanh và có đèn báo riêng biệt. MixAmp tích hợp giúp điều chỉnh âm lượng game/chat trực tiếp, trong khi Blue VO!CE cho phép tùy chỉnh giọng nói chuyên nghiệp.
+ 
+
+	
+
+
+	
+		
+
+		
+
+
+	
+
+
+
+	
+
+Ngoài ra, Logitech G còn giới thiệu chuột gaming Logitech G PRO X2 SUPERSTRIKE với công nghệ SUPERSTRIKE độc quyền, giúp giảm độ trễ nhấp chuột lên tới 30 ms. Chuột nặng chỉ 65g nhưng trang bị cảm biến HERO 2 tiên tiến với 44.000 DPI và tốc độ 888 IPS. Công nghệ LIGHTSPEED đảm bảo kết nối ổn định với tốc độ 8 kHz. Thời lượng pin 90 giờ cùng khả năng tùy chỉnh 10 bước kích hoạt, mang lại lợi thế cạnh tranh vượt trội cho game thủ.
+[2025-09-19 03:24:26] [profile-3] Extracted text into 'extractedData': Logitech G ra mắt nhiều thiết bị gaming nổi bậtLê Huyền Vân+ Theo dõi18/9/2025 20:12Phản hồi: 0FactTinhte FactFacebookXem nhanhẨnLogitech G PRO X SUPERLIGHT 2c: Nhỏ gọn, hiệu suất vượt trộiLogitech G515 RAPID TKL: Tốc độ tối đa, hiệu năng tối ưuLogitech G321 LIGHTSPEED: tai nghe không dây đa năngLogitech G ASTRO A20 X: kết nối kép cho game thủ consoleTại sự kiện Logitech G Play 2025, Logitech G chính thức giới thiệu hàng loạt sản phẩm, thiết bị
+gamning nổi bật nhằm hỗ trợ các game thủ.
+ 
+Logitech G PRO X SUPERLIGHT 2c: Nhỏ gọn, hiệu suất vượt trội 
+
+
+
+	View attachment 8369744
+	
+
+
+Logitech G PRO X SUPERLIGHT 2c là phiên bản thu gọn, nhẹ hơn của dòng chuột PRO
+X SUPERLIGHT, hướng đến game thủ có bàn tay nhỏ hoặc ưa chuộng kiểu cầm nhỏ gọn. Với trọng lượng chỉ 51g – 53g, và kích thước giảm 5%, chuột mang lại cảm giác thoải mái, giảm mỏi khi chơi game lâu.
+ 
+Chuột vẫn tích hợp công nghệ hàng đầu: cảm biến HERO 2 với độ phân giải ên đến 44.000 DPI và tốc độ theo dõi 888 inch/giây, cho độ chính xác cao. Công tắc lai LIGHTFORCE mang lại cảm giác bấm sắc nét, phản hồi nhanh. Kết nối không dây LIGHTSPEED với tốc độ phản hồi 8kHz giúp duy trì độ ổn định tối đa, tương thích sạc không dây POWERPLAY. 
+ 
+G PRO X SUPERLIGHT 2c có ba màu: đen, trắng, hồng. Phù hợp cho những ai tìm kiếm sự kết hợp giữa hiệu suất, thiết kế nhỏ gọn và phong cách.
+ 
+Logitech G515 RAPID TKL: Tốc độ tối đa, hiệu năng tối ưu 
+
+	
+
+
+	
+		
+
+		
+
+
+	
+
+
+
+	
+
+Logitech G515 RAPID TKL là bàn phím cơ gaming thiết kế không phím số, nhỏ gọn. Điểm nổi bật chính là công tắc analog từ tính cấu hình thấp (chỉ 22mm), mang lại tốc độ phản hồi cực nhanh.
+Hành trình phím 2.5mm, với điểm kích hoạt tùy chỉnh từ 0.1mm – 2.5mm, cho phép người chơi tinh chỉnh từng phím theo ý muốn.
+Bàn phím sử dụng switch đã bôi trơn sẵn, kết hợp với keycaps PBT đúc hai lớp. Thiết kế mỏng, mặt trên bằng thép không gỉ, cùng kết cấu chống ồn nhiều lớp giúp trải nghiệm gõ chắc chắn và êm ái.
+ 
+G515 RAPID TKL hỗ trợ LIGHTSYNC RGB, tùy chỉnh qua phần mềm Logitech G HUB, cho phép tạo macro, hồ sơ game và cá nhân hóa ánh sáng. Tương thích với PC/Mac và các hệ máy như Xbox, PlayStation, Nintendo Switch.
+ 
+Logitech G321 LIGHTSPEED: tai nghe không dây đa năng 
+
+	
+
+
+	
+		
+
+		
+
+
+	
+
+
+
+	
+
+Logitech G321 LIGHTSPEED là tai nghe không dây gaming mang đến sự kết hợp hoàn
+hảo giữa thoải mái, hiệu năng cao và tính đa dụng. Đệm đầu dày và chụp tai bằng mút hoạt tính bọc vải dệt kim mang lại cảm giác êm ái và vừa vặn cho nhiều kích cỡ đầu. Tai nghe sử dụng kết nối không dây LIGHTSPEED với độ trễ cực thấp trong phạm vi 10m, cùng thời lượng pin trên 20 giờ. Màng loa 40mm tái tạo âm thanh sống động, micro cần gạt 16kHz tích hợp có thể gập để tắt tiếng, giúp giao tiếp rõ ràng, tiện lợi.
+  Quảng cáoAdmicro AdX
+if (typeof(admsspPosition) == "undefined") {_admloadJs("//media1.admicro.vn/core/ssppage.js", function () {admsspPosition({sspid:10166,w:728,h:90, group: ""}); });} else {admsspPosition({sspid:10166,w:728,h:90, group: "", isNoBrand:false});}
+admssppageMobile({adslot:10172,w:300,h:250,zcp:"kmd75yxs",adslots:"","zones":"","sspid":"2018951", isNoBrand:false });
+Ngoài ra, G321 hỗ trợ Bluetooth 5.2, tương thích với PC/Mac, thiết bị di động và các hệ máy console như Xbox, PS4/PS5, Switch, lý tưởng cho chơi game, nghe nhạc, gọi Discord.
+ 
+Logitech G ASTRO A20 X: kết nối kép cho game thủ console 
+
+	
+
+
+	
+		
+
+		
+
+
+	
+
+
+
+	
+
+Logitech G ASTRO A20 X là tai nghe không dây lý tưởng cho game thủ console, mang
+đến âm thanh mạnh mẽ, kết nối linh hoạt và tùy biến cao. A20 X nổi bật với PLAYSYNC AUDIO – cho phép kết nối đồng thời hai hệ máy console (như PS5 và Xbox Series X|S) và dễ dàng chuyển đổi chỉ với một nút bấm. Tích hợp LIGHTSYNC RGB với 8 vùng tùy chỉnh màu sắc, mang đến khả năng cá nhân hóa theo phong cách riêng.
+ 
+Về âm thanh, A20 X dùng màng loa PRO-G 40mm, micro tháo rời đạt chất lượng phát sóng 48kHz, hỗ trợ tắt tiếng nhanh và có đèn báo riêng biệt. MixAmp tích hợp giúp điều chỉnh âm lượng game/chat trực tiếp, trong khi Blue VO!CE cho phép tùy chỉnh giọng nói chuyên nghiệp.
+ 
+
+	
+
+
+	
+		
+
+		
+
+
+	
+
+
+
+	
+
+Ngoài ra, Logitech G còn giới thiệu chuột gaming Logitech G PRO X2 SUPERSTRIKE với công nghệ SUPERSTRIKE độc quyền, giúp giảm độ trễ nhấp chuột lên tới 30 ms. Chuột nặng chỉ 65g nhưng trang bị cảm biến HERO 2 tiên tiến với 44.000 DPI và tốc độ 888 IPS. Công nghệ LIGHTSPEED đảm bảo kết nối ổn định với tốc độ 8 kHz. Thời lượng pin 90 giờ cùng khả năng tùy chỉnh 10 bước kích hoạt, mang lại lợi thế cạnh tranh vượt trội cho game thủ.
+[2025-09-19 03:24:26] [profile-3] Calling Roxane AI (social_commenter mode)...
+[2025-09-19 03:24:32] [profile-3] AI Response: Ui nhìn nhiều sản phẩm quá, nhất là cái tai nghe không dây nghe có vẻ ổn đấy!
+[2025-09-19 03:24:32] [profile-3] aiResponse: Ui nhìn nhiều sản phẩm quá, nhất là cái tai nghe không dây nghe có vẻ ổn đấy!
+[2025-09-19 03:24:32] [profile-3] AI response stored in: aiResponse
+[2025-09-19 03:24:32] Script execution completed successfully
+[2025-09-19 03:27:50] [profile-3] Using task directory: /Users/mac/Desktop/Worker/Worker/storage/local/3/local
+[2025-09-19 03:27:50] [profile-3] Original script (first 200 chars):
+[2025-09-19 03:27:50] [profile-3] import puppeteer from "puppeteer";
+import * as act from "#act";
+await page.goto("https://tinhte.vn/");
+console.log("Page title:", await page.title());
+await act.click(page, "//*[@id=\"__next\"]/div[1]
+[2025-09-19 03:27:50] [profile-3] Script imports converted to require statements
+[2025-09-19 03:27:50] Pre-loading ES6 modules...
+[2025-09-19 03:27:50] ES6 modules loading completed
+[2025-09-19 03:27:50] [profile-3] Processed Script:....
+[2025-09-19 03:27:50] [profile-3] try { config = JSON.parse(config); } catch (e) { }
+const puppeteer = require("puppeteer");
+const act = require("#act");
+await page.goto("https://tinhte.vn/");
+console.log("Page title:", await page.title());
+await act.click(page, "//*[@id=\"__next\"]/div[1]/div[1]/div[2]/div/div/div[1]/div[1]/ol/li[1]/div[2]/article/div/h4/a", 0);
+// Extract text content from element
+const extractedData = await act.getText(page, "//*[@id=\"__next\"]/div[1]/div/div[2]/div[2]/div[1]/div/div/div[1]/main");
+console.log("Extracted text into 'extractedData':", extractedData);
+// Assign variable from extractedData to data
+const data = extractedData;
+console.log("Assigned 'data':", data);
+// AI Assistant (social_commenter) - Using Roxane API
+const aiResponse = await (async () => {
+  const axios = (await import('axios')).default;
+  // Using input from variable: data
+  const userPrompt = `Comment on this: ${data}`;
+
+  const requestConfig = {
+    method: 'POST',
+    url: 'https://llmapi.roxane.one/v1/chat/completions',
+    headers: {
+      'Content-Type': 'application/json',
+      'Authorization': 'Bearer linh-1752464641053-phonefarm'
+    },
+    data: {
+      model: 'text-model',
+      messages: [
+        { role: 'system', content: "You are a social media user. Create ONE natural comment only. Rules:\n- Write ONLY the comment, nothing else\n- No quotes, brackets, or explanations\n- Be genuine and conversational\n- 1-2 sentences maximum\n- Match the language of the post\n- No formatting like *asterisks* or _underscores_" },
+        { role: 'user', content: userPrompt }
+      ],
+      temperature: 0.8,
+      max_tokens: 150
+    }
+  };
+
+  try {
+    console.log('Calling Roxane AI (social_commenter mode)...');
+    const response = await axios(requestConfig);
+    let aiText = response.data.choices[0].message.content;
+    
+    // Clean the response
+    aiText = aiText.trim();
+    // Remove quotes if present
+    aiText = aiText.replace(/^["']|["']$/g, '');
+    // Remove common prefixes
+    aiText = aiText.replace(/^(Comment:|Answer:|Response:|Here is|Here's)\s*/i, '');
+    // Remove markdown formatting
+    aiText = aiText.replace(/\*\*(.*?)\*\*/g, '$1');
+    aiText = aiText.replace(/__(.*?)__/g, '$1');
+    aiText = aiText.replace(/\*(.*?)\*/g, '$1');
+    aiText = aiText.replace(/_(.*?)_/g, '$1');
+    
+    console.log('AI Response:', aiText);
+    return aiText;
+  } catch (error) {
+    console.error('Roxane AI Request failed:', error.message);
+    if (error.response) {
+      console.error('Error details:', error.response.data);
+    }
+    throw error;
+  }
+})();
+console.log('AI response stored in: aiResponse');
+console.log("aiResponse:", aiResponse);
+
+[2025-09-19 03:27:50] Executing automation script
+[2025-09-19 03:27:50] [profile-3] Script requesting module: puppeteer
+[2025-09-19 03:27:51] [profile-3] Script requesting module: #act
+[2025-09-19 03:27:51] [profile-3] Returning pre-loaded #act module, keys: ["checkElement","click","demo","elementExists","getAttribute","getAttributes","getElement","getElements","getText","getValue","pause","scrollToElement","scrollToEndOfPage","scrollToHomeOfPage","select","type","waitForElement","waitForNavigation","waitForTrueElement"]
+[2025-09-19 03:27:57] [profile-3] Page title: Tinhte.vn - MXH Hỏi đáp, Review, Thông tin công nghệ
+[2025-09-19 03:27:57] [profile-3] Click: //*[@id="__next"]/div[1]/div[1]/div[2]/div/div/div[1]/div[1]/ol/li[1]/div[2]/article/div/h4/a
+[2025-09-19 03:27:57] [profile-3] Pause in 500 milliseconds...
+[2025-09-19 03:27:58] [profile-3] ✅ Clicked element: //*[@id="__next"]/div[1]/div[1]/div[2]/div/div/div[1]/div[1]/ol/li[1]/div[2]/article/div/h4/a
+[2025-09-19 03:27:58] [profile-3] 📝 Get Text: "//*[@id="__next"]/div[1]/div/div[2]/div[2]/div[1]/div/div/div[1]/main" (attempt 1/3)
+[2025-09-19 03:28:01] [profile-3] ✅ Extracted text: "Logitech G ra mắt nhiều thiết bị gaming nổi bậtLê Huyền Vân+ Theo dõi18/9/2025 20:12Phản hồi: 0FactT..."
+[2025-09-19 03:28:01] [profile-3] Extracted text into 'extractedData': Logitech G ra mắt nhiều thiết bị gaming nổi bậtLê Huyền Vân+ Theo dõi18/9/2025 20:12Phản hồi: 0FactTinhte FactFacebookXem nhanhẨnLogitech G PRO X SUPERLIGHT 2c: Nhỏ gọn, hiệu suất vượt trộiLogitech G515 RAPID TKL: Tốc độ tối đa, hiệu năng tối ưuLogitech G321 LIGHTSPEED: tai nghe không dây đa năngLogitech G ASTRO A20 X: kết nối kép cho game thủ consoleTại sự kiện Logitech G Play 2025, Logitech G chính thức giới thiệu hàng loạt sản phẩm, thiết bị
+gamning nổi bật nhằm hỗ trợ các game thủ.
+ 
+Logitech G PRO X SUPERLIGHT 2c: Nhỏ gọn, hiệu suất vượt trội 
+
+
+
+	View attachment 8369744
+	
+
+
+Logitech G PRO X SUPERLIGHT 2c là phiên bản thu gọn, nhẹ hơn của dòng chuột PRO
+X SUPERLIGHT, hướng đến game thủ có bàn tay nhỏ hoặc ưa chuộng kiểu cầm nhỏ gọn. Với trọng lượng chỉ 51g – 53g, và kích thước giảm 5%, chuột mang lại cảm giác thoải mái, giảm mỏi khi chơi game lâu.
+ 
+Chuột vẫn tích hợp công nghệ hàng đầu: cảm biến HERO 2 với độ phân giải ên đến 44.000 DPI và tốc độ theo dõi 888 inch/giây, cho độ chính xác cao. Công tắc lai LIGHTFORCE mang lại cảm giác bấm sắc nét, phản hồi nhanh. Kết nối không dây LIGHTSPEED với tốc độ phản hồi 8kHz giúp duy trì độ ổn định tối đa, tương thích sạc không dây POWERPLAY. 
+ 
+G PRO X SUPERLIGHT 2c có ba màu: đen, trắng, hồng. Phù hợp cho những ai tìm kiếm sự kết hợp giữa hiệu suất, thiết kế nhỏ gọn và phong cách.
+ 
+Logitech G515 RAPID TKL: Tốc độ tối đa, hiệu năng tối ưu 
+
+	
+
+
+	
+		
+
+		
+
+
+	
+
+
+
+	
+
+Logitech G515 RAPID TKL là bàn phím cơ gaming thiết kế không phím số, nhỏ gọn. Điểm nổi bật chính là công tắc analog từ tính cấu hình thấp (chỉ 22mm), mang lại tốc độ phản hồi cực nhanh.
+Hành trình phím 2.5mm, với điểm kích hoạt tùy chỉnh từ 0.1mm – 2.5mm, cho phép người chơi tinh chỉnh từng phím theo ý muốn.
+Bàn phím sử dụng switch đã bôi trơn sẵn, kết hợp với keycaps PBT đúc hai lớp. Thiết kế mỏng, mặt trên bằng thép không gỉ, cùng kết cấu chống ồn nhiều lớp giúp trải nghiệm gõ chắc chắn và êm ái.
+ 
+G515 RAPID TKL hỗ trợ LIGHTSYNC RGB, tùy chỉnh qua phần mềm Logitech G HUB, cho phép tạo macro, hồ sơ game và cá nhân hóa ánh sáng. Tương thích với PC/Mac và các hệ máy như Xbox, PlayStation, Nintendo Switch.
+ 
+Logitech G321 LIGHTSPEED: tai nghe không dây đa năng 
+
+	
+
+
+	
+		
+
+		
+
+
+	
+
+
+
+	
+
+Logitech G321 LIGHTSPEED là tai nghe không dây gaming mang đến sự kết hợp hoàn
+hảo giữa thoải mái, hiệu năng cao và tính đa dụng. Đệm đầu dày và chụp tai bằng mút hoạt tính bọc vải dệt kim mang lại cảm giác êm ái và vừa vặn cho nhiều kích cỡ đầu. Tai nghe sử dụng kết nối không dây LIGHTSPEED với độ trễ cực thấp trong phạm vi 10m, cùng thời lượng pin trên 20 giờ. Màng loa 40mm tái tạo âm thanh sống động, micro cần gạt 16kHz tích hợp có thể gập để tắt tiếng, giúp giao tiếp rõ ràng, tiện lợi.
+  Quảng cáoAdmicro AdX
+if (typeof(admsspPosition) == "undefined") {_admloadJs("//media1.admicro.vn/core/ssppage.js", function () {admsspPosition({sspid:10166,w:728,h:90, group: ""}); });} else {admsspPosition({sspid:10166,w:728,h:90, group: "", isNoBrand:false});}
+admssppageMobile({adslot:10172,w:300,h:250,zcp:"kmd75yxs",adslots:"","zones":"","sspid":"2018951", isNoBrand:false });
+Ngoài ra, G321 hỗ trợ Bluetooth 5.2, tương thích với PC/Mac, thiết bị di động và các hệ máy console như Xbox, PS4/PS5, Switch, lý tưởng cho chơi game, nghe nhạc, gọi Discord.
+ 
+Logitech G ASTRO A20 X: kết nối kép cho game thủ console 
+
+	
+
+
+	
+		
+
+		
+
+
+	
+
+
+
+	
+
+Logitech G ASTRO A20 X là tai nghe không dây lý tưởng cho game thủ console, mang
+đến âm thanh mạnh mẽ, kết nối linh hoạt và tùy biến cao. A20 X nổi bật với PLAYSYNC AUDIO – cho phép kết nối đồng thời hai hệ máy console (như PS5 và Xbox Series X|S) và dễ dàng chuyển đổi chỉ với một nút bấm. Tích hợp LIGHTSYNC RGB với 8 vùng tùy chỉnh màu sắc, mang đến khả năng cá nhân hóa theo phong cách riêng.
+ 
+Về âm thanh, A20 X dùng màng loa PRO-G 40mm, micro tháo rời đạt chất lượng phát sóng 48kHz, hỗ trợ tắt tiếng nhanh và có đèn báo riêng biệt. MixAmp tích hợp giúp điều chỉnh âm lượng game/chat trực tiếp, trong khi Blue VO!CE cho phép tùy chỉnh giọng nói chuyên nghiệp.
+ 
+
+	
+
+
+	
+		
+
+		
+
+
+	
+
+
+
+	
+
+Ngoài ra, Logitech G còn giới thiệu chuột gaming Logitech G PRO X2 SUPERSTRIKE với công nghệ SUPERSTRIKE độc quyền, giúp giảm độ trễ nhấp chuột lên tới 30 ms. Chuột nặng chỉ 65g nhưng trang bị cảm biến HERO 2 tiên tiến với 44.000 DPI và tốc độ 888 IPS. Công nghệ LIGHTSPEED đảm bảo kết nối ổn định với tốc độ 8 kHz. Thời lượng pin 90 giờ cùng khả năng tùy chỉnh 10 bước kích hoạt, mang lại lợi thế cạnh tranh vượt trội cho game thủ.
+[2025-09-19 03:28:01] [profile-3] Assigned 'data': Logitech G ra mắt nhiều thiết bị gaming nổi bậtLê Huyền Vân+ Theo dõi18/9/2025 20:12Phản hồi: 0FactTinhte FactFacebookXem nhanhẨnLogitech G PRO X SUPERLIGHT 2c: Nhỏ gọn, hiệu suất vượt trộiLogitech G515 RAPID TKL: Tốc độ tối đa, hiệu năng tối ưuLogitech G321 LIGHTSPEED: tai nghe không dây đa năngLogitech G ASTRO A20 X: kết nối kép cho game thủ consoleTại sự kiện Logitech G Play 2025, Logitech G chính thức giới thiệu hàng loạt sản phẩm, thiết bị
+gamning nổi bật nhằm hỗ trợ các game thủ.
+ 
+Logitech G PRO X SUPERLIGHT 2c: Nhỏ gọn, hiệu suất vượt trội 
+
+
+
+	View attachment 8369744
+	
+
+
+Logitech G PRO X SUPERLIGHT 2c là phiên bản thu gọn, nhẹ hơn của dòng chuột PRO
+X SUPERLIGHT, hướng đến game thủ có bàn tay nhỏ hoặc ưa chuộng kiểu cầm nhỏ gọn. Với trọng lượng chỉ 51g – 53g, và kích thước giảm 5%, chuột mang lại cảm giác thoải mái, giảm mỏi khi chơi game lâu.
+ 
+Chuột vẫn tích hợp công nghệ hàng đầu: cảm biến HERO 2 với độ phân giải ên đến 44.000 DPI và tốc độ theo dõi 888 inch/giây, cho độ chính xác cao. Công tắc lai LIGHTFORCE mang lại cảm giác bấm sắc nét, phản hồi nhanh. Kết nối không dây LIGHTSPEED với tốc độ phản hồi 8kHz giúp duy trì độ ổn định tối đa, tương thích sạc không dây POWERPLAY. 
+ 
+G PRO X SUPERLIGHT 2c có ba màu: đen, trắng, hồng. Phù hợp cho những ai tìm kiếm sự kết hợp giữa hiệu suất, thiết kế nhỏ gọn và phong cách.
+ 
+Logitech G515 RAPID TKL: Tốc độ tối đa, hiệu năng tối ưu 
+
+	
+
+
+	
+		
+
+		
+
+
+	
+
+
+
+	
+
+Logitech G515 RAPID TKL là bàn phím cơ gaming thiết kế không phím số, nhỏ gọn. Điểm nổi bật chính là công tắc analog từ tính cấu hình thấp (chỉ 22mm), mang lại tốc độ phản hồi cực nhanh.
+Hành trình phím 2.5mm, với điểm kích hoạt tùy chỉnh từ 0.1mm – 2.5mm, cho phép người chơi tinh chỉnh từng phím theo ý muốn.
+Bàn phím sử dụng switch đã bôi trơn sẵn, kết hợp với keycaps PBT đúc hai lớp. Thiết kế mỏng, mặt trên bằng thép không gỉ, cùng kết cấu chống ồn nhiều lớp giúp trải nghiệm gõ chắc chắn và êm ái.
+ 
+G515 RAPID TKL hỗ trợ LIGHTSYNC RGB, tùy chỉnh qua phần mềm Logitech G HUB, cho phép tạo macro, hồ sơ game và cá nhân hóa ánh sáng. Tương thích với PC/Mac và các hệ máy như Xbox, PlayStation, Nintendo Switch.
+ 
+Logitech G321 LIGHTSPEED: tai nghe không dây đa năng 
+
+	
+
+
+	
+		
+
+		
+
+
+	
+
+
+
+	
+
+Logitech G321 LIGHTSPEED là tai nghe không dây gaming mang đến sự kết hợp hoàn
+hảo giữa thoải mái, hiệu năng cao và tính đa dụng. Đệm đầu dày và chụp tai bằng mút hoạt tính bọc vải dệt kim mang lại cảm giác êm ái và vừa vặn cho nhiều kích cỡ đầu. Tai nghe sử dụng kết nối không dây LIGHTSPEED với độ trễ cực thấp trong phạm vi 10m, cùng thời lượng pin trên 20 giờ. Màng loa 40mm tái tạo âm thanh sống động, micro cần gạt 16kHz tích hợp có thể gập để tắt tiếng, giúp giao tiếp rõ ràng, tiện lợi.
+  Quảng cáoAdmicro AdX
+if (typeof(admsspPosition) == "undefined") {_admloadJs("//media1.admicro.vn/core/ssppage.js", function () {admsspPosition({sspid:10166,w:728,h:90, group: ""}); });} else {admsspPosition({sspid:10166,w:728,h:90, group: "", isNoBrand:false});}
+admssppageMobile({adslot:10172,w:300,h:250,zcp:"kmd75yxs",adslots:"","zones":"","sspid":"2018951", isNoBrand:false });
+Ngoài ra, G321 hỗ trợ Bluetooth 5.2, tương thích với PC/Mac, thiết bị di động và các hệ máy console như Xbox, PS4/PS5, Switch, lý tưởng cho chơi game, nghe nhạc, gọi Discord.
+ 
+Logitech G ASTRO A20 X: kết nối kép cho game thủ console 
+
+	
+
+
+	
+		
+
+		
+
+
+	
+
+
+
+	
+
+Logitech G ASTRO A20 X là tai nghe không dây lý tưởng cho game thủ console, mang
+đến âm thanh mạnh mẽ, kết nối linh hoạt và tùy biến cao. A20 X nổi bật với PLAYSYNC AUDIO – cho phép kết nối đồng thời hai hệ máy console (như PS5 và Xbox Series X|S) và dễ dàng chuyển đổi chỉ với một nút bấm. Tích hợp LIGHTSYNC RGB với 8 vùng tùy chỉnh màu sắc, mang đến khả năng cá nhân hóa theo phong cách riêng.
+ 
+Về âm thanh, A20 X dùng màng loa PRO-G 40mm, micro tháo rời đạt chất lượng phát sóng 48kHz, hỗ trợ tắt tiếng nhanh và có đèn báo riêng biệt. MixAmp tích hợp giúp điều chỉnh âm lượng game/chat trực tiếp, trong khi Blue VO!CE cho phép tùy chỉnh giọng nói chuyên nghiệp.
+ 
+
+	
+
+
+	
+		
+
+		
+
+
+	
+
+
+
+	
+
+Ngoài ra, Logitech G còn giới thiệu chuột gaming Logitech G PRO X2 SUPERSTRIKE với công nghệ SUPERSTRIKE độc quyền, giúp giảm độ trễ nhấp chuột lên tới 30 ms. Chuột nặng chỉ 65g nhưng trang bị cảm biến HERO 2 tiên tiến với 44.000 DPI và tốc độ 888 IPS. Công nghệ LIGHTSPEED đảm bảo kết nối ổn định với tốc độ 8 kHz. Thời lượng pin 90 giờ cùng khả năng tùy chỉnh 10 bước kích hoạt, mang lại lợi thế cạnh tranh vượt trội cho game thủ.
+[2025-09-19 03:28:01] [profile-3] Calling Roxane AI (social_commenter mode)...
+[2025-09-19 03:28:07] [profile-3] AI Response: Hay quá, nhiều sản phẩm mới và thú vị quá!
+[2025-09-19 03:28:07] [profile-3] AI response stored in: aiResponse
+[2025-09-19 03:28:07] [profile-3] aiResponse: Hay quá, nhiều sản phẩm mới và thú vị quá!
+[2025-09-19 03:28:07] Script execution completed successfully
+[2025-09-19 03:29:05] [profile-3] Using task directory: /Users/mac/Desktop/Worker/Worker/storage/local/3/local
+[2025-09-19 03:29:05] [profile-3] Original script (first 200 chars):
+[2025-09-19 03:29:05] [profile-3] import puppeteer from "puppeteer";
+import * as act from "#act";
+await page.goto("https://tinhte.vn/");
+console.log("Page title:", await page.title());
+await act.click(page, "//*[@id=\"__next\"]/div[1]
+[2025-09-19 03:29:05] [profile-3] Script imports converted to require statements
+[2025-09-19 03:29:05] Pre-loading ES6 modules...
+[2025-09-19 03:29:05] ES6 modules loading completed
+[2025-09-19 03:29:05] [profile-3] Processed Script:....
+[2025-09-19 03:29:05] [profile-3] try { config = JSON.parse(config); } catch (e) { }
+const puppeteer = require("puppeteer");
+const act = require("#act");
+await page.goto("https://tinhte.vn/");
+console.log("Page title:", await page.title());
+await act.click(page, "//*[@id=\"__next\"]/div[1]/div[1]/div[2]/div/div/div[1]/div[1]/ol/li[1]/div[2]/article/div/h4/a", 0);
+// Extract text content from element
+const extractedData = await act.getText(page, "//*[@id=\"__next\"]/div[1]/div/div[2]/div[2]/div[1]/div/div/div[1]/main");
+console.log("Extracted text into 'extractedData':", extractedData);
+// Assign variable from extractedData to data
+const data = extractedData;
+console.log("Assigned 'data':", data);
+// AI Assistant (social_commenter) - Using Roxane API
+const aiResponse = await (async () => {
+  const axios = (await import('axios')).default;
+  // Using input from variable: data
+  const userPrompt = `Comment on this: ${data}`;
+
+  const requestConfig = {
+    method: 'POST',
+    url: 'https://llmapi.roxane.one/v1/chat/completions',
+    headers: {
+      'Content-Type': 'application/json',
+      'Authorization': 'Bearer linh-1752464641053-phonefarm'
+    },
+    data: {
+      model: 'text-model',
+      messages: [
+        { role: 'system', content: "You are a social media user. Create ONE natural comment only. Rules:\n- Write ONLY the comment, nothing else\n- No quotes, brackets, or explanations\n- Be genuine and conversational\n- 1-2 sentences maximum\n- Match the language of the post\n- No formatting like *asterisks* or _underscores_" },
+        { role: 'user', content: userPrompt }
+      ],
+      temperature: 0.8,
+      max_tokens: 150
+    }
+  };
+
+  try {
+    console.log('Calling Roxane AI (social_commenter mode)...');
+    const response = await axios(requestConfig);
+    let aiText = response.data.choices[0].message.content;
+    
+    // Clean the response
+    aiText = aiText.trim();
+    // Remove quotes if present
+    aiText = aiText.replace(/^["']|["']$/g, '');
+    // Remove common prefixes
+    aiText = aiText.replace(/^(Comment:|Answer:|Response:|Here is|Here's)\s*/i, '');
+    // Remove markdown formatting
+    aiText = aiText.replace(/\*\*(.*?)\*\*/g, '$1');
+    aiText = aiText.replace(/__(.*?)__/g, '$1');
+    aiText = aiText.replace(/\*(.*?)\*/g, '$1');
+    aiText = aiText.replace(/_(.*?)_/g, '$1');
+    
+    console.log('AI Response:', aiText);
+    return aiText;
+  } catch (error) {
+    console.error('Roxane AI Request failed:', error.message);
+    if (error.response) {
+      console.error('Error details:', error.response.data);
+    }
+    throw error;
+  }
+})();
+console.log('AI response stored in: aiResponse');
+console.log("aiResponse:", aiResponse);
+
+[2025-09-19 03:29:05] Executing automation script
+[2025-09-19 03:29:05] [profile-3] Script requesting module: puppeteer
+[2025-09-19 03:29:06] [profile-3] Returning pre-loaded #act module, keys: ["checkElement","click","demo","elementExists","getAttribute","getAttributes","getElement","getElements","getText","getValue","pause","scrollToElement","scrollToEndOfPage","scrollToHomeOfPage","select","type","waitForElement","waitForNavigation","waitForTrueElement"]
+[2025-09-19 03:29:06] [profile-3] Script requesting module: #act
+[2025-09-19 03:29:10] [profile-3] Page title: Tinhte.vn - MXH Hỏi đáp, Review, Thông tin công nghệ
+[2025-09-19 03:29:10] [profile-3] Click: //*[@id="__next"]/div[1]/div[1]/div[2]/div/div/div[1]/div[1]/ol/li[1]/div[2]/article/div/h4/a
+[2025-09-19 03:29:10] [profile-3] Pause in 500 milliseconds...
+[2025-09-19 03:29:11] [profile-3] ✅ Clicked element: //*[@id="__next"]/div[1]/div[1]/div[2]/div/div/div[1]/div[1]/ol/li[1]/div[2]/article/div/h4/a
+[2025-09-19 03:29:11] [profile-3] 📝 Get Text: "//*[@id="__next"]/div[1]/div/div[2]/div[2]/div[1]/div/div/div[1]/main" (attempt 1/3)
+[2025-09-19 03:29:15] [profile-3] ✅ Extracted text: "Logitech G ra mắt nhiều thiết bị gaming nổi bậtLê Huyền Vân+ Theo dõi18/9/2025 20:12Phản hồi: 0FactT..."
+[2025-09-19 03:29:15] [profile-3] Extracted text into 'extractedData': Logitech G ra mắt nhiều thiết bị gaming nổi bậtLê Huyền Vân+ Theo dõi18/9/2025 20:12Phản hồi: 0FactTinhte FactFacebookXem nhanhẨnLogitech G PRO X SUPERLIGHT 2c: Nhỏ gọn, hiệu suất vượt trộiLogitech G515 RAPID TKL: Tốc độ tối đa, hiệu năng tối ưuLogitech G321 LIGHTSPEED: tai nghe không dây đa năngLogitech G ASTRO A20 X: kết nối kép cho game thủ consoleTại sự kiện Logitech G Play 2025, Logitech G chính thức giới thiệu hàng loạt sản phẩm, thiết bị
+gamning nổi bật nhằm hỗ trợ các game thủ.
+ 
+Logitech G PRO X SUPERLIGHT 2c: Nhỏ gọn, hiệu suất vượt trội 
+
+
+
+	View attachment 8369744
+	
+
+
+Logitech G PRO X SUPERLIGHT 2c là phiên bản thu gọn, nhẹ hơn của dòng chuột PRO
+X SUPERLIGHT, hướng đến game thủ có bàn tay nhỏ hoặc ưa chuộng kiểu cầm nhỏ gọn. Với trọng lượng chỉ 51g – 53g, và kích thước giảm 5%, chuột mang lại cảm giác thoải mái, giảm mỏi khi chơi game lâu.
+ 
+Chuột vẫn tích hợp công nghệ hàng đầu: cảm biến HERO 2 với độ phân giải ên đến 44.000 DPI và tốc độ theo dõi 888 inch/giây, cho độ chính xác cao. Công tắc lai LIGHTFORCE mang lại cảm giác bấm sắc nét, phản hồi nhanh. Kết nối không dây LIGHTSPEED với tốc độ phản hồi 8kHz giúp duy trì độ ổn định tối đa, tương thích sạc không dây POWERPLAY. 
+ 
+G PRO X SUPERLIGHT 2c có ba màu: đen, trắng, hồng. Phù hợp cho những ai tìm kiếm sự kết hợp giữa hiệu suất, thiết kế nhỏ gọn và phong cách.
+ 
+Logitech G515 RAPID TKL: Tốc độ tối đa, hiệu năng tối ưu 
+
+	
+
+
+	
+		
+
+		
+
+
+	
+
+
+
+	
+
+Logitech G515 RAPID TKL là bàn phím cơ gaming thiết kế không phím số, nhỏ gọn. Điểm nổi bật chính là công tắc analog từ tính cấu hình thấp (chỉ 22mm), mang lại tốc độ phản hồi cực nhanh.
+Hành trình phím 2.5mm, với điểm kích hoạt tùy chỉnh từ 0.1mm – 2.5mm, cho phép người chơi tinh chỉnh từng phím theo ý muốn.
+Bàn phím sử dụng switch đã bôi trơn sẵn, kết hợp với keycaps PBT đúc hai lớp. Thiết kế mỏng, mặt trên bằng thép không gỉ, cùng kết cấu chống ồn nhiều lớp giúp trải nghiệm gõ chắc chắn và êm ái.
+ 
+G515 RAPID TKL hỗ trợ LIGHTSYNC RGB, tùy chỉnh qua phần mềm Logitech G HUB, cho phép tạo macro, hồ sơ game và cá nhân hóa ánh sáng. Tương thích với PC/Mac và các hệ máy như Xbox, PlayStation, Nintendo Switch.
+ 
+Logitech G321 LIGHTSPEED: tai nghe không dây đa năng 
+
+	
+
+
+	
+		
+
+		
+
+
+	
+
+
+
+	
+
+Logitech G321 LIGHTSPEED là tai nghe không dây gaming mang đến sự kết hợp hoàn
+hảo giữa thoải mái, hiệu năng cao và tính đa dụng. Đệm đầu dày và chụp tai bằng mút hoạt tính bọc vải dệt kim mang lại cảm giác êm ái và vừa vặn cho nhiều kích cỡ đầu. Tai nghe sử dụng kết nối không dây LIGHTSPEED với độ trễ cực thấp trong phạm vi 10m, cùng thời lượng pin trên 20 giờ. Màng loa 40mm tái tạo âm thanh sống động, micro cần gạt 16kHz tích hợp có thể gập để tắt tiếng, giúp giao tiếp rõ ràng, tiện lợi.
+  Quảng cáoAdmicro AdX
+if (typeof(admsspPosition) == "undefined") {_admloadJs("//media1.admicro.vn/core/ssppage.js", function () {admsspPosition({sspid:10166,w:728,h:90, group: ""}); });} else {admsspPosition({sspid:10166,w:728,h:90, group: "", isNoBrand:false});}
+admssppageMobile({adslot:10172,w:300,h:250,zcp:"kmd75yxs",adslots:"","zones":"","sspid":"2018951", isNoBrand:false });
+Ngoài ra, G321 hỗ trợ Bluetooth 5.2, tương thích với PC/Mac, thiết bị di động và các hệ máy console như Xbox, PS4/PS5, Switch, lý tưởng cho chơi game, nghe nhạc, gọi Discord.
+ 
+Logitech G ASTRO A20 X: kết nối kép cho game thủ console 
+
+	
+
+
+	
+		
+
+		
+
+
+	
+
+
+
+	
+
+Logitech G ASTRO A20 X là tai nghe không dây lý tưởng cho game thủ console, mang
+đến âm thanh mạnh mẽ, kết nối linh hoạt và tùy biến cao. A20 X nổi bật với PLAYSYNC AUDIO – cho phép kết nối đồng thời hai hệ máy console (như PS5 và Xbox Series X|S) và dễ dàng chuyển đổi chỉ với một nút bấm. Tích hợp LIGHTSYNC RGB với 8 vùng tùy chỉnh màu sắc, mang đến khả năng cá nhân hóa theo phong cách riêng.
+ 
+Về âm thanh, A20 X dùng màng loa PRO-G 40mm, micro tháo rời đạt chất lượng phát sóng 48kHz, hỗ trợ tắt tiếng nhanh và có đèn báo riêng biệt. MixAmp tích hợp giúp điều chỉnh âm lượng game/chat trực tiếp, trong khi Blue VO!CE cho phép tùy chỉnh giọng nói chuyên nghiệp.
+ 
+
+	
+
+
+	
+		
+
+		
+
+
+	
+
+
+
+	
+
+Ngoài ra, Logitech G còn giới thiệu chuột gaming Logitech G PRO X2 SUPERSTRIKE với công nghệ SUPERSTRIKE độc quyền, giúp giảm độ trễ nhấp chuột lên tới 30 ms. Chuột nặng chỉ 65g nhưng trang bị cảm biến HERO 2 tiên tiến với 44.000 DPI và tốc độ 888 IPS. Công nghệ LIGHTSPEED đảm bảo kết nối ổn định với tốc độ 8 kHz. Thời lượng pin 90 giờ cùng khả năng tùy chỉnh 10 bước kích hoạt, mang lại lợi thế cạnh tranh vượt trội cho game thủ.
+[2025-09-19 03:29:15] [profile-3] Assigned 'data': Logitech G ra mắt nhiều thiết bị gaming nổi bậtLê Huyền Vân+ Theo dõi18/9/2025 20:12Phản hồi: 0FactTinhte FactFacebookXem nhanhẨnLogitech G PRO X SUPERLIGHT 2c: Nhỏ gọn, hiệu suất vượt trộiLogitech G515 RAPID TKL: Tốc độ tối đa, hiệu năng tối ưuLogitech G321 LIGHTSPEED: tai nghe không dây đa năngLogitech G ASTRO A20 X: kết nối kép cho game thủ consoleTại sự kiện Logitech G Play 2025, Logitech G chính thức giới thiệu hàng loạt sản phẩm, thiết bị
+gamning nổi bật nhằm hỗ trợ các game thủ.
+ 
+Logitech G PRO X SUPERLIGHT 2c: Nhỏ gọn, hiệu suất vượt trội 
+
+
+
+	View attachment 8369744
+	
+
+
+Logitech G PRO X SUPERLIGHT 2c là phiên bản thu gọn, nhẹ hơn của dòng chuột PRO
+X SUPERLIGHT, hướng đến game thủ có bàn tay nhỏ hoặc ưa chuộng kiểu cầm nhỏ gọn. Với trọng lượng chỉ 51g – 53g, và kích thước giảm 5%, chuột mang lại cảm giác thoải mái, giảm mỏi khi chơi game lâu.
+ 
+Chuột vẫn tích hợp công nghệ hàng đầu: cảm biến HERO 2 với độ phân giải ên đến 44.000 DPI và tốc độ theo dõi 888 inch/giây, cho độ chính xác cao. Công tắc lai LIGHTFORCE mang lại cảm giác bấm sắc nét, phản hồi nhanh. Kết nối không dây LIGHTSPEED với tốc độ phản hồi 8kHz giúp duy trì độ ổn định tối đa, tương thích sạc không dây POWERPLAY. 
+ 
+G PRO X SUPERLIGHT 2c có ba màu: đen, trắng, hồng. Phù hợp cho những ai tìm kiếm sự kết hợp giữa hiệu suất, thiết kế nhỏ gọn và phong cách.
+ 
+Logitech G515 RAPID TKL: Tốc độ tối đa, hiệu năng tối ưu 
+
+	
+
+
+	
+		
+
+		
+
+
+	
+
+
+
+	
+
+Logitech G515 RAPID TKL là bàn phím cơ gaming thiết kế không phím số, nhỏ gọn. Điểm nổi bật chính là công tắc analog từ tính cấu hình thấp (chỉ 22mm), mang lại tốc độ phản hồi cực nhanh.
+Hành trình phím 2.5mm, với điểm kích hoạt tùy chỉnh từ 0.1mm – 2.5mm, cho phép người chơi tinh chỉnh từng phím theo ý muốn.
+Bàn phím sử dụng switch đã bôi trơn sẵn, kết hợp với keycaps PBT đúc hai lớp. Thiết kế mỏng, mặt trên bằng thép không gỉ, cùng kết cấu chống ồn nhiều lớp giúp trải nghiệm gõ chắc chắn và êm ái.
+ 
+G515 RAPID TKL hỗ trợ LIGHTSYNC RGB, tùy chỉnh qua phần mềm Logitech G HUB, cho phép tạo macro, hồ sơ game và cá nhân hóa ánh sáng. Tương thích với PC/Mac và các hệ máy như Xbox, PlayStation, Nintendo Switch.
+ 
+Logitech G321 LIGHTSPEED: tai nghe không dây đa năng 
+
+	
+
+
+	
+		
+
+		
+
+
+	
+
+
+
+	
+
+Logitech G321 LIGHTSPEED là tai nghe không dây gaming mang đến sự kết hợp hoàn
+hảo giữa thoải mái, hiệu năng cao và tính đa dụng. Đệm đầu dày và chụp tai bằng mút hoạt tính bọc vải dệt kim mang lại cảm giác êm ái và vừa vặn cho nhiều kích cỡ đầu. Tai nghe sử dụng kết nối không dây LIGHTSPEED với độ trễ cực thấp trong phạm vi 10m, cùng thời lượng pin trên 20 giờ. Màng loa 40mm tái tạo âm thanh sống động, micro cần gạt 16kHz tích hợp có thể gập để tắt tiếng, giúp giao tiếp rõ ràng, tiện lợi.
+  Quảng cáoAdmicro AdX
+if (typeof(admsspPosition) == "undefined") {_admloadJs("//media1.admicro.vn/core/ssppage.js", function () {admsspPosition({sspid:10166,w:728,h:90, group: ""}); });} else {admsspPosition({sspid:10166,w:728,h:90, group: "", isNoBrand:false});}
+admssppageMobile({adslot:10172,w:300,h:250,zcp:"kmd75yxs",adslots:"","zones":"","sspid":"2018951", isNoBrand:false });
+Ngoài ra, G321 hỗ trợ Bluetooth 5.2, tương thích với PC/Mac, thiết bị di động và các hệ máy console như Xbox, PS4/PS5, Switch, lý tưởng cho chơi game, nghe nhạc, gọi Discord.
+ 
+Logitech G ASTRO A20 X: kết nối kép cho game thủ console 
+
+	
+
+
+	
+		
+
+		
+
+
+	
+
+
+
+	
+
+Logitech G ASTRO A20 X là tai nghe không dây lý tưởng cho game thủ console, mang
+đến âm thanh mạnh mẽ, kết nối linh hoạt và tùy biến cao. A20 X nổi bật với PLAYSYNC AUDIO – cho phép kết nối đồng thời hai hệ máy console (như PS5 và Xbox Series X|S) và dễ dàng chuyển đổi chỉ với một nút bấm. Tích hợp LIGHTSYNC RGB với 8 vùng tùy chỉnh màu sắc, mang đến khả năng cá nhân hóa theo phong cách riêng.
+ 
+Về âm thanh, A20 X dùng màng loa PRO-G 40mm, micro tháo rời đạt chất lượng phát sóng 48kHz, hỗ trợ tắt tiếng nhanh và có đèn báo riêng biệt. MixAmp tích hợp giúp điều chỉnh âm lượng game/chat trực tiếp, trong khi Blue VO!CE cho phép tùy chỉnh giọng nói chuyên nghiệp.
+ 
+
+	
+
+
+	
+		
+
+		
+
+
+	
+
+
+
+	
+
+Ngoài ra, Logitech G còn giới thiệu chuột gaming Logitech G PRO X2 SUPERSTRIKE với công nghệ SUPERSTRIKE độc quyền, giúp giảm độ trễ nhấp chuột lên tới 30 ms. Chuột nặng chỉ 65g nhưng trang bị cảm biến HERO 2 tiên tiến với 44.000 DPI và tốc độ 888 IPS. Công nghệ LIGHTSPEED đảm bảo kết nối ổn định với tốc độ 8 kHz. Thời lượng pin 90 giờ cùng khả năng tùy chỉnh 10 bước kích hoạt, mang lại lợi thế cạnh tranh vượt trội cho game thủ.
+[2025-09-19 03:29:16] [profile-3] Calling Roxane AI (social_commenter mode)...
+[2025-09-19 03:29:21] [profile-3] AI Response: Hay quá, nhiều sản phẩm mới quá! Rất mong được trải nghiệm thử.
+[2025-09-19 03:29:21] [profile-3] AI response stored in: aiResponse
+[2025-09-19 03:29:21] Script execution completed successfully
+[2025-09-19 03:29:21] [profile-3] aiResponse: Hay quá, nhiều sản phẩm mới quá! Rất mong được trải nghiệm thử.

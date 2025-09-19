@@ -156,7 +156,11 @@ export async function openChromeWithProfile(
     // Launch Chrome in background (detached)
     if (process.platform === 'win32') {
       await execAsync(`start "" ${command}`, { windowsHide: true });
+    } else if (process.platform === 'darwin') {
+      // macOS: Use open command for better compatibility
+      await execAsync(`open -a "Google Chrome" --args ${chromeArgs.join(' ')}`);
     } else {
+      // Linux
       await execAsync(`nohup ${command} > /dev/null 2>&1 &`);
     }
 

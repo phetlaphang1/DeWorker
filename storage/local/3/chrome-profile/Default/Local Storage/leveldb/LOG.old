@@ -1,3 +1,6 @@
-2025/09/16-10:59:11.086 2ac3e Reusing MANIFEST /Users/mac/Desktop/Worker/Worker/storage/local/3/chrome-profile/Default/Local Storage/leveldb/MANIFEST-000001
-2025/09/16-10:59:11.096 2ac3e Recovering log #3
-2025/09/16-10:59:11.096 2ac3e Reusing old log /Users/mac/Desktop/Worker/Worker/storage/local/3/chrome-profile/Default/Local Storage/leveldb/000003.log 
+2025/09/19-10:29:05.257 22748 Reusing MANIFEST /Users/mac/Desktop/Worker/Worker/storage/local/3/chrome-profile/Default/Local Storage/leveldb/MANIFEST-000001
+2025/09/19-10:29:05.263 22748 Recovering log #19
+2025/09/19-10:29:05.264 22748 Reusing old log /Users/mac/Desktop/Worker/Worker/storage/local/3/chrome-profile/Default/Local Storage/leveldb/000019.log 
+2025/09/19-10:29:12.881 2274a Level-0 table #23: started
+2025/09/19-10:29:12.887 2274a Level-0 table #23: 13651 bytes OK
+2025/09/19-10:29:12.891 2274a Delete type=0 #19

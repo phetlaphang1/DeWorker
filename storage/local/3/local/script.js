@@ -1,29 +1,64 @@
-// HTTP Request to http://toikhoe.com.vn/api/posts
-  const httpResponse = await (async () => {
-    const axios = (await import('axios')).default;
-    const requestConfig = {
-      method: "GET",
-      url: "http://toikhoe.com.vn/api/posts",
-      timeout: 30000,
-      headers: {
-        'Content-Type': 'application/json',
-      },
-    };
-    
-    try {
-      console.log('Making HTTP GET request to:', 'http://toikhoe.com.vn/api/posts');
-      const response = await axios(requestConfig);
-      console.log('Response status:', response.status);
-      console.log('Response data:', JSON.stringify(response.data, null, 2));
-      return response.data;
-    } catch (error) {
-      console.error('HTTP Request failed:', error.message);
-      if (error.response) {
-        console.error('Response status:', error.response.status);
-        console.error('Response data:', error.response.data);
-      }
-      throw error;
+import puppeteer from "puppeteer";
+import * as act from "#act";
+await page.goto("https://tinhte.vn/");
+console.log("Page title:", await page.title());
+await act.click(page, "//*[@id=\"__next\"]/div[1]/div[1]/div[2]/div/div/div[1]/div[1]/ol/li[1]/div[2]/article/div/h4/a", 0);
+// Extract text content from element
+const extractedData = await act.getText(page, "//*[@id=\"__next\"]/div[1]/div/div[2]/div[2]/div[1]/div/div/div[1]/main");
+console.log("Extracted text into 'extractedData':", extractedData);
+// Assign variable from extractedData to data
+const data = extractedData;
+console.log("Assigned 'data':", data);
+// AI Assistant (social_commenter) - Using Roxane API
+const aiResponse = await (async () => {
+  const axios = (await import('axios')).default;
+  // Using input from variable: data
+  const userPrompt = `Comment on this: ${data}`;
+
+  const requestConfig = {
+    method: 'POST',
+    url: 'https://llmapi.roxane.one/v1/chat/completions',
+    headers: {
+      'Content-Type': 'application/json',
+      'Authorization': 'Bearer linh-1752464641053-phonefarm'
+    },
+    data: {
+      model: 'text-model',
+      messages: [
+        { role: 'system', content: "You are a social media user. Create ONE natural comment only. Rules:\n- Write ONLY the comment, nothing else\n- No quotes, brackets, or explanations\n- Be genuine and conversational\n- 1-2 sentences maximum\n- Match the language of the post\n- No formatting like *asterisks* or _underscores_" },
+        { role: 'user', content: userPrompt }
+      ],
+      temperature: 0.8,
+      max_tokens: 150
     }
-  })();
-  console.log('Response stored in variable: httpResponse');
-  console.log("httpResponse:", httpResponse);
+  };
+
+  try {
+    console.log('Calling Roxane AI (social_commenter mode)...');
+    const response = await axios(requestConfig);
+    let aiText = response.data.choices[0].message.content;
+    
+    // Clean the response
+    aiText = aiText.trim();
+    // Remove quotes if present
+    aiText = aiText.replace(/^["']|["']$/g, '');
+    // Remove common prefixes
+    aiText = aiText.replace(/^(Comment:|Answer:|Response:|Here is|Here's)\s*/i, '');
+    // Remove markdown formatting
+    aiText = aiText.replace(/\*\*(.*?)\*\*/g, '$1');
+    aiText = aiText.replace(/__(.*?)__/g, '$1');
+    aiText = aiText.replace(/\*(.*?)\*/g, '$1');
+    aiText = aiText.replace(/_(.*?)_/g, '$1');
+    
+    console.log('AI Response:', aiText);
+    return aiText;
+  } catch (error) {
+    console.error('Roxane AI Request failed:', error.message);
+    if (error.response) {
+      console.error('Error details:', error.response.data);
+    }
+    throw error;
+  }
+})();
+console.log('AI response stored in: aiResponse');
+console.log("aiResponse:", aiResponse);

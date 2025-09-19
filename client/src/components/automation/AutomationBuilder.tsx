@@ -55,19 +55,36 @@ const PALETTE: {
     description: "Browser navigation (back/forward/refresh)",
     defaultConfig: { action: "forward" } 
   },
-  { 
-    kind: "Type", 
-    label: "Type Text", 
+  {
+    kind: "Type",
+    label: "Type Text",
     icon: <Type className="w-4 h-4" />,
     description: "Enter text into an input field",
-    defaultConfig: { xpath: "", text: "" } 
+    defaultConfig: {
+      xpath: "",
+      text: "",
+      inputType: "text", // "text" or "variable"
+      variableName: ""
+    }
   },
-  { 
-    kind: "Click", 
-    label: "Click Element", 
+  {
+    kind: "MultiType",
+    label: "Multi Type",
+    icon: <Type className="w-4 h-4" />,
+    description: "Type into multiple fields at once",
+    defaultConfig: {
+      fields: [
+        { xpath: "", text: "", inputType: "text", variableName: "" },
+        { xpath: "", text: "", inputType: "text", variableName: "" }
+      ]
+    }
+  },
+  {
+    kind: "Click",
+    label: "Click Element",
     icon: <MousePointer className="w-4 h-4" />,
     description: "Click on a page element",
-    defaultConfig: { xpath: "", index: 0 } 
+    defaultConfig: { xpath: "", index: 0 }
   },
   { 
     kind: "Select", 
@@ -215,6 +232,7 @@ const CustomNodeComponent = ({ data, selected }: { data: NodeData; selected: boo
           ${data.kind === 'GoTo' ? 'bg-blue-100' : ''}
           ${data.kind === 'Navigation' ? 'bg-blue-100' : ''}
           ${data.kind === 'Type' ? 'bg-green-100' : ''}
+          ${data.kind === 'MultiType' ? 'bg-green-100' : ''}
           ${data.kind === 'Click' ? 'bg-purple-100' : ''}
           ${data.kind === 'Select' ? 'bg-indigo-100' : ''}
           ${data.kind === 'SwitchFrame' ? 'bg-orange-100' : ''}
@@ -234,6 +252,7 @@ const CustomNodeComponent = ({ data, selected }: { data: NodeData; selected: boo
           {data.kind === "GoTo" && <Globe className="w-5 h-5 text-blue-600" />}
           {data.kind === "Navigation" && <Navigation className="w-5 h-5 text-blue-600" />}
           {data.kind === "Type" && <Type className="w-5 h-5 text-green-600" />}
+          {data.kind === "MultiType" && <Type className="w-5 h-5 text-green-600" />}
           {data.kind === "Click" && <MousePointer className="w-5 h-5 text-purple-600" />}
           {data.kind === "Select" && <List className="w-5 h-5 text-indigo-600" />}
           {data.kind === "SwitchFrame" && <Frame className="w-5 h-5 text-orange-600" />}
@@ -469,205 +488,8 @@ function AutomationBuilderInner() {
 
   // Export current flow as executable JavaScript automation code
   const exportJS = async () => {
-    // Generate code first
-    const order = topoSort();
-    const nodeMap = new Map(nodes.map((n) => [n.id, n]));
-    const lines: string[] = [];
-    let openLoops = 0;
-
-    for (const id of order) {
-      const n = nodeMap.get(id);
-      if (!n) continue;
-      const d = n.data as NodeData;
-
-      if (d.kind === "GoTo") {
-        const url = d.config?.url?.trim() || "https://example.com";
-        lines.push(`await page.goto(${JSON.stringify(url)});`);
-        lines.push(`console.log("Page title:", await page.title());`);
-      }
-      if (d.kind === "Navigation") {
-        const action = d.config?.action || "forward";
-        if (action === "forward") lines.push(`await page.goForward();`);
-        else if (action === "back") lines.push(`await page.goBack();`);
-        else if (action === "refresh") lines.push(`await page.reload();`);
-        else if (action === "newTab") lines.push(`const newPage = await browser.newPage();`);
-      }
-      if (d.kind === "Type") {
-        const xpath = d.config?.xpath?.trim() || "";
-        const text  = d.config?.text ?? "";
-        lines.push(`await act.type(page, ${JSON.stringify(xpath)}, ${JSON.stringify(text)});`);
-      }
-      if (d.kind === "Click") {
-        const xpath = d.config?.xpath?.trim() || "";
-        const index = d.config?.index;
-        const stmt = Number.isFinite(index)
-          ? `await act.click(page, ${JSON.stringify(xpath)}, ${Number(index)});`
-          : `await act.click(page, ${JSON.stringify(xpath)});`;
-        lines.push(stmt);
-      }
-      if (d.kind === "Select") {
-        const xpath = d.config?.xpath?.trim() || "";
-        const selectBy = d.config?.selectBy || "text";
-        const selectValue = d.config?.selectValue || "";
-        const selectIndex = d.config?.selectIndex ?? 0;
-        
-        if (selectBy === "index") {
-          lines.push(`await act.select(page, ${JSON.stringify(xpath)}, { index: ${selectIndex} });`);
-        } else if (selectBy === "value") {
-          lines.push(`await act.select(page, ${JSON.stringify(xpath)}, { value: ${JSON.stringify(selectValue)} });`);
-        } else {
-          lines.push(`await act.select(page, ${JSON.stringify(xpath)}, { text: ${JSON.stringify(selectValue)} });`);
-        }
-      }
-      if (d.kind === "SwitchFrame") {
-        const frameType = d.config?.frameType || "enter";
-        const frameSelector = d.config?.frameSelector || "";
-        
-        if (frameType === "enter") {
-          lines.push(`const frame = await page.waitForSelector(${JSON.stringify(frameSelector)});`);
-          lines.push(`await page.evaluate(el => el.contentDocument, frame);`);
-        } else if (frameType === "exit") {
-          lines.push(`await page.mainFrame();`);
-        } else if (frameType === "parent") {
-          lines.push(`await page.parentFrame();`);
-        }
-      }
-      if (d.kind === "SwitchTab") {
-        const tabIndex = d.config?.tabIndex ?? 0;
-        const tabUrl = d.config?.tabUrl || "";
-        
-        if (tabUrl) {
-          lines.push(`const pages = await browser.pages();`);
-          lines.push(`const targetPage = pages.find(p => p.url().includes(${JSON.stringify(tabUrl)}));`);
-          lines.push(`if (targetPage) await targetPage.bringToFront();`);
-        } else {
-          lines.push(`const pages = await browser.pages();`);
-          lines.push(`if (pages[${tabIndex}]) await pages[${tabIndex}].bringToFront();`);
-        }
-      }
-      if (d.kind === "ScrollTo") {
-        const scrollType = d.config?.scrollType || "element";
-        const xpath = d.config?.xpath?.trim() || "";
-        const scrollX = d.config?.scrollX ?? 0;
-        const scrollY = d.config?.scrollY ?? 0;
-        
-        if (scrollType === "element") {
-          lines.push(`await act.scrollToElement(page, ${JSON.stringify(xpath)});`);
-        } else if (scrollType === "position") {
-          lines.push(`await page.evaluate(() => window.scrollTo(${scrollX}, ${scrollY}));`);
-        } else if (scrollType === "bottom") {
-          lines.push(`await page.evaluate(() => window.scrollTo(0, document.body.scrollHeight));`);
-        } else if (scrollType === "top") {
-          lines.push(`await page.evaluate(() => window.scrollTo(0, 0));`);
-        }
-      }
-      if (d.kind === "Wait") {
-        const waitType = d.config?.waitType || "element";
-        const xpath = d.config?.xpath?.trim() || "";
-        const timeout = d.config?.timeout ?? 5000;
-        
-        if (waitType === "element") {
-          lines.push(`await act.waitForElement(page, ${JSON.stringify(xpath)}, ${timeout});`);
-        } else {
-          lines.push(`await new Promise(resolve => setTimeout(resolve, ${timeout}));`);
-        }
-      }
-      if (d.kind === "Sleep") {
-        const timeout = d.config?.timeout ?? 1000;
-        lines.push(`await new Promise(resolve => setTimeout(resolve, ${timeout}));`);
-      }
-      if (d.kind === "If") {
-        const condition = d.config?.condition || "element_exists";
-        const xpath = d.config?.xpath?.trim() || "";
-        const value = d.config?.value || "";
-        
-        if (condition === "element_exists") {
-          lines.push(`if (await act.elementExists(page, ${JSON.stringify(xpath)})) {`);
-        } else if (condition === "element_not_exists") {
-          lines.push(`if (!(await act.elementExists(page, ${JSON.stringify(xpath)}))) {`);
-        } else if (condition === "text_contains") {
-          lines.push(`if ((await page.content()).includes(${JSON.stringify(value)})) {`);
-        } else if (condition === "page_title_is") {
-          lines.push(`if ((await page.title()) === ${JSON.stringify(value)}) {`);
-        }
-      }
-      if (d.kind === "Loop") {
-        const loopCount = d.config?.loopCount ?? 5;
-        const currentIndexName = d.config?.currentIndexName || "i";
-        lines.push(`for (let ${currentIndexName} = 0; ${currentIndexName} < ${loopCount}; ${currentIndexName}++) {`);
-        lines.push(`  console.log("Loop iteration:", ${currentIndexName} + 1);`);
-        openLoops++;
-      }
-      if (d.kind === "EndLoop") {
-        if (openLoops > 0) {
-          lines.push(`}`); 
-          openLoops--;
-        }
-      }
-      if (d.kind === "Extract") {
-        const xpath = d.config?.xpath?.trim() || "";
-        const extractType = d.config?.extractType || "text";
-        const attribute = d.config?.attribute || "";
-        
-        if (extractType === "text") {
-          lines.push(`const extractedText = await act.getText(page, ${JSON.stringify(xpath)});`);
-          lines.push(`console.log("Extracted:", extractedText);`);
-        } else {
-          lines.push(`const extractedAttr = await act.getAttribute(page, ${JSON.stringify(xpath)}, ${JSON.stringify(attribute)});`);
-          lines.push(`console.log("Extracted:", extractedAttr);`);
-        }
-      }
-      if (d.kind === "DataProcess") {
-        const processType = d.config?.processType || "getText";
-        const xpath = d.config?.xpath?.trim() || "";
-        const targetVariable = d.config?.targetVariable || "result";
-        
-        if (processType === "getText") {
-          lines.push(`const ${targetVariable} = await act.getText(page, ${JSON.stringify(xpath)});`);
-        } else if (processType === "getValue") {
-          lines.push(`const ${targetVariable} = await act.getValue(page, ${JSON.stringify(xpath)});`);
-        } else if (processType === "assignVariable") {
-          const sourceVariable = d.config?.sourceVariable || "";
-          lines.push(`const ${targetVariable} = ${sourceVariable};`);
-        }
-      }
-      if (d.kind === "Log") {
-        const logLevel = d.config?.logLevel || "info";
-        const message = d.config?.message || "";
-        
-        if (logLevel === "error") {
-          lines.push(`console.error(${JSON.stringify(message)});`);
-        } else if (logLevel === "warn") {
-          lines.push(`console.warn(${JSON.stringify(message)});`);
-        } else if (logLevel === "debug") {
-          lines.push(`console.debug(${JSON.stringify(message)});`);
-        } else {
-          lines.push(`console.log(${JSON.stringify(message)});`);
-        }
-      }
-    }
-
-    // Auto-close any open loops
-    while (openLoops > 0) {
-      lines.push(`}`);
-      openLoops--;
-    }
-
-    const header =
-`import puppeteer from "puppeteer";
-import * as act from "#act";
-
-(async () => {
-  const browser = await puppeteer.launch({ headless: false });
-  const page = await browser.newPage();
-`;
-
-    const footer = `
-  await browser.close();
-})();
-`;
-
-    const jsCode = header + "  " + lines.join("\n  ") + footer;
+    // Use generateCodeInternal to get the same code as generateCode
+    const jsCode = await generateCodeInternal();
     
     const blob = new Blob([jsCode], {
       type: "application/javascript",
@@ -989,13 +811,69 @@ import * as act from "#act";
           };
         }
         else if (line.includes('await act.getText(')) {
-          const extractMatch = line.match(/await\s+act\.getText\(page,\s*["']([^"']+)["']\)/);
+          // Match pattern: const variableName = await act.getText(page, "xpath");
+          const extractMatch = line.match(/const\s+(\w+)\s*=\s*await\s+act\.getText\(page,\s*["']([^"']+)["']\)/);
           nodeData = {
             label: 'Extract Data',
             kind: 'Extract',
             config: {
-              xpath: extractMatch?.[1] || '',
-              extractType: 'text'
+              xpath: extractMatch?.[2] || '',
+              extractType: 'text',
+              variableName: extractMatch?.[1] || 'extractedData'
+            }
+          };
+        }
+        // Parse DataProcess - Assign variable
+        else if (line.includes('// Assign variable from')) {
+          const nextLineIndex = lines.indexOf(line) + 1;
+          if (nextLineIndex < lines.length) {
+            const nextLine = lines[nextLineIndex];
+            const assignMatch = nextLine.match(/const\s+(\w+)\s*=\s*(\w+);/);
+            if (assignMatch) {
+              nodeData = {
+                label: 'Process Data',
+                kind: 'DataProcess',
+                config: {
+                  processType: 'assignVariable',
+                  targetVariable: assignMatch[1],
+                  sourceVariable: assignMatch[2]
+                }
+              };
+            }
+          }
+        }
+        // Parse AI Assistant node
+        else if (line.includes('// AI Assistant') && line.includes('Using Roxane API')) {
+          // Extract AI role from comment: // AI Assistant (social_commenter)
+          const roleMatch = line.match(/AI Assistant\s*\(([^)]+)\)/);
+          const aiRole = roleMatch?.[1] || 'assistant';
+
+          // Find the response variable name
+          const varMatch = line.match(/const\s+(\w+)\s*=/);
+          const responseVar = varMatch?.[1] || 'aiResponse';
+
+          // Look for input variable in next lines
+          const nextLines = lines.slice(lines.indexOf(line), lines.indexOf(line) + 10);
+          let inputVariable = 'data';
+
+          for (const nextLine of nextLines) {
+            if (nextLine.includes('Using input from variable:')) {
+              const inputMatch = nextLine.match(/Using input from variable:\s*(\w+)/);
+              if (inputMatch) {
+                inputVariable = inputMatch[1];
+                break;
+              }
+            }
+          }
+
+          nodeData = {
+            label: 'AI Assistant',
+            kind: 'AI',
+            config: {
+              aiRole: aiRole,
+              aiInputType: 'variable',
+              aiInputVariable: inputVariable,
+              aiResponseVariable: responseVar
             }
           };
         }
@@ -1232,29 +1110,17 @@ import * as act from "#act";
     }
   };
 
-  // cắt đoạn giữa newPage() và browser.close() (loại cả 2 dòng mốc)
-  const sliceToDefaultSnippet = (fullCode: string) => {
-    const lines = fullCode.split("\n");
-    const startIdxRaw = lines.findIndex((l) =>
-      /await\s+browser\.newPage\(\);/.test(l)
-    );
-    const endIdxRaw = lines.findIndex((l) =>
-      /await\s+browser\.close\(\);/.test(l)
-    );
-    const start = startIdxRaw >= 0 ? startIdxRaw + 1 : 0;
-    const end = endIdxRaw >= 0 ? endIdxRaw : lines.length;
-    return lines.slice(start, end).join("\n").trim();
-  };
 
 
-  const generateCode = async () => {
-  // build phần thân từ các node
-  const order = topoSort();
-  const nodeMap = new Map(nodes.map((n) => [n.id, n]));
-  const lines: string[] = [];
-  let openLoops = 0; // Track open loops
-  let openIfs = 0; // Track open if statements
-  let hasElse = false; // Track if current if has else
+  // Shared code generation logic
+  const generateCodeInternal = async () => {
+    // build phần thân từ các node
+    const order = topoSort();
+    const nodeMap = new Map(nodes.map((n) => [n.id, n]));
+    const lines: string[] = [];
+    let openLoops = 0; // Track open loops
+    let openIfs = 0; // Track open if statements
+    let hasElse = false; // Track if current if has else
 
   for (const id of order) {
     const n = nodeMap.get(id);
@@ -1275,8 +1141,34 @@ import * as act from "#act";
     }
     if (d.kind === "Type") {
       const xpath = d.config?.xpath?.trim() || "";
-      const text  = d.config?.text ?? "";
-      lines.push(`await act.type(page, ${JSON.stringify(xpath)}, ${JSON.stringify(text)});`);
+      const inputType = (d.config as any)?.inputType || "text";
+
+      if (inputType === "variable") {
+        const variableName = d.config?.variableName || "inputText";
+        lines.push(`await act.type(page, ${JSON.stringify(xpath)}, ${variableName});`);
+      } else {
+        const text = d.config?.text ?? "";
+        lines.push(`await act.type(page, ${JSON.stringify(xpath)}, ${JSON.stringify(text)});`);
+      }
+    }
+    if (d.kind === "MultiType") {
+      const fields = (d.config as any)?.fields || [];
+      lines.push(`// Type into multiple fields`);
+
+      for (const field of fields) {
+        const xpath = field.xpath?.trim() || "";
+        const inputType = field.inputType || "text";
+
+        if (xpath) {
+          if (inputType === "variable") {
+            const variableName = field.variableName || "inputText";
+            lines.push(`await act.type(page, ${JSON.stringify(xpath)}, ${variableName});`);
+          } else {
+            const text = field.text ?? "";
+            lines.push(`await act.type(page, ${JSON.stringify(xpath)}, ${JSON.stringify(text)});`);
+          }
+        }
+      }
     }
     if (d.kind === "Click") {
       const xpath = d.config?.xpath?.trim() || "";
@@ -1719,7 +1611,18 @@ import * as act from "#act";
     openIfs--;
   }
 
-  const header =
+  // Xử lý code generation dựa trên checkbox Default
+  let full = "";
+
+  if (isDefault) {
+    // Default mode: chỉ xuất imports và các lệnh trực tiếp
+    const helperImport = `import puppeteer from "puppeteer";\nimport * as act from "#act";\n`;
+    const body = lines.join("\n");
+    full = helperImport + body;
+    if (!full.endsWith("\n")) full += "\n";
+  } else {
+    // Full mode: có wrapper function với browser launch
+    const header =
 `import puppeteer from "puppeteer";
 import * as act from "#act";
 
@@ -1728,32 +1631,23 @@ import * as act from "#act";
   const page = await browser.newPage();
 `;
 
-  const footer = `
+    const footer = `
   await browser.close();
 })();
 `;
-
-  let full = header + "  " + lines.join("\n  ") + footer;
-
-  // Nếu tick "Default" → chỉ copy phần giữa newPage() và close,
-  // NHƯNG vẫn chèn import helpers nếu có Type/Click
-  if (isDefault) {
-    const body = sliceToDefaultSnippet(full); // giữa newPage() và close()
-    const needsHelpers = nodes.some((n) => {
-      const k = (n.data as NodeData).kind;
-      return k === "Type" || k === "Click";
-    });
-    const helperImport = needsHelpers
-      ? `import puppeteer from "puppeteer";\nimport * as act from "#act";\n`
-      : "";
-    full = helperImport + body + (body.endsWith("\n") ? "" : "\n");
-  } else {
+    full = header + "  " + lines.join("\n  ") + footer;
     if (!full.endsWith("\n")) full += "\n";
   }
 
-  setPreview(full);
-  await copyToClipboard(full);
+  return full;
 };
+
+  // Generate code and copy to clipboard
+  const generateCode = async () => {
+    const full = await generateCodeInternal();
+    setPreview(full);
+    await copyToClipboard(full);
+  };
 
 
   return (
@@ -2238,24 +2132,65 @@ import * as act from "#act";
                           XPath selector for the input element
                         </p>
                       </div>
+
                       <div>
                         <label className="text-sm font-medium text-gray-600 mb-2 block">
-                          Text to Type
+                          Input Type
                         </label>
-                        <textarea
+                        <select
                           className="w-full border-2 border-gray-200 rounded-lg px-3 py-2
-                                   focus:border-blue-400 focus:outline-none transition-colors resize-none"
-                          rows={3}
-                          placeholder="Enter the text to type..."
-                          value={(selectedNode.data as NodeData).config?.text || ""}
+                                   focus:border-blue-400 focus:outline-none transition-colors"
+                          value={((selectedNode.data as NodeData).config as any)?.inputType || "text"}
                           onChange={(e) =>
-                            patchSelectedConfig({ text: e.target.value })
+                            patchSelectedConfig({ inputType: e.target.value })
                           }
-                        />
+                        >
+                          <option value="text">Fixed Text</option>
+                          <option value="variable">From Variable</option>
+                        </select>
                         <p className="text-xs text-gray-500 mt-1">
-                          The text that will be typed into the element
+                          Choose to type fixed text or use a variable
                         </p>
                       </div>
+
+                      {((selectedNode.data as NodeData).config as any)?.inputType === "variable" ? (
+                        <div>
+                          <label className="text-sm font-medium text-gray-600 mb-2 block">
+                            Variable Name
+                          </label>
+                          <input
+                            className="w-full border-2 border-gray-200 rounded-lg px-3 py-2
+                                     focus:border-blue-400 focus:outline-none transition-colors"
+                            placeholder="extractedData"
+                            value={(selectedNode.data as NodeData).config?.variableName || ""}
+                            onChange={(e) =>
+                              patchSelectedConfig({ variableName: e.target.value })
+                            }
+                          />
+                          <p className="text-xs text-gray-500 mt-1">
+                            Name of the variable containing the text to type
+                          </p>
+                        </div>
+                      ) : (
+                        <div>
+                          <label className="text-sm font-medium text-gray-600 mb-2 block">
+                            Text to Type
+                          </label>
+                          <textarea
+                            className="w-full border-2 border-gray-200 rounded-lg px-3 py-2
+                                     focus:border-blue-400 focus:outline-none transition-colors resize-none"
+                            rows={3}
+                            placeholder="Enter the text to type..."
+                            value={(selectedNode.data as NodeData).config?.text || ""}
+                            onChange={(e) =>
+                              patchSelectedConfig({ text: e.target.value })
+                            }
+                          />
+                          <p className="text-xs text-gray-500 mt-1">
+                            The text that will be typed into the element
+                          </p>
+                        </div>
+                      )}
                     </div>
                   )}
 
@@ -2329,6 +2264,125 @@ import * as act from "#act";
                           <option value="newTab">New Tab</option>
                         </select>
                       </div>
+                    </div>
+                  )}
+
+                  {/* MultiType */}
+                  {(selectedNode.data as NodeData).kind === "MultiType" && (
+                    <div className="space-y-3">
+                      <div className="bg-blue-50 p-3 rounded-lg">
+                        <p className="text-xs font-medium text-blue-800 mb-1">
+                          💡 Type into multiple fields at once
+                        </p>
+                        <p className="text-xs text-blue-700">
+                          Perfect for login forms, multi-field forms, etc.
+                        </p>
+                      </div>
+
+                      {(((selectedNode.data as NodeData).config as any)?.fields || []).map((field: any, index: number) => (
+                        <div key={index} className="border-2 border-gray-200 rounded-lg p-4 space-y-3">
+                          <div className="flex justify-between items-center mb-2">
+                            <h4 className="text-sm font-medium text-gray-700">Field {index + 1}</h4>
+                            {index > 1 && (
+                              <button
+                                onClick={() => {
+                                  const fields = [...(((selectedNode.data as NodeData).config as any)?.fields || [])];
+                                  fields.splice(index, 1);
+                                  patchSelectedConfig({ fields });
+                                }}
+                                className="text-red-500 hover:text-red-700 text-xs"
+                              >
+                                Remove
+                              </button>
+                            )}
+                          </div>
+
+                          <div>
+                            <label className="text-xs font-medium text-gray-600 mb-1 block">
+                              XPath
+                            </label>
+                            <input
+                              className="w-full border border-gray-200 rounded px-2 py-1 text-sm
+                                       focus:border-blue-400 focus:outline-none font-mono"
+                              placeholder={index === 0 ? "//input[@name='username']" : "//input[@name='password']"}
+                              value={field.xpath || ""}
+                              onChange={(e) => {
+                                const fields = [...(((selectedNode.data as NodeData).config as any)?.fields || [])];
+                                fields[index] = { ...fields[index], xpath: e.target.value };
+                                patchSelectedConfig({ fields });
+                              }}
+                            />
+                          </div>
+
+                          <div>
+                            <label className="text-xs font-medium text-gray-600 mb-1 block">
+                              Input Type
+                            </label>
+                            <select
+                              className="w-full border border-gray-200 rounded px-2 py-1 text-sm
+                                       focus:border-blue-400 focus:outline-none"
+                              value={field.inputType || "text"}
+                              onChange={(e) => {
+                                const fields = [...(((selectedNode.data as NodeData).config as any)?.fields || [])];
+                                fields[index] = { ...fields[index], inputType: e.target.value };
+                                patchSelectedConfig({ fields });
+                              }}
+                            >
+                              <option value="text">Fixed Text</option>
+                              <option value="variable">From Variable</option>
+                            </select>
+                          </div>
+
+                          {field.inputType === "variable" ? (
+                            <div>
+                              <label className="text-xs font-medium text-gray-600 mb-1 block">
+                                Variable Name
+                              </label>
+                              <input
+                                className="w-full border border-gray-200 rounded px-2 py-1 text-sm
+                                         focus:border-blue-400 focus:outline-none"
+                                placeholder="username"
+                                value={field.variableName || ""}
+                                onChange={(e) => {
+                                  const fields = [...(((selectedNode.data as NodeData).config as any)?.fields || [])];
+                                  fields[index] = { ...fields[index], variableName: e.target.value };
+                                  patchSelectedConfig({ fields });
+                                }}
+                              />
+                            </div>
+                          ) : (
+                            <div>
+                              <label className="text-xs font-medium text-gray-600 mb-1 block">
+                                Text to Type
+                              </label>
+                              <input
+                                className="w-full border border-gray-200 rounded px-2 py-1 text-sm
+                                         focus:border-blue-400 focus:outline-none"
+                                placeholder={index === 0 ? "Enter username..." : "Enter password..."}
+                                value={field.text || ""}
+                                onChange={(e) => {
+                                  const fields = [...(((selectedNode.data as NodeData).config as any)?.fields || [])];
+                                  fields[index] = { ...fields[index], text: e.target.value };
+                                  patchSelectedConfig({ fields });
+                                }}
+                              />
+                            </div>
+                          )}
+                        </div>
+                      ))}
+
+                      <button
+                        onClick={() => {
+                          const fields = [...(((selectedNode.data as NodeData).config as any)?.fields || [])];
+                          fields.push({ xpath: "", text: "", inputType: "text", variableName: "" });
+                          patchSelectedConfig({ fields });
+                        }}
+                        className="w-full py-2 border-2 border-dashed border-gray-300 rounded-lg
+                                 text-sm text-gray-600 hover:border-blue-400 hover:text-blue-600
+                                 transition-colors"
+                      >
+                        + Add Field
+                      </button>
                     </div>
                   )}
 
